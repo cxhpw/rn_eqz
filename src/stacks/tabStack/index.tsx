@@ -1,0 +1,145 @@
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from '@/screens/home';
+import My from '@/screens/my';
+import Chat from '@/screens/chat';
+import Category from '@/screens/category';
+import helper from '@/helper';
+import { IconNames } from '@/components/Icon';
+import { StyleSheet, Text } from 'react-native';
+import { Image } from 'react-native';
+
+const { scale } = helper;
+const Tab = createBottomTabNavigator();
+
+const tabItems: {
+  name: string;
+  component: React.FC;
+  label: string;
+  icon: IconNames | Element;
+}[] = [
+  {
+    //@ts-ignore
+    component: Home,
+    name: 'Home',
+    label: '首页',
+    icon: (focused: boolean) => {
+      return (
+        <Image
+          style={style.Icon}
+          source={
+            focused
+              ? require('@/images/index-select.png')
+              : require('@/images/index.png')
+          }
+        />
+      );
+    },
+  },
+  {
+    //@ts-ignore
+    component: Category,
+    name: 'Category',
+    label: '分类',
+    icon: (focused: boolean) => {
+      return (
+        <Image
+          style={style.Icon}
+          source={
+            focused
+              ? require('@/images/category-select.png')
+              : require('@/images/category.png')
+          }
+        />
+      );
+    },
+  },
+  {
+    //@ts-ignore
+    component: Chat,
+    name: 'Chat',
+    label: '客服',
+    icon: (focused: boolean) => {
+      return (
+        <Image
+          style={style.Icon}
+          source={
+            focused
+              ? require('@/images/chat-select.png')
+              : require('@/images/chat.png')
+          }
+        />
+      );
+    },
+  },
+  {
+    //@ts-ignore
+    component: My,
+    name: 'My',
+    label: '我的',
+    icon: (focused: boolean) => {
+      return (
+        <Image
+          style={style.Icon}
+          source={
+            focused
+              ? require('@/images/my-select.png')
+              : require('@/images/my.png')
+          }
+        />
+      );
+    },
+  },
+];
+
+function TabStack() {
+  return (
+    <Tab.Navigator
+      initialRouteName="HomePage"
+      screenOptions={{
+        headerShown: true,
+        lazy: true,
+        tabBarStyle: {
+          paddingTop: scale(4),
+        },
+      }}>
+      {tabItems.map(item => {
+        return (
+          <Tab.Screen
+            key={item.name}
+            name={item.name}
+            component={item.component}
+            options={{
+              title: item.label,
+              tabBarLabel({ focused }) {
+                return (
+                  <Text
+                    // eslint-disable-next-line react-native/no-inline-styles
+                    style={{
+                      fontSize: scale(12),
+                      color: focused ? '#c63520' : '#666666',
+                      paddingTop: scale(4),
+                    }}>
+                    {item.label}
+                  </Text>
+                );
+              },
+              tabBarIcon({ focused }) {
+                // @ts-ignore
+                return item.icon(focused);
+              },
+            }}
+          />
+        );
+      })}
+    </Tab.Navigator>
+  );
+}
+
+export default TabStack;
+
+const style = StyleSheet.create({
+  Icon: {
+    width: scale(30),
+    height: scale(30),
+  },
+});

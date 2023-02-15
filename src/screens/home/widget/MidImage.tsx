@@ -2,7 +2,7 @@ import { Box } from 'native-base';
 import { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-const MidImage = ({ url }) => {
+const MidImage = ({ url }: { url: string }) => {
   return (
     <Box mx="2.5" mt={2.5}>
       <Image

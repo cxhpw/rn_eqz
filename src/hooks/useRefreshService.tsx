@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useMemoizedFn, useRequest, useSafeState } from 'ahooks';
 import { Service, Options } from 'ahooks/lib/useRequest/src/types';
 import { useMemo } from 'react';

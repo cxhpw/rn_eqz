@@ -1,21 +1,23 @@
 import { StyleSheet, Linking, TouchableOpacity, Alert } from 'react-native';
-import React, { PropsWithChildren } from 'react';
+import React, { memo, PropsWithChildren, useState } from 'react';
 import { Container, Text } from '@/components';
 import { Box, Center } from 'native-base';
 import { useAppSelector } from '@/hooks';
 import FastImage from 'react-native-fast-image';
+import { useAppDispatch } from '@/hooks';
+import { fetchFeedback } from '@/reducers/modules/utils';
 
 type Props = {
   name: string;
 };
 
 //@ts-ignore
-function Card({ title, desc }) {
+const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.5}
       onPress={() => {
-        const url = `tel:13590101067`;
+        const url = `tel:${desc}`;
         Linking.canOpenURL(url)
           .then(supported => {
             if (!supported) {
@@ -24,27 +26,35 @@ function Card({ title, desc }) {
             Linking.openURL(url);
           })
           .catch(error => {
-            console.log(error);
             Alert.alert('提示', error.message);
           });
       }}>
       <Box py={7} px={6} mb={4} style={style.card}>
         <Box>
-          <Text style={style.title}>{title}</Text>
+          <Text style={style.title} color="black">
+            {title}
+          </Text>
         </Box>
         <Box>
-          <Text style={style.desc}>{desc}</Text>
+          <Text style={style.desc}>呼叫: {desc}</Text>
         </Box>
       </Box>
     </TouchableOpacity>
   );
-}
+});
 
 const Chat: React.FC<PropsWithChildren<Props>> = () => {
   const { PrTLImg } = useAppSelector(state => state.appConfig);
+  const [data, setData] = useState();
+  const dispatch = useAppDispatch();
+  dispatch(fetchFeedback()).then(res => {
+    if (!data) {
+      setData(res.payload);
+    }
+  });
   return (
     <Container isBttomTabsScreen>
-      <Center>
+      <Center flex={1} mt="-40%">
         <FastImage
           style={style.Image}
           source={{
@@ -53,11 +63,11 @@ const Chat: React.FC<PropsWithChildren<Props>> = () => {
           resizeMode="cover"
         />
         <Text padding="x7" color="gray300">
-          工作日9:00-21:30 非工作日9:00-18:00
+          {data?.ServiceTime}
         </Text>
         <Box px={6} width="full">
-          <Card title="商家电话" desc="呼叫" />
-          <Card title="平台电话" desc="呼叫" />
+          <Card title="商家电话" desc={`${data?.BusinessPhone}`} />
+          <Card title="平台电话" desc={`${data?.PlatformServices}`} />
         </Box>
       </Center>
     </Container>

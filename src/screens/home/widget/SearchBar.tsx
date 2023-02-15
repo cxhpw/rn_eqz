@@ -16,8 +16,8 @@ const SearchBar: React.FC = () => {
         overflow="hidden"
         borderRadius={4}
         backgroundColor="white">
-        <Icon name="sousuo" color={theme.colors.placeholder} size={25} />
-        <Text color="placeholder" fontSize={14} ml="x1">
+        <Icon name="sousuo" color={theme.colors.primary500} size={25} />
+        <Text color="primary500" fontSize={14} ml="x1">
           想体验什么？搜搜看
         </Text>
       </Flex>

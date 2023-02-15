@@ -23,8 +23,8 @@ export default function useCustomRequest<T, P extends any[] = []>(
     refreshDeps,
     onError: (error: any, params: P) => {
       try {
-        const { code, message } = JSON.parse(error.message);
-        if ([].includes(code)) {
+        const { code } = JSON.parse(error.message);
+        if ([100].includes(code)) {
           // signOut();
         } else {
           // toastFail(message);

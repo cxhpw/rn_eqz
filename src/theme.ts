@@ -13,7 +13,6 @@ export const lightTheme = {
     iconBg: 'rgba(255,255,255,0.3)',
     tabActive: '#C6E1FD',
     text: '#000000',
-    placeholder: '#bbbbbb',
   },
   textVariants: {
     ...theme.lightTheme.textVariants,
@@ -33,7 +32,6 @@ export const darkTheme: AppTheme = {
     iconBg: 'rgba(255,255,255,0.3)',
     tabActive: '#C6E1FD',
     text: '#ffffff',
-    placeholder: '#bbbbbb',
     gray300: '#ffffff',
     gray500: '#333',
   },

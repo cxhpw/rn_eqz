@@ -5,10 +5,12 @@ type AuthStackParamList = {};
 type MainStackParamList = {
   Tab: undefined;
   Home: undefined;
-  Category: undefined;
+  Category: { id?: number };
   Chat: undefined;
   My: undefined;
-  Detail: undefined;
+  Detail: { id: number | string };
+  Order: { code: number | string };
+  Help: undefined;
 };
 
 type AppParamList = MainStackParamList &

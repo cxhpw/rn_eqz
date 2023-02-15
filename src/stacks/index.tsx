@@ -1,8 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabScreen from './tabStack';
 import Detail from '@/screens/detail';
+import Order from '@/screens/order';
+import Help from '@/screens/help';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<AppParamList>();
 
 const MAIN_SCREENS = [
   {
@@ -17,6 +19,22 @@ const MAIN_SCREENS = [
     component: Detail,
     options: {
       title: '详情',
+    },
+  },
+  {
+    name: 'Order',
+    component: Order,
+    options: {
+      title: '我的订单',
+    },
+  },
+];
+const COMMON_SCREENS = [
+  {
+    name: 'Help',
+    component: Help,
+    options: {
+      title: '帮助中心',
     },
   },
 ];
@@ -37,33 +55,15 @@ export default () => {
           presentation: 'card',
         }}>
         {MAIN_SCREENS.map(screen => {
+          //@ts-ignore
           return <Stack.Screen key={screen.name} {...screen} />;
         })}
       </Stack.Group>
       <Stack.Group>
-        {/* <Stack.Screen
-          name="Detail"
-          component={FourScreen}
-          options={({ navigation }) => {
-            return {
-              headerLeft: () => {
-                if (navigation.canGoBack()) {
-                  return null;
-                } else {
-                  return (
-                    <Button
-                      title="首页"
-                      onPress={() => {
-                        console.log('返回首页');
-                        navigation.replace('Tab');
-                      }}
-                    />
-                  );
-                }
-              },
-            };
-          }}
-        /> */}
+        {COMMON_SCREENS.map(screen => {
+          //@ts-ignore
+          return <Stack.Screen key={screen.name} {...screen} />;
+        })}
       </Stack.Group>
     </Stack.Navigator>
   );

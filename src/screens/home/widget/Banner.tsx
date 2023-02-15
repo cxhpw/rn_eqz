@@ -1,0 +1,100 @@
+import { memo } from 'react';
+import { Dimensions, Image, StyleSheet } from 'react-native';
+import { Box, Flex } from 'native-base';
+import Carousel from 'react-native-reanimated-carousel';
+import { useRequest, useSafeState } from 'ahooks';
+import request from '@/request';
+import { Text } from '@/components';
+
+type Props = {};
+type BannerProps = {
+  AdLink: string;
+  AdMediaPath: string;
+  AdName: string;
+  AdText: string;
+};
+function Banner({}: Props) {
+  const [current, setCurrent] = useSafeState(1);
+  async function fetchBanner(params: number) {
+    const res = await request({
+      url: '/Include/alipay/data.aspx',
+      params: {
+        apiname: 'getbanner',
+        adid: params,
+      },
+    });
+    return res.data;
+  }
+  const width = Dimensions.get('window').width - 20;
+  const { data = [], loading } = useRequest(fetchBanner, {
+    defaultParams: [3],
+  });
+  return (
+    <Box mx="2.5" position="relative">
+      {!loading ? (
+        <Carousel
+          loop
+          width={width}
+          style={style.swiper}
+          autoPlay={true}
+          data={data as BannerProps[]}
+          scrollAnimationDuration={1500}
+          onSnapToItem={index => setCurrent(index + 1)}
+          renderItem={({ item }) => (
+            <Image
+              source={{
+                uri: item.AdMediaPath,
+              }}
+              style={style.swiperItem}
+              resizeMode="stretch"
+            />
+          )}
+        />
+      ) : (
+        <Box style={style.swiper}>loading...</Box>
+      )}
+      <Indicator total={data.length} current={current} />
+    </Box>
+  );
+}
+
+//@ts-ignore
+function Indicator({ current, total }) {
+  return (
+    <Flex
+      direction="row"
+      padding={1}
+      backgroundColor="rgba(0,0,0,.5)"
+      position="absolute"
+      bottom={1}
+      borderRadius="2.5"
+      right={1}>
+      <Text style={[style.Indicator, { fontSize: 12 }]}>{current}</Text>
+      <Text style={style.Indicator}>/</Text>
+      <Text style={style.Indicator}>{total}</Text>
+    </Flex>
+  );
+}
+
+const style = StyleSheet.create({
+  swiper: {
+    borderRadius: 4,
+    height: 160,
+    overflow: 'hidden',
+    backgroundColor: '#ffffff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  swiperItem: {
+    width: '100%',
+    height: 160,
+  },
+  Indicator: {
+    fontSize: 10,
+    lineHeight: 14,
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+});
+
+export default memo(Banner);

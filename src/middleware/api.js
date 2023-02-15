@@ -1,9 +1,9 @@
-﻿import {applyMiddleware} from 'redux';
+﻿import { applyMiddleware } from 'redux';
 
 /**
  * 记录所有被发起的 action 以及产生的新的 state。
  */
-const logger = (store) => (next) => (action) => {
+const logger = store => next => action => {
   console.group(action.type);
   console.info('dispatching', action);
   let result = next(action);
@@ -15,7 +15,7 @@ const logger = (store) => (next) => (action) => {
 /**
  * 在 state 更新完成和 listener 被通知之后发送崩溃报告。
  */
-const crashReporter = (store) => (next) => (action) => {
+const crashReporter = store => next => action => {
   try {
     return next(action);
   } catch (err) {
@@ -34,7 +34,7 @@ const crashReporter = (store) => (next) => (action) => {
  * 用 { meta: { delay: N } } 来让 action 延迟 N 毫秒。
  * 在这个案例中，让 `dispatch` 返回一个取消 timeout 的函数。
  */
-const timeoutScheduler = (store) => (next) => (action) => {
+const timeoutScheduler = store => next => action => {
   if (!action.meta || !action.meta.delay) {
     return next(action);
   }
@@ -50,7 +50,7 @@ const timeoutScheduler = (store) => (next) => (action) => {
  * 通过 { meta: { raf: true } } 让 action 在一个 rAF 循环帧中被发起。
  * 在这个案例中，让 `dispatch` 返回一个从队列中移除该 action 的函数。
  */
-const rafScheduler = (store) => (next) => {
+const rafScheduler = store => next => {
   let queuedActions = [];
   let frame = null;
 
@@ -71,7 +71,7 @@ const rafScheduler = (store) => (next) => {
     }
   }
 
-  return (action) => {
+  return action => {
     if (!action.meta || !action.meta.raf) {
       return next(action);
     }
@@ -80,7 +80,7 @@ const rafScheduler = (store) => (next) => {
     maybeRaf();
 
     return function cancel() {
-      queuedActions = queuedActions.filter((a) => a !== action);
+      queuedActions = queuedActions.filter(a => a !== action);
     };
   };
 };
@@ -90,7 +90,7 @@ const rafScheduler = (store) => (next) => {
  * 如果这个 promise 被 resolved，他的结果将被作为 action 发起。
  * 这个 promise 会被 `dispatch` 返回，因此调用者可以处理 rejection。
  */
-const vanillaPromise = (store) => (next) => (action) => {
+const vanillaPromise = store => next => action => {
   if (typeof action.then !== 'function') {
     return next(action);
   }
@@ -105,21 +105,21 @@ const vanillaPromise = (store) => (next) => (action) => {
  *
  * 为了方便起见，`dispatch` 会返回这个 promise 让调用者可以等待。
  */
-const readyStatePromise = (store) => (next) => (action) => {
+const readyStatePromise = store => next => action => {
   if (!action.promise) {
     return next(action);
   }
 
   function makeAction(ready, data) {
-    let newAction = Object.assign({}, action, {ready}, data);
+    let newAction = Object.assign({}, action, { ready }, data);
     delete newAction.promise;
     return newAction;
   }
 
   next(makeAction(false));
   return action.promise.then(
-    (result) => next(makeAction(true, {result})),
-    (error) => next(makeAction(true, {error})),
+    result => next(makeAction(true, { result })),
+    error => next(makeAction(true, { error })),
   );
 };
 
@@ -131,7 +131,7 @@ const readyStatePromise = (store) => (next) => (action) => {
  *
  * `dispatch` 会返回被发起函数的返回值。
  */
-const thunk = (store) => (next) => (action) =>
+const thunk = store => next => action =>
   typeof action === 'function'
     ? action(store.dispatch, store.getState)
     : next(action);

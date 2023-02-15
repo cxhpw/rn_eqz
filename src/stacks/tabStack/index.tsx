@@ -7,6 +7,7 @@ import helper from '@/helper';
 import { IconNames } from '@/components/Icon';
 import { StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native';
+import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
 const { scale } = helper;
 const Tab = createBottomTabNavigator();
@@ -16,6 +17,7 @@ const tabItems: {
   component: React.FC;
   label: string;
   icon: IconNames | Element;
+  options?: BottomTabNavigationOptions;
 }[] = [
   {
     //@ts-ignore
@@ -88,6 +90,9 @@ const tabItems: {
         />
       );
     },
+    options: {
+      headerStyle: {},
+    },
   },
 ];
 
@@ -127,6 +132,7 @@ function TabStack() {
                 // @ts-ignore
                 return item.icon(focused);
               },
+              ...item.options,
             }}
           />
         );
@@ -139,7 +145,7 @@ export default TabStack;
 
 const style = StyleSheet.create({
   Icon: {
-    width: scale(30),
-    height: scale(30),
+    width: scale(24),
+    height: scale(24),
   },
 });

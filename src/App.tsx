@@ -20,7 +20,7 @@ import {
 import { useFlipper } from '@react-navigation/devtools';
 import { Provider } from 'react-redux';
 import { enableFreeze } from 'react-native-screens';
-import { Fallback } from '@/components';
+import { Fallback, ThemeProvider } from '@/components';
 import { useSafeState, useMemoizedFn, useMount } from 'ahooks';
 import { useNetwork } from './hooks';
 import { navigationRef } from '@/services/NavigationService';
@@ -28,6 +28,9 @@ import { linking } from './linking';
 import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
 import store from '@/store';
+import { lightTheme, darkTheme } from './theme';
+import { NativeBaseProvider } from 'native-base';
+import { fetchAppConfig } from './reducers/modules/config';
 
 enableFreeze();
 
@@ -40,6 +43,7 @@ const App = () => {
   useMount(() => {
     const init = async () => {
       // …do multiple sync or async tasks
+      store.dispatch(fetchAppConfig());
     };
     init().finally(() => {
       hideSplash({ fade: true });
@@ -59,17 +63,21 @@ const App = () => {
   });
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <NavigationContainer
-            ref={navigationRef}
-            theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-            fallback={<Fallback />}
-            linking={linking}>
-            <Stack />
-          </NavigationContainer>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
+      <NativeBaseProvider>
+        <SafeAreaProvider>
+          <GestureHandlerRootView style={{ flex: 1 }}>
+            <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+              <NavigationContainer
+                ref={navigationRef}
+                theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+                fallback={<Fallback />}
+                linking={linking}>
+                <Stack />
+              </NavigationContainer>
+            </ThemeProvider>
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </NativeBaseProvider>
     </Provider>
   );
 };

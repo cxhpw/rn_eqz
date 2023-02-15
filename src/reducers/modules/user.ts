@@ -3,11 +3,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 type Props = {
   status: boolean;
   message: 'pending' | 'fulfilled' | 'rejected';
+  id: number;
 };
 
 const initialState: Props = {
   status: false,
   message: 'pending',
+  id: 0,
 };
 
 const userSlice = createSlice({
@@ -16,22 +18,24 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchUser.pending, (state, action) => {
-      console.log(1);
       state.message = action.meta.requestStatus;
     });
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      console.log(2);
       state.message = action.meta.requestStatus;
-      state.status = action.payload;
+      state.status = action.payload.status;
+      state.id = action.payload.id;
     });
   },
 });
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
-  async (id, options) => {
-    return new Promise<boolean>(resolve => {
+  async (id: number) => {
+    return new Promise<Pick<Props, 'status' | 'id'>>(resolve => {
       setTimeout(() => {
-        resolve(true);
+        resolve({
+          status: true,
+          id,
+        });
       }, 3000);
     });
   },

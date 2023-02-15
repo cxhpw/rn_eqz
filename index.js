@@ -2,14 +2,14 @@
  * @format
  */
 import 'react-native-gesture-handler';
-import {Alert, AppRegistry, LogBox} from 'react-native';
+import { Alert, AppRegistry, LogBox } from 'react-native';
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
 } from 'react-native-exception-handler';
 import RNRestart from 'react-native-restart';
 import App from './src/App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
 
 LogBox.ignoreLogs([
   'Require cycle:',

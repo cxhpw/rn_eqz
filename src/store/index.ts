@@ -4,6 +4,7 @@ import {
   type ThunkAction,
   type AnyAction,
 } from '@reduxjs/toolkit';
+
 function logger({ getState }: any) {
   return (next: any) => (action: AnyAction) => {
     console.group('==================================\n');
@@ -12,7 +13,11 @@ function logger({ getState }: any) {
       'color: #28cd17; font-weight: bold',
       getState(),
     );
-    console.log('%c will dispatch: ', 'color: red;font-weight: bold', action);
+    console.log(
+      '%c will dispatch: ',
+      'color: red;font-weight: bold',
+      action.type,
+    );
 
     let returnValue = next(action);
 

@@ -10,7 +10,7 @@ const { scale } = helper;
 
 const basePalette = {
   // 基础色
-  white: '#FFFFFF',
+  white: '#ffffff',
   black: '#000000',
   transparent: 'transparent',
   // 功能色
@@ -24,7 +24,7 @@ const basePalette = {
   func700: 'transparent',
   func800: 'transparent',
   func900: 'transparent',
-} as const;
+};
 // 默认调色板
 const palette = {
   ...basePalette,
@@ -50,7 +50,7 @@ const palette = {
   gray700: 'rgba(0, 0, 0, 0.04)',
   gray800: 'transparent',
   gray900: 'transparent',
-} as const;
+};
 const lightTheme = createTheme({
   spacing: {
     x0: 0,
@@ -64,6 +64,7 @@ const lightTheme = createTheme({
     x8: scale(32),
     x9: scale(36),
     x10: scale(40),
+    '2.5': scale(10),
   },
   colors: {
     ...palette,
@@ -76,6 +77,7 @@ const lightTheme = createTheme({
     text_active: palette.white,
     primary_text: palette.black,
     primary_background: palette.white,
+    spacerColor: '#f8f8f8',
   },
   borderRadii: {
     x0: 0,
@@ -118,6 +120,11 @@ const lightTheme = createTheme({
     largeTablet: 1024,
   },
   textVariants: {
+    defaults: {
+      fontSize: scale(14),
+      lineHeight: scale(19),
+      fontFamily: 'PingFang SC',
+    },
     h0: {
       fontWeight: 'bold',
       fontSize: scale(28),
@@ -192,7 +199,7 @@ const lightTheme = createTheme({
     d3: {
       fontSize: scale(12),
       lineHeight: scale(14),
-      fontFamily: 'Roboto',
+      // fontFamily: 'Roboto',
     },
     d4: {},
     d5: {},
@@ -243,6 +250,7 @@ const darkTheme = {
     text_active: darkPalette.white,
     primary_text: palette.white,
     primary_background: palette.black,
+    spacerColor: darkPalette.gray100,
   },
   theme: 'dark',
 };
@@ -251,3 +259,5 @@ export default {
   lightTheme,
   darkTheme,
 };
+export type Theme = typeof lightTheme;
+export type Spacing = keyof Theme['spacing'];

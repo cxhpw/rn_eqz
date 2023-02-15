@@ -45,7 +45,7 @@ const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
 
 const Chat: React.FC<PropsWithChildren<Props>> = () => {
   const { PrTLImg } = useAppSelector(state => state.appConfig);
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
   const dispatch = useAppDispatch();
   dispatch(fetchFeedback()).then(res => {
     if (!data) {

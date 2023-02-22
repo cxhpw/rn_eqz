@@ -70,6 +70,7 @@ const Index: React.FC<PropsWithChildren<Props>> = ({
                 key={item.AutoID}
                 {...item}
                 hasPrice={hasPrice}
+                size={185 / 2}
                 renderIcon={
                   hasSort
                     ? IconFn(index)

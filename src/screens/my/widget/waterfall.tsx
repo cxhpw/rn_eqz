@@ -31,7 +31,7 @@ const Waterfall = () => {
           <WaterfallItem data={item} key={item.AutoID} />
         ))}
       </Flex>
-      <LoadButton title="本租赁服务由e奇租提供" />
+      <LoadButton loading={loading} title="本租赁服务由e奇租提供" />
     </Box>
   );
 };

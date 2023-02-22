@@ -1,7 +1,14 @@
-import { StyleSheet, Text, View, TextStyle, ColorValue } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextStyle,
+  ColorValue,
+  ViewStyle,
+} from 'react-native';
 
 type Props = {
-  money: number | string;
+  money: number | string | undefined;
   prefixStyle?: TextStyle;
   suffixStyle?: TextStyle;
   color?: ColorValue;
@@ -9,16 +16,17 @@ type Props = {
   beforeText?: string;
   beforeStyle?: TextStyle;
   style?: TextStyle;
+  containerStyle?: ViewStyle;
 };
 
 function priceSlice(n: Props['money'], mode: string = 'prefix') {
-  n = String(n);
+  n = Number(n).toFixed(2);
   const i = n.trim().indexOf('.');
   return mode === 'prefix' ? n.slice(0, i) : n.slice(i);
 }
 
 const Price: React.FC<Props> = ({
-  money,
+  money = 0,
   prefixStyle,
   suffixStyle,
   color = '#e4393c',
@@ -26,9 +34,10 @@ const Price: React.FC<Props> = ({
   afterText = '/日起',
   style: commonStyle,
   beforeStyle,
+  containerStyle,
 }) => {
   return (
-    <View style={[style.wrapper]}>
+    <View style={[style.wrapper, containerStyle]}>
       <Text style={[style.common, { color: color }, commonStyle]}>
         <Text style={[beforeStyle]}>{beforeText}</Text>
         <Text style={[style.prefix, prefixStyle]}>{priceSlice(money)}</Text>
@@ -42,7 +51,7 @@ const Price: React.FC<Props> = ({
 const style = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: 0,
   },
   common: {
     fontSize: 12,

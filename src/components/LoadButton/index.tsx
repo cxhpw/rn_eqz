@@ -1,7 +1,10 @@
 import { Flex } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
-const Index: React.FC<{ title: string }> = ({ title }) => {
+const Index: React.FC<{ title: string; loading: boolean }> = ({
+  title,
+  loading = false,
+}) => {
   return (
     <Flex
       position="relative"
@@ -9,9 +12,18 @@ const Index: React.FC<{ title: string }> = ({ title }) => {
       py={5}
       alignItems="center"
       justifyContent="center">
-      <View style={style.line} />
-      <Text style={style.title}>{title}</Text>
-      <View style={style.line} />
+      {loading ? (
+        <>
+          <ActivityIndicator size="small" color="#999" />
+          <Text style={[style.title, { paddingLeft: 5 }]}>加载中...</Text>
+        </>
+      ) : (
+        <>
+          <View style={style.line} />
+          <Text style={style.title}>{title}</Text>
+          <View style={style.line} />
+        </>
+      )}
     </Flex>
   );
 };

@@ -164,6 +164,10 @@ export const CustomRefreshControl = forwardRef<
   );
 });
 
+/**
+ * 获取当前时间
+ * @returns
+ */
 const fetchNowTime = () => {
   const date = new Date();
   const M = date.getMonth() + 1;

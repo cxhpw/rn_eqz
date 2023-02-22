@@ -9,6 +9,7 @@ export { default as Price } from './Price';
 export { default as LoadButton } from './LoadButton';
 export { default as Pressable } from './Pressable';
 export { default as WaterfallList } from './WaterfallList';
+export { default as Skeleton } from './Skeleton';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

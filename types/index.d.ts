@@ -81,3 +81,79 @@ const orderStatus = [
 ] as const;
 
 type OrderStatus = typeof orderStatus;
+
+type Goods = {
+  AutoID: number;
+  BannerUrl: string;
+  CategoryBanner: string;
+  CategoryImage: string;
+  CategoryName: string;
+  IsRecommend: boolean;
+  ProductList: Product[];
+  UrlRewriteName: string;
+};
+
+type ProductImage = {
+  PicID: number;
+  ImgSrc: string;
+};
+
+type ProductInfo = {
+  AutoID: number;
+  Hit: number;
+  Leaserule: string;
+  MarketPrice: number;
+  MarketPrice: number;
+  MinSellPrice: number;
+  ModelID: number;
+  ProDetail: string;
+  ProInsuranceRemark: string;
+  ProductName: string;
+  ProductTag: string[];
+  PromotionsTags: {
+    TageType: number;
+    TageValue: string;
+  }[];
+  SellPrice: number;
+  SellType: string;
+  ShortDesc: string;
+  SpecialPrice: string;
+  Unit: string;
+  serverRmark: string;
+  serverTitle: string;
+  Evaluation: number;
+  IsSpecial: 'true' | 'false';
+  leaseterm: string[];
+  SpecialSummary: { Daynum: number; Discount: number }[];
+};
+
+type ProductDetail = {
+  guige: {
+    GuiGeName: string;
+    GuiGeValue: string;
+    IsImageShow: boolean;
+  }[];
+  partslist: [];
+  piclist: ProductImage[];
+  productdata: ProductInfo;
+  prolist: Product[];
+};
+
+type Spec = {
+  name: string;
+  checked: boolean;
+  children: Spec[];
+};
+
+type ProductPrice = {
+  autoid: number;
+  code: number;
+  dayprice: number;
+  monthprice: number;
+  msg: string;
+  price: number;
+  rentdays: number;
+  rentprice: number;
+  type: number;
+  weekprice: number;
+};

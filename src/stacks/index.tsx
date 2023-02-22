@@ -3,6 +3,7 @@ import TabScreen from './tabStack';
 import Detail from '@/screens/detail';
 import Order from '@/screens/order';
 import Help from '@/screens/help';
+import Config from 'react-native-config';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -18,7 +19,7 @@ const MAIN_SCREENS = [
     name: 'Detail',
     component: Detail,
     options: {
-      title: '详情',
+      title: Config.APP_DISPLAY_NAME,
     },
   },
   {

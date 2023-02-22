@@ -1,13 +1,18 @@
-import { Text, Price } from '@/components';
+import { Text, Price, Pressable } from '@/components';
 import { memo } from 'react';
 import { View, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { navigate } from '@/services/NavigationService';
+import { navigate, push, replace } from '@/services/NavigationService';
 
 type Props = Product & {
   hasPrice?: boolean;
   renderIcon?: JSX.Element | '';
   IconStyle?: ViewStyle;
+  size?: number | string;
+  px?: number;
+  mx?: number;
+  ItemStyle?: ViewStyle;
+  onPress?: (id: any) => void;
 };
 
 const Item: React.FC<Props> = ({
@@ -18,24 +23,40 @@ const Item: React.FC<Props> = ({
   hasPrice,
   renderIcon,
   IconStyle,
+  size,
+  px = 0,
+  mx = 0,
+  ItemStyle,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={() => {
-        navigate('Detail', { id: AutoID });
-      }}>
-      <View style={style.wrapper}>
-        <View style={{ position: 'relative' }}>
+    <View
+      style={[
+        {
+          width: size,
+          paddingHorizontal: px,
+          marginHorizontal: mx,
+        },
+        ItemStyle,
+      ]}>
+      <Pressable
+        scalable={false}
+        onPress={() => {
+          // navigate('Detail', { id: AutoID });
+          typeof onPress === 'function'
+            ? onPress(AutoID)
+            : push('Detail', { id: AutoID });
+        }}>
+        <View style={style.wrapper}>
           <FastImage
-            style={style.fastImage}
+            style={StyleSheet.absoluteFill}
             source={{
               uri: ProImg,
             }}
           />
           <View style={[style.Icon, IconStyle]}>{renderIcon}</View>
         </View>
-        <Text numberOfLines={2} mt="x1" variant="p2">
+        <Text numberOfLines={2} mt="x1" variant="p2" mb="x2">
           {ProductName}
         </Text>
         {hasPrice && (
@@ -49,19 +70,18 @@ const Item: React.FC<Props> = ({
             money={SpecialPrice}
           />
         )}
-      </View>
-    </TouchableOpacity>
+      </Pressable>
+    </View>
   );
 };
 
 const style = StyleSheet.create({
   wrapper: {
-    width: 185 / 2,
-  },
-  fastImage: {
-    width: 185 / 2,
-    height: 185 / 2,
+    position: 'relative',
+    paddingBottom: '100%',
+    width: '100%',
     borderRadius: 4,
+    overflow: 'hidden',
   },
   Icon: {
     position: 'absolute',

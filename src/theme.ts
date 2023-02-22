@@ -13,6 +13,7 @@ export const lightTheme = {
     iconBg: 'rgba(255,255,255,0.3)',
     tabActive: '#C6E1FD',
     text: '#000000',
+    primary50: '#38CEB1',
   },
   textVariants: {
     ...theme.lightTheme.textVariants,
@@ -34,6 +35,7 @@ export const darkTheme: AppTheme = {
     text: '#ffffff',
     gray300: '#ffffff',
     gray500: '#333',
+    primary50: '#07c160',
   },
   textVariants: {
     ...theme.darkTheme.textVariants,

@@ -28,6 +28,7 @@ const feedbackSlice = createSlice({
     builder.addCase(fetchFeedback.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(fetchFeedback.rejected, () => {});
   },
 });
 

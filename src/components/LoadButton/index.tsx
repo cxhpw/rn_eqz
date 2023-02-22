@@ -1,7 +1,7 @@
 import { Flex } from 'native-base';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
-const Index: React.FC<{ title: string; loading: boolean }> = ({
+const Index: React.FC<{ title: string; loading?: boolean }> = ({
   title,
   loading = false,
 }) => {

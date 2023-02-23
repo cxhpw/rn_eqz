@@ -32,7 +32,7 @@ const Detail: React.FC<Props> = () => {
         })
       ).data,
   );
-  const onMount = d => {
+  const onMount = (d: any) => {
     console.log('onMount', d);
     setPriceParameter(d);
   };
@@ -85,7 +85,7 @@ const Detail: React.FC<Props> = () => {
           <Carousel data={data?.piclist} />
           <PlatformLogo />
           <ProductPanel data={data?.productdata} />
-          <PricePanel data={data?.productdata} {...priceParameter} />
+          <PricePanel data={data?.productdata} />
           <Spacer />
           <Recommend data={data?.prolist} />
           <Spacer />

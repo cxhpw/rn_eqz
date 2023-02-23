@@ -5,6 +5,6 @@ const ProductContext = createContext<
     Partial<ProductPrice> & { spec: Spec[] } & {
       onChange: (index: number, obj: Spec) => void;
     }
->({});
+>({} as any);
 
 export default ProductContext;

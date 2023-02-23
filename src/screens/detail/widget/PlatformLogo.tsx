@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 
 const PlatformLogo = () => {
   const { alipayadimg } = useAppSelector(state => state.appConfig);
+  console.log('PlatformLogo render');
   return (
     <FastImage
       style={style.Image}

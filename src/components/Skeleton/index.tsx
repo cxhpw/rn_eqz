@@ -33,7 +33,6 @@ const Skeleton: React.FC<SkeletonProps> = ({
 
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
-    console.log(width, height);
     setSize({ width, height });
   };
 

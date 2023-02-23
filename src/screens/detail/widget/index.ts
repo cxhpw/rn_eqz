@@ -4,3 +4,4 @@ export { default as ProductPanel } from './ProductPanel';
 export { default as PricePanel } from './PricePanel';
 export { default as Recommend } from './Recommend';
 export { default as Desc } from './Desc';
+export { default as ActionSubmit } from './actionSubmit';

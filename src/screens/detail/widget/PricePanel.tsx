@@ -15,6 +15,7 @@ const PricePanel: React.FC<Props> = ({
   monthprice,
 }) => {
   const theme = useTheme<AppTheme>();
+  console.log('PricePanel render');
   return (
     <Box py="15px" px={2.5}>
       <HStack alignItems="center">

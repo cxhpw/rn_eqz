@@ -10,6 +10,8 @@ export { default as LoadButton } from './LoadButton';
 export { default as Pressable } from './Pressable';
 export { default as WaterfallList } from './WaterfallList';
 export { default as Skeleton } from './Skeleton';
+export { default as HtmlParse } from './htmlParse';
+export { Tabs } from './Tabs';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

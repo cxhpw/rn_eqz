@@ -3,11 +3,13 @@ import Item from '@/screens/home/widget/Section/Item';
 import DisCount from '@/screens/home/widget/Section/Discount';
 import { Text } from '@/components';
 import { Box } from 'native-base';
+import { memo } from 'react';
 
 type Props = {
   data: Product[] | undefined;
 };
 const Recommend: React.FC<Props> = ({ data = [] }) => {
+  console.log('Recommend render');
   return (
     <Box px={2.5} pt="15px">
       <Text variant="h2">推荐商品</Text>
@@ -39,4 +41,4 @@ const Recommend: React.FC<Props> = ({ data = [] }) => {
   );
 };
 
-export default Recommend;
+export default memo(Recommend);

@@ -101,6 +101,7 @@ type ProductImage = {
 type ProductInfo = {
   AutoID: number;
   Hit: number;
+  ProImg: string;
   Leaserule: string;
   MarketPrice: number;
   MarketPrice: number;
@@ -125,6 +126,7 @@ type ProductInfo = {
   IsSpecial: 'true' | 'false';
   leaseterm: string[];
   SpecialSummary: { Daynum: number; Discount: number }[];
+  MinDays: number;
 };
 
 type ProductDetail = {

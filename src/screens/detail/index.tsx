@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, Dimensions } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { Container, Skeleton, Spacer } from '@/components';
@@ -10,17 +10,16 @@ import {
   PricePanel,
   ProductPanel,
   Recommend,
+  ActionSubmit,
 } from './widget';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
-import useSpecService from './useSpecService';
-import useDateRange from '@/hooks/useDateRange';
-
 type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 
 const { width } = Dimensions.get('window');
 const Detail: React.FC<Props> = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
+  const [priceParameter, setPriceParameter] = useState(null);
   const { data, loading } = useCustomRequest<ProductDetail>(
     async () =>
       (
@@ -33,36 +32,16 @@ const Detail: React.FC<Props> = () => {
         })
       ).data,
   );
-  const { spec, defaultValue, onChange } = useSpecService(data?.guige);
-  const { date, reCalcDate } = useDateRange(1);
-  const { data: priceParameter, run } = useCustomRequest<ProductPrice>(
-    async () =>
-      (
-        await request({
-          url: '/Include/alipay/data.aspx',
-          params: {
-            apiname: 'getproductprice',
-            start: date[0],
-            end: date[1],
-            pid: 766,
-            guige: defaultValue,
-          },
-        })
-      ).data,
-    {
-      refreshDeps: [defaultValue],
-      manual: true,
-    },
-  );
-  useEffect(() => {
-    if (defaultValue !== undefined) {
-      run();
-    }
-    reCalcDate(5);
-  }, [defaultValue, reCalcDate, run]);
+  const onMount = d => {
+    console.log('onMount', d);
+    setPriceParameter(d);
+  };
+  console.log('detail render');
   return (
     <Container>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        contentContainerStyle={{ paddingBottom: 60 }}>
         <Skeleton
           styles={[
             {
@@ -110,9 +89,10 @@ const Detail: React.FC<Props> = () => {
           <Spacer />
           <Recommend data={data?.prolist} />
           <Spacer />
-          <Desc />
+          <Desc data={data?.productdata} />
         </Skeleton>
       </ScrollView>
+      <ActionSubmit data={data} onMount={onMount} />
     </Container>
   );
 };

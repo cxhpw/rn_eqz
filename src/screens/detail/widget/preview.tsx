@@ -34,6 +34,7 @@ const Dot = memo(({ active }: { active: boolean }) => {
 const Carousel: React.FC<PropsWithChildren<Props>> = ({ data = [] }) => {
   const { width } = Dimensions.get('window');
   const [active, setActive] = useState(0);
+  console.log('Carousel render');
   return (
     <Box width="full" style={style.wrapper}>
       <RNCarousel
@@ -86,4 +87,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default Carousel;
+export default memo(Carousel);

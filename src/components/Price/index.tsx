@@ -15,6 +15,7 @@ type Props = {
   afterText?: string;
   beforeText?: string;
   beforeStyle?: TextStyle;
+  afterStyle?: TextStyle;
   style?: TextStyle;
   containerStyle?: ViewStyle;
 };
@@ -34,6 +35,7 @@ const Price: React.FC<Props> = ({
   afterText = '/日起',
   style: commonStyle,
   beforeStyle,
+  afterStyle,
   containerStyle,
 }) => {
   return (
@@ -42,7 +44,7 @@ const Price: React.FC<Props> = ({
         <Text style={[beforeStyle]}>{beforeText}</Text>
         <Text style={[style.prefix, prefixStyle]}>{priceSlice(money)}</Text>
         <Text style={[suffixStyle]}>{priceSlice(money, 'suffix')}</Text>
-        <Text style={[style.after]}>{afterText}</Text>
+        <Text style={[style.after, afterStyle]}>{afterText}</Text>
       </Text>
     </View>
   );

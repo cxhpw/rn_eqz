@@ -15,6 +15,7 @@ const Tag = memo(({ title }: { title: string }) => {
 
 const ProductPanel: React.FC<Props> = ({ data }) => {
   const theme = useTheme<AppTheme>();
+  console.log('ProductPanel render');
   return (
     <Box
       padding={2.5}

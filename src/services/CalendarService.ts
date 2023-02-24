@@ -167,10 +167,6 @@ class Calendar {
     return monthsInRange;
   }
 
-  getNew() {
-    return this.dates;
-  }
-
   public get dates(): TDate[][] {
     return this._dates;
   }

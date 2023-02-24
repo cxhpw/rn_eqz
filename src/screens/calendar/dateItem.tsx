@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { useUpdate } from 'ahooks';
 import { TDate } from '@/services/CalendarService';
+import CalendarContext from './context';
+import { useContext } from 'react';
 
 type Props = {
   data: TDate;
@@ -40,6 +42,7 @@ function getDateTextStyle(d: TDate): TextStyle {
 }
 
 const DateItem: React.FC<Props> = ({ data }) => {
+  const {} = useContext(CalendarContext);
   const update = useUpdate();
   return (
     <Pressable

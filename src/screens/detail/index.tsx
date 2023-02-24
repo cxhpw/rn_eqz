@@ -14,8 +14,8 @@ import {
 } from './widget';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
-type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 
+type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 const { width } = Dimensions.get('window');
 const Detail: React.FC<Props> = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();

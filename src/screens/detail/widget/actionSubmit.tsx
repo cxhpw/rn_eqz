@@ -1,5 +1,11 @@
 import { Box, Button, Center, Flex, HStack } from 'native-base';
-import { Image, StyleSheet } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Linking,
+  Alert,
+  InteractionManager,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
@@ -26,7 +32,6 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
   const theme = useTheme<AppTheme>();
   const { bottom } = useSafeAreaInsets();
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const { spec, defaultValue, onChange } = useSpecService(data?.guige);
   const { date, reCalcDate } = useDateRange(1);
   // 价格
@@ -123,10 +128,33 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
         <Box style={[style.content, { paddingBottom: bottom }]}>
           <Header data={{ ...data, ...priceParameter }} />
           <Body data={spec} onChange={onChange} />
-          <Footer data={data?.productdata} />
+          <Footer
+            data={data?.productdata}
+            onClick={() => {
+              setIsModalVisible(false);
+              InteractionManager.runAfterInteractions(() => {
+                navigate('Calendar', {
+                  // 警告：函数值无法被序列化，但是功能能用
+                  fn: (n: boolean) => setIsModalVisible(n),
+                });
+              });
+            }}
+          />
           <Button
             onPress={() => {
               console.log('点击确定');
+              // Linking.canOpenURL(
+              //   'alipays://platformapi/startApp?appId=60000157',
+              // ).then(support => {
+              //   if (support) {
+              //     Linking.openURL(
+              //       'alipays://platformapi/startApp?appId=2018100561582465',
+              //     );
+              //   } else {
+              //     Alert.alert('请安装支付宝');
+              //   }
+              // });
+              // alipays://platformapi/startApp?appId=60000157
             }}
             style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>
             确定

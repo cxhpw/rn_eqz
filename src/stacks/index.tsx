@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Config from 'react-native-config';
+
 import TabScreen from './tabStack';
 import Detail from '@/screens/detail';
 import Order from '@/screens/order';
 import Help from '@/screens/help';
-import Config from 'react-native-config';
+import Calendar from '@/screens/calendar';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -27,6 +29,13 @@ const MAIN_SCREENS = [
     component: Order,
     options: {
       title: '我的订单',
+    },
+  },
+  {
+    name: 'Calendar',
+    component: Calendar,
+    options: {
+      title: '选择日期',
     },
   },
 ];

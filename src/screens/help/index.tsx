@@ -9,7 +9,6 @@ interface DataType {
   imageUrl: string;
   height: number;
 }
-
 function fetchData({
   page,
   pageSize,

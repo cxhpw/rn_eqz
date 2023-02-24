@@ -1,13 +1,19 @@
 import { Icon, Pressable } from '@/components';
+import { navigate } from '@/services/NavigationService';
 import { Box } from 'native-base';
 import { Text, StyleSheet, View } from 'react-native';
 
 type Props = {
   data: ProductInfo | undefined;
+  onClick: () => void;
 };
-const Footer: React.FC<Props> = ({ data }) => {
+const Footer: React.FC<Props> = ({ data, onClick }) => {
   return (
-    <Pressable scalable={false}>
+    <Pressable
+      scalable={false}
+      onPress={() => {
+        onClick();
+      }}>
       <Box style={styles.wrapper}>
         <Text style={styles.title}>
           租赁日期<Text style={styles.label}>（{data?.MinDays}天起租）</Text>

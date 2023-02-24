@@ -11,6 +11,11 @@ type MainStackParamList = {
   Detail: { id: number | string };
   Order: { code: number | string };
   Help: undefined;
+  Calendar: {
+    start?: string;
+    end?: string;
+    fn: (n: boolean) => void;
+  };
 };
 
 type AppParamList = MainStackParamList &

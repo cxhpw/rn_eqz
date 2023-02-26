@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Container } from '@/components';
 import DateCalendar from './dateCalendar';
-import { ScrollView } from 'react-native';
+import ActionSubmit from './widget/actionSubmit';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
-const Index: React.FC<Props> = ({ route }) => {
+
+let startEnd: string[] = [];
+const Index: React.FC<Props> = ({ route, navigation }) => {
+  const [height, setHeight] = useState(0);
   useEffect(() => {
     const { fn } = route.params;
     return () => {
@@ -14,13 +17,34 @@ const Index: React.FC<Props> = ({ route }) => {
   }, [route.params]);
   const onChange = (res: any) => {
     console.log('选择日期', res);
+    startEnd = res;
   };
-  console.log('asdas render');
+  const onLayout = (h: SetStateAction<number>) => {
+    setHeight(h);
+  };
+  const onSubmit = () => {
+    //@ts-ignore
+    navigation.navigate({
+      name: 'Detail',
+      params: {
+        startEnd,
+      },
+      merge: true,
+    });
+  };
   return (
     <Container>
-      <ScrollView>
-        <DateCalendar onChange={onChange} />
-      </ScrollView>
+      <DateCalendar
+        start={route.params.start}
+        end={route.params.end}
+        onChange={onChange}
+        paddingBttom={height}
+      />
+      <ActionSubmit
+        onSubmit={onSubmit}
+        onLayout={onLayout}
+        min={route.params.minDay}
+      />
     </Container>
   );
 };

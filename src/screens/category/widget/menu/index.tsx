@@ -1,6 +1,8 @@
 import { ScrollView } from 'react-native';
 import MenuItem, { type IGestureResponderEvent } from './item';
 import { forwardRef } from 'react';
+import { useTheme } from '@shopify/restyle';
+import { AppTheme } from '@/theme';
 
 type Props = {
   data?: Goods[];
@@ -14,6 +16,7 @@ const Menu = (
   { data = [], activeIndex = 0, onPress, onLayout }: Props,
   ref: any,
 ) => {
+  const { theme, colors } = useTheme<AppTheme>();
   return (
     <ScrollView
       ref={ref}
@@ -21,7 +24,10 @@ const Menu = (
         const { height } = e.nativeEvent.layout;
         onLayout?.(height);
       }}
-      style={{ flex: 1, backgroundColor: '#f7f5f6' }}
+      style={{
+        flex: 1,
+        backgroundColor: theme === 'dark' ? colors.black : '#f7f5f6',
+      }}
       showsVerticalScrollIndicator={false}>
       {data?.map((item, idx) => (
         <MenuItem

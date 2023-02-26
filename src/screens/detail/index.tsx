@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, Dimensions } from 'react-native';
-import React, { useState } from 'react';
+import { ScrollView, Dimensions } from 'react-native';
+import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { Container, Skeleton, Spacer } from '@/components';
@@ -19,7 +19,6 @@ type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 const { width } = Dimensions.get('window');
 const Detail: React.FC<Props> = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
-  const [priceParameter, setPriceParameter] = useState(null);
   const { data, loading } = useCustomRequest<ProductDetail>(
     async () =>
       (
@@ -32,10 +31,6 @@ const Detail: React.FC<Props> = () => {
         })
       ).data,
   );
-  const onMount = (d: any) => {
-    console.log('onMount', d);
-    setPriceParameter(d);
-  };
   console.log('detail render');
   return (
     <Container>
@@ -92,11 +87,9 @@ const Detail: React.FC<Props> = () => {
           <Desc data={data?.productdata} />
         </Skeleton>
       </ScrollView>
-      <ActionSubmit data={data} onMount={onMount} />
+      <ActionSubmit data={data} />
     </Container>
   );
 };
-
-const styles = StyleSheet.create({});
 
 export default Detail;

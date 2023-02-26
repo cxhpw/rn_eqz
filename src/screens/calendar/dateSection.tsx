@@ -4,15 +4,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import DateItem from './dateItem';
 type Props = {
   title: string;
-  data: TDate[];
+  dates: TDate[];
 };
-const DateSection: React.FC<Props> = ({ title, data }) => {
-  console.log('datesection render');
+const DateSection: React.FC<Props> = ({ title, dates }) => {
   return (
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.dates}>
-        {data.map((date, idx) => {
+        {dates.map(date => {
           return <DateItem key={`${date.date}`} data={date} />;
         })}
       </View>

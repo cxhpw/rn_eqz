@@ -18,14 +18,13 @@ import Header from './modalContent/header';
 import Body from './modalContent/Body';
 import Footer from './modalContent/Footer';
 import { useCustomRequest } from '@/hooks';
-import useDateRange from '@/hooks/useDateRange';
 import request from '@/request';
 import useSpecService from '../useSpecService';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 type Props = {
   data: ProductDetail | undefined;
-  onMount: (e: any) => void;
+  onMount?: (e: any) => void;
 };
 const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
@@ -33,8 +32,7 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
   const { bottom } = useSafeAreaInsets();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { spec, defaultValue, onChange } = useSpecService(data?.guige);
-  const { date, reCalcDate } = useDateRange(1);
-  // 价格
+  // 获取规格商品价格
   const { data: priceParameter, run } = useCustomRequest<ProductPrice>(
     async () =>
       (
@@ -42,8 +40,8 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
           url: '/Include/alipay/data.aspx',
           params: {
             apiname: 'getproductprice',
-            start: date[0],
-            end: date[1],
+            start: params.startEnd ? params.startEnd[0] : '',
+            end: params.startEnd ? params.startEnd[1] : '',
             pid: params.id,
             guige: defaultValue,
           },
@@ -56,10 +54,11 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
   );
 
   useEffect(() => {
-    if (defaultValue !== undefined) {
+    console.log('useEffect');
+    if (params.startEnd?.length || defaultValue !== undefined) {
       run();
     }
-  }, [defaultValue, reCalcDate, run]);
+  }, [defaultValue, params.startEnd, run]);
 
   console.log('ActionSubmit render');
   return (
@@ -136,6 +135,9 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
                 navigate('Calendar', {
                   // 警告：函数值无法被序列化，但是功能能用
                   fn: (n: boolean) => setIsModalVisible(n),
+                  start: params.startEnd ? params.startEnd[0] : '',
+                  end: params.startEnd ? params.startEnd[1] : '',
+                  minDay: data?.productdata.MinDays,
                 });
               });
             }}
@@ -143,17 +145,17 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
           <Button
             onPress={() => {
               console.log('点击确定');
-              // Linking.canOpenURL(
-              //   'alipays://platformapi/startApp?appId=60000157',
-              // ).then(support => {
-              //   if (support) {
-              //     Linking.openURL(
-              //       'alipays://platformapi/startApp?appId=2018100561582465',
-              //     );
-              //   } else {
-              //     Alert.alert('请安装支付宝');
-              //   }
-              // });
+              Linking.canOpenURL(
+                'alipays://platformapi/startApp?appId=60000157',
+              ).then(support => {
+                if (support) {
+                  Linking.openURL(
+                    'alipays://platformapi/startApp?appId=2018100561582465',
+                  );
+                } else {
+                  Alert.alert('请安装支付宝');
+                }
+              });
               // alipays://platformapi/startApp?appId=60000157
             }}
             style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>

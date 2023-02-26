@@ -25,12 +25,14 @@ export type TDate = {
   fade: boolean;
   disabled: boolean;
   onPress: (d: TDate) => void;
+  dates: TDate[][];
+  dirty: boolean;
 };
 type Options = {
-  onChange: (res: any) => void;
-  maxMonthShow: 4;
-  start: string;
-  end: string;
+  onChange?: (res: any) => void;
+  maxMonthShow?: 4;
+  start?: string;
+  end?: string;
 };
 
 class Calendar {
@@ -47,10 +49,17 @@ class Calendar {
   private latestDate: Dayjs;
   private _years: number[] = [];
   private _months: number[] = [];
+  private cache: TDate[] = [];
+  private startDateData?: TDate;
+  private endDateData?: TDate;
+  private prev_startDateData?: TDate;
+  private prev_endDateData?: TDate;
 
   constructor(options?: Options) {
     this.options = options || ({} as Options);
     this.maxMonthShow = options?.maxMonthShow || 4;
+    this.startDate = options?.start ? dayjs(options?.start) : undefined;
+    this.endDate = options?.end ? dayjs(options?.end) : undefined;
     this.earliestDate = dayjs().startOf('month');
     this.latestDate = dayjs().startOf('month').add(this.maxMonthShow, 'month');
     this.createCalendar();
@@ -62,9 +71,9 @@ class Calendar {
     return Calendar.instance;
   }
 
-  private handle(d: TDate) {
-    this.currentDate = d.d;
-    if (d.fade || d.past || d.disabled) {
+  onDatePress = (DateData: TDate) => {
+    this.currentDate = DateData.d;
+    if (DateData.fade || DateData.past || DateData.disabled) {
       return;
     }
     if (
@@ -72,49 +81,70 @@ class Calendar {
       this.currentDate.isSame(this.endDate)
     ) {
       return;
-    }
-    if (this.startDate && this.endDate) {
+    } else if (this.startDate && this.endDate) {
       //@ts-ignore
-      this.startDate = this.endDate = null;
-    }
-    if (!this.startDate && !this.endDate) {
       this.startDate = this.currentDate;
-      d.start = true;
-    }
-    if (
+      this.endDate = undefined;
+      this.startDateData = DateData;
+      this.endDateData = undefined;
+    } else if (!this.startDate && !this.endDate) {
+      this.startDate = this.currentDate;
+      this.startDateData = DateData;
+    } else if (
       this.startDate &&
       this.currentDate.isAfter(this.startDate) &&
       !this.endDate
     ) {
       this.endDate = this.currentDate;
-      d.end = true;
-    }
-    if (this.startDate && this.currentDate.isBefore(this.startDate)) {
+      this.endDateData = DateData;
+    } else if (this.startDate && this.currentDate.isBefore(this.startDate)) {
       this.endDate = this.startDate;
       this.startDate = this.currentDate;
+      this.endDateData = this.startDateData;
+      this.startDateData = DateData;
     }
-    if (this.startDate && this.endDate) {
-      this.checkRandDays(this.startDate, this.endDate);
+    this.checkRandDays();
+    this.prev_startDateData = this.startDateData;
+    this.prev_endDateData = this.endDateData;
+  };
+  private cleanup() {
+    let startIdx = this.cache.indexOf(this.prev_startDateData!);
+    let endIdx = this.cache.indexOf(this.prev_endDateData!);
+    let length = endIdx - startIdx;
+    if (length > 0) {
+      for (let i = startIdx; i <= endIdx; i++) {
+        this.cache[i].selected = false;
+        this.cache[i].start = false;
+        this.cache[i].end = false;
+        this.cache[i].dirty = true;
+      }
     }
   }
 
-  private checkRandDays(start: Dayjs, end: Dayjs) {
-    for (let i = 0; i < this._dates.length; i++) {
-      for (let j = 0; j < this._dates[i].length; j++) {
-        const date = this._dates[i][j];
-        if (date.d.isAfter(end)) {
-          return;
-        }
-        if (date.d.isBetween(start, end)) {
-          console.log(2, date.d.format(this.format));
-          date.selected = true;
-        }
+  private checkRandDays() {
+    this.cleanup();
+    let startIdx = this.cache.indexOf(this.startDateData!);
+    let endIdx = this.cache.indexOf(this.endDateData!);
+    let length = endIdx - startIdx;
+    if (startIdx !== -1) {
+      this.startDateData!.start = true;
+      this.startDateData!.end = false;
+      this.startDateData!.selected = false;
+    }
+    if (endIdx !== -1) {
+      this.endDateData!.end = true;
+      this.endDateData!.start = false;
+      this.endDateData!.selected = false;
+    }
+    if (length > 0) {
+      for (let i = startIdx + 1; i < endIdx; i++) {
+        this.cache[i].selected = true;
       }
     }
   }
 
   private createCalendar() {
-    this._dates = this.calendarArrays();
+    this._dates = this.calendarArrays(dayjs(), this.startDate, this.endDate);
   }
 
   private calendarArrays(
@@ -135,7 +165,7 @@ class Calendar {
       let endRange = dayjs(reference).endOf('month');
       let d = startRange.clone();
       while (d.isBefore(endRange)) {
-        daysInRange.push({
+        const dateObj: TDate = {
           d: d,
           str: d.format('D'),
           date: d.format(this.format),
@@ -153,8 +183,19 @@ class Calendar {
           fade: !d.isSame(reference, 'month'),
           /* */
           disabled: d.isBefore(now.add(3, 'day')),
-          onPress: (date: TDate) => this.handle(date),
-        });
+          onPress: (n: TDate) => this.onDatePress(n),
+          dates: monthsInRange,
+          /* 是否需要重新渲染 */
+          dirty: false,
+        };
+        daysInRange.push(dateObj);
+        this.cache.push(dateObj);
+        if (dateObj.start) {
+          this.startDateData = this.prev_startDateData = dateObj;
+        }
+        if (dateObj.end) {
+          this.endDateData = this.prev_endDateData = dateObj;
+        }
         d = d.add(1, 'day');
       }
       current = current.add(1, 'month').startOf('day');
@@ -181,6 +222,30 @@ class Calendar {
 
   public get weekdays(): string[] {
     return this.days_array;
+  }
+
+  public get start(): string | undefined {
+    return this.startDateData?.date;
+  }
+
+  public get end(): string | undefined {
+    return this.endDateData?.date;
+  }
+
+  setOptions(options: Options) {
+    if (options.start && options.end) {
+      this.startDate = dayjs(options.start);
+      this.endDate = dayjs(options.end);
+      for (let i = 0; i < this.cache.length; i++) {
+        const element = this.cache[i];
+        if (element.d.isSame(this.startDate)) {
+          this.startDateData = element;
+        } else if (element.d.isSame(this.endDate)) {
+          this.endDateData = element;
+        }
+      }
+      this.checkRandDays();
+    }
   }
 }
 export { Calendar };

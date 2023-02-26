@@ -1,4 +1,6 @@
 import { Pressable, Text } from '@/components';
+import { AppTheme } from '@/theme';
+import { useTheme } from '@shopify/restyle';
 import { Center } from 'native-base';
 import { memo } from 'react';
 import { GestureResponderEvent, StyleSheet } from 'react-native';
@@ -21,9 +23,10 @@ const Item: React.FC<Props> = ({
   onPress,
   activeTintColor,
   active,
-  unActiveTintColor,
 }) => {
   console.log('Item', item.AutoID, active);
+
+  const { theme, colors } = useTheme<AppTheme>();
   return (
     <Pressable
       scalable={false}
@@ -37,7 +40,13 @@ const Item: React.FC<Props> = ({
       <Center
         style={[
           style.menuItem,
-          { backgroundColor: active ? activeTintColor : unActiveTintColor },
+          {
+            backgroundColor: active
+              ? theme === 'dark'
+                ? colors.background
+                : activeTintColor
+              : 'transparent',
+          },
         ]}
         key={item.AutoID}>
         <Text

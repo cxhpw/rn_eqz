@@ -7,7 +7,6 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { useUpdate } from 'ahooks';
 import { TDate } from '@/services/CalendarService';
 import CalendarContext from './context';
 import { useContext } from 'react';
@@ -16,6 +15,7 @@ type Props = {
   data: TDate;
 };
 const { width } = Dimensions.get('window');
+const itemWidth = Math.round((width / 7) * 100) / 100;
 function getDateViewStyle(d: TDate): ViewStyle {
   let style: ViewStyle = {};
   if (d.past || d.disabled) {
@@ -26,6 +26,14 @@ function getDateViewStyle(d: TDate): ViewStyle {
   }
   if (d.start || d.end) {
     style.backgroundColor = '#22d7bb';
+  }
+  if (d.start) {
+    style.borderTopLeftRadius = itemWidth / 2;
+    style.borderBottomLeftRadius = itemWidth / 2;
+  }
+  if (d.end) {
+    style.borderTopRightRadius = itemWidth / 2;
+    style.borderBottomRightRadius = itemWidth / 2;
   }
   if (d.selected) {
     style.backgroundColor = '#a9fff2';
@@ -42,12 +50,14 @@ function getDateTextStyle(d: TDate): TextStyle {
 }
 
 const DateItem: React.FC<Props> = ({ data }) => {
-  const {} = useContext(CalendarContext);
-  const update = useUpdate();
+  const { update } = useContext(CalendarContext);
   return (
     <Pressable
       onPress={() => {
-        console.log(data.start, data.selected, data.end);
+        data.onPress(data);
+        console.log('更新');
+        update();
+        // setDates([...data.dates]);
       }}>
       <View style={[styles.date, getDateViewStyle(data)]}>
         <Text style={[getDateTextStyle(data)]}>
@@ -62,8 +72,8 @@ const DateItem: React.FC<Props> = ({ data }) => {
 
 const styles = StyleSheet.create({
   date: {
-    width: Math.round((width / 7) * 100) / 100,
-    height: Math.round((width / 7) * 100) / 100,
+    width: itemWidth,
+    height: itemWidth,
     alignItems: 'center',
     justifyContent: 'center',
     // borderRadius: Math.round((width / 7) * 100) / 100,

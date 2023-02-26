@@ -2,24 +2,22 @@ import { StyleSheet, View } from 'react-native';
 
 import DateSection from './dateSection';
 import CalendatContext from './context';
-import { TDate } from '@/services/CalendarService';
 import { useContext } from 'react';
 
 type Props = {
-  dates?: TDate[][];
   months?: number[];
   years?: number[];
 };
-const DateBody: React.FC<Props> = () => {
+const DateBody: React.FC<Props> = ({ years, months }) => {
   console.log('dateBody render');
-  const { dates, years, months } = useContext(CalendatContext);
+  const { dates } = useContext(CalendatContext);
   return (
     <View style={styles.wrapper}>
-      {dates.map((item, index) => {
+      {dates?.map((item, index) => {
         return (
           <DateSection
-            data={item}
-            title={`${years[index]}年${months[index]}月`}
+            dates={item}
+            title={`${years![index]}年${months![index]}月`}
             key={`date${index}`}
           />
         );

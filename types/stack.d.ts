@@ -8,12 +8,13 @@ type MainStackParamList = {
   Category: { id?: number };
   Chat: undefined;
   My: undefined;
-  Detail: { id: number | string };
+  Detail: { id: number | string; startEnd?: string[] };
   Order: { code: number | string };
   Help: undefined;
   Calendar: {
     start?: string;
     end?: string;
+    minDay?: number | string;
     fn: (n: boolean) => void;
   };
 };

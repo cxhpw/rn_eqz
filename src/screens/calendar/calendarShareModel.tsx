@@ -3,6 +3,7 @@ import {
   PropsWithChildren,
   ReactNode,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react';
@@ -19,7 +20,7 @@ type ConsumerProps<Value> = {
 
 type ShareModel = Pick<
   Calendar,
-  'dates' | 'start' | 'end' | 'weekdays' | 'years' | 'months'
+  'dates' | 'start' | 'end' | 'weekdays' | 'years' | 'months' | 'days'
 > & {
   update: ReturnType<typeof useUpdate>;
 };
@@ -30,7 +31,7 @@ export function createShareModel() {
     children,
     initialState,
   }: PropsWithChildren<Record<string, any>>) => {
-    console.log(initialState);
+    console.log('initialState', initialState);
     const [calendarInstance] = useState(() => new Calendar(initialState));
     const shareModel: ShareModel = {
       update: useUpdate(),
@@ -40,9 +41,22 @@ export function createShareModel() {
       months: calendarInstance.months,
       start: calendarInstance.start,
       end: calendarInstance.end,
+      days: calendarInstance.days,
     };
+    useEffect(() => {
+      if (initialState.boundary) {
+        calendarInstance.setStartEnd(initialState.start, initialState.end);
+        shareModel.update();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [initialState]);
+
     return useMemo(
-      () => <Context.Provider value={shareModel}>{children}</Context.Provider>,
+      () => {
+        return (
+          <Context.Provider value={shareModel}>{children}</Context.Provider>
+        );
+      },
       // eslint-disable-next-line react-hooks/exhaustive-deps
       [shareModel],
     );

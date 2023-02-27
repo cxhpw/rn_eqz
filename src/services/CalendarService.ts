@@ -29,10 +29,11 @@ export type TDate = {
   dirty: boolean;
 };
 type Options = {
-  onChange?: (res: any) => void;
+  onChange?: (res: any, n: number | undefined) => void;
   maxMonthShow?: 4;
   start?: string;
   end?: string;
+  boundary?: boolean;
 };
 
 class Calendar {
@@ -54,8 +55,10 @@ class Calendar {
   private endDateData?: TDate;
   private prev_startDateData?: TDate;
   private prev_endDateData?: TDate;
+  private isFixedDays: boolean = false;
 
   constructor(options?: Options) {
+    console.info('生成Calendar实例');
     this.options = options || ({} as Options);
     this.maxMonthShow = options?.maxMonthShow || 4;
     this.startDate = options?.start ? dayjs(options?.start) : undefined;
@@ -73,6 +76,7 @@ class Calendar {
 
   onDatePress = (DateData: TDate) => {
     this.currentDate = DateData.d;
+    this.isFixedDays = false;
     if (DateData.fade || DateData.past || DateData.disabled) {
       return;
     }
@@ -104,8 +108,6 @@ class Calendar {
       this.startDateData = DateData;
     }
     this.checkRandDays();
-    this.prev_startDateData = this.startDateData;
-    this.prev_endDateData = this.endDateData;
   };
   private cleanup() {
     let startIdx = this.cache.indexOf(this.prev_startDateData!);
@@ -122,6 +124,7 @@ class Calendar {
   }
 
   private checkRandDays() {
+    // 重置上一次日期状态
     this.cleanup();
     let startIdx = this.cache.indexOf(this.startDateData!);
     let endIdx = this.cache.indexOf(this.endDateData!);
@@ -132,6 +135,7 @@ class Calendar {
       this.startDateData!.selected = false;
     }
     if (endIdx !== -1) {
+      console.log('endIdx', endIdx);
       this.endDateData!.end = true;
       this.endDateData!.start = false;
       this.endDateData!.selected = false;
@@ -141,7 +145,15 @@ class Calendar {
         this.cache[i].selected = true;
       }
     }
-    this.options.onChange?.([this.startDateData?.date, this.endDateData?.date]);
+    // 保存当前日期状态
+    this.prev_startDateData = this.startDateData;
+    this.prev_endDateData = this.endDateData;
+    if (!this.isFixedDays) {
+      this.options.onChange?.(
+        [this.startDateData?.date, this.endDateData?.date],
+        this.days,
+      );
+    }
   }
 
   private createCalendar() {
@@ -233,16 +245,26 @@ class Calendar {
     return this.endDateData?.date;
   }
 
-  setOptions(options: Options) {
-    if (options.start && options.end) {
-      this.startDate = dayjs(options.start);
-      this.endDate = dayjs(options.end);
+  public get days(): number | undefined {
+    const n: number | undefined = this.startDate?.diff(this.endDate, 'day');
+    return n! < 0 ? Math.abs(n!) + 1 : 0;
+  }
+
+  setStartEnd(start: string, end: string) {
+    console.log('手动设置开始-结束日期', start, end);
+    this.isFixedDays = true;
+    this.cleanup();
+    if (start && end) {
+      this.startDate = dayjs(start);
+      this.endDate = dayjs(end);
       for (let i = 0; i < this.cache.length; i++) {
         const element = this.cache[i];
         if (element.d.isSame(this.startDate)) {
           this.startDateData = element;
         } else if (element.d.isSame(this.endDate)) {
+          console.log('end', element.date);
           this.endDateData = element;
+          break;
         }
       }
       this.checkRandDays();

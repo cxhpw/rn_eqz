@@ -1,18 +1,20 @@
 import { Text, Pressable } from '@/components';
-import { navigate } from '@/services/NavigationService';
 import { AppTheme } from '@/theme';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
 import { Box, Button, Center, Flex } from 'native-base';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useToast } from 'native-base';
 
 type Props = {
-  min: unknown;
+  min: any;
+  days: number;
   onLayout: (e: any) => void;
   onSubmit: () => void;
   onRangeDays: (n: any) => void;
+  boundary?: boolean;
 };
 function getActiveStyle(isActive: boolean): ViewStyle {
   return isActive
@@ -23,18 +25,34 @@ function getActiveStyle(isActive: boolean): ViewStyle {
 }
 const ActionSubmit: React.FC<Props> = ({
   min,
+  days,
   onLayout,
   onSubmit,
   onRangeDays,
+  boundary = false,
 }) => {
+  const toast = useToast();
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const [show, setShow] = useState<boolean>(false);
   const { bottom } = useSafeAreaInsets();
   const { params } = useRoute<RouteProp<AppParamList, 'Calendar'>>();
-  const [show, setShow] = useState<boolean>(false);
   const [active, setActive] = useState(-1);
   const theme = useTheme<AppTheme>();
   const onLayoutChange = (e: LayoutChangeEvent) => {
     onLayout(e.nativeEvent.layout.height - bottom);
   };
+  useEffect(() => {
+    console.log('days', days);
+    if (!isNaN(days) && days !== 0) {
+      setDisabled(days < min);
+      days < min &&
+        toast.show({
+          description: `此商品至少起租${min}天`,
+          placement: 'top',
+        });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [days, min]);
   return (
     <Box
       onLayout={onLayoutChange}
@@ -55,8 +73,12 @@ const ActionSubmit: React.FC<Props> = ({
                   onRangeDays(item);
                 }}
                 key={item}
-                style={[styles.cell, getActiveStyle(active === index)]}>
-                <Text color={active === index ? 'white' : 'gray500'}>
+                style={[
+                  styles.cell,
+                  getActiveStyle(active === index && boundary),
+                ]}>
+                <Text
+                  color={active === index && boundary ? 'white' : 'gray500'}>
                   {item}天
                 </Text>
               </Pressable>
@@ -78,11 +100,12 @@ const ActionSubmit: React.FC<Props> = ({
           <Text color="gray500">{`此商品至少起租${min}天`}</Text>
         </Center>
         <Button
+          disabled={disabled}
           onPress={() => onSubmit()}
           style={[
             styles.button,
             {
-              backgroundColor: theme.colors.primary50,
+              backgroundColor: disabled ? '#999' : theme.colors.primary50,
             },
           ]}>
           <Text color="white">确定</Text>

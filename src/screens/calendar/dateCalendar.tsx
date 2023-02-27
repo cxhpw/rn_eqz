@@ -4,22 +4,27 @@ import { ScrollView } from 'react-native';
 import useCaledatService from './useCaledatService';
 
 type Props = {
-  onChange: (res: any) => void;
+  onChange: (res: string[], n: number) => void;
   paddingBttom?: any;
   start?: string;
   end?: string;
+  fixedDays?: number;
+  boundary?: boolean;
 };
 const DateCalendar: React.FC<Props> = ({
   onChange,
   paddingBttom,
   start,
   end,
+  boundary,
 }) => {
+  console.log('Calendar render');
   return (
     <useCaledatService.Provider
       initialState={{
         start,
         end,
+        boundary,
         onChange: onChange,
       }}>
       <ScrollView

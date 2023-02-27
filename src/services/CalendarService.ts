@@ -141,6 +141,7 @@ class Calendar {
         this.cache[i].selected = true;
       }
     }
+    this.options.onChange?.([this.startDateData?.date, this.endDateData?.date]);
   }
 
   private createCalendar() {

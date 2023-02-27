@@ -1,6 +1,7 @@
 import { Text, Pressable } from '@/components';
 import { navigate } from '@/services/NavigationService';
 import { AppTheme } from '@/theme';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
 import { Box, Button, Center, Flex } from 'native-base';
 import { useState } from 'react';
@@ -11,15 +12,25 @@ type Props = {
   min: unknown;
   onLayout: (e: any) => void;
   onSubmit: () => void;
+  onRangeDays: (n: any) => void;
 };
-function getActiveStyle(): ViewStyle {
-  return {
-    backgroundColor: '#38CEB1',
-  };
+function getActiveStyle(isActive: boolean): ViewStyle {
+  return isActive
+    ? {
+        backgroundColor: '#38CEB1',
+      }
+    : {};
 }
-const ActionSubmit: React.FC<Props> = ({ min, onLayout, onSubmit }) => {
+const ActionSubmit: React.FC<Props> = ({
+  min,
+  onLayout,
+  onSubmit,
+  onRangeDays,
+}) => {
   const { bottom } = useSafeAreaInsets();
+  const { params } = useRoute<RouteProp<AppParamList, 'Calendar'>>();
   const [show, setShow] = useState<boolean>(false);
+  const [active, setActive] = useState(-1);
   const theme = useTheme<AppTheme>();
   const onLayoutChange = (e: LayoutChangeEvent) => {
     onLayout(e.nativeEvent.layout.height - bottom);
@@ -37,18 +48,19 @@ const ActionSubmit: React.FC<Props> = ({ min, onLayout, onSubmit }) => {
         <Flex flexDir="row" alignItems="center">
           <Text color="gray500">租期：</Text>
           <Flex flexDir="row">
-            <Pressable style={[styles.cell, getActiveStyle()]}>
-              <Text color={true ? 'white' : 'gray500'}>5天</Text>
-            </Pressable>
-            <Pressable style={styles.cell}>
-              <Text color="gray500">5天</Text>
-            </Pressable>
-            <Pressable style={styles.cell}>
-              <Text color="gray500">5天</Text>
-            </Pressable>
-            <Pressable style={styles.cell}>
-              <Text color="gray500">5天</Text>
-            </Pressable>
+            {params.leaseterm?.map((item, index) => (
+              <Pressable
+                onPress={() => {
+                  setActive(index);
+                  onRangeDays(item);
+                }}
+                key={item}
+                style={[styles.cell, getActiveStyle(active === index)]}>
+                <Text color={active === index ? 'white' : 'gray500'}>
+                  {item}天
+                </Text>
+              </Pressable>
+            ))}
           </Flex>
         </Flex>
         {show && (
@@ -120,6 +132,7 @@ const styles = StyleSheet.create({
     borderColor: '#dfdfdf',
     borderRadius: 4,
     marginRight: 10,
+    borderWidth: 1,
   },
   actionSubmit: {
     borderTopWidth: 1,

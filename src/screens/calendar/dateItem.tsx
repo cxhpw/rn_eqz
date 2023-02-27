@@ -8,8 +8,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { TDate } from '@/services/CalendarService';
-import CalendarContext from './context';
-import { useContext } from 'react';
+import useCaledatService from './useCaledatService';
 
 type Props = {
   data: TDate;
@@ -50,14 +49,14 @@ function getDateTextStyle(d: TDate): TextStyle {
 }
 
 const DateItem: React.FC<Props> = ({ data }) => {
-  const { update } = useContext(CalendarContext);
+  // const { update } = useContext(CalendarContext);
+  const { update } = useCaledatService.useModel();
   return (
     <Pressable
       onPress={() => {
         data.onPress(data);
         console.log('更新');
         update();
-        // setDates([...data.dates]);
       }}>
       <View style={[styles.date, getDateViewStyle(data)]}>
         <Text style={[getDateTextStyle(data)]}>

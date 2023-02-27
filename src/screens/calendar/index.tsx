@@ -32,6 +32,9 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
       merge: true,
     });
   };
+  const onRangeDays = (n: any) => {
+    console.log(n);
+  };
   return (
     <Container>
       <DateCalendar
@@ -43,6 +46,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
       <ActionSubmit
         onSubmit={onSubmit}
         onLayout={onLayout}
+        onRangeDays={onRangeDays}
         min={route.params.minDay}
       />
     </Container>

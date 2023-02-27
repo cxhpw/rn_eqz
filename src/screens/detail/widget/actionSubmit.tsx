@@ -54,13 +54,12 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
   );
 
   useEffect(() => {
-    console.log('useEffect');
+    console.log('重新获取规格商品价格');
     if (params.startEnd?.length || defaultValue !== undefined) {
       run();
     }
   }, [defaultValue, params.startEnd, run]);
 
-  console.log('ActionSubmit render');
   return (
     <>
       <HStack
@@ -138,6 +137,7 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
                   start: params.startEnd ? params.startEnd[0] : '',
                   end: params.startEnd ? params.startEnd[1] : '',
                   minDay: data?.productdata.MinDays,
+                  leaseterm: data?.leaseterm,
                 });
               });
             }}
@@ -145,12 +145,10 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
           <Button
             onPress={() => {
               console.log('点击确定');
-              Linking.canOpenURL(
-                'alipays://platformapi/startApp?appId=60000157',
-              ).then(support => {
+              Linking.canOpenURL('alipays').then(support => {
                 if (support) {
                   Linking.openURL(
-                    'alipays://platformapi/startApp?appId=2018100561582465',
+                    'alipays://platformapi/startApp?appId=2018100561582465&url=/pages/recommendation/recommendation',
                   );
                 } else {
                   Alert.alert('请安装支付宝');

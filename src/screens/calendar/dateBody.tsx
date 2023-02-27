@@ -1,16 +1,15 @@
 import { StyleSheet, View } from 'react-native';
 
 import DateSection from './dateSection';
-import CalendatContext from './context';
-import { useContext } from 'react';
+import useCaledatService from './useCaledatService';
 
 type Props = {
   months?: number[];
   years?: number[];
 };
-const DateBody: React.FC<Props> = ({ years, months }) => {
+const DateBody: React.FC<Props> = () => {
   console.log('dateBody render');
-  const { dates } = useContext(CalendatContext);
+  const { dates, years, months } = useCaledatService.useModel();
   return (
     <View style={styles.wrapper}>
       {dates?.map((item, index) => {

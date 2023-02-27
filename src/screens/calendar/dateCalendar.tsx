@@ -1,10 +1,7 @@
 import DateHeader from './dateHeader';
 import DateBody from './dateBody';
-import CalendarContext, { useCalendar } from './context';
-import { Calendar } from '@/services/CalendarService';
-import { useEffect, useState } from 'react';
-import { useUpdate } from 'ahooks';
 import { ScrollView } from 'react-native';
+import useCaledatService from './useCaledatService';
 
 type Props = {
   onChange: (res: any) => void;
@@ -15,28 +12,15 @@ type Props = {
 const DateCalendar: React.FC<Props> = ({
   onChange,
   paddingBttom,
-  start: s,
-  end: e,
+  start,
+  end,
 }) => {
-  const update = useUpdate();
-  let [calendar] = useState<Calendar | null>(
-    () =>
-      new Calendar({
-        start: s,
-        end: e,
-      }),
-  );
-  const { start, end } = useCalendar(calendar);
-  useEffect(() => {
-    if (start && end) {
-      onChange([start, end]);
-    }
-  }, [calendar, e, end, onChange, s, start, update]);
   return (
-    <CalendarContext.Provider
-      value={{
-        dates: calendar?.dates,
-        update,
+    <useCaledatService.Provider
+      initialState={{
+        start,
+        end,
+        onChange: onChange,
       }}>
       <ScrollView
         stickyHeaderIndices={[0]}
@@ -44,10 +28,10 @@ const DateCalendar: React.FC<Props> = ({
         contentContainerStyle={{
           paddingBottom: paddingBttom,
         }}>
-        <DateHeader weekdays={calendar?.weekdays} />
-        <DateBody months={calendar?.months} years={calendar?.years} />
+        <DateHeader />
+        <DateBody />
       </ScrollView>
-    </CalendarContext.Provider>
+    </useCaledatService.Provider>
   );
 };
 

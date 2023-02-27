@@ -124,7 +124,6 @@ type ProductInfo = {
   serverTitle: string;
   Evaluation: number;
   IsSpecial: 'true' | 'false';
-  leaseterm: string[];
   SpecialSummary: { Daynum: number; Discount: number }[];
   MinDays: number;
 };
@@ -139,6 +138,7 @@ type ProductDetail = {
   piclist: ProductImage[];
   productdata: ProductInfo;
   prolist: Product[];
+  leaseterm: string[];
 };
 
 type Spec = {

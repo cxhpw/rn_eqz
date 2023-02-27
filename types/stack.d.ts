@@ -16,6 +16,7 @@ type MainStackParamList = {
     end?: string;
     minDay?: number | string;
     fn: (n: boolean) => void;
+    leaseterm?: number[] | string[];
   };
 };
 

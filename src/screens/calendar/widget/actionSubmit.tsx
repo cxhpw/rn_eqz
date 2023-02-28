@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useToast } from 'native-base';
+import request from '@/request';
+import { useCustomRequest } from '@/hooks';
 
 type Props = {
   min: any;
@@ -15,6 +17,7 @@ type Props = {
   onSubmit: () => void;
   onRangeDays: (n: any) => void;
   boundary?: boolean;
+  startEnd?: string[];
 };
 function getActiveStyle(isActive: boolean): ViewStyle {
   return isActive
@@ -30,6 +33,7 @@ const ActionSubmit: React.FC<Props> = ({
   onSubmit,
   onRangeDays,
   boundary = false,
+  startEnd,
 }) => {
   const toast = useToast();
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -41,18 +45,49 @@ const ActionSubmit: React.FC<Props> = ({
   const onLayoutChange = (e: LayoutChangeEvent) => {
     onLayout(e.nativeEvent.layout.height - bottom);
   };
+  // 获取规格商品价格
+  const { data, run } = useCustomRequest<ProductPrice>(
+    async () =>
+      (
+        await request({
+          url: '/Include/alipay/data.aspx',
+          params: {
+            apiname: 'getproductprice',
+            start: startEnd ? startEnd[0] : '',
+            end: startEnd ? startEnd[1] : '',
+            pid: params.id,
+            guige: params.spec,
+          },
+        })
+      ).data,
+    {
+      manual: true,
+      onSuccess: () => {
+        setShow(true);
+      },
+    },
+  );
   useEffect(() => {
-    console.log('days', days);
-    if (!isNaN(days) && days !== 0) {
+    console.log('days', days, min);
+    if (days > 0) {
       setDisabled(days < min);
-      days < min &&
+      if (days < min) {
         toast.show({
           description: `此商品至少起租${min}天`,
           placement: 'top',
         });
+        setShow(false);
+      } else {
+        run();
+      }
+    } else {
+      setShow(false);
+      setDisabled(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days, min]);
+
+  console.log('Calendar actionSubmit render');
   return (
     <Box
       onLayout={onLayoutChange}
@@ -89,8 +124,13 @@ const ActionSubmit: React.FC<Props> = ({
           <Box>
             <Text style={styles.info_text}>
               总租金
-              <Text style={styles.info_text_price}>￥66.66</Text>
-              共7天， 日租金<Text style={styles.info_text_price}>￥66.66</Text>
+              <Text style={styles.info_text_price}>
+                ￥{data?.rentprice.toFixed(2)}
+              </Text>
+              共{data?.rentdays}天， 日租金
+              <Text style={styles.info_text_price}>
+                ￥{data?.dayprice.toFixed(2)}
+              </Text>
             </Text>
           </Box>
         )}

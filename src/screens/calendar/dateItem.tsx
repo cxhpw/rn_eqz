@@ -49,7 +49,6 @@ function getDateTextStyle(d: TDate): TextStyle {
 }
 
 const DateItem: React.FC<Props> = ({ data }) => {
-  // const { update } = useContext(CalendarContext);
   const { update } = useCaledatService.useModel();
   return (
     <Pressable

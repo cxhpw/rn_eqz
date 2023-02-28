@@ -24,7 +24,7 @@ export type TDate = {
   /* 判断是否同一个月 */
   fade: boolean;
   disabled: boolean;
-  onPress: (d: TDate) => void;
+  onPress: (d: TDate) => Promise<boolean>;
   dates: TDate[][];
   dirty: boolean;
 };
@@ -74,17 +74,17 @@ class Calendar {
     return Calendar.instance;
   }
 
-  onDatePress = (DateData: TDate) => {
+  onDatePress = async (DateData: TDate): Promise<boolean> => {
     this.currentDate = DateData.d;
     this.isFixedDays = false;
     if (DateData.fade || DateData.past || DateData.disabled) {
-      return;
+      return false;
     }
     if (
       this.currentDate.isSame(this.startDate) ||
       this.currentDate.isSame(this.endDate)
     ) {
-      return;
+      return false;
     } else if (this.startDate && this.endDate) {
       //@ts-ignore
       this.startDate = this.currentDate;
@@ -108,6 +108,7 @@ class Calendar {
       this.startDateData = DateData;
     }
     this.checkRandDays();
+    return true;
   };
   private cleanup() {
     let startIdx = this.cache.indexOf(this.prev_startDateData!);
@@ -118,8 +119,13 @@ class Calendar {
         this.cache[i].selected = false;
         this.cache[i].start = false;
         this.cache[i].end = false;
-        this.cache[i].dirty = true;
       }
+    }
+    if (this.prev_startDateData && !this.prev_endDateData) {
+      this.prev_startDateData.start = false;
+      this.prev_startDateData.selected = false;
+      this.prev_startDateData.end = false;
+      this.prev_startDateData.start = false;
     }
   }
 
@@ -135,7 +141,6 @@ class Calendar {
       this.startDateData!.selected = false;
     }
     if (endIdx !== -1) {
-      console.log('endIdx', endIdx);
       this.endDateData!.end = true;
       this.endDateData!.start = false;
       this.endDateData!.selected = false;
@@ -246,7 +251,7 @@ class Calendar {
   }
 
   public get days(): number | undefined {
-    const n: number | undefined = this.startDate?.diff(this.endDate, 'day');
+    const n: number = this.startDate?.diff(this.endDate, 'day') || 0;
     return n! < 0 ? Math.abs(n!) + 1 : 0;
   }
 
@@ -262,7 +267,6 @@ class Calendar {
         if (element.d.isSame(this.startDate)) {
           this.startDateData = element;
         } else if (element.d.isSame(this.endDate)) {
-          console.log('end', element.date);
           this.endDateData = element;
           break;
         }

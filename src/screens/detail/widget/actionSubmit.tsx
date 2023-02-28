@@ -138,6 +138,8 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
                   end: params.startEnd ? params.startEnd[1] : '',
                   minDay: data?.productdata.MinDays,
                   leaseterm: data?.leaseterm,
+                  id: params.id,
+                  spec: defaultValue,
                 });
               });
             }}

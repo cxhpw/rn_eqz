@@ -17,7 +17,6 @@ let boundary = false;
 const Index: React.FC<Props> = ({ route, navigation }) => {
   const [height, setHeight] = useState(0);
   const [days, setDays] = useState(() => {
-    console.log(route.params);
     return dayjs(route.params.end).diff(route.params.start);
   });
   const [fixedDays, setFixedDays] = useState<string[]>([]);
@@ -32,10 +31,10 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
   };
   // 用户选择日期回调
   const onChange = (res: string[], n: number) => {
-    console.log('选择日期', res, n);
+    console.log('选择日期', res, n, days);
     startEnd = res;
-    setDays(n);
     boundary = false;
+    setDays(n);
   };
   // 确定回调
   const onSubmit = () => {
@@ -55,10 +54,11 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
       const start = dayjs().add(3, 'day');
       const end = start.add(n - 1, 'day');
       setFixedDays([start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')]);
+      setDays(n);
       boundary = true;
+      startEnd = [start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')];
     }
     run();
-    console.log(12312);
   };
   return (
     <Container>
@@ -75,6 +75,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
         onRangeDays={onRangeDays}
         min={route.params.minDay}
         boundary={boundary}
+        startEnd={startEnd}
         days={days}
       />
     </Container>

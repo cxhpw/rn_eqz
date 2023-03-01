@@ -30,20 +30,22 @@ import Stack from '@/stacks';
 import store from '@/store';
 import { lightTheme, darkTheme } from './theme';
 import { NativeBaseProvider } from 'native-base';
-import { fetchAppConfig } from './reducers/modules/config';
+import { useStore } from './store/z';
 
 enableFreeze();
 
 const App = () => {
+  // const fetchService = useStore(state => state.fetchService);
+  const fetchAppConfig = useStore(state => state.fetchAppConfig);
   // 监听网络情况
-  useNetwork(store);
+  useNetwork();
 
   useFlipper(navigationRef);
 
   useMount(() => {
     const init = async () => {
-      // …do multiple sync or async tasks
-      store.dispatch(fetchAppConfig());
+      // fetchService();
+      fetchAppConfig();
     };
     init().finally(() => {
       hideSplash({ fade: true });

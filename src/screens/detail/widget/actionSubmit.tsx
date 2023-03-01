@@ -147,16 +147,17 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
           <Button
             onPress={() => {
               console.log('点击确定');
-              Linking.canOpenURL('alipays').then(support => {
-                if (support) {
-                  Linking.openURL(
-                    'alipays://platformapi/startApp?appId=2018100561582465&url=/pages/recommendation/recommendation',
-                  );
-                } else {
-                  Alert.alert('请安装支付宝');
-                }
-              });
-              // alipays://platformapi/startApp?appId=60000157
+              Linking.canOpenURL('alipays://platformapi/startApp').then(
+                support => {
+                  if (support) {
+                    Linking.openURL(
+                      'alipays://platformapi/startApp?appId=2018100561582465&page=/pages/recommendation/recommendation',
+                    );
+                  } else {
+                    Alert.alert('请安装支付宝');
+                  }
+                },
+              );
             }}
             style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>
             确定

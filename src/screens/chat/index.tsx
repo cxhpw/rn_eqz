@@ -1,11 +1,10 @@
 import { StyleSheet, Linking, TouchableOpacity, Alert } from 'react-native';
-import React, { memo, PropsWithChildren, useState } from 'react';
+import React, { memo, PropsWithChildren } from 'react';
 import { Container, Text } from '@/components';
 import { Box, Center } from 'native-base';
-import { useAppSelector } from '@/hooks';
 import FastImage from 'react-native-fast-image';
-import { useAppDispatch } from '@/hooks';
-import { fetchFeedback } from '@/reducers/modules/utils';
+import { useStore } from '@/store/z';
+import { useMount } from 'ahooks';
 
 type Props = {
   name: string;
@@ -44,14 +43,12 @@ const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
 });
 
 const Chat: React.FC<PropsWithChildren<Props>> = () => {
-  const { PrTLImg } = useAppSelector(state => state.appConfig);
-  const [data, setData] = useState<any>();
-  const dispatch = useAppDispatch();
-  dispatch(fetchFeedback()).then(res => {
-    if (!data) {
-      setData(res.payload);
-    }
-  });
+  const { PrTLImg } = useStore(state => state.appConfig);
+  const [data, fetchService] = useStore(state => [
+    state.serviceInfo,
+    state.fetchService,
+  ]);
+  useMount(() => fetchService());
   return (
     <Container isBttomTabsScreen>
       <Center flex={1} mt="-40%">

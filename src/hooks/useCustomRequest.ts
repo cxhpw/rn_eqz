@@ -1,12 +1,12 @@
+import { useStore } from '@/store/z';
 import { useRequest } from 'ahooks';
 import { Service, Options } from 'ahooks/lib/useRequest/src/types';
-import useAppSelector from './useAppSelector';
 
 export default function useCustomRequest<T, P extends any[] = []>(
   service: Service<T, P>,
   options?: Options<T, P>,
 ) {
-  const isOnline = useAppSelector(state => state.isOnline);
+  const isOnline = useStore(state => state.isOnline);
   const customService = async (...args: P) => {
     if (!isOnline) {
       throw new Error(
@@ -18,7 +18,11 @@ export default function useCustomRequest<T, P extends any[] = []>(
     }
     return service(...args);
   };
-  const { refreshDeps = [isOnline], onError, ...restOptions } = options || {};
+  const {
+    refreshDeps = [isOnline, ...(options?.refreshDeps || [])],
+    onError,
+    ...restOptions
+  } = options || {};
   const result = useRequest(customService, {
     refreshDeps,
     onError: (error: any, params: P) => {

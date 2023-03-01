@@ -1,10 +1,10 @@
-import { useAppSelector } from '@/hooks';
+import { useStore } from '@/store/z';
 import { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 
 const PlatformLogo = () => {
-  const { alipayadimg } = useAppSelector(state => state.appConfig);
+  const { alipayadimg } = useStore(state => state.appConfig);
   console.log('PlatformLogo render');
   return (
     <FastImage

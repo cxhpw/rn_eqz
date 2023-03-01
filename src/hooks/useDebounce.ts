@@ -14,6 +14,7 @@ function useDebounce<T>(value: T, options?: DebounceOptions) {
   }, options);
   useEffect(() => {
     run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   return debounced;
 }

@@ -13,8 +13,8 @@ import {
 } from './widget';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { useAppSelector } from '@/hooks';
 import { Box } from 'native-base';
+import { useStore } from '@/store/z';
 
 type Props = {} & BottomTabScreenProps<AppParamList>;
 
@@ -35,7 +35,7 @@ function Summary({ children }: PropsWithChildren) {
   );
 }
 const Index: React.FC<Props> = ({ navigation }) => {
-  const { WeiXinTopImg, WeiXinTopColor, TagImg, ad1, ad2 } = useAppSelector(
+  const { WeiXinTopImg, WeiXinTopColor, TagImg, ad1, ad2 } = useStore(
     state => state.appConfig,
   );
   useEffect(() => {

@@ -18,7 +18,6 @@ import {
   DefaultTheme,
 } from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
-import { Provider } from 'react-redux';
 import { enableFreeze } from 'react-native-screens';
 import { Fallback, ThemeProvider } from '@/components';
 import { useSafeState, useMemoizedFn, useMount } from 'ahooks';
@@ -27,10 +26,9 @@ import { navigationRef } from '@/services/NavigationService';
 import { linking } from './linking';
 import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
-import store from '@/store';
 import { lightTheme, darkTheme } from './theme';
 import { NativeBaseProvider } from 'native-base';
-import { useStore } from './store/z';
+import { useStore } from './store';
 
 enableFreeze();
 
@@ -64,23 +62,21 @@ const App = () => {
     return () => listener.remove();
   });
   return (
-    <Provider store={store}>
-      <NativeBaseProvider>
-        <SafeAreaProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
-            <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-              <NavigationContainer
-                ref={navigationRef}
-                theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-                fallback={<Fallback />}
-                linking={linking}>
-                <Stack />
-              </NavigationContainer>
-            </ThemeProvider>
-          </GestureHandlerRootView>
-        </SafeAreaProvider>
-      </NativeBaseProvider>
-    </Provider>
+    <NativeBaseProvider>
+      <SafeAreaProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+            <NavigationContainer
+              ref={navigationRef}
+              theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+              fallback={<Fallback />}
+              linking={linking}>
+              <Stack />
+            </NavigationContainer>
+          </ThemeProvider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </NativeBaseProvider>
   );
 };
 

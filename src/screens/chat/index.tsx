@@ -3,7 +3,7 @@ import React, { memo, PropsWithChildren } from 'react';
 import { Container, Text } from '@/components';
 import { Box, Center } from 'native-base';
 import FastImage from 'react-native-fast-image';
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 import { useMount } from 'ahooks';
 
 type Props = {

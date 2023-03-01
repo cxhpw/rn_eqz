@@ -1,4 +1,4 @@
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 import { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';

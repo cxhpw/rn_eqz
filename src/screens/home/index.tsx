@@ -14,7 +14,7 @@ import {
 import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { Box } from 'native-base';
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 
 type Props = {} & BottomTabScreenProps<AppParamList>;
 

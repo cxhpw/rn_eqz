@@ -1,4 +1,4 @@
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 import { useRequest } from 'ahooks';
 import { Service, Options } from 'ahooks/lib/useRequest/src/types';
 

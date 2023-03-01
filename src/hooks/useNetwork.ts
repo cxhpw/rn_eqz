@@ -1,4 +1,4 @@
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 import NetInfo, {
   NetInfoState,
   useNetInfo,

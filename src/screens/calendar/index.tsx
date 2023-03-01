@@ -4,7 +4,7 @@ import { Container } from '@/components';
 import DateCalendar from './dateCalendar';
 import ActionSubmit from './widget/actionSubmit';
 import dayjs from 'dayjs';
-import { useStore } from '@/store/z';
+import { useStore } from '@/store';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
 

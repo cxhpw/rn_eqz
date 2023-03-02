@@ -1,4 +1,4 @@
-import { scale } from '@/helper/normalize';
+import { helpers } from '@/components';
 import { Box, Center, HStack, VStack } from 'native-base';
 import { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
@@ -6,6 +6,7 @@ import FastImage from 'react-native-fast-image';
 type Props = {
   urls: { image: string; name: string; url: string }[];
 };
+const { scale } = helpers;
 const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
   return (
     <Box py={5} px={2.5}>

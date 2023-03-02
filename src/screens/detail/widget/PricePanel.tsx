@@ -86,7 +86,7 @@ const PricePanel: React.FC<Props> = ({
           </Text>
         </Center>
       </HStack>
-      <Flex
+      {/* <Flex
         flexDir="row"
         mb={2.5}
         style={{
@@ -133,8 +133,8 @@ const PricePanel: React.FC<Props> = ({
           afterText="/日"
           money={monthprice}
         />
-      </Flex>
-      <Flex flexDir="row">
+      </Flex> */}
+      <Flex flexDir="row" mt={4}>
         {data?.SpecialSummary.map(item => (
           <Text key={item.Discount} style={style.dis}>
             满{item.Daynum}天打{item.Discount}折

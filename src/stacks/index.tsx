@@ -7,6 +7,7 @@ import Order from '@/screens/order';
 import Help from '@/screens/help';
 import Calendar from '@/screens/calendar';
 import OrderSubmit from '@/screens/orderSubmit';
+import Company from '@/screens/company';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 const MAIN_SCREENS = [
@@ -52,6 +53,13 @@ const COMMON_SCREENS = [
     component: Help,
     options: {
       title: '帮助中心',
+    },
+  },
+  {
+    name: 'Company',
+    component: Company,
+    options: {
+      title: '企业租赁',
     },
   },
 ];

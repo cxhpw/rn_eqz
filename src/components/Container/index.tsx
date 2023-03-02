@@ -45,7 +45,7 @@ const Container: React.FC<
         backgroundColor="transparent"
         translucent
       />
-      {children}
+      <NetwordError>{children}</NetwordError>
     </SafeAreaView>
   );
 };

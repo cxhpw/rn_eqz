@@ -4,7 +4,7 @@
  *
  */
 import theme from '@/components/Theme/theme';
-import { scale } from './helper/normalize';
+import { scale } from './components/helpers/normalize';
 
 export const lightTheme = {
   ...theme.lightTheme,
@@ -14,6 +14,7 @@ export const lightTheme = {
     tabActive: '#C6E1FD',
     text: '#000000',
     primary50: '#38CEB1',
+    primary200: '#38CEB1',
   },
   textVariants: {
     ...theme.lightTheme.textVariants,
@@ -35,7 +36,8 @@ export const darkTheme: AppTheme = {
     text: '#ffffff',
     gray300: '#ffffff',
     gray500: '#333',
-    primary50: '#07c160',
+    primary50: '#38CEB1',
+    primary200: '#38CEB1',
   },
   textVariants: {
     ...theme.darkTheme.textVariants,

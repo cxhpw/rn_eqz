@@ -1,26 +1,33 @@
-import { Center } from 'native-base';
-import { Text } from '@/components';
-import NetInfo from '@react-native-community/netinfo';
-import { useStore } from '@/store';
+import { Text } from 'react-native';
+import { Component, ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 
-const Index = () => {
-  const setNetwork = useStore(state => state.setNetwork);
-  const fetchAppConfig = useStore(state => state.fetchAppConfig);
-  return (
-    <Center flex={1}>
-      <Text>网络不好</Text>
-      <Text
-        onPress={() => {
-          NetInfo.fetch().then(state => {
-            setNetwork(state.isConnected as boolean);
-          });
-          // setNetwork(true);
-          // fetchAppConfig();
-        }}>
-        请点击重试
-      </Text>
-    </Center>
-  );
-};
+type Props = PropsWithChildren<{
+  customNode?: ReactNode;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  onRefresh?: () => void;
+}>;
+export class index extends Component<Props, { error: Error | null }> {
+  static displayName = 'ErrorBlock';
+  state = {
+    error: null,
+  };
+  static getDerivedStateFromError(error: Error) {
+    return { error };
+  }
+  componentDidCatch(error: Error, info: ErrorInfo): void {
+    console.log('报错');
+    if (this.props.onError) {
+      this.props.onError(error, info);
+    } else {
+      console.error(error, info);
+    }
+  }
+  render() {
+    if (this.state.error) {
+      return <Text>报错</Text>;
+    }
+    return this.props.children;
+  }
+}
 
-export default Index;
+export default index;

@@ -28,17 +28,7 @@ const DateCalendar: React.FC<Props> = ({
         end,
         boundary,
         onChange: onChange,
-        invalidDates: [
-          '2023-03-14',
-          '2023-03-15',
-          '2023-03-16',
-          '2023-03-17',
-          '2023-03-18',
-          '2023-03-19',
-          '2023-03-20',
-          '2023-03-25',
-          '2023-03-26',
-        ],
+        invalidDates,
       }}>
       <ScrollView
         stickyHeaderIndices={[0]}

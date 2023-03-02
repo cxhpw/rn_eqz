@@ -3,13 +3,13 @@ import Home from '@/screens/home';
 import My from '@/screens/my';
 import Chat from '@/screens/chat';
 import Category from '@/screens/category';
-import helper from '@/helper';
 import { IconNames } from '@/components/Icon';
 import { StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native';
+import { helpers } from '@/components';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
-const { scale } = helper;
+const { scale } = helpers;
 const Tab = createBottomTabNavigator();
 
 const tabItems: {

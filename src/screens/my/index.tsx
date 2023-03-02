@@ -41,13 +41,13 @@ const SERVICES_LIST = [
   {
     label: '续租买断',
     url: require('@/images/icon_1.png'),
-    routeName: '',
+    routeName: 'Chat',
   },
-  {
-    label: '分销中心',
-    url: require('@/images/icon_2.png'),
-    routeName: '',
-  },
+  // {
+  //   label: '分销中心',
+  //   url: require('@/images/icon_2.png'),
+  //   routeName: '',
+  // },
   {
     label: '地址管理',
     url: require('@/images/icon_3.png'),
@@ -61,7 +61,7 @@ const SERVICES_LIST = [
   {
     label: '企业租赁',
     url: require('@/images/icon_5.png'),
-    routeName: '',
+    routeName: 'Company',
   },
   {
     label: '使用帮忙',
@@ -155,7 +155,11 @@ const My: React.FC<Props> = () => {
               <MenuItem
                 onPress={e => {
                   console.log(e.dataset);
-                  navigate(e.dataset.routeName);
+                  const { routeName, label } = e.dataset;
+                  switch (label) {
+                    default:
+                      navigate(routeName);
+                  }
                 }}
                 data={props}
                 py={4}

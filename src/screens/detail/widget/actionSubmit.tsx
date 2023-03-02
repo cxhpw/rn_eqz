@@ -9,8 +9,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { scale } from '@/helper/normalize';
-import { Text, Pressable } from '@/components';
+import { Text, Pressable, helpers } from '@/components';
 import { navigate } from '@/services/NavigationService';
 import Modal from 'react-native-modal';
 import { useEffect, useState } from 'react';
@@ -26,6 +25,8 @@ type Props = {
   data: ProductDetail | undefined;
   onMount?: (e: any) => void;
 };
+
+const { scale } = helpers;
 const ActionSubmit: React.FC<Props> = ({ data }) => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   const theme = useTheme<AppTheme>();

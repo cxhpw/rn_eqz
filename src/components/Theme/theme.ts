@@ -4,9 +4,9 @@
  *
  */
 import { createTheme } from '@shopify/restyle';
-import helper from '@/helper';
+import helpers from '../helpers';
 
-const { scale } = helper;
+const { scale } = helpers;
 
 const basePalette = {
   // 基础色
@@ -261,3 +261,4 @@ export default {
 };
 export type Theme = typeof lightTheme;
 export type Spacing = keyof Theme['spacing'];
+export type Colors = keyof Theme['colors'];

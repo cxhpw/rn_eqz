@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import {
   StyleProp,
   TextInput,
@@ -13,12 +13,13 @@ import { useTheme } from '@shopify/restyle';
 import Box from '../Box';
 import Flex from '../Flex';
 import helpers from '../helpers';
-import SvgIcon from '../Icon';
+// import SvgIcon from '../Icon';
 import Text from '../Text';
 import { Theme } from '../Theme/theme';
 // import InputItem from './InputItem';
 // import TextArea from './TextArea';
 import useInput from './useInput';
+import { ONE_PIXEL } from '../helpers/normalize';
 
 const AnimatedTouchableIcon =
   Animated.createAnimatedComponent(TouchableOpacity);
@@ -141,7 +142,7 @@ const Input = forwardRef<TextInput, InputProps>(
               { width: 0, overflow: 'hidden', alignItems: 'center' },
               clearIconStyle,
             ]}>
-            <SvgIcon name="closecircleo" color={theme.colors.icon} />
+            {/* <SvgIcon name="closecircleo" color={theme.colors.icon} /> */}
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
@@ -149,10 +150,10 @@ const Input = forwardRef<TextInput, InputProps>(
             activeOpacity={0.5}
             onPress={triggerPasswordType}
             style={{ marginRight: theme.spacing.x1 }}>
-            <SvgIcon
+            {/* <SvgIcon
               name={eyeOpen ? 'eyeclose' : 'eyeopen'}
               color={theme.colors.icon}
-            />
+            /> */}
           </TouchableOpacity>
         )}
         {rightIcon && <Box marginRight="x1">{rightIcon}</Box>}
@@ -191,6 +192,6 @@ const Input = forwardRef<TextInput, InputProps>(
 Input.displayName = 'Input';
 
 export default Object.assign(Input, {
-  InputItem,
-  TextArea,
+  // InputItem,
+  // TextArea,
 });

@@ -17,6 +17,7 @@ export const moderateScale = (size: number, factor = 0.5) =>
   size + (scale(size) - size) * factor;
 export const moderateVerticalScale = (size: number, factor = 0.5) =>
   size + (verticalScale(size) - size) * factor;
+export const ONE_PIXEL = StyleSheet.hairlineWidth;
 
 export const s = scale;
 export const vs = verticalScale;

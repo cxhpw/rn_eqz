@@ -26,6 +26,7 @@ const FlexItem: FC<FlexItemProps> = ({ children, ...restProps }) => {
     justifyContent: 'center',
     ...restProps,
   });
+  //@ts-ignore
   return <View {...props}>{children}</View>;
 };
 FlexItem.displayName = 'FlexItem';

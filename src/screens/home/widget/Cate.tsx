@@ -7,7 +7,7 @@ import { navigate } from '@/services/NavigationService';
 
 type Props = {};
 
-async function fetch1() {
+async function fetch() {
   const res = await request.get('/Include/alipay/data.aspx', {
     params: {
       apiname: 'getindexcategory',
@@ -21,7 +21,7 @@ const Cate: React.FC<PropsWithChildren<Props>> = ({}) => {
       AutoID: number;
       CategoryImage: string;
     }[]
-  >(fetch1);
+  >(fetch);
   const onClick = (id: number) => {
     navigate('Category', { id });
   };

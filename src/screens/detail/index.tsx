@@ -19,19 +19,17 @@ type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 const { width } = Dimensions.get('window');
 const Detail: React.FC<Props> = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
-  const { data, loading } = useCustomRequest<ProductDetail>(
-    async () =>
-      (
-        await request({
-          url: '/Include/alipay/data.aspx',
-          params: {
-            apiname: 'getproduct',
-            pid: params.id,
-          },
-        })
-      ).data,
-  );
-  console.log('detail render');
+  const { data, loading, error } = useCustomRequest<ProductDetail>(async () => {
+    const res = await request({
+      url: '/Include/alipay/data.aspx',
+      params: {
+        apiname: 'getproduct',
+        pid: params.id,
+      },
+    });
+    return res.data;
+  });
+  console.log('detail render', loading, error);
   return (
     <Container>
       <ScrollView

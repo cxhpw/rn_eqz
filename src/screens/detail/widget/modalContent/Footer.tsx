@@ -1,13 +1,15 @@
 import { Icon, Pressable } from '@/components';
-import { navigate } from '@/services/NavigationService';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { Box } from 'native-base';
 import { Text, StyleSheet, View } from 'react-native';
+import dayjs from 'dayjs';
 
 type Props = {
   data: ProductInfo | undefined;
   onClick: () => void;
 };
 const Footer: React.FC<Props> = ({ data, onClick }) => {
+  const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   return (
     <Pressable
       scalable={false}
@@ -18,7 +20,19 @@ const Footer: React.FC<Props> = ({ data, onClick }) => {
         <Text style={styles.title}>
           租赁日期<Text style={styles.label}>（{data?.MinDays}天起租）</Text>
         </Text>
-        <Text>请选择租赁日期</Text>
+        {params.startEnd?.length ? (
+          // eslint-disable-next-line react-native/no-inline-styles
+          <Text style={[styles.label, { fontSize: 14 }]}>
+            {dayjs(params.startEnd[0]).format('MM月DD日')}-
+            {dayjs(params.startEnd[1]).format('MM月DD日')}
+            (共
+            {dayjs(params.startEnd[1]).diff(dayjs(params.startEnd[0]), 'day') +
+              1}
+            天)
+          </Text>
+        ) : (
+          <Text>请选择租赁日期</Text>
+        )}
         <View style={styles.icon}>
           <Icon name="right" color="#ccc" />
         </View>

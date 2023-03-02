@@ -9,7 +9,7 @@
  */
 
 import { useEffect } from 'react';
-import { Appearance } from 'react-native';
+import { Appearance, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
@@ -33,7 +33,6 @@ import { useStore } from './store';
 enableFreeze();
 
 const App = () => {
-  // const fetchService = useStore(state => state.fetchService);
   const fetchAppConfig = useStore(state => state.fetchAppConfig);
   // 监听网络情况
   useNetwork();
@@ -42,7 +41,6 @@ const App = () => {
 
   useMount(() => {
     const init = async () => {
-      // fetchService();
       fetchAppConfig();
     };
     init().finally(() => {

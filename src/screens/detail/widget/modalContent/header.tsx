@@ -1,4 +1,5 @@
 import { Price } from '@/components';
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { Box, Flex, VStack } from 'native-base';
 import { Text, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -6,6 +7,7 @@ type Props = {
   data: Partial<ProductDetail> & Partial<ProductPrice>;
 };
 const Header: React.FC<Props> = ({ data }) => {
+  const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   return (
     <Box style={styles.header}>
       <Flex alignItems="center" flexDir="row">
@@ -18,11 +20,13 @@ const Header: React.FC<Props> = ({ data }) => {
         <VStack>
           <Box mb={2.5}>
             <Price
+              // eslint-disable-next-line react-native/no-inline-styles
               style={{
                 fontSize: 20,
               }}
               color="#38CEB1"
               afterText="/日"
+              // eslint-disable-next-line react-native/no-inline-styles
               afterStyle={{
                 fontSize: 12,
                 color: '#5C5C5C',
@@ -31,15 +35,39 @@ const Header: React.FC<Props> = ({ data }) => {
             />
           </Box>
           <Box>
-            <Price
-              color="#999"
-              beforeText="押金:￥"
-              afterText=""
-              style={{
-                fontWeight: '400',
-              }}
-              money={data.productdata?.MarketPrice}
-            />
+            {params.startEnd?.length ? (
+              <>
+                <Price
+                  color="#999"
+                  beforeText="起始租金:￥"
+                  afterText=""
+                  style={styles.price}
+                  money={data.dayprice}
+                />
+                <Price
+                  color="#999"
+                  beforeText="周租金:￥"
+                  afterText=""
+                  style={styles.price}
+                  money={data.weekprice}
+                />
+                <Price
+                  color="#999"
+                  beforeText="月租金:￥"
+                  afterText=""
+                  style={styles.price}
+                  money={data.monthprice}
+                />
+              </>
+            ) : (
+              <Price
+                color="#999"
+                beforeText="押金:￥"
+                afterText=""
+                style={styles.price}
+                money={data.productdata?.MarketPrice}
+              />
+            )}
           </Box>
         </VStack>
       </Flex>
@@ -75,6 +103,9 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 4,
     overflow: 'hidden',
+  },
+  price: {
+    fontWeight: '400',
   },
 });
 

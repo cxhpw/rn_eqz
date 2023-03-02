@@ -6,9 +6,9 @@ import Detail from '@/screens/detail';
 import Order from '@/screens/order';
 import Help from '@/screens/help';
 import Calendar from '@/screens/calendar';
+import OrderSubmit from '@/screens/orderSubmit';
 
 const Stack = createNativeStackNavigator<AppParamList>();
-
 const MAIN_SCREENS = [
   {
     name: 'Tab',
@@ -29,6 +29,13 @@ const MAIN_SCREENS = [
     component: Order,
     options: {
       title: '我的订单',
+    },
+  },
+  {
+    name: 'OrderSubmit',
+    component: OrderSubmit,
+    options: {
+      title: '确定订单',
     },
   },
   {

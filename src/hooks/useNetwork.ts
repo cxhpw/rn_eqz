@@ -14,7 +14,8 @@ export default function useNetwork() {
    * 当连接状态发生改变的时候
    */
   useUpdateEffect(() => {
-    setNetwork(!!netInfo.isConnected && !!netInfo?.isInternetReachable);
+    console.log('网络发生了变化', netInfo);
+    setNetwork(!!netInfo.isConnected && !!netInfo.isInternetReachable);
   }, [netInfo.isConnected, netInfo.isInternetReachable]);
   /**
    * 一上来就先获取网络连接状态

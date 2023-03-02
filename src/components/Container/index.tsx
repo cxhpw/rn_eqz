@@ -1,8 +1,10 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 import { type AppTheme } from '@/theme';
+import { useStore } from '@/store';
+import NetwordError from '../NetwordError';
 
 const Container: React.FC<
   PropsWithChildren<{
@@ -17,6 +19,7 @@ const Container: React.FC<
   isBttomTabsScreen = false,
 }) => {
   const theme = useTheme<AppTheme>();
+  const isOnline = useStore(state => state.isOnline);
   const styles = StyleSheet.create({
     container: {
       flex: 1,

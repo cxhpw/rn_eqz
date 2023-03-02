@@ -34,6 +34,7 @@ type Options = {
   start?: string;
   end?: string;
   boundary?: boolean;
+  invalidDates: string[];
 };
 
 class Calendar {
@@ -74,7 +75,8 @@ class Calendar {
     return Calendar.instance;
   }
 
-  onDatePress = async (DateData: TDate): Promise<boolean> => {
+  onEventHandle = async (DateData: TDate): Promise<boolean> => {
+    let mode: string = '';
     this.currentDate = DateData.d;
     this.isFixedDays = false;
     if (DateData.fade || DateData.past || DateData.disabled) {
@@ -101,13 +103,18 @@ class Calendar {
     ) {
       this.endDate = this.currentDate;
       this.endDateData = DateData;
+      mode = 'after';
     } else if (this.startDate && this.currentDate.isBefore(this.startDate)) {
       this.endDate = this.startDate;
       this.startDate = this.currentDate;
       this.endDateData = this.startDateData;
       this.startDateData = DateData;
+      // 需要特殊处理
+      mode = 'before';
     }
-    this.checkRandDays();
+    if (this.checkIsValid(mode, this.startDate, this.endDate)) {
+      this.resetRandDays();
+    }
     return true;
   };
   private cleanup() {
@@ -129,7 +136,7 @@ class Calendar {
     }
   }
 
-  private checkRandDays() {
+  private resetRandDays() {
     // 重置上一次日期状态
     this.cleanup();
     let startIdx = this.cache.indexOf(this.startDateData!);
@@ -160,7 +167,31 @@ class Calendar {
       );
     }
   }
-
+  private checkIsValid(mode: string, start?: Dayjs, end?: Dayjs): boolean {
+    if (start && end) {
+      for (let i = 0; i < this.options.invalidDates.length; i++) {
+        const str = this.options.invalidDates[i];
+        if (start.isBefore(str) && end.isAfter(str)) {
+          if (mode === 'after') {
+            // this.endDate = undefined;
+            // this.endDateData = undefined;
+            let prev_date = this.endDate;
+            let prev_dateData = this.endDateData;
+            this.endDate = undefined;
+            this.endDateData = undefined;
+            this.startDate = prev_date;
+            this.startDateData = prev_dateData;
+            return true;
+          } else if (mode === 'before') {
+            this.endDate = undefined;
+            this.endDateData = undefined;
+            return true;
+          }
+        }
+      }
+    }
+    return true;
+  }
   private createCalendar() {
     this._dates = this.calendarArrays(dayjs(), this.startDate, this.endDate);
   }
@@ -194,14 +225,17 @@ class Calendar {
           today: d.isSame(now, 'day'),
           /** 现在选择的时间 */
           current: current && d.isSame(current, 'day'),
-          past: d.isBefore(now),
+          past: d.isBefore(now.add(3, 'day')),
           selected: start && end && d.isBetween(start, end),
           outside: d.isBefore(this.earliestDate) || d.isAfter(this.latestDate),
           /* 判断是否同一个月 */
           fade: !d.isSame(reference, 'month'),
-          /* */
-          disabled: d.isBefore(now.add(3, 'day')),
-          onPress: (n: TDate) => this.onDatePress(n),
+          /* 无效的日期 */
+          disabled:
+            this.options.invalidDates.indexOf(d.format(this.format)) >= 0
+              ? true
+              : false,
+          onPress: (n: TDate) => this.onEventHandle(n),
           dates: monthsInRange,
           /* 是否需要重新渲染 */
           dirty: false,
@@ -256,7 +290,6 @@ class Calendar {
   }
 
   setStartEnd(start: string, end: string) {
-    console.log('手动设置开始-结束日期', start, end);
     this.isFixedDays = true;
     this.cleanup();
     if (start && end) {
@@ -271,7 +304,7 @@ class Calendar {
           break;
         }
       }
-      this.checkRandDays();
+      this.resetRandDays();
     }
   }
 }

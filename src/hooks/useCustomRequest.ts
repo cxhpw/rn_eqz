@@ -18,11 +18,8 @@ export default function useCustomRequest<T, P extends any[] = []>(
     }
     return service(...args);
   };
-  const {
-    refreshDeps = [isOnline, ...(options?.refreshDeps || [])],
-    onError,
-    ...restOptions
-  } = options || {};
+  let { refreshDeps = [], onError, ...restOptions } = options || {};
+  refreshDeps = refreshDeps.concat(isOnline);
   const result = useRequest(customService, {
     refreshDeps,
     onError: (error: any, params: P) => {

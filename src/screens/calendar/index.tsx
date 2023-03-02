@@ -4,6 +4,8 @@ import { Container } from '@/components';
 import DateCalendar from './dateCalendar';
 import ActionSubmit from './widget/actionSubmit';
 import dayjs from 'dayjs';
+import { useCustomRequest } from '@/hooks';
+import request from '@/request';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
 
@@ -20,6 +22,19 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
     return dayjs(route.params.end).diff(route.params.start);
   });
   const [fixedDays, setFixedDays] = useState<string[]>([]);
+  const { data = { unavailabledate: [] } } = useCustomRequest<{
+    unavailabledate: string[];
+  }>(async () => {
+    const res = await request({
+      url: '/Include/alipay/data.aspx',
+      params: {
+        apiname: 'getschedulecalendar',
+        pid: route.params.id,
+        guige: route.params.spec,
+      },
+    });
+    return res.data;
+  });
   useEffect(() => {
     const { fn } = route.params;
     return () => {
@@ -60,6 +75,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
     }
     run();
   };
+
   return (
     <Container>
       <DateCalendar
@@ -68,6 +84,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
         boundary={boundary}
         onChange={onChange}
         paddingBttom={height}
+        invalidDates={data.unavailabledate}
       />
       <ActionSubmit
         onSubmit={onSubmit}

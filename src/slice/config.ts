@@ -23,9 +23,15 @@ export type AppConfigSlice = {
   fetchAppConfig: () => Promise<Props>;
   appConfig: Props;
 };
-export const createAppConfigSlice: StateCreator<AppConfigSlice> = set => ({
+export const createAppConfigSlice: StateCreator<AppConfigSlice> = (
+  set,
+  get,
+) => ({
   appConfig: {} as Props,
   fetchAppConfig: async () => {
+    if ('PrTLImg' in get().appConfig) {
+      return get().appConfig;
+    }
     const res = await request.get('/Include/alipay/data.aspx', {
       params: {
         apiname: 'getweixinconfig',

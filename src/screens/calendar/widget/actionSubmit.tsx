@@ -61,9 +61,13 @@ const ActionSubmit: React.FC<Props> = ({
         })
       ).data,
     {
+      refreshDeps: [startEnd],
       manual: true,
       onSuccess: () => {
         setShow(true);
+      },
+      onFinally: () => {
+        console.log('完成');
       },
     },
   );
@@ -75,9 +79,11 @@ const ActionSubmit: React.FC<Props> = ({
         toast.show({
           description: `此商品至少起租${min}天`,
           placement: 'top',
+          duration: 2000,
         });
         setShow(false);
       } else {
+        console.log('发生请求');
         run();
       }
     } else {
@@ -87,7 +93,6 @@ const ActionSubmit: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days, min]);
 
-  console.log('Calendar actionSubmit render');
   return (
     <Box
       onLayout={onLayoutChange}
@@ -144,6 +149,7 @@ const ActionSubmit: React.FC<Props> = ({
           onPress={() => onSubmit()}
           style={[
             styles.button,
+            // eslint-disable-next-line react-native/no-inline-styles
             {
               backgroundColor: disabled ? '#999' : theme.colors.primary50,
             },

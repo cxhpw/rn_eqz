@@ -26,7 +26,7 @@ type Props = {
   data: ProductDetail | undefined;
   onMount?: (e: any) => void;
 };
-const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
+const ActionSubmit: React.FC<Props> = ({ data }) => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   const theme = useTheme<AppTheme>();
   const { bottom } = useSafeAreaInsets();
@@ -65,6 +65,7 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
       <HStack
         style={[
           style.wrapper,
+          // eslint-disable-next-line react-native/no-inline-styles
           {
             bottom: bottom,
             backgroundColor: theme.theme === 'dark' ? '#232121' : '#fff',
@@ -130,6 +131,7 @@ const ActionSubmit: React.FC<Props> = ({ data, onMount }) => {
             data={data?.productdata}
             onClick={() => {
               setIsModalVisible(false);
+              // 安排一个任务在交互和动画完成之后执行
               InteractionManager.runAfterInteractions(() => {
                 navigate('Calendar', {
                   // 警告：函数值无法被序列化，但是功能能用

@@ -63,6 +63,9 @@ const DateItem: React.FC<Props> = ({ data }) => {
         </Text>
         {data.start && <Text style={styles.text}>起租</Text>}
         {data.end && <Text style={styles.text}>归还</Text>}
+        {data.disabled && (
+          <Text style={[styles.text, { color: '#999' }]}>没档期</Text>
+        )}
       </View>
     </Pressable>
   );

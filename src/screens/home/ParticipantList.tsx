@@ -1,3 +1,4 @@
+import { Container } from '@/components';
 import React, { useState } from 'react';
 import {
   Button,
@@ -92,36 +93,39 @@ export default function AnimatedListExample(): React.ReactElement {
   };
 
   return (
-    <View style={[styles.listView]}>
-      <ScrollView style={[{ width: '100%' }]}>
-        {participantList.map(participant => (
-          <Participant
-            key={participant.id}
-            name={participant.name}
-            onRemove={() => removeParticipant(participant.id)}
-          />
-        ))}
-      </ScrollView>
+    <Container isBttomTabsScreen>
+      <View style={[styles.listView]}>
+        <ScrollView style={[{ width: '100%' }]}>
+          {participantList.map(participant => (
+            <Participant
+              key={participant.id}
+              name={participant.name}
+              onRemove={() => removeParticipant(participant.id)}
+            />
+          ))}
+        </ScrollView>
 
-      <View style={[styles.bottomRow]}>
-        <View style={[styles.textInput]}>
-          <Text>Add: </Text>
-          <TextInput
-            placeholder="Name"
-            value={inputValue}
-            onChangeText={setInputValue}
-            style={{
-              flex: 1,
-            }}
+        <View style={[styles.bottomRow]}>
+          <View style={[styles.textInput]}>
+            <Text>Add: </Text>
+            <TextInput
+              placeholder="Name"
+              value={inputValue}
+              onChangeText={setInputValue}
+              style={{
+                flex: 1,
+              }}
+            />
+          </View>
+
+          <Button
+            title="Add"
+            disabled={inputValue === ''}
+            onPress={addParticipant}
           />
         </View>
-
-        <Button
-          title="Add"
-          disabled={inputValue === ''}
-          onPress={addParticipant}
-        />
       </View>
-    </View>
+    </Container>
   );
 }
+Participant.displayName = 'Participant';

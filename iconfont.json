@@ -4,5 +4,5 @@
   "save_dir": "./src/components/Icon",
   "trim_icon_prefix": "icon",
   "default_icon_size": 18,
-  "local_svgs": ""
+  "local_svgs": "./assets/svg"
 }

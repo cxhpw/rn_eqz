@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Alert } from 'react-native';
 import Config from 'react-native-config';
 
 const service = axios.create({
@@ -8,7 +9,10 @@ const service = axios.create({
 });
 
 service.interceptors.request.use(
-  config => config,
+  config => {
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    return config;
+  },
   error => {
     console.log('请求错误', error);
     return Promise.reject(error);
@@ -17,6 +21,13 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   resopnse => {
+    if (resopnse.data.ret === 'fail') {
+      Alert.alert('提示', resopnse.data.msg, [
+        {
+          text: '确定',
+        },
+      ]);
+    }
     return resopnse;
   },
   error => {

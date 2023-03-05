@@ -6,7 +6,7 @@ export type isOnlineSlice = {
   setNetwork: (n: boolean) => void;
 };
 export const createisOnlineSlice: StateCreator<isOnlineSlice> = set => ({
-  isOnline: false,
+  isOnline: true,
   setNetwork: state => set({ isOnline: state }),
 });
 

@@ -66,7 +66,7 @@ const COMMON_SCREENS = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Tab"
+      initialRouteName="OrderSubmit"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

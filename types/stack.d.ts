@@ -10,6 +10,7 @@ type MainStackParamList = {
   My: undefined;
   Detail: { id: number | string; startEnd?: string[] };
   Order: { code: number | string };
+  OrderSubmit: undefined;
   Help: undefined;
   Calendar: {
     start?: string;

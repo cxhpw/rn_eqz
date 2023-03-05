@@ -14,11 +14,13 @@ class Portal extends React.Component<Props> {
 
     return (
       <PortalContext.Consumer>
-        {manager => (
-          <PortalConsumer manager={manager as PortalMethods}>
-            {children}
-          </PortalConsumer>
-        )}
+        {manager => {
+          return (
+            <PortalConsumer manager={manager as PortalMethods}>
+              {children}
+            </PortalConsumer>
+          );
+        }}
       </PortalContext.Consumer>
     );
   }

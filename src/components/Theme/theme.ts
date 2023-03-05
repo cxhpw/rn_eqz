@@ -48,7 +48,7 @@ const palette = {
   gray500: '#333333',
   gray600: 'rgba(0, 0, 0, 0.4)',
   gray700: 'rgba(0, 0, 0, 0.04)',
-  gray800: 'transparent',
+  gray800: '#f8f8f8',
   gray900: 'transparent',
 };
 const lightTheme = createTheme({
@@ -77,7 +77,7 @@ const lightTheme = createTheme({
     text_active: palette.white,
     primary_text: palette.black,
     primary_background: palette.white,
-    spacerColor: '#f8f8f8',
+    spacerColor: palette.gray800,
   },
   borderRadii: {
     x0: 0,
@@ -233,7 +233,7 @@ const darkPalette = {
   gray500: 'rgba(255, 255, 255, 0.8)',
   gray600: 'rgba(0, 0, 0, 0.4)',
   gray700: 'rgba(0, 0, 0, 0.04)',
-  gray800: 'transparent',
+  gray800: 'rgba(255, 255, 255, 0.15)',
   gray900: 'transparent',
 };
 

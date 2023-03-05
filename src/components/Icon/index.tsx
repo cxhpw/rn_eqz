@@ -14,6 +14,8 @@ import IconDidian from './IconDidian';
 import IconKuaidi from './IconKuaidi';
 import IconSousuoO from './IconSousuoO';
 import IconSousuo from './IconSousuo';
+import IconEyeclose from './IconEyeclose';
+import IconEyeopen from './IconEyeopen';
 export { default as IconJinggao } from './IconJinggao';
 export { default as IconWarning } from './IconWarning';
 export { default as IconRight } from './IconRight';
@@ -24,6 +26,8 @@ export { default as IconDidian } from './IconDidian';
 export { default as IconKuaidi } from './IconKuaidi';
 export { default as IconSousuoO } from './IconSousuoO';
 export { default as IconSousuo } from './IconSousuo';
+export { default as IconEyeclose } from './IconEyeclose';
+export { default as IconEyeopen } from './IconEyeopen';
 
 export type IconNames =
   | 'jinggao'
@@ -35,7 +39,9 @@ export type IconNames =
   | 'didian'
   | 'kuaidi'
   | 'sousuo_o'
-  | 'sousuo';
+  | 'sousuo'
+  | 'eyeclose'
+  | 'eyeopen';
 
 interface Props extends GProps, ViewProps {
   name: IconNames;
@@ -65,6 +71,10 @@ let IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
       return <IconSousuoO key="9" {...rest} />;
     case 'sousuo':
       return <IconSousuo key="10" {...rest} />;
+    case 'eyeclose':
+      return <IconEyeclose key="L1" {...rest} />;
+    case 'eyeopen':
+      return <IconEyeopen key="L2" {...rest} />;
   }
 
   return null;

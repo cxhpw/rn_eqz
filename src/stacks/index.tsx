@@ -6,7 +6,7 @@ import Detail from '@/screens/detail';
 import Order from '@/screens/order';
 import Help from '@/screens/help';
 import Calendar from '@/screens/calendar';
-import OrderSubmit from '@/screens/orderSubmit';
+import OrderSubmit from '@/screens/map';
 import Company from '@/screens/company';
 
 const Stack = createNativeStackNavigator<AppParamList>();
@@ -66,7 +66,7 @@ const COMMON_SCREENS = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="OrderSubmit"
+      initialRouteName="Tab"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

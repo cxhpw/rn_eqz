@@ -15,6 +15,9 @@
 		66A38BFA71B29DD75C47EA60 /* libPods-rnProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF69D4B4378403FD2A12945 /* libPods-rnProject.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		846B7B092976D74F00975B05 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846B7B082976D74E00975B05 /* BootSplash.storyboard */; };
+		8476744A29B4975800EB417D /* RNTMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476744929B4975800EB417D /* RNTMapManager.m */; };
+		8476745229B4B3ED00EB417D /* RNTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476745129B4B3ED00EB417D /* RNTMapView.m */; };
+		8476745529B5F3FC00EB417D /* RNTMapMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476745429B5F3FC00EB417D /* RNTMapMarket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,13 @@
 		29EE2554BC4ED7B96DFCD12E /* Pods-rnProject-rnProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnProject-rnProjectTests.release.xcconfig"; path = "Target Support Files/Pods-rnProject-rnProjectTests/Pods-rnProject-rnProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = rnProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		846B7B082976D74E00975B05 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = rnProject/BootSplash.storyboard; sourceTree = "<group>"; };
+		8476744829B4975800EB417D /* RNTMapManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTMapManager.h; sourceTree = "<group>"; };
+		8476744929B4975800EB417D /* RNTMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapManager.m; sourceTree = "<group>"; };
+		8476744B29B49F4400EB417D /* RCTConvert+Mapkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+Mapkit.h"; sourceTree = "<group>"; };
+		8476744D29B4B22F00EB417D /* RNTMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNTMapView.h; sourceTree = "<group>"; };
+		8476745129B4B3ED00EB417D /* RNTMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNTMapView.m; sourceTree = "<group>"; };
+		8476745329B5F3FC00EB417D /* RNTMapMarket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTMapMarket.h; sourceTree = "<group>"; };
+		8476745429B5F3FC00EB417D /* RNTMapMarket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapMarket.m; sourceTree = "<group>"; };
 		849F83692945EB0E00BE479B /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		9EF69D4B4378403FD2A12945 /* libPods-rnProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-rnProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB7C4A89258CD92E2B54021C /* Pods-rnProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rnProject.release.xcconfig"; path = "Target Support Files/Pods-rnProject/Pods-rnProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -96,6 +106,13 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				8476744829B4975800EB417D /* RNTMapManager.h */,
+				8476744D29B4B22F00EB417D /* RNTMapView.h */,
+				8476745129B4B3ED00EB417D /* RNTMapView.m */,
+				8476744929B4975800EB417D /* RNTMapManager.m */,
+				8476744B29B49F4400EB417D /* RCTConvert+Mapkit.h */,
+				8476745329B5F3FC00EB417D /* RNTMapMarket.h */,
+				8476745429B5F3FC00EB417D /* RNTMapMarket.m */,
 			);
 			name = rnProject;
 			sourceTree = "<group>";
@@ -401,7 +418,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8476745229B4B3ED00EB417D /* RNTMapView.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				8476745529B5F3FC00EB417D /* RNTMapMarket.m in Sources */,
+				8476744A29B4975800EB417D /* RNTMapManager.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

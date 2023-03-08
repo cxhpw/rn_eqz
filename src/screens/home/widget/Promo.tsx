@@ -11,7 +11,7 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
   return (
     <Box py={5} px={2.5}>
       <Box>{children}</Box>
-      {urls.length && (
+      {urls.length > 0 && (
         <HStack space={2.5}>
           <Center flex={1} backgroundColor="amber.100">
             <FastImage

@@ -8,6 +8,8 @@ import Help from '@/screens/help';
 import Calendar from '@/screens/calendar';
 import OrderSubmit from '@/screens/map';
 import Company from '@/screens/company';
+import Complaint from '@/screens/complaint';
+import Address from '@/screens/address';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 const MAIN_SCREENS = [
@@ -60,6 +62,27 @@ const COMMON_SCREENS = [
     component: Company,
     options: {
       title: '企业租赁',
+    },
+  },
+  {
+    name: 'Complaint',
+    component: Complaint,
+    options: {
+      title: '投诉建议',
+    },
+  },
+  {
+    name: 'AddressCenter',
+    component: Address,
+    options: {
+      title: '地址管理',
+    },
+  },
+  {
+    name: 'Address',
+    component: Address,
+    options: {
+      title: '地址中心',
     },
   },
 ];

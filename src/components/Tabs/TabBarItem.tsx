@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { TabBarItemProps } from './type';

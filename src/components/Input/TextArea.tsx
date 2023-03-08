@@ -71,6 +71,7 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
             ref={ref}
             {...restProps}
             style={[
+              // eslint-disable-next-line react-native/no-inline-styles
               {
                 height,
                 padding: theme.spacing.x1,

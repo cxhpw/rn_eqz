@@ -17,6 +17,7 @@ export { default as Box } from './Box';
 export { default as helpers } from './helpers';
 export { default as Input } from './Input';
 export { default as Form } from './Form';
+export { default as ErrorBlock } from './ErrorBlock';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

@@ -38,9 +38,9 @@ const Desc: React.FC<Props> = ({ data }) => {
         ))}
       </Flex>
       {active === 0 ? (
-        <HtmlParse html={data?.ProDetail} />
+        <HtmlParse html={data!.ProDetail} />
       ) : (
-        <HtmlParse html={data?.Leaserule} />
+        <HtmlParse html={data!.Leaserule} />
       )}
     </Box>
   );

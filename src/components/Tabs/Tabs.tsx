@@ -47,6 +47,7 @@ const Tabs: FC<TabsProps> = ({
       keyboardDismissMode="on-drag"
       lazy={props.lazy}
       swipeEnabled={props.swipeEnabled}
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       renderTabBar={props => (
         <TabBar
           {...props}

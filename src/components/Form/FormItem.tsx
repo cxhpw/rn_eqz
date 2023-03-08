@@ -72,7 +72,6 @@ const FormItem: React.FC<Props> = ({
               });
         return <>{childNode}</>;
       }}
-      {/* {React.cloneElement(children as React.ReactElement, {})} */}
     </Field>
   );
 };

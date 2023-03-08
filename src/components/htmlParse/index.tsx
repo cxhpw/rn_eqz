@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { WebView } from 'react-native-webview';
 
 type Props = {
-  html?: string;
+  html: string;
+  htmlStyle?: string;
+  onLoadEnd?: () => void;
 };
-const Index = ({ html = '' }: Props) => {
+const Index = ({ html = '', onLoadEnd }: Props) => {
   const [height, setHeight] = useState(0);
   const generateHtml = (content: string) => `
   <!DOCTYPE html>\n
@@ -21,6 +23,10 @@ const Index = ({ html = '' }: Props) => {
         img {
           max-width: 100%;
           display: block;
+        }
+        * {
+          margin: 0;
+          padding: 0;
         }
       </style>
     </head>
@@ -43,10 +49,13 @@ const Index = ({ html = '' }: Props) => {
       }}
       onMessage={event => {
         if (Number(event.nativeEvent.data) !== height) {
+          console.log(event.nativeEvent.data);
           setHeight(Number(event.nativeEvent.data));
+          onLoadEnd?.();
         }
       }}
       source={{
+        // html.replace(/&nbsp;/gi, '')
         html: generateHtml(html.replace(/&nbsp;/gi, '')),
       }}
     />

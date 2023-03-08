@@ -1,4 +1,9 @@
-type CommonStackParamList = {};
+type CommonStackParamList = {
+  Complaint: undefined;
+  OrderSubmit: undefined;
+  Help: undefined;
+  Address: undefined;
+};
 
 type AuthStackParamList = {};
 
@@ -10,8 +15,6 @@ type MainStackParamList = {
   My: undefined;
   Detail: { id: number | string; startEnd?: string[] };
   Order: { code: number | string };
-  OrderSubmit: undefined;
-  Help: undefined;
   Calendar: {
     start?: string;
     end?: string;

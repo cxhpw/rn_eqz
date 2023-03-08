@@ -51,12 +51,12 @@ const SERVICES_LIST = [
   {
     label: '地址管理',
     url: require('@/images/icon_3.png'),
-    routeName: '',
+    routeName: 'Address',
   },
   {
     label: '投诉&建议',
     url: require('@/images/icon_4.png'),
-    routeName: '',
+    routeName: 'Complaint',
   },
   {
     label: '企业租赁',

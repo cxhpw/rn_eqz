@@ -51,6 +51,10 @@ const palette = {
   gray800: '#f8f8f8',
   gray900: 'transparent',
 };
+const commonRadius = {
+  borderRadius: 'full',
+  borderWidth: 2,
+};
 const lightTheme = createTheme({
   spacing: {
     x0: 0,
@@ -78,6 +82,7 @@ const lightTheme = createTheme({
     primary_text: palette.black,
     primary_background: palette.white,
     spacerColor: palette.gray800,
+    radio_active: palette.primary100,
   },
   borderRadii: {
     x0: 0,
@@ -210,7 +215,21 @@ const lightTheme = createTheme({
     d9: {},
   },
   RadioVariants: {
-    defaults: {},
+    defaults: {
+      ...commonRadius,
+      color: 'gray200',
+      borderColor: 'gray200',
+    },
+    checked: {
+      ...commonRadius,
+      color: 'radio_active',
+      borderColor: 'radio_active',
+    },
+    disabled: {
+      ...commonRadius,
+      color: 'gray50',
+      borderColor: 'gray50',
+    },
   },
   theme: 'light',
 });
@@ -255,9 +274,7 @@ const darkTheme = {
     primary_text: palette.white,
     primary_background: palette.black,
     spacerColor: darkPalette.gray100,
-  },
-  RadioVariants: {
-    defaults: {},
+    radio_active: palette.primary100,
   },
   theme: 'dark',
 };

@@ -1,6 +1,8 @@
 import { View } from 'react-native';
 import {
   composeRestyleFunctions,
+  spacing,
+  SpacingProps,
   layout,
   LayoutProps,
   useRestyle,
@@ -11,14 +13,27 @@ import { PropsWithChildren } from 'react';
 import { Theme } from '../Theme/theme';
 import Text from '../Text';
 
-type CenterProps = LayoutProps<Theme> & BorderProps<Theme>;
+// type Props = React.ComponentProps<typeof CenterBase> & LayoutProps<Theme>;
+// const CenterBase = createBox<Theme, ViewProps>(View);
+// const Center = ({ children, ...rest }: PropsWithChildren<Props>) => {
+//   return (
+//     <CenterBase {...rest} alignItems="center" justifyContent="center">
+//       <Text>{children}</Text>
+//     </CenterBase>
+//   );
+// };
 
-const restyleFunctions = composeRestyleFunctions([layout, border]);
+type CenterProps = LayoutProps<Theme> &
+  BorderProps<Theme> &
+  SpacingProps<Theme>;
+
+const restyleFunctions = composeRestyleFunctions([layout, border, spacing]);
 
 const Center = ({ children, ...rest }: PropsWithChildren<CenterProps>) => {
   const props = useRestyle(restyleFunctions as any, {
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
     ...rest,
   });
   return (

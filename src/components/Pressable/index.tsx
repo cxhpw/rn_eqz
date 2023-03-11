@@ -29,7 +29,7 @@
  * effect is the invocation of `onPress` and `onLongPress` that occur when a
  * responder is release while in the "press in" states.
  */
-import { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren, forwardRef, ForwardedRef } from 'react';
 import {
   Pressable as RNPressable,
   PressableProps as RNPressableProps,
@@ -61,18 +61,21 @@ export interface PressableProps
   style?: StyleProp<ViewStyle>;
 }
 
-const Pressable: FC<PropsWithChildren<PressableProps>> = ({
-  children,
-  activeOpacity = 0.5,
-  pressOffset = 20,
-  hitOffset,
-  delayLongPress = 1000,
-  scalable = true,
-  style,
-  onPress,
-  onLongPress,
-  disabled,
-}) => {
+const Pressable = (
+  {
+    children,
+    activeOpacity = 0.5,
+    pressOffset = 20,
+    hitOffset,
+    delayLongPress = 1000,
+    scalable = true,
+    style,
+    onPress,
+    onLongPress,
+    disabled,
+  }: PropsWithChildren<PressableProps>,
+  ref: any,
+) => {
   const pressed = useSharedValue(0);
 
   const handlePressIn = () => {
@@ -99,6 +102,7 @@ const Pressable: FC<PropsWithChildren<PressableProps>> = ({
 
   return (
     <RNPressable
+      ref={ref}
       android_disableSound={false}
       android_ripple={null}
       pressRetentionOffset={pressOffset}
@@ -115,4 +119,4 @@ const Pressable: FC<PropsWithChildren<PressableProps>> = ({
 };
 Pressable.displayName = 'Pressable';
 
-export default Pressable;
+export default forwardRef(Pressable);

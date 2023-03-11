@@ -36,7 +36,6 @@ export function useRefreshService<
     // if (!signedIn) {
     //   throw new Error(JSON.stringify({ code: '0', message: 'sadasd' }));
     // }
-    console.log('fetch');
     return service(...args);
   };
 
@@ -76,7 +75,6 @@ export function useRefreshService<
           return newData.concat(list ?? []);
         });
       }
-
       if (totalPage === 0 || totalPage === page) {
         setAllLoaded(true);
       } else {

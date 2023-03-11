@@ -15,6 +15,7 @@ export const lightTheme = {
     text: '#000000',
     primary50: '#38CEB1',
     primary200: '#38CEB1',
+    primary_background: '#ffffff',
   },
   textVariants: {
     ...theme.lightTheme.textVariants,
@@ -38,6 +39,7 @@ export const darkTheme: AppTheme = {
     gray500: '#333',
     primary50: '#38CEB1',
     primary200: '#38CEB1',
+    primary_background: '#131C22',
   },
   textVariants: {
     ...theme.darkTheme.textVariants,

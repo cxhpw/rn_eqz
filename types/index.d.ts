@@ -1,9 +1,10 @@
 interface Page<T> {
-  list?: Array<T>;
-  page?: number;
-  pageSize?: number;
-  total?: number;
-  totalPage?: number;
+  dataList?: Array<T>;
+  PageIndex?: number;
+  PageSize?: number;
+  TotalCount?: number;
+  TotalPage?: number;
+  NextPage?: number;
 }
 
 type UserInfo = {
@@ -158,4 +159,20 @@ type ProductPrice = {
   rentprice: number;
   type: number;
   weekprice: number;
+};
+
+type AddressInfo = {
+  Address: string;
+  AutoID: number;
+  AutoTimeStamp: string;
+  City: string;
+  Consignee: string;
+  ContactPhone: string;
+  Country: string;
+  County: string;
+  IsDefault: boolean;
+  PostCode: stirng;
+  Province: string;
+  UserID: number;
+  UserName: string;
 };

@@ -91,6 +91,7 @@ const lightTheme = createTheme({
     x8: scale(32),
     x9: scale(36),
     x10: scale(40),
+    full: 9999,
   },
   zIndices: {
     '1': 1,
@@ -208,6 +209,9 @@ const lightTheme = createTheme({
     d8: {},
     d9: {},
   },
+  RadioVariants: {
+    defaults: {},
+  },
   theme: 'light',
 });
 /** 深色调色板 */
@@ -251,6 +255,9 @@ const darkTheme = {
     primary_text: palette.white,
     primary_background: palette.black,
     spacerColor: darkPalette.gray100,
+  },
+  RadioVariants: {
+    defaults: {},
   },
   theme: 'dark',
 };

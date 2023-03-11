@@ -39,7 +39,9 @@ class StorageService {
     }
     return false;
   }
-
+  /**
+   * 是否登陆
+   */
   get signedIn(): boolean {
     if (
       StorageService.getInstance()
@@ -54,7 +56,9 @@ class StorageService {
     }
     return false;
   }
-
+  /**
+   * 用户密钥
+   */
   get token(): Token {
     if (
       StorageService.getInstance()
@@ -73,7 +77,9 @@ class StorageService {
     }
     return {};
   }
-
+  /**
+   * 用户信息
+   */
   get userInfo(): UserInfo {
     if (
       StorageService.getInstance()
@@ -92,7 +98,11 @@ class StorageService {
     }
     return {};
   }
-
+  /**
+   * 更新缓存
+   * @param key
+   * @param value
+   */
   updateStorage<T>(key: StorageToken, value: T) {
     try {
       const type = typeof value;
@@ -127,11 +137,16 @@ class StorageService {
       console.error(error);
     }
   }
-
+  /**
+   * 删除缓存
+   * @param key
+   */
   deleteStorage(key: StorageToken) {
     StorageService.getInstance().storage.delete(key);
   }
-
+  /**
+   * 登出
+   */
   signOut() {
     StorageService.getInstance().deleteStorage(StorageToken.SignedIn);
     StorageService.getInstance().deleteStorage(StorageToken.UserInfo);

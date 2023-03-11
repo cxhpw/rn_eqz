@@ -16,7 +16,6 @@ import {
 
 import { Theme } from '../Theme/theme';
 import FlexItem from './FlexItem';
-
 const restyleFunctions = composeRestyleFunctions([
   spacing,
   border,

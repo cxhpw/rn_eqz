@@ -13,7 +13,7 @@
     "commit": "git-cz",
     "tsc": "tsc -p tsconfig.json",
     "pod": "cd ios && pod install --verbose --no-repo-update && cd ..",
-    "postinstall": "npx husky install",
+    "postinstall": "npx husky install && npx patch-package",
     "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts}\"",
     "clean": "react-native-clean-project",
     "svg-init": "npx iconfont-rn"

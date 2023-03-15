@@ -12,12 +12,12 @@ export const INITIAL_PAGE_SIZE = 10;
 
 const DEFAULT_PARAMS = [
   {
-    page: INITIAL_PAGE,
-    pageSize: INITIAL_PAGE_SIZE,
+    PageIndex: INITIAL_PAGE,
+    PageSize: INITIAL_PAGE_SIZE,
   },
 ];
 
-export type PageParams = { page: number; pageSize: number } & Record<
+export type PageParams = { PageIndex: number; PageSize: number } & Record<
   string,
   unknown
 >;
@@ -64,18 +64,23 @@ export function useRefreshService<
     onSuccess(data: R, params: P) {
       console.log('success', data);
       // 对data进行处理
-      const { list, page = INITIAL_PAGE, totalPage = 0, total = 0 } = data;
-      if (total === 0) {
+      const {
+        dataList,
+        PageIndex = INITIAL_PAGE,
+        TotalPage = 0,
+        TotalCount = 0,
+      } = data;
+      if (TotalCount === 0) {
         setData([] as T[]);
-      } else if (page === INITIAL_PAGE) {
-        setData(list ?? []);
+      } else if (PageIndex === INITIAL_PAGE) {
+        setData(dataList ?? []);
       } else {
-        setData(data => {
-          const newData = [...data];
-          return newData.concat(list ?? []);
+        setData(prevDataList => {
+          const newData = [...prevDataList];
+          return newData.concat(dataList ?? []);
         });
       }
-      if (totalPage === 0 || totalPage === page) {
+      if (TotalCount === 0 || TotalPage === PageIndex) {
         setAllLoaded(true);
       } else {
         setAllLoaded(false);
@@ -91,7 +96,7 @@ export function useRefreshService<
    */
   const onRefresh = async () => {
     try {
-      await runAsync({ ...params[0], page: INITIAL_PAGE });
+      await runAsync({ ...params[0], PageIndex: INITIAL_PAGE });
     } catch (error) {
       handleError(error, params as P);
     }
@@ -104,10 +109,9 @@ export function useRefreshService<
     if (loading) return;
 
     try {
-      const { page } = params[0];
-      if (allLoaded || page >= (result?.totalPage ?? 0)) return;
-
-      await runAsync({ ...params[0], page: page + 1 });
+      const { PageIndex } = params[0];
+      if (allLoaded || PageIndex >= (result?.TotalPage ?? 0)) return;
+      await runAsync({ ...params[0], PageIndex: PageIndex + 1 });
     } catch (error) {
       handleError(error, params as P);
     }
@@ -117,7 +121,7 @@ export function useRefreshService<
     if (loading) return;
 
     try {
-      await runAsync({ ...params[0], pageSize: 10, page: INITIAL_PAGE });
+      await runAsync({ ...params[0], PageSize: 10, PageIndex: INITIAL_PAGE });
     } catch (error) {
       handleError(error, params as P);
     }
@@ -125,7 +129,7 @@ export function useRefreshService<
 
   const { refreshing, loadingMore } = useMemo(() => {
     if (params.length > 0) {
-      const isFirstPage = params[0].page === INITIAL_PAGE;
+      const isFirstPage = params[0].PageIndex === INITIAL_PAGE;
       if (isFirstPage) {
         return {
           refreshing: loading,

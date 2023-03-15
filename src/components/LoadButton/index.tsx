@@ -1,8 +1,8 @@
 import { Flex } from 'native-base';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
-const Index: React.FC<{ title: string; loading?: boolean }> = ({
-  title,
+const Index: React.FC<{ title?: string; loading?: boolean }> = ({
+  title = '没有更多数据',
   loading = false,
 }) => {
   return (

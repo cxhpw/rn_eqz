@@ -276,6 +276,14 @@ const darkTheme = {
     spacerColor: darkPalette.gray100,
     radio_active: palette.primary100,
   },
+  RadioVariants: {
+    ...lightTheme.RadioVariants,
+    defaults: {
+      ...commonRadius,
+      borderColor: 'white',
+      color: 'white',
+    },
+  },
   theme: 'dark',
 };
 

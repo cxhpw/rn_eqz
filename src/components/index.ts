@@ -21,7 +21,9 @@ export { default as ErrorBlock } from './ErrorBlock';
 export { default as Swipeable } from './Swipeable';
 export { default as Empty } from './Empty';
 export { default as Flex } from './Flex';
-export { default as Center } from './Center/index';
+export { default as Center } from './Center';
+export { default as Switch } from './Switch';
+export { Picker } from './Picker';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

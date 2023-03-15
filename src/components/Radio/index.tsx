@@ -9,6 +9,7 @@ RadioTemp.Group = RadioGroup;
 const Radio = RadioTemp as IRadioComponentType;
 
 export { Radio };
+
 export type {
   IRadioProps,
   IRadioGroupProps,

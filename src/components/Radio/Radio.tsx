@@ -103,5 +103,5 @@ const Radio = (
     />
   );
 };
-
+Radio.displayName = 'Radio';
 export default memo(forwardRef(Radio));

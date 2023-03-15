@@ -10,6 +10,7 @@ import OrderSubmit from '@/screens/map';
 import Company from '@/screens/company';
 import Complaint from '@/screens/complaint';
 import Address from '@/screens/address';
+import AddAddress from '@/screens/addAddress';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 const MAIN_SCREENS = [
@@ -79,8 +80,8 @@ const COMMON_SCREENS = [
     },
   },
   {
-    name: 'Address',
-    component: Address,
+    name: 'AddAddress',
+    component: AddAddress,
     options: {
       title: '地址中心',
     },
@@ -89,7 +90,7 @@ const COMMON_SCREENS = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Tab"
+      initialRouteName="AddAddress"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

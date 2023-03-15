@@ -3,6 +3,9 @@ type CommonStackParamList = {
   OrderSubmit: undefined;
   Help: undefined;
   Address: undefined;
+  AddAddress: {
+    id?: string | number;
+  };
 };
 
 type AuthStackParamList = {};

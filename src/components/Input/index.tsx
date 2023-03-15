@@ -5,6 +5,7 @@ import {
   TextInputProps,
   TextStyle,
   TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 
@@ -59,6 +60,10 @@ export interface InputProps
   brief?: ReactNode;
   /** 边框 */
   type?: 'bottom' | 'all';
+  /** label样式 */
+  labelStyle?: TextStyle;
+  /** 输入框父元素样式 */
+  containerStyle?: ViewStyle;
 }
 
 const Input = forwardRef<TextInput, InputProps>(
@@ -80,6 +85,8 @@ const Input = forwardRef<TextInput, InputProps>(
       style,
       brief,
       type = 'all',
+      labelStyle,
+      containerStyle,
       ...restProps
     },
     ref,
@@ -102,6 +109,7 @@ const Input = forwardRef<TextInput, InputProps>(
       onClear,
       colon,
       required,
+      labelStyle,
     });
 
     const InputContent = (
@@ -194,7 +202,7 @@ const Input = forwardRef<TextInput, InputProps>(
     return labelPosition === 'left' ? (
       <Flex alignItems="flex-start">
         {LabelComp}
-        <Box flex={1}>
+        <Box style={[containerStyle]} flex={1}>
           {InputWrapper}
           {Brief}
         </Box>

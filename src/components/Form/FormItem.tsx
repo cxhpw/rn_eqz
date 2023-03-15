@@ -6,6 +6,8 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../Theme/theme';
 import { ViewStyle } from 'react-native';
 
+const Enum = ['Input', 'Switch', 'Radio', 'Checkbox'];
+
 type Props = PropsWithChildren<
   FieldProps & {
     /** 边框 */
@@ -21,7 +23,9 @@ const Error: React.FC<ErrorProps> = ({ children, warning }) => (
     {children?.[0]}
   </Text>
 );
+
 let child: React.ReactElement;
+
 const FormItem: React.FC<Props> = ({
   /** 边框 */
   type = 'all',
@@ -54,9 +58,14 @@ const FormItem: React.FC<Props> = ({
       ref.current?.focus();
     }
   };
+  if (!children || Enum.indexOf(children.type.render.displayName) === -1) {
+    console.warn('Error: first children must be inculde a Form Component');
+    return null;
+  }
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
       {(control, meta, form) => {
+        // console.log(control);
         const childNode =
           typeof children === 'function'
             ? children(control, meta, form)
@@ -75,5 +84,5 @@ const FormItem: React.FC<Props> = ({
     </Field>
   );
 };
-
+FormItem.displayName = 'FormItem';
 export default FormItem;

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren } from 'react';
 import {
   StyleProp,
   Text,

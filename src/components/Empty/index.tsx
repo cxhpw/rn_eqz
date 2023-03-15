@@ -43,7 +43,7 @@ const Empty: React.FC<EmptyProps> = ({
   const renderTextDom = () => {
     if (typeof emptyText === 'string') {
       return (
-        <Text variant="p1" color="gray500">
+        <Text variant="p1" color="text" mt="x4">
           {emptyText}
         </Text>
       );

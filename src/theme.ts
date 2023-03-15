@@ -24,6 +24,14 @@ export const lightTheme = {
       fontSize: scale(20),
     },
   },
+  RadioVariants: {
+    ...theme.lightTheme.RadioVariants,
+    disabled: {
+      ...theme.lightTheme.RadioVariants.disabled,
+      color: 'gray200',
+      borderColor: 'gray200',
+    },
+  },
 };
 
 export type AppTheme = typeof lightTheme;
@@ -46,6 +54,14 @@ export const darkTheme: AppTheme = {
     h1: {
       ...theme.darkTheme.textVariants.h1,
       fontSize: scale(20),
+    },
+  },
+  RadioVariants: {
+    ...theme.lightTheme.RadioVariants,
+    disabled: {
+      ...theme.lightTheme.RadioVariants.disabled,
+      color: 'gray200',
+      borderColor: 'gray200',
     },
   },
 };

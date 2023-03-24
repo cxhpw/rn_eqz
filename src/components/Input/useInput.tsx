@@ -23,6 +23,7 @@ export default function useInput({
   onClear,
   colon = false,
   required = false,
+  labelStyle,
 }: Pick<
   InputProps,
   | 'inputType'
@@ -33,6 +34,7 @@ export default function useInput({
   | 'onClear'
   | 'colon'
   | 'required'
+  | 'labelStyle'
 >) {
   const [inputValue, setInputValue] = useSafeState(value);
   const [eyeOpen, setEyeOpen] = useSafeState(inputType === 'password');
@@ -64,7 +66,6 @@ export default function useInput({
       if (typeof label === 'string') {
         return (
           <Flex
-            marginRight="x2"
             alignItems="center"
             style={labelPosition === 'left' ? { height: scale(40) } : {}}>
             {required && (
@@ -72,7 +73,7 @@ export default function useInput({
                 *
               </Text>
             )}
-            <Text variant="p1" color="gray500">
+            <Text style={[labelStyle]} variant="p1" color="gray500">
               {label}
             </Text>
             <Text>{colon ? ':' : ''}</Text>
@@ -94,6 +95,7 @@ export default function useInput({
       );
     }
     return null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [colon, label, labelPosition, required]);
 
   const clearIconStyle = useAnimatedStyle(() => {

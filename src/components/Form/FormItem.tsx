@@ -18,7 +18,7 @@ interface ErrorProps {
   warning?: boolean;
   children?: React.ReactNode[];
 }
-const Error: React.FC<ErrorProps> = ({ children, warning }) => (
+const Error: React.FC<ErrorProps> = ({ children }) => (
   <Text variant="p3" color="func600">
     {children?.[0]}
   </Text>
@@ -58,6 +58,7 @@ const FormItem: React.FC<Props> = ({
       ref.current?.focus();
     }
   };
+  //@ts-ignore
   if (!children || Enum.indexOf(children.type.render.displayName) === -1) {
     console.warn('Error: first children must be inculde a Form Component');
     return null;

@@ -23,6 +23,7 @@ export interface TabsProps
     'keyboardDismissMode' | 'swipeEnabled' | 'lazy'
   > {
   scenes: TabsScene[];
+  /** 激活的key */
   activeTab?: string;
   bounces?: boolean;
   tabBarStyle?: StyleProp<ViewStyle>;
@@ -41,6 +42,9 @@ export type Event = {
 export type Scene = {
   route: CustomRoute;
 };
+
+export type TViewProps = Scene &
+  Pick<SceneRendererProps, 'jumpTo' | 'position'>;
 
 export type TabBarProps = SceneRendererProps &
   Pick<

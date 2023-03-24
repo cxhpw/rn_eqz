@@ -9,7 +9,6 @@ import { Measure, TabBarItemProps, TabBarProps } from './type';
 export default function TabBar(props: TabBarProps) {
   const scrollViewRef = useRef<Animated.ScrollView>(null);
   const [measures, setMeasures] = useState<Measure[]>([]);
-
   useEffect(() => {
     setTimeout(() => {
       const m: Measure[] = [];
@@ -43,7 +42,7 @@ export default function TabBar(props: TabBarProps) {
         horizontal
         accessibilityRole="tablist"
         keyboardShouldPersistTaps="handled"
-        scrollEnabled={false} // <- TODO 尝试作为props传进来，目前问题是在滚动时怎么让Indicator也跟着滚动
+        scrollEnabled={true} // <- TODO 尝试作为props传进来，目前问题是在滚动时怎么让Indicator也跟着滚动
         bounces={props.bounces}
         alwaysBounceHorizontal={false}
         scrollsToTop={false}
@@ -51,6 +50,7 @@ export default function TabBar(props: TabBarProps) {
         automaticallyAdjustContentInsets={false}
         overScrollMode="never"
         contentContainerStyle={[
+          // eslint-disable-next-line react-native/no-inline-styles
           {
             flexDirection: 'row',
             justifyContent: 'flex-start',
@@ -58,7 +58,7 @@ export default function TabBar(props: TabBarProps) {
             flexWrap: 'nowrap',
             height: 40,
           },
-          { flex: 1 }, // scrollEnabled
+          // { flex: 1 }, // scrollEnabled
           props.tabBarStyle,
         ]}
         scrollEventThrottle={16}>
@@ -85,7 +85,6 @@ export default function TabBar(props: TabBarProps) {
               props.jumpTo(key);
             },
           };
-
           return <TabBarItem key={key} {...itemProps} />;
         })}
       </Animated.ScrollView>

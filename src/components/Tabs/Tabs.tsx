@@ -36,9 +36,6 @@ const Tabs: FC<TabsProps> = ({
 
   return (
     <TabView
-      style={{
-        height: 500,
-      }}
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@byron-react-native/refresh-control": "^1.2.5",
+    "@gorhom/bottom-sheet": "^4",
     "@react-native-community/netinfo": "^9.3.7",
     "@react-navigation/bottom-tabs": "^6.5.1",
     "@react-navigation/devtools": "^6.0.15",
@@ -48,6 +49,7 @@
     "react-native-mmkv": "^2.5.1",
     "react-native-modal": "^13.0.1",
     "react-native-pager-view": "^6.1.2",
+    "react-native-picker": "^4.3.7",
     "react-native-reanimated": "^2.14.2",
     "react-native-reanimated-carousel": "^3.3.0",
     "react-native-restart": "^0.0.24",

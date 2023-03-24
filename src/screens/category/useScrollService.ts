@@ -9,7 +9,7 @@ export default function useScrollService(
   initalValue: Goods[] = [],
 ) {
   const [active, setActive] = useSafeState(-1);
-  const [_height, setHeight] = useSafeState(0);
+  const [_height, setHeight] = useSafeState(MENUITEM_HEIGHT);
   const [content, setContent] = useSafeState<Goods | null>(() => {
     if (!initalValue.length) {
       return null;

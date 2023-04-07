@@ -17,7 +17,7 @@ type MainStackParamList = {
   Chat: undefined;
   My: undefined;
   Detail: { id: number | string; startEnd?: string[] };
-  Order: { code: number | string };
+  Order: { code?: number | string };
   Calendar: {
     start?: string;
     end?: string;

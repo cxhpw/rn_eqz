@@ -50,6 +50,19 @@ type Product = {
   SpecialPrice: string;
 };
 
+type OrderItem = {
+  OrderID: number;
+  OitemID: number;
+  ContentImage: string;
+  EndTime: string;
+  OrderTotalAmount: number;
+  OtherFee: number;
+  ProName: string;
+  Quantity: number;
+  StartingTime: string;
+  OrderStatus: number;
+};
+
 const orderStatus = [
   {
     label: '全部',

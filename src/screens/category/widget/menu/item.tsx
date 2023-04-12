@@ -24,8 +24,6 @@ const Item: React.FC<Props> = ({
   activeTintColor,
   active,
 }) => {
-  console.log('Item', item.AutoID, active);
-
   const { theme, colors } = useTheme<AppTheme>();
   return (
     <Pressable

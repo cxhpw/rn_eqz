@@ -29,7 +29,7 @@
  * effect is the invocation of `onPress` and `onLongPress` that occur when a
  * responder is release while in the "press in" states.
  */
-import { FC, PropsWithChildren, forwardRef, ForwardedRef } from 'react';
+import { PropsWithChildren, forwardRef, memo, useState } from 'react';
 import {
   Pressable as RNPressable,
   PressableProps as RNPressableProps,
@@ -47,6 +47,17 @@ type Rect = {
   top: number;
   left: number;
   right: number;
+};
+
+export const useIsPressed = () => {
+  const [isPressed, setIsPressed] = useState(false);
+  return {
+    pressableProps: {
+      onPressIn: () => setIsPressed(true),
+      onPressOut: () => setIsPressed(false),
+    },
+    isPressed,
+  };
 };
 
 export interface PressableProps
@@ -87,6 +98,7 @@ const Pressable = (
   };
 
   const animatedStyle = useAnimatedStyle(() => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     const style = {
       opacity: pressed.value ? withTiming(activeOpacity) : withTiming(1),
     };
@@ -119,4 +131,4 @@ const Pressable = (
 };
 Pressable.displayName = 'Pressable';
 
-export default forwardRef(Pressable);
+export default memo(forwardRef(Pressable));

@@ -66,7 +66,6 @@ const FormItem: React.FC<Props> = ({
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
       {(control, meta, form) => {
-        // console.log(control);
         const childNode =
           typeof children === 'function'
             ? children(control, meta, form)

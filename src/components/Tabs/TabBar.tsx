@@ -1,5 +1,6 @@
+import useScrollToCenterDistance from '@/hooks/useScrollToCenter';
 import { useEffect, useRef, useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import TabBarIndicator from './TabBarIndicator';
@@ -7,7 +8,7 @@ import TabBarItem from './TabBarItem';
 import { Measure, TabBarItemProps, TabBarProps } from './type';
 
 export default function TabBar(props: TabBarProps) {
-  const scrollViewRef = useRef<Animated.ScrollView>(null);
+  const scrollViewRef = useRef<Animated.ScrollView | ScrollView>(null);
   const [measures, setMeasures] = useState<Measure[]>([]);
   useEffect(() => {
     setTimeout(() => {
@@ -26,7 +27,11 @@ export default function TabBar(props: TabBarProps) {
       });
     }, 0);
   }, [props.navigationState.routes, setMeasures]);
-
+  const x = useScrollToCenterDistance({
+    ref: props.navigationState.routes[props.navigationState.index].ref,
+    wrapperRef: scrollViewRef,
+    idx: props.navigationState.index,
+  });
   let tabBarWidth = 0;
   if (measures.length === 0) {
     tabBarWidth = 0;
@@ -38,7 +43,7 @@ export default function TabBar(props: TabBarProps) {
   return (
     <View>
       <Animated.ScrollView
-        ref={scrollViewRef}
+        ref={scrollViewRef as any}
         horizontal
         accessibilityRole="tablist"
         keyboardShouldPersistTaps="handled"
@@ -58,7 +63,6 @@ export default function TabBar(props: TabBarProps) {
             flexWrap: 'nowrap',
             height: 40,
           },
-          // { flex: 1 }, // scrollEnabled
           props.tabBarStyle,
         ]}
         scrollEventThrottle={16}>
@@ -87,18 +91,22 @@ export default function TabBar(props: TabBarProps) {
           };
           return <TabBarItem key={key} {...itemProps} />;
         })}
+
+        {/* 指示器 */}
+        {props.showIndicator && (
+          <View
+            style={[{ position: 'absolute', width: tabBarWidth, bottom: 0 }]}>
+            {measures.length > 0 && (
+              <TabBarIndicator
+                x={x}
+                measures={measures}
+                currentIndex={props.navigationState.index}
+                indicatorStyle={props.indicatorStyle}
+              />
+            )}
+          </View>
+        )}
       </Animated.ScrollView>
-      {props.showIndicator && (
-        <View style={[{ position: 'relative', width: tabBarWidth }]}>
-          {measures.length > 0 && (
-            <TabBarIndicator
-              measures={measures}
-              currentIndex={props.navigationState.index}
-              indicatorStyle={props.indicatorStyle}
-            />
-          )}
-        </View>
-      )}
     </View>
   );
 }

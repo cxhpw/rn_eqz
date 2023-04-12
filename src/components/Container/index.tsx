@@ -3,8 +3,6 @@ import { StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 import { type AppTheme } from '@/theme';
-import { useStore } from '@/store';
-import { ErrorBlock } from '@/components';
 
 const Container: React.FC<
   PropsWithChildren<{

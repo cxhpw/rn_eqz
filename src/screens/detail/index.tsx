@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { ScrollView, Dimensions } from 'react-native';
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';

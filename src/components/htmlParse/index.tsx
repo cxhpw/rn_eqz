@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { WebView } from 'react-native-webview';
 
 type Props = {
-  html: string;
+  html: string | undefined;
   htmlStyle?: string;
   onLoadEnd?: () => void;
 };

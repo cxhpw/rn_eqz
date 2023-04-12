@@ -62,7 +62,6 @@ export function useRefreshService<
     defaultParams: DEFAULT_PARAMS as P,
     ...restOptions,
     onSuccess(data: R, params: P) {
-      console.log('success', data);
       // 对data进行处理
       const {
         dataList,
@@ -90,7 +89,6 @@ export function useRefreshService<
     },
     onError: handleError,
   });
-
   /**
    * 从头开始刷新数据
    */

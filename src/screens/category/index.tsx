@@ -27,12 +27,10 @@ const Category: React.FC<PropsWithChildren<Props>> = () => {
   });
   const { content, update } = useScrollService(ref, active, goods);
   const handleMenuChange = (e: IGestureResponderEvent) => {
-    console.log(11, e.dataset);
     isMenuHandleEvent = true;
     setActive(e.dataset.index as number);
   };
   useEffect(() => {
-    console.log('useEffect');
     // 如果是左侧点击切换状态就直接返回
     if (isMenuHandleEvent) {
       isMenuHandleEvent = false;

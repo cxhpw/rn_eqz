@@ -1,6 +1,6 @@
 import { Text, Pressable, HtmlParse } from '@/components';
 import { Box, Center, Flex } from 'native-base';
-import { memo, useCallback, useState } from 'react';
+import { memo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 type Props = {
@@ -38,9 +38,9 @@ const Desc: React.FC<Props> = ({ data }) => {
         ))}
       </Flex>
       {active === 0 ? (
-        <HtmlParse html={data!.ProDetail} />
+        <HtmlParse html={data?.ProDetail} />
       ) : (
-        <HtmlParse html={data!.Leaserule} />
+        <HtmlParse html={data?.Leaserule} />
       )}
     </Box>
   );

@@ -24,6 +24,9 @@ export { default as Flex } from './Flex';
 export { default as Center } from './Center';
 export { default as Switch } from './Switch';
 export { Picker } from './Picker';
+export { default as FlashList } from './FlashList';
+export { Button as SButton } from './SButton';
+export { default as UIActivityIndicator } from './Indicator/UIActivityIndicator';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

@@ -231,6 +231,32 @@ const lightTheme = createTheme({
       borderColor: 'gray50',
     },
   },
+  /** 按钮默认主题 */
+  ButtonVariants: {
+    Solid: {
+      borderColor: 'primary100',
+      backgroundColor: 'primary100',
+      color: 'white',
+    },
+    Subtle: {},
+    Outline: {
+      backgroundColor: 'transparent',
+      borderColor: 'border',
+      color: 'primary100',
+    },
+    Link: {
+      borderColor: 'transparent',
+      color: 'primary100',
+    },
+    Ghost: {
+      borderColor: 'transparent',
+    },
+    Unstyled: {
+      borderColor: 'transparent',
+      backgroundColor: 'transparent',
+      color: 'text',
+    },
+  },
   theme: 'light',
 });
 /** 深色调色板 */
@@ -283,6 +309,9 @@ const darkTheme = {
       borderColor: 'white',
       color: 'white',
     },
+  },
+  ButtonVariants: {
+    ...lightTheme.ButtonVariants,
   },
   theme: 'dark',
 };

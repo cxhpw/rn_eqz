@@ -76,7 +76,6 @@ const Radio = (
     inputRef,
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const inputProps = React.useMemo(
     () => radioState.inputProps,
     // eslint-disable-next-line react-hooks/exhaustive-deps

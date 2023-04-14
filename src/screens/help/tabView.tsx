@@ -5,8 +5,12 @@ import CardList from './widget/cardList';
 
 type Props = {
   data: any[];
+  route: any;
 };
-const Demo: React.FC<Props> = ({ data }) => {
+const Demo: React.FC<Props> = ({ data = [], route }) => {
+  if (route?.props) {
+    data = route?.props;
+  }
   return (
     <ScrollView
       style={{ flex: 1 }}

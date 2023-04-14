@@ -1,18 +1,23 @@
 import { TViewProps } from '@/components/Tabs/type';
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, createContext, useEffect } from 'react';
 import { Box, Empty, FlashList, LoadButton } from '@/components';
 import { useRefreshService } from '@/hooks';
 import request from '@/request';
 import Item from './item';
-import { Select } from 'native-base';
 
 type Props = {
   id: string;
 } & TViewProps;
+type noop = (n: OrderItem[]) => OrderItem[];
+export const OrderContext = createContext<null | {
+  data: OrderItem[];
+  setData: (fn: noop) => void;
+}>(null);
 
 const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
   const {
     data = [],
+    setData,
     allLoaded,
     loadingMore,
     refreshing,
@@ -36,35 +41,40 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
     },
   );
   const renderFooter = () => {
-    return <LoadButton loading={!allLoaded} />;
+    return data.length === 0 ? null : <LoadButton loading={!allLoaded} />;
   };
-  useEffect(() => {
-    console.log('加载状态', refreshing);
-  }, [refreshing]);
   return (
     <Box backgroundColor="background" flex={1}>
-      <FlashList
-        data={data}
-        // eslint-disable-next-line react-native/no-inline-styles
-        contentContainerStyle={{
-          paddingHorizontal: 10,
-        }}
-        renderItem={({ item }) => <Item {...item} />}
-        onEndReached={onLoadMore}
-        keyExtractor={_item => `${_item.OitemID}`}
-        refreshing={refreshing}
-        onEndReachedThreshold={100}
-        loadingMore={loadingMore}
-        allLoaded={allLoaded}
-        estimatedItemSize={300}
-        renderEmpty={() => (
-          <Box style={{ marginTop: '30%' }}>
-            <Empty />
-          </Box>
-        )}
-        showsVerticalScrollIndicator={false}
-        renderFooter={renderFooter}
-      />
+      <OrderContext.Provider
+        value={{
+          data,
+          setData,
+        }}>
+        <FlashList
+          data={data}
+          // eslint-disable-next-line react-native/no-inline-styles
+          contentContainerStyle={{
+            paddingHorizontal: 10,
+          }}
+          renderItem={({ item }) => <Item {...item} />}
+          onEndReached={onLoadMore}
+          keyExtractor={_item => `${_item.OrderID}`}
+          refreshing={refreshing}
+          onEndReachedThreshold={100}
+          loadingMore={loadingMore}
+          allLoaded={allLoaded}
+          estimatedItemSize={300}
+          renderEmpty={() =>
+            refreshing || data.length !== 0 ? null : (
+              <Box style={{ marginTop: '30%' }}>
+                <Empty />
+              </Box>
+            )
+          }
+          showsVerticalScrollIndicator={false}
+          renderFooter={renderFooter}
+        />
+      </OrderContext.Provider>
     </Box>
   );
 };

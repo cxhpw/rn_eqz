@@ -41,23 +41,26 @@ export default function useButtonService(id: number) {
   };
   /** 是否删除 */
   const onDetele = () => {
-    Alert.alert('提示', '确定删除', [
-      {
-        text: '取消',
-        style: 'default',
-      },
-      {
-        text: '确定',
-        onPress: () => {
-          runAsync({
-            action: 'delete',
-          }).then(res => {
-            console.log(res);
-            showToast(res.msg);
-          });
+    return new Promise(resolve => {
+      Alert.alert('提示', '确定删除', [
+        {
+          text: '取消',
+          style: 'default',
         },
-      },
-    ]);
+        {
+          text: '确定',
+          onPress: () => {
+            runAsync({
+              action: 'delete',
+            }).then(res => {
+              console.log(res);
+              showToast(res.msg);
+              resolve(res);
+            });
+          },
+        },
+      ]);
+    });
   };
   /** 是否签收 */
   const onSign = () => {

@@ -27,10 +27,14 @@ export default function TabBar(props: TabBarProps) {
       });
     }, 0);
   }, [props.navigationState.routes, setMeasures]);
+
   const x = useScrollToCenterDistance({
     ref: props.navigationState.routes[props.navigationState.index].ref,
     wrapperRef: scrollViewRef,
     idx: props.navigationState.index,
+  });
+  scrollViewRef.current?.scrollTo({
+    x,
   });
   let tabBarWidth = 0;
   if (measures.length === 0) {
@@ -62,6 +66,7 @@ export default function TabBar(props: TabBarProps) {
             alignItems: 'center',
             flexWrap: 'nowrap',
             height: 40,
+            minWidth: '100%',
           },
           props.tabBarStyle,
         ]}

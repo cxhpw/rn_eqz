@@ -29,11 +29,9 @@ const Tabs: FC<TabsProps> = ({
 
   const renderScene = SceneMap(scenes);
   const activeIndex = routes.findIndex(item => item.key === props.activeTab);
-
   const [index, setIndex] = React.useState(
     activeIndex === -1 ? 0 : activeIndex,
   );
-
   return (
     <TabView
       navigationState={{ index, routes }}

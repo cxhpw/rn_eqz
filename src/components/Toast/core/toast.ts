@@ -14,13 +14,6 @@ type Message = ValueOrFunction<Renderable, Toast>;
 
 type ToastHandler = (message: Message, options?: ToastOptions) => string;
 
-/**
- * 生成toast所需参数
- * @param message
- * @param type
- * @param opts
- * @returns
- */
 const createToast = (
   message: Message,
   type: ToastType = 'blank',
@@ -29,21 +22,12 @@ const createToast = (
   createdAt: Date.now(),
   visible: true,
   type,
-  ariaProps: {
-    role: 'status',
-    'aria-live': 'polite',
-  },
   message,
   pauseDuration: 0,
   ...opts,
   id: opts?.id || genId(),
 });
 
-/**
- * 生成不同类型toast
- * @param type
- * @returns ToastHandler
- */
 const createHandler =
   (type?: ToastType): ToastHandler =>
   (message, options) => {

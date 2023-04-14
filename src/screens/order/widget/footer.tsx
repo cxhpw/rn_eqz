@@ -3,8 +3,11 @@ import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { StyleSheet } from 'react-native';
 import useButtonService from './useButtonService';
+import { OrderContext } from './tabView';
+import { useContext } from 'react';
 
 const Footer = ({ status, id }: any) => {
+  const Context = useContext(OrderContext);
   const theme = useTheme<AppTheme>();
   const { onCancel, onDetele, onPay } = useButtonService(id);
   const styles = StyleSheet.create({
@@ -27,7 +30,15 @@ const Footer = ({ status, id }: any) => {
           variant="Outline"
           colorScheme="text"
           style={styles.btn}
-          onPress={onDetele}>
+          onPress={() => {
+            onDetele().then(() => {
+              console.log(231);
+              Context?.setData(oldData => {
+                const res = oldData.filter(item => item.OrderID !== id);
+                return [...res];
+              });
+            });
+          }}>
           删除订单
         </SButton>
       );

@@ -1,10 +1,12 @@
 import { memo } from 'react';
-import { Dimensions, Image, StyleSheet } from 'react-native';
+import { Dimensions, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Box, Flex } from 'native-base';
 import Carousel from 'react-native-reanimated-carousel';
 import { useRequest, useSafeState } from 'ahooks';
 import request from '@/request';
 import { Text } from '@/components';
+import { transformUrlToParams } from '@/utils/common';
+import { navigate } from '@/services/NavigationService';
 
 type Props = {};
 type BannerProps = {
@@ -41,13 +43,20 @@ function Banner({}: Props) {
           scrollAnimationDuration={1500}
           onSnapToItem={index => setCurrent(index + 1)}
           renderItem={({ item }) => (
-            <Image
-              source={{
-                uri: item.AdMediaPath,
-              }}
-              style={style.swiperItem}
-              resizeMode="stretch"
-            />
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                const { routeName, params } = transformUrlToParams(item.AdLink);
+                navigate(routeName as any, params);
+              }}>
+              <Image
+                source={{
+                  uri: item.AdMediaPath,
+                }}
+                style={style.swiperItem}
+                resizeMode="stretch"
+              />
+            </TouchableOpacity>
           )}
         />
       ) : (

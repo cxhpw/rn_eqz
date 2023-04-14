@@ -52,6 +52,9 @@ const SERVICES_LIST = [
     label: '地址管理',
     url: require('@/images/icon_3.png'),
     routeName: 'Address',
+    params: {
+      pageIsRefresh: true,
+    },
   },
   {
     label: '投诉&建议',
@@ -155,10 +158,10 @@ const My: React.FC<Props> = () => {
               <MenuItem
                 onPress={e => {
                   console.log(e.dataset);
-                  const { routeName, label } = e.dataset;
+                  const { routeName, label, params = {} } = e.dataset;
                   switch (label) {
                     default:
-                      navigate(routeName);
+                      navigate(routeName, { ...params });
                   }
                 }}
                 data={props}

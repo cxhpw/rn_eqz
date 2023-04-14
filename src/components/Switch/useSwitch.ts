@@ -4,7 +4,7 @@ import type { SwitchProps } from './index';
 export default function useSwitch({ onChange, value }: SwitchProps) {
   const [initValue, setInitValue] = useSafeState(value);
   const onChangeRef = useLatest(onChange);
-
+  console.log('initValue', initValue);
   const handeleChange = (val: boolean) => {
     setInitValue(val);
     onChangeRef.current?.(val);

@@ -72,7 +72,6 @@ const ActionSubmit: React.FC<Props> = ({
     },
   );
   useEffect(() => {
-    console.log('days', days, min);
     if (days > 0) {
       setDisabled(days < min);
       if (days < min) {

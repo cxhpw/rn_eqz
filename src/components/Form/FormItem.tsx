@@ -6,7 +6,7 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../Theme/theme';
 import { ViewStyle } from 'react-native';
 
-const Enum = ['Input', 'Switch', 'Radio', 'Checkbox'];
+// const Enum = ['Input', 'Switch', 'Radio', 'Checkbox'];
 
 type Props = PropsWithChildren<
   FieldProps & {
@@ -18,7 +18,7 @@ interface ErrorProps {
   warning?: boolean;
   children?: React.ReactNode[];
 }
-const Error: React.FC<ErrorProps> = ({ children }) => (
+export const Error: React.FC<ErrorProps> = ({ children }) => (
   <Text variant="p3" color="func600">
     {children?.[0]}
   </Text>
@@ -34,6 +34,7 @@ const FormItem: React.FC<Props> = ({
   ...fieldProps
 }) => {
   const theme = useTheme<Theme>();
+  /** 保存表单元素实例 */
   const ref = useRef<{ focus: () => void } | null>(null);
   const fieldContext = useContext(FieldContext);
   const mergeStyleProps = () => {
@@ -59,10 +60,9 @@ const FormItem: React.FC<Props> = ({
     }
   };
   //@ts-ignore
-  if (!children || Enum.indexOf(children.type.render.displayName) === -1) {
-    console.warn('Error: first children must be inculde a Form Component');
-    return null;
-  }
+  // if (!children || Enum.indexOf(children.type.render.displayName) === -1) {
+  //   console.warn('Error: first children must be inculde a Form Component');
+  // }
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
       {(control, meta, form) => {

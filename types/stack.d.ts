@@ -2,10 +2,19 @@ type CommonStackParamList = {
   Complaint: undefined;
   OrderSubmit: undefined;
   Help: undefined;
-  Address: undefined;
+  Address: {
+    pageIsRefresh?: boolean;
+  };
   AddAddress: {
     id?: string | number;
   };
+  WebView: {
+    url: string;
+  };
+  Activity: {
+    id?: string | number;
+  };
+  Company: undefined;
 };
 
 type AuthStackParamList = {};

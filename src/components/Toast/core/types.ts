@@ -33,21 +33,15 @@ export const resolveValue = <TValue, TArg>(
 
 export interface Toast {
   type: ToastType;
-  /** 唯一标识 */
   id: string;
   message: ValueOrFunction<Renderable, Toast>;
   icon?: Renderable;
-  /** toast持续时间 */
   duration?: number;
   pauseDuration: number;
-  /** toast弹出方向 */
   position?: ToastPosition;
-
   style?: ViewStyle;
   iconTheme?: IconTheme;
-
   createdAt: number;
-  /** toast状态 */
   visible: boolean;
   height?: number;
 }

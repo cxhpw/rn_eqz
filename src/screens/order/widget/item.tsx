@@ -5,6 +5,12 @@ import { memo } from 'react';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { getDays, getMonthDate } from '@/utils/common';
+import Animated, {
+  Layout,
+  FadeIn,
+  LightSpeedOutRight,
+  JumpingTransition,
+} from 'react-native-reanimated';
 import Footer from './footer';
 
 const StatusTag = memo(({ children, status = 'fail' }: any) => {
@@ -132,4 +138,5 @@ const styles = StyleSheet.create({
     height: 50,
   },
 });
+Item.displayName = 'OrderItem';
 export default memo(Item);

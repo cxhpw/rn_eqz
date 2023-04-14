@@ -83,9 +83,7 @@ const useScrollToCenterDistance = ({
   offset = direction === 'horizontal' ? cell.left : cell.top;
 
   const x = offset - (totalSize - size) / 2;
-  wrapperRef.current?.scrollTo({
-    x,
-  });
+
   return x;
 };
 

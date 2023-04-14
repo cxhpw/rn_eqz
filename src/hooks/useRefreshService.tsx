@@ -40,7 +40,6 @@ export function useRefreshService<
   };
 
   const { onSuccess, onError, ...restOptions } = options || {};
-
   const handleError = (err: unknown, params: P) => {
     console.log(err);
     const { code, message } = JSON.parse((err as Error).message);
@@ -104,8 +103,7 @@ export function useRefreshService<
    * 加载下一页数据
    */
   const onLoadMore = async () => {
-    if (loading) return;
-
+    if (loading || params.length === 0) return;
     try {
       const { PageIndex } = params[0];
       if (allLoaded || PageIndex >= (result?.TotalPage ?? 0)) return;
@@ -150,7 +148,7 @@ export function useRefreshService<
     loadingMore,
     allLoaded,
     data,
-
+    setData,
     onRefresh: useMemoizedFn(onRefresh),
     onLoadMore: useMemoizedFn(onLoadMore),
     onUpdate: useMemoizedFn(onUpdate),

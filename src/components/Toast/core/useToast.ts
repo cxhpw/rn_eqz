@@ -57,6 +57,7 @@ export function useToast(toastOptions?: DefaultToastOptions) {
 
   const calculateOffset = useCallback(
     (
+      // eslint-disable-next-line @typescript-eslint/no-shadow
       toast: Toast,
       opts?: {
         reverseOrder?: boolean;

@@ -1,8 +1,11 @@
 import { helpers } from '@/components';
 import { Box, Center, HStack, VStack } from 'native-base';
 import { PropsWithChildren } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { transformUrlToParams } from '@/utils/common';
+import { navigate } from '@/services/NavigationService';
+
 type Props = {
   urls: { image: string; name: string; url: string }[];
 };
@@ -13,14 +16,26 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
       <Box>{children}</Box>
       {urls.length > 0 && (
         <HStack space={2.5}>
-          <Center flex={1} backgroundColor="amber.100">
-            <FastImage
-              style={style.leftImage}
-              source={{
-                uri: urls[0].image,
+          <Center flex={1} position="relative">
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                const { routeName, params } = transformUrlToParams(urls[0].url);
+                navigate(routeName as any, {
+                  ...params,
+                });
               }}
-              resizeMode="cover"
-            />
+              style={{
+                width: '100%',
+              }}>
+              <FastImage
+                style={style.leftImage}
+                source={{
+                  uri: urls[0].image,
+                }}
+                resizeMode="cover"
+              />
+            </TouchableOpacity>
           </Center>
           <Center flex={1}>
             <VStack
@@ -29,22 +44,50 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
                 width: '100%',
               }}>
               <Center flex={1}>
-                <FastImage
-                  style={style.rightImage}
-                  source={{
-                    uri: urls[1].image,
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => {
+                    const { routeName, params } = transformUrlToParams(
+                      urls[1].url,
+                    );
+                    navigate(routeName as any, {
+                      ...params,
+                    });
                   }}
-                  resizeMode="cover"
-                />
+                  style={{
+                    width: '100%',
+                  }}>
+                  <FastImage
+                    style={style.rightImage}
+                    source={{
+                      uri: urls[1].image,
+                    }}
+                    resizeMode="cover"
+                  />
+                </TouchableOpacity>
               </Center>
               <Center>
-                <FastImage
-                  style={style.rightImage}
-                  source={{
-                    uri: urls[2].image,
+                <TouchableOpacity
+                  activeOpacity={1}
+                  onPress={() => {
+                    const { routeName, params } = transformUrlToParams(
+                      urls[2].url,
+                    );
+                    navigate(routeName as any, {
+                      ...params,
+                    });
                   }}
-                  resizeMode="cover"
-                />
+                  style={{
+                    width: '100%',
+                  }}>
+                  <FastImage
+                    style={style.rightImage}
+                    source={{
+                      uri: urls[2].image,
+                    }}
+                    resizeMode="cover"
+                  />
+                </TouchableOpacity>
               </Center>
             </VStack>
           </Center>

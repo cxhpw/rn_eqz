@@ -1,4 +1,7 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
 import Config from 'react-native-config';
 
 import TabScreen from './tabStack';
@@ -11,9 +14,19 @@ import Company from '@/screens/company';
 import Complaint from '@/screens/complaint';
 import Address from '@/screens/address';
 import AddAddress from '@/screens/addAddress';
+import WebView from '@/screens/webview';
+import Activity from '@/screens/activity';
 
 const Stack = createNativeStackNavigator<AppParamList>();
-const MAIN_SCREENS = [
+
+interface ScreenProps {
+  name: keyof AppParamList;
+  component: JSX.Element | Element;
+  options?: NativeStackNavigationOptions;
+  initialParams?: any;
+}
+
+const MAIN_SCREENS: ScreenProps[] = [
   {
     name: 'Tab',
     component: TabScreen,
@@ -34,6 +47,10 @@ const MAIN_SCREENS = [
     options: {
       title: '我的订单',
     },
+    /** 需要初始化参数 */
+    initialParams: {
+      code: -1,
+    } as Partial<AppParamList['Order']>,
   },
   {
     name: 'OrderSubmit',
@@ -50,7 +67,8 @@ const MAIN_SCREENS = [
     },
   },
 ];
-const COMMON_SCREENS = [
+
+const COMMON_SCREENS: ScreenProps[] = [
   {
     name: 'Help',
     component: Help,
@@ -73,7 +91,7 @@ const COMMON_SCREENS = [
     },
   },
   {
-    name: 'AddressCenter',
+    name: 'Address',
     component: Address,
     options: {
       title: '地址管理',
@@ -86,11 +104,29 @@ const COMMON_SCREENS = [
       title: '地址中心',
     },
   },
+  {
+    name: 'WebView',
+    component: WebView,
+    options: {
+      title: '',
+    },
+  },
+  {
+    name: 'Activity',
+    component: Activity,
+    options: {
+      title: '优惠活动',
+      headerTransparent: true,
+      headerTitle: '',
+      headerTintColor: '#fff',
+    },
+  },
 ];
+
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="AddAddress"
+      initialRouteName="Home"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

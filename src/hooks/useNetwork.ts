@@ -16,12 +16,10 @@ export default function useNetwork() {
   useUpdateEffect(() => {
     console.log(
       '网络发生了变化',
-      !!netInfo.isConnected && !!netInfo.isInternetReachable
-        ? '网络正常'
-        : '网络异常',
+      !!netInfo.isConnected ? '网络正常' : '网络异常',
     );
-    setNetwork(!!netInfo.isConnected && !!netInfo.isInternetReachable);
-  }, [netInfo.isConnected, netInfo.isInternetReachable]);
+    setNetwork(!!netInfo.isConnected);
+  }, [netInfo.isConnected]);
   /**
    * 一上来就先获取网络连接状态
    */

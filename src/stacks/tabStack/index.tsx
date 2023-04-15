@@ -14,13 +14,12 @@ const Tab = createBottomTabNavigator();
 
 const tabItems: {
   name: string;
-  component: React.FC;
+  component: JSX.Element | Element;
   label: string;
   icon: IconNames | Element;
   options?: BottomTabNavigationOptions;
 }[] = [
   {
-    //@ts-ignore
     component: Home,
     name: 'Home',
     label: '首页',
@@ -38,7 +37,6 @@ const tabItems: {
     },
   },
   {
-    //@ts-ignore
     component: Category,
     name: 'Category',
     label: '分类',
@@ -56,7 +54,6 @@ const tabItems: {
     },
   },
   {
-    //@ts-ignore
     component: Chat,
     name: 'Chat',
     label: '客服',
@@ -74,7 +71,6 @@ const tabItems: {
     },
   },
   {
-    //@ts-ignore
     component: My,
     name: 'My',
     label: '我的',
@@ -112,6 +108,7 @@ function TabStack() {
           <Tab.Screen
             key={item.name}
             name={item.name}
+            //@ts-ignore
             component={item.component}
             options={{
               title: item.label,

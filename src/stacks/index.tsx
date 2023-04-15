@@ -16,6 +16,7 @@ import Address from '@/screens/address';
 import AddAddress from '@/screens/addAddress';
 import WebView from '@/screens/webview';
 import Activity from '@/screens/activity';
+import Search from '@/screens/search';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -64,6 +65,13 @@ const MAIN_SCREENS: ScreenProps[] = [
     component: Calendar,
     options: {
       title: '选择日期',
+    },
+  },
+  {
+    name: 'Search',
+    component: Search,
+    options: {
+      title: '搜索',
     },
   },
 ];
@@ -126,7 +134,7 @@ const COMMON_SCREENS: ScreenProps[] = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Search"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

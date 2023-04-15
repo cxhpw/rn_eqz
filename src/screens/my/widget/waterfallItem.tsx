@@ -2,21 +2,22 @@ import { Text } from '@/components';
 import { Box, VStack } from 'native-base';
 import FastImage from 'react-native-fast-image';
 import { Price, Pressable } from '@/components';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
 import { navigate } from '@/services/NavigationService';
 type Props = {
   data: Product;
+  style?: ViewStyle;
 };
-const WaterfallItem: React.FC<Props> = ({ data }) => {
+const WaterfallItem: React.FC<Props> = ({ data, style }) => {
   return (
-    <Box px="5px" width="1/2" mb="2.5">
+    <Box px="5px" width="1/2" mb="2.5" style={[style]}>
       <Pressable
         scalable={false}
         onPress={() => {
           navigate('Detail', { id: data.AutoID });
         }}>
         <VStack backgroundColor="white" borderRadius="6px" overflow="hidden">
-          <Box style={style.box}>
+          <Box style={styles.box}>
             <FastImage
               source={{
                 uri: data?.ProImg,
@@ -40,7 +41,7 @@ const WaterfallItem: React.FC<Props> = ({ data }) => {
     </Box>
   );
 };
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   box: {
     position: 'relative',
     width: '100%',

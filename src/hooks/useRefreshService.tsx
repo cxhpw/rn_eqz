@@ -103,11 +103,14 @@ export function useRefreshService<
    * 加载下一页数据
    */
   const onLoadMore = async () => {
-    if (loading || params.length === 0) return;
+    if (loading) return;
+    console.log(allLoaded);
     try {
-      const { PageIndex } = params[0];
+      let _param = params?.[0] ?? options?.defaultParams[0];
+      const { PageIndex } = _param;
+      console.log(PageIndex, allLoaded, PageIndex >= (result?.TotalPage ?? 0));
       if (allLoaded || PageIndex >= (result?.TotalPage ?? 0)) return;
-      await runAsync({ ...params[0], PageIndex: PageIndex + 1 });
+      await runAsync({ ..._param, PageIndex: PageIndex + 1 });
     } catch (error) {
       handleError(error, params as P);
     }

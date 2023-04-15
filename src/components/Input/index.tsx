@@ -21,6 +21,7 @@ import InputItem from './InputItem';
 import TextArea from './TextArea';
 import useInput from './useInput';
 import { ONE_PIXEL } from '../helpers/normalize';
+import ErrorIcon from '../Toast/components/error';
 
 const AnimatedTouchableIcon =
   Animated.createAnimatedComponent(TouchableOpacity);
@@ -150,7 +151,7 @@ const Input = forwardRef<TextInput, InputProps>(
               { width: 0, overflow: 'hidden', alignItems: 'center' },
               clearIconStyle,
             ]}>
-            {/* <SvgIcon name="closecircleo" color={theme.colors.icon} /> */}
+            <ErrorIcon primary="#999" />
           </AnimatedTouchableIcon>
         )}
         {inputType === 'password' && (
@@ -161,6 +162,7 @@ const Input = forwardRef<TextInput, InputProps>(
             <SvgIcon
               name={eyeOpen ? 'eyeclose' : 'eyeopen'}
               color={[theme.colors.icon]}
+              size={25}
             />
           </TouchableOpacity>
         )}
@@ -174,6 +176,7 @@ const Input = forwardRef<TextInput, InputProps>(
           borderBottomWidth={ONE_PIXEL}
           borderColor="border"
           borderRadius="x1"
+          paddingRight="2.5"
           style={[style]}>
           {InputContent}
         </Flex>
@@ -182,6 +185,7 @@ const Input = forwardRef<TextInput, InputProps>(
           borderWidth={ONE_PIXEL}
           borderColor="border"
           borderRadius="x1"
+          paddingRight="2.5"
           style={[style]}>
           {InputContent}
         </Flex>

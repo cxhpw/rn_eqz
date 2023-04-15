@@ -36,6 +36,7 @@ type MainStackParamList = {
     id: number | string;
     spec?: string;
   };
+  Search: undefined;
 };
 
 type AppParamList = MainStackParamList &

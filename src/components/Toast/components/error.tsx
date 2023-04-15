@@ -13,7 +13,7 @@ export interface ErrorTheme {
   secondary?: string;
 }
 
-const ErrorIcon: React.FC<ErrorTheme> = () => {
+const ErrorIcon: React.FC<ErrorTheme> = ({ primary, secondary }) => {
   const progress = useSharedValue(0);
   const IconWrapperAnimatedStyle = useAnimatedStyle(() => {
     return {
@@ -29,6 +29,30 @@ const ErrorIcon: React.FC<ErrorTheme> = () => {
   useMount(() => {
     progress.value = 1;
   });
+  const styles = StyleSheet.create({
+    IconWrapper: {
+      width: 20,
+      opacity: 0,
+      height: 20,
+      borderRadius: 9999,
+      backgroundColor: primary || '#ff4b4b',
+      position: 'relative',
+      transform: [{ rotate: '45deg' }, { scale: 0 }],
+    },
+    Icon: {
+      opacity: 0,
+      position: 'absolute',
+      borderRadius: 3,
+      backgroundColor: secondary || '#fff',
+      bottom: 9,
+      left: 4,
+      height: 2,
+      width: 12,
+    },
+    SecIcon: {
+      transform: [{ rotate: '90deg' }],
+    },
+  });
   return (
     <Animated.View style={[styles.IconWrapper, IconWrapperAnimatedStyle]}>
       <Animated.View style={[styles.Icon, IconAnimatedStyle]} />
@@ -36,29 +60,5 @@ const ErrorIcon: React.FC<ErrorTheme> = () => {
     </Animated.View>
   );
 };
-const styles = StyleSheet.create({
-  IconWrapper: {
-    width: 20,
-    opacity: 0,
-    height: 20,
-    borderRadius: 9999,
-    backgroundColor: '#ff4b4b',
-    position: 'relative',
-    transform: [{ rotate: '45deg' }, { scale: 0 }],
-  },
-  Icon: {
-    opacity: 0,
-    position: 'absolute',
-    borderRadius: 3,
-    backgroundColor: '#fff',
-    bottom: 9,
-    left: 4,
-    height: 2,
-    width: 12,
-  },
-  SecIcon: {
-    transform: [{ rotate: '90deg' }],
-  },
-});
 
 export default memo(ErrorIcon);

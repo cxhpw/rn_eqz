@@ -35,7 +35,7 @@ const Body: React.FC<Props> = ({ data, onChange }) => {
               <Box style={styles.box} key={item.name}>
                 <Text style={styles.title}>{item.name}</Text>
                 <Flex flexWrap="wrap" flexDir="row">
-                  {item.children.map((child, childIdx) => (
+                  {item.children.map(child => (
                     <Pressable
                       scalable={false}
                       key={child.name}

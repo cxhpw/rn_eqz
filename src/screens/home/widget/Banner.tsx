@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Box, Flex } from 'native-base';
 import Carousel from 'react-native-reanimated-carousel';
@@ -40,8 +40,8 @@ function Banner({}: Props) {
           style={style.swiper}
           autoPlay={true}
           data={data as BannerProps[]}
-          scrollAnimationDuration={1500}
-          onSnapToItem={index => setCurrent(index + 1)}
+          autoPlayInterval={3000}
+          scrollAnimationDuration={1000}
           renderItem={({ item }) => (
             <TouchableOpacity
               activeOpacity={1}
@@ -58,6 +58,12 @@ function Banner({}: Props) {
               />
             </TouchableOpacity>
           )}
+          onScrollBegin={() => {
+            setCurrent(oldValue => {
+              let len = data.length;
+              return oldValue === len ? 1 : oldValue + 1;
+            });
+          }}
         />
       ) : (
         <Box style={style.swiper}>loading...</Box>

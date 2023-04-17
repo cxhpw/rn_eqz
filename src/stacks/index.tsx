@@ -134,7 +134,7 @@ const COMMON_SCREENS: ScreenProps[] = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Search"
+      initialRouteName="Home"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

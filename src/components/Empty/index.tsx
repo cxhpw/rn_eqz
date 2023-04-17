@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import Svg, { Ellipse, G, Path } from 'react-native-svg';
 
 import {
@@ -20,6 +20,7 @@ type EmptyProps = BackgroundColorProps<Theme> &
     emptyText?: ReactNode;
     /** 自定义img */
     customImg?: ReactNode;
+    style?: ViewStyle;
   };
 
 const restyleFunctions = composeRestyleFunctions([layout, backgroundColor]);

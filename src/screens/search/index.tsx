@@ -1,4 +1,4 @@
-import { Box, Flex, Input, LoadButton } from '@/components';
+import { Box, Flex, Input, LoadButton, Empty } from '@/components';
 import { useRefreshService } from '@/hooks';
 import { MasonryFlashList } from '@shopify/flash-list';
 import { useEffect, useState } from 'react';
@@ -96,12 +96,16 @@ const Index = () => {
             />
           )}
           ListEmptyComponent={
-            <Hot
-              onChange={e => {
-                if (e === key) return;
-                SetKey(e);
-              }}
-            />
+            data.length === 0 && key === '' ? (
+              <Hot
+                onChange={e => {
+                  if (e === key) return;
+                  SetKey(e);
+                }}
+              />
+            ) : (
+              <Empty style={{ marginTop: 100 }} emptyText="搜索结果为空" />
+            )
           }
           ListFooterComponent={
             data.length === 0 ? null : <LoadButton loading={refreshing} />

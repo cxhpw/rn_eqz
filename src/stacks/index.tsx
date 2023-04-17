@@ -9,7 +9,7 @@ import Detail from '@/screens/detail';
 import Order from '@/screens/order';
 import Help from '@/screens/help';
 import Calendar from '@/screens/calendar';
-import OrderSubmit from '@/screens/map';
+import OrderSubmit from '@/screens/orderSubmit';
 import Company from '@/screens/company';
 import Complaint from '@/screens/complaint';
 import Address from '@/screens/address';
@@ -17,6 +17,7 @@ import AddAddress from '@/screens/addAddress';
 import WebView from '@/screens/webview';
 import Activity from '@/screens/activity';
 import Search from '@/screens/search';
+import OrderDetail from '@/screens/orderDetail';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -52,6 +53,13 @@ const MAIN_SCREENS: ScreenProps[] = [
     initialParams: {
       code: -1,
     } as Partial<AppParamList['Order']>,
+  },
+  {
+    name: 'OrderDetail',
+    component: OrderDetail,
+    options: {
+      title: '订单详情',
+    },
   },
   {
     name: 'OrderSubmit',

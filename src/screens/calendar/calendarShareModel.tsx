@@ -31,7 +31,6 @@ export function createShareModel() {
     children,
     initialState,
   }: PropsWithChildren<Record<string, any>>) => {
-    console.log('initialState', initialState);
     const [calendarInstance] = useState(() => new Calendar(initialState));
     const shareModel: ShareModel = {
       update: useUpdate(),

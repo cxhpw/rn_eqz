@@ -5,13 +5,7 @@ export const linking: LinkingOptions<AppParamList> = {
   prefixes: ['rntemplate://'],
   config: {
     screens: {
-      Home: {
-        screens: {
-          Two: 'two',
-          Three: 'three',
-        },
-      },
-      Detail: 'user',
+      Detail: 'detail/:id',
     },
   },
 };

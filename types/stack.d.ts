@@ -1,6 +1,5 @@
 type CommonStackParamList = {
   Complaint: undefined;
-  OrderSubmit: undefined;
   Help: undefined;
   Address: {
     pageIsRefresh?: boolean;
@@ -25,18 +24,27 @@ type MainStackParamList = {
   Category: { id?: number };
   Chat: undefined;
   My: undefined;
-  Detail: { id: number | string; startEnd?: string[] };
+  Detail: {
+    id?: number | string;
+    /**
+     * 保存租赁日期数组
+     * @example ["2023-04-23", "2023-04-27"]
+     */
+    startEnd?: string[];
+  };
   Order: { code?: number | string };
   Calendar: {
     start?: string;
     end?: string;
     minDay?: number | string;
-    fn: (n: boolean) => void;
+    fn?: (n: boolean) => void;
     leaseterm?: number[] | string[];
-    id: number | string;
+    id?: number | string;
     spec?: string;
   };
   Search: undefined;
+  OrderDetail: { id: number };
+  OrderSubmit: { id: number; start: string; end: string };
 };
 
 type AppParamList = MainStackParamList &

@@ -1,8 +1,8 @@
 import { Text, Price, Pressable } from '@/components';
 import { memo } from 'react';
-import { View, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { navigate, push, replace } from '@/services/NavigationService';
+import { push } from '@/services/NavigationService';
 
 type Props = Product & {
   hasPrice?: boolean;

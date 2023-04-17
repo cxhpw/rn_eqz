@@ -20,7 +20,6 @@ const DateCalendar: React.FC<Props> = ({
   boundary,
   invalidDates,
 }) => {
-  console.log('Calendar render');
   return (
     <useCaledatService.Provider
       initialState={{

@@ -1,5 +1,5 @@
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderDetail'>> = ({
   route,
@@ -10,5 +10,7 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderDetail'>> = ({
     </View>
   );
 };
+
+Index.displayName = 'OrderDetail';
 
 export default Index;

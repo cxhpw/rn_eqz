@@ -8,7 +8,6 @@ type Props = {
   years?: number[];
 };
 const DateBody: React.FC<Props> = () => {
-  console.log('dateBody render');
   const { dates, years, months } = useCaledatService.useModel();
   return (
     <View style={styles.wrapper}>

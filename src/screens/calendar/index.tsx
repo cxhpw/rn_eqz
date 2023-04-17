@@ -1,20 +1,15 @@
-import { SetStateAction, useEffect, useState } from 'react';
-import {
-  NativeStackScreenProps,
-  NativeStackView,
-} from '@react-navigation/native-stack';
-import { useNavigationContainerRef } from '@react-navigation/native';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Container } from '@/components';
 import DateCalendar from './dateCalendar';
 import ActionSubmit from './widget/actionSubmit';
 import dayjs from 'dayjs';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
-import { redirect } from '@/services/NavigationService';
+import { redirect, setParams } from '@/services/NavigationService';
+import { RouteProp } from '@react-navigation/native';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
-
-let startEnd: string[] = [];
 
 /**
  * 是否手动
@@ -23,9 +18,8 @@ let startEnd: string[] = [];
  */
 let manual = false;
 const Index: React.FC<Props> = ({ route, navigation }) => {
+  const startEnd = useRef<string[]>([]);
   const [height, setHeight] = useState(0);
-  const navigationRef = useNavigationContainerRef();
-  console.log(navigationRef.getCurrentRoute());
   /**
    * 租赁天数
    */
@@ -65,24 +59,21 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
   // 用户选择日期回调
   const onChange = (res: string[], n: number) => {
     console.log('选择日期', res, n);
-    startEnd = res;
+    startEnd.current = res;
     manual = false;
     setDays(n);
   };
   // 确定回调
   const onSubmit = () => {
-    // navigation.navigate({
-    //   name: 'Detail',
-    //   params: {
-    //     startEnd,
-    //   },
-    //   merge: true,
-    // });
-    // redirect('OrderSubmit', {
-    //   id: route.params.id as number,
-    //   start: startEnd[0],
-    //   end: startEnd[1],
-    // });
+    setParams('Detail', {
+      startEnd: startEnd.current,
+      isShowModal: true,
+    });
+    redirect('OrderSubmit', {
+      id: route.params.id as number,
+      start: startEnd.current[0],
+      end: startEnd.current[1],
+    });
   };
   // 租期回调
   const onRangeDays = (n: any) => {
@@ -93,7 +84,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
       setFixedDays([start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')]);
       setDays(n);
       manual = true;
-      startEnd = [start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')];
+      startEnd.current = [start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD')];
     }
     run();
   };
@@ -114,7 +105,7 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
         onRangeDays={onRangeDays}
         min={route.params.minDay}
         boundary={manual}
-        startEnd={startEnd}
+        startEnd={startEnd.current}
         days={days}
       />
     </Container>

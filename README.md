@@ -81,3 +81,31 @@ npx iconfont-rn
 // or
 yarn svg-init
 ```
+
+## 4.配置外链打开 app 内指定页面以及传参
+
+在 linking.ts 文件中配置相关链接，相关配置文档[查看](https://reactnavigation.org/docs/deep-linking)
+
+通过使用 uri-scheme 配置
+
+```
+npx uri-scheme add rntemplate
+```
+
+测试
+
+```
+npx uri-scheme open rntemplate://路径 --ios
+```
+
+xcode
+
+```
+xcrun simctl openurl booted "rntemplate://路径"
+```
+
+adb
+
+```
+adb shell am start -W -a android.intent.action.VIEW -d "rntemplate://路径" [your android package name]
+```

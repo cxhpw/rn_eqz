@@ -12,7 +12,7 @@ import { useTheme } from '@shopify/restyle';
 import { Text, Pressable, helpers } from '@/components';
 import { navigate } from '@/services/NavigationService';
 import Modal from 'react-native-modal';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Header from './modalContent/header';
 import Body from './modalContent/Body';
 import Footer from './modalContent/Footer';
@@ -60,7 +60,22 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
       run();
     }
   }, [defaultValue, params.startEnd, run]);
-
+  const navToCale = () => {
+    setIsModalVisible(false);
+    // 安排一个任务在交互和动画完成之后执行
+    InteractionManager.runAfterInteractions(() => {
+      navigate('Calendar', {
+        // 警告：函数值无法被序列化，但是功能能用
+        fn: (n: boolean) => setIsModalVisible(n),
+        start: params.startEnd ? params.startEnd[0] : '',
+        end: params.startEnd ? params.startEnd[1] : '',
+        minDay: data?.productdata.MinDays,
+        leaseterm: data?.leaseterm,
+        id: params.id,
+        spec: defaultValue,
+      });
+    });
+  };
   return (
     <>
       <HStack
@@ -128,39 +143,29 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
         <Box style={[style.content, { paddingBottom: bottom }]}>
           <Header data={{ ...data, ...priceParameter }} />
           <Body data={spec} onChange={onChange} />
-          <Footer
-            data={data?.productdata}
-            onClick={() => {
-              setIsModalVisible(false);
-              // 安排一个任务在交互和动画完成之后执行
-              InteractionManager.runAfterInteractions(() => {
-                navigate('Calendar', {
-                  // 警告：函数值无法被序列化，但是功能能用
-                  fn: (n: boolean) => setIsModalVisible(n),
-                  start: params.startEnd ? params.startEnd[0] : '',
-                  end: params.startEnd ? params.startEnd[1] : '',
-                  minDay: data?.productdata.MinDays,
-                  leaseterm: data?.leaseterm,
-                  id: params.id,
-                  spec: defaultValue,
-                });
-              });
-            }}
-          />
+          <Footer data={data?.productdata} onClick={navToCale} />
           <Button
             onPress={() => {
-              console.log('点击确定');
-              Linking.canOpenURL('alipays://platformapi/startApp').then(
-                support => {
-                  if (support) {
-                    Linking.openURL(
-                      'alipays://platformapi/startApp?appId=2018100561582465&page=/pages/recommendation/recommendation',
-                    );
-                  } else {
-                    Alert.alert('请安装支付宝');
-                  }
-                },
-              );
+              if (+!!params?.startEnd?.length === 0) {
+                navToCale();
+                return;
+              }
+              navigate('OrderSubmit', {
+                id: data!.productdata.AutoID,
+                start: params?.startEnd?.[0] ?? '',
+                end: params?.startEnd?.[1] ?? '',
+              });
+              // Linking.canOpenURL('alipays://platformapi/startApp').then(
+              //   support => {
+              //     if (support) {
+              //       Linking.openURL(
+              //         `alipays://platformapi/startApp?appId=2018100561582465&page=/pages/detail/detail?id=${data?.productdata.AutoID}`,
+              //       );
+              //     } else {
+              //       Alert.alert('请安装支付宝');
+              //     }
+              //   },
+              // );
             }}
             style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>
             确定
@@ -215,4 +220,4 @@ const style = StyleSheet.create({
   },
 });
 
-export default ActionSubmit;
+export default memo(ActionSubmit);

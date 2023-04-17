@@ -36,7 +36,7 @@ export function push<T extends keyof AppParamList>(
 /**
  * 重定向到某个页面
  */
-export function replace<T extends keyof AppParamList>(
+export function redirect<T extends keyof AppParamList>(
   name: T,
   params?: AppParamList[T],
 ) {

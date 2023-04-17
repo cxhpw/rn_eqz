@@ -8,7 +8,6 @@ type Props = {
 };
 const DateHeader: React.FC<Props> = () => {
   const { weekdays } = useCaledatService.useModel();
-  console.log('dataHeader render');
   return (
     <Flex style={styles.weekdays} flexDir="row">
       {weekdays.map(item => (

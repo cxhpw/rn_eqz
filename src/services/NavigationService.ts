@@ -70,3 +70,37 @@ export function goto(step = -1) {
     });
   }
 }
+type Keyof<T extends {}> = Extract<keyof T, string>;
+
+/**
+ * 设置特定路由的参数
+ * @param routeName 路由名称
+ * @param options 路由参数
+ */
+export function setParams<
+  RouteName extends keyof AppParamList = Keyof<AppParamList>,
+>(routeName: RouteName, options: AppParamList[RouteName]) {
+  if (navigationRef.isReady()) {
+    const state = navigationRef.getState();
+    const index = getIndexFromRouteName(routeName);
+    navigationRef.dispatch({
+      ...CommonActions.setParams({
+        ...state.routes[index].params,
+        ...options,
+      }),
+      source: state.routes[index].key,
+    });
+  }
+}
+
+function getIndexFromRouteName(routeName: string): number {
+  const state = navigationRef.getState();
+  let index = -1;
+  for (let i = 0; i < state.routes.length; i++) {
+    if (routeName === state.routes[i].name) {
+      index = i;
+      break;
+    }
+  }
+  return index;
+}

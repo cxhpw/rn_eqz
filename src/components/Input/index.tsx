@@ -77,7 +77,7 @@ const Input = forwardRef<TextInput, InputProps>(
       inputType = 'input',
       inputStyle,
       disabled = false,
-      allowClear = true,
+      allowClear = false,
       value,
       onChange,
       onClear,

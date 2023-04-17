@@ -13,7 +13,7 @@ import request from '@/request';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import PickerRegion from './picker';
-import { navigate } from '@/services/NavigationService';
+import { navigate, goBack, setParams } from '@/services/NavigationService';
 import { useEffect, useState } from 'react';
 
 const { useForm } = Form;
@@ -77,9 +77,10 @@ const Index = () => {
     runAsync(values).then(res => {
       showToast(res.msg);
       if (res.ret === 'success') {
-        navigate('Address', {
+        setParams('Address', {
           pageIsRefresh: true,
         });
+        goBack();
       }
     });
   };

@@ -32,6 +32,8 @@ export type Props = PropsWithChildren<{
   actionWidth?: number;
   /** 作为滑动操作互斥的判断依据 */
   id: string | number;
+  /** 禁止滑动 */
+  disabled?: boolean;
 }>;
 
 const Index: React.FC<Props> = ({
@@ -40,6 +42,7 @@ const Index: React.FC<Props> = ({
   actions = [],
   actionWidth = 64,
   id,
+  disabled = false,
 }) => {
   const { swipeableRef, changeState } = useSwiperRow({ id });
   const calcWidth = () => {
@@ -78,6 +81,9 @@ const Index: React.FC<Props> = ({
     progress: Animated.AnimatedInterpolation<number>,
     _dragAnimatedValue: Animated.AnimatedInterpolation<number>,
   ) => {
+    if (disabled) {
+      return null;
+    }
     return (
       <View
         // eslint-disable-next-line react-native/no-inline-styles
@@ -103,7 +109,7 @@ const Index: React.FC<Props> = ({
       rightThreshold={40}
       renderRightActions={renderRightActions}
       onSwipeableOpen={() => changeState(id)}
-      containerStyle={style}>
+      containerStyle={[style]}>
       {children}
     </Swipeable>
   );

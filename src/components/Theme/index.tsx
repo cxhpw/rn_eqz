@@ -4,8 +4,6 @@ import { PropsWithChildren } from 'react';
 import baseTheme, { type Theme } from './theme';
 import { Portal } from '@/components';
 
-import { Toaster } from '@/components/Toast';
-
 const { lightTheme } = baseTheme;
 type Props = {
   theme: Theme;

@@ -1,7 +1,6 @@
-import type { AccessibilityRole } from 'react-native';
 import type { RadioGroupState } from '@react-stately/radio';
 import type { MutableRefObject } from 'react';
-import { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
+import { ViewProps } from 'react-native';
 import { Theme } from '../Theme/theme';
 export type IRadioValue = string;
 export type IRadioGroupOnChangeHandler = (value: IRadioValue) => any;
@@ -84,15 +83,6 @@ export interface IRadioContext {
   size?: number;
   state: RadioGroupState;
 }
-
-export type IUseRadioGroupReturnType = {
-  radioGroupProps: {
-    accessibilityRole: AccessibilityRole;
-    onChange: (value: IRadioValue) => any;
-    value: IRadioValue;
-    name: string;
-  };
-};
 
 export type IRadioComponentType = ((props: IRadioProps) => JSX.Element) & {
   Group: React.MemoExoticComponent<

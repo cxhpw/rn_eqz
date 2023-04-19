@@ -234,8 +234,8 @@ const lightTheme = createTheme({
   /** 按钮默认主题 */
   ButtonVariants: {
     Solid: {
-      borderColor: 'primary100',
-      backgroundColor: 'primary100',
+      borderColor: 'primary50',
+      backgroundColor: 'primary50',
       color: 'white',
     },
     Subtle: {},

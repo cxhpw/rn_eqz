@@ -41,10 +41,14 @@ const Price: React.FC<Props> = ({
   return (
     <View style={[style.wrapper, containerStyle]}>
       <Text style={[style.common, { color: color }, commonStyle]}>
-        <Text style={[beforeStyle]}>{beforeText}</Text>
+        {beforeText.length > 0 ? (
+          <Text style={[beforeStyle]}>{beforeText}</Text>
+        ) : null}
         <Text style={[style.prefix, prefixStyle]}>{priceSlice(money)}</Text>
         <Text style={[suffixStyle]}>{priceSlice(money, 'suffix')}</Text>
-        <Text style={[style.after, afterStyle]}>{afterText}</Text>
+        {afterText.length > 0 ? (
+          <Text style={[style.after, afterStyle]}>{afterText}</Text>
+        ) : null}
       </Text>
     </View>
   );

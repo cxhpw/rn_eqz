@@ -6,9 +6,9 @@ type Props = {
   htmlStyle?: string;
   onLoadEnd?: () => void;
 };
-const Index = ({ html = '', onLoadEnd }: Props) => {
+const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
   const [height, setHeight] = useState(0);
-  const generateHtml = (content: string) => `
+  const generateHtml = (content: string, _htmlStyle?: string) => `
   <!DOCTYPE html>\n
   <html>
     <head>
@@ -28,6 +28,7 @@ const Index = ({ html = '', onLoadEnd }: Props) => {
           margin: 0;
           padding: 0;
         }
+        ${_htmlStyle}
       </style>
     </head>
     <body>
@@ -44,9 +45,11 @@ const Index = ({ html = '', onLoadEnd }: Props) => {
   return (
     <WebView
       scrollEnabled={false}
-      style={{
-        height: height,
-      }}
+      style={[
+        {
+          height: height,
+        },
+      ]}
       onMessage={event => {
         if (Number(event.nativeEvent.data) !== height) {
           console.log(event.nativeEvent.data);
@@ -56,7 +59,7 @@ const Index = ({ html = '', onLoadEnd }: Props) => {
       }}
       source={{
         // html.replace(/&nbsp;/gi, '')
-        html: generateHtml(html.replace(/&nbsp;/gi, '')),
+        html: generateHtml(html.replace(/&nbsp;/gi, ''), htmlStyle),
       }}
     />
   );

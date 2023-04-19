@@ -1,10 +1,12 @@
+/* eslint-disable react-native/no-inline-styles */
 import { memo, forwardRef } from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
-import Flex from '../Flex';
 import { IButtonProps } from './types';
 import useButton from './usePropsResolution';
 import Text from '../Text';
 import { useIsPressed } from '../Pressable';
+import Center from '../Center';
+import UIActivityIndicator from '../Indicator/UIActivityIndicator';
 
 function composeEventHandlers<E>(
   originalEventHandler?: null | ((event: E) => void),
@@ -32,7 +34,6 @@ const Button = (
   ref: any,
 ) => {
   const { pressableProps, isPressed } = useIsPressed();
-
   const {
     StylePressable,
     indicatorColor,
@@ -42,13 +43,13 @@ const Button = (
     _text,
     ...redolveProps
   } = useButton(props, {
-    isDisabled: isDisabled,
+    isDisabled: isDisabled || isLoading,
     isPressed: isPressedProp || isPressed,
     variant: variant,
   });
   const boxChildren = (child: any) => {
     return child ? (
-      <Text variant="p2" color={colorScheme} style={_text}>
+      <Text variant="p0" color={colorScheme} style={[_text]}>
         {child}
       </Text>
     ) : null;
@@ -56,7 +57,14 @@ const Button = (
   const spinnerElement = spinner ? (
     spinner
   ) : (
-    <ActivityIndicator color={indicatorColor} size={20} />
+    <UIActivityIndicator
+      color={indicatorColor}
+      size={14}
+      style={{
+        marginStart: spinnerPlacement === 'start' ? 10 : 0,
+        marginLeft: spinnerPlacement === 'end' ? 10 : 0,
+      }}
+    />
   );
   return (
     <StylePressable
@@ -66,7 +74,7 @@ const Button = (
       onPressIn={composeEventHandlers(onPressIn, pressableProps.onPressIn)}
       onPressOut={composeEventHandlers(onPressOut, pressableProps.onPressOut)}
       {...redolveProps}>
-      <Flex>
+      <Center height="100%">
         {isLoading && spinnerPlacement === 'start' ? spinnerElement : null}
         {leftIcon && !isLoading ? leftIcon : null}
         {(isLoading || leftIcon) && <Text style={styles.space} />}
@@ -78,7 +86,7 @@ const Button = (
         {(isLoading || rightIcon) && <Text style={styles.space} />}
         {rightIcon && !isLoading ? rightIcon : null}
         {isLoading && spinnerPlacement === 'end' ? spinnerElement : null}
-      </Flex>
+      </Center>
     </StylePressable>
   );
 };

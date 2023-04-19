@@ -37,6 +37,8 @@ export interface InterfaceButtonProps
   style?: StyleProp<ViewStyle & TextStyle>;
   /** 字体颜色 */
   colorScheme?: Colors;
+  /** loading颜色 */
+  indicatorColor?: string;
 }
 
 export type ButtonVariants =

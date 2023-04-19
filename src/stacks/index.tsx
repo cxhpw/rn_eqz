@@ -112,6 +112,9 @@ const COMMON_SCREENS: ScreenProps[] = [
     options: {
       title: '地址管理',
     },
+    initialParams: {
+      pageIsRefresh: true,
+    },
   },
   {
     name: 'AddAddress',

@@ -3,6 +3,8 @@ type CommonStackParamList = {
   Help: undefined;
   Address: {
     pageIsRefresh?: boolean;
+    from?: 'OrderSubmit';
+    onChange?: (value: any) => void;
   };
   AddAddress: {
     id?: string | number;
@@ -31,6 +33,8 @@ type MainStackParamList = {
      * @example ["2023-04-23", "2023-04-27"]
      */
     startEnd?: string[];
+    /** 是否默认显示modal */
+    isShowModal?: boolean;
   };
   Order: { code?: number | string };
   Calendar: {

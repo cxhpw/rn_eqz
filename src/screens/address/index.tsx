@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Box,
   Container,
@@ -48,12 +49,33 @@ const Index = ({
       const result = await res.data;
       const defaultItem = result.dataList?.filter(item => item.IsDefault);
       setValue(defaultItem?.[0]?.AutoID + '');
+      //@ts-ignore
+      setBackAddressData(defaultItem?.[0]);
       return result;
     },
     {
       manual: true,
     },
   );
+  const setBackAddressData = (_value: AddressInfo) => {
+    if (!_value) {
+      return;
+    }
+    if (
+      route.params.from === 'OrderSubmit' &&
+      typeof route.params?.onChange === 'function'
+    ) {
+      route.params.onChange({
+        id: _value.AutoID,
+        name: _value.Consignee,
+        address: _value.Address,
+        phone: _value.ContactPhone,
+        province: _value.Province,
+        city: _value.City,
+        county: _value.County,
+      });
+    }
+  };
   useEffect(() => {
     if (isFocused && route.params?.pageIsRefresh) {
       navigation.setParams({
@@ -62,23 +84,6 @@ const Index = ({
       onRefresh();
     }
   }, [isFocused, navigation, onRefresh, route.params?.pageIsRefresh]);
-  const styles = StyleSheet.create({
-    wrapper: {
-      flex: 1,
-      // backgroundColor: theme.colors.primary_background,
-      paddingHorizontal: 15,
-      justifyContent: 'center',
-      width: '100%',
-      height: 80,
-    },
-    title: {
-      marginBottom: 10,
-    },
-    separator: {
-      backgroundColor: 'rgb(200, 199, 204)',
-      height: StyleSheet.hairlineWidth,
-    },
-  });
   const onDelete = async (id: any) => {
     const res = (
       await request.post('/Include/alipay/data.aspx', {
@@ -92,6 +97,26 @@ const Index = ({
       toast.showToast(res.msg);
       onRefresh();
     }
+  };
+  const EditControl = ({ id }: { id: number }) => {
+    if (route.params.from === 'OrderSubmit') {
+      return null;
+    }
+    return (
+      <Pressable
+        style={{
+          padding: 10,
+          marginRight: 10,
+        }}
+        onPress={() => {
+          console.log(123);
+          navigate('AddAddress', {
+            id,
+          });
+        }}>
+        <Icon name="bianji" size={25} color="#333" />
+      </Pressable>
+    );
   };
   return (
     <Container backgroundColor="#f8f8f8">
@@ -110,6 +135,7 @@ const Index = ({
               renderItem={({ item }) => (
                 <Swipeable
                   id={item.AutoID}
+                  disabled={route.params.from === 'OrderSubmit'}
                   actions={[
                     {
                       label: '删除',
@@ -122,9 +148,24 @@ const Index = ({
                   <Pressable
                     activeOpacity={1}
                     scalable={false}
-                    onPress={() => {
+                    onPress={async () => {
                       setValue(item.AutoID + '');
-                      console.log(item.AutoID);
+                      const res = await (
+                        await request.post('/Include/alipay/data.aspx', {
+                          apiname: 'useraddress',
+                          action: 'modify',
+                          addrid: item.AutoID,
+                          consignee: item.Consignee,
+                          area: `${item.Province},${item.City},${item.County}`,
+                          address: item.Address,
+                          postcode: item.PostCode,
+                          contactphone: item.ContactPhone,
+                          isdefault: 1,
+                        })
+                      ).data;
+                      if (res.ret === 'success') {
+                        setBackAddressData(item);
+                      }
                     }}>
                     <Flex
                       backgroundColor="primary_background"
@@ -148,22 +189,10 @@ const Index = ({
                         <Flex>
                           <Text variant="p2">{item.Province} &nbsp;&nbsp;</Text>
                           <Text variant="p2">{item.City}&nbsp;&nbsp;</Text>
-                          <Text variant="p2">{item.Country}</Text>
+                          <Text variant="p2">{item.County}</Text>
                         </Flex>
                       </Box>
-                      <Pressable
-                        style={{
-                          padding: 10,
-                          marginRight: 10,
-                        }}
-                        onPress={() => {
-                          console.log(123);
-                          navigate('AddAddress', {
-                            id: item.AutoID,
-                          });
-                        }}>
-                        <Icon name="bianji" size={25} color="#333" />
-                      </Pressable>
+                      <EditControl id={item.AutoID} />
                     </Flex>
                   </Pressable>
                 </Swipeable>
@@ -196,6 +225,22 @@ const Index = ({
     </Container>
   );
 };
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    paddingHorizontal: 15,
+    justifyContent: 'center',
+    width: '100%',
+    height: 80,
+  },
+  title: {
+    marginBottom: 10,
+  },
+  separator: {
+    backgroundColor: 'rgb(200, 199, 204)',
+    height: StyleSheet.hairlineWidth,
+  },
+});
 
 Index.displayName = 'Address';
 export default Index;

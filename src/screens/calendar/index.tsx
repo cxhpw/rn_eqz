@@ -64,13 +64,13 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
     setDays(n);
   };
   // 确定回调
-  const onSubmit = () => {
+  const onSubmit = (id: number) => {
     setParams('Detail', {
       startEnd: startEnd.current,
       isShowModal: true,
     });
     redirect('OrderSubmit', {
-      id: route.params.id as number,
+      id: id,
       start: startEnd.current[0],
       end: startEnd.current[1],
     });
@@ -111,5 +111,5 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
     </Container>
   );
 };
-
+Index.displayName = 'Calendar';
 export default Index;

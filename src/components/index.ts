@@ -27,6 +27,7 @@ export { default as FlashList } from './FlashList';
 export { Button as SButton } from './SButton';
 export { default as UIActivityIndicator } from './Indicator/UIActivityIndicator';
 export { CustomRefreshControl } from './CustomRefreshControl';
+export { default as Checkbox } from './Checkbox';
 
 export type { Props as PortalProps } from './Portal';
 export type { Props as PortalHostProps } from './Portal/PortalHost';

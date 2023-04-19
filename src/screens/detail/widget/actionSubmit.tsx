@@ -12,14 +12,14 @@ import { useTheme } from '@shopify/restyle';
 import { Text, Pressable, helpers } from '@/components';
 import { navigate } from '@/services/NavigationService';
 import Modal from 'react-native-modal';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import Header from './modalContent/header';
 import Body from './modalContent/Body';
 import Footer from './modalContent/Footer';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import useSpecService from '../useSpecService';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
 
 type Props = {
   data: ProductDetail | undefined;
@@ -28,6 +28,7 @@ type Props = {
 
 const { scale } = helpers;
 const ActionSubmit: React.FC<Props> = ({ data }) => {
+  const ref = useRef<Modal>();
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   const theme = useTheme<AppTheme>();
   const { bottom } = useSafeAreaInsets();
@@ -55,25 +56,37 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
   );
 
   useEffect(() => {
-    console.log('重新获取规格商品价格');
     if (params.startEnd?.length || defaultValue !== undefined) {
       run();
     }
   }, [defaultValue, params.startEnd, run]);
-  const navToCale = () => {
+  const navToCale = (name?: 'calendar') => {
     setIsModalVisible(false);
     // 安排一个任务在交互和动画完成之后执行
     InteractionManager.runAfterInteractions(() => {
-      navigate('Calendar', {
-        // 警告：函数值无法被序列化，但是功能能用
-        fn: (n: boolean) => setIsModalVisible(n),
-        start: params.startEnd ? params.startEnd[0] : '',
-        end: params.startEnd ? params.startEnd[1] : '',
-        minDay: data?.productdata.MinDays,
-        leaseterm: data?.leaseterm,
-        id: params.id,
-        spec: defaultValue,
-      });
+      console.log('InteractionManager');
+      if (name === 'calendar') {
+        navigate('Calendar', {
+          // 警告：函数值无法被序列化，但是功能能用
+          fn: (n: boolean) => setIsModalVisible(n),
+          start: params.startEnd ? params.startEnd[0] : '',
+          end: params.startEnd ? params.startEnd[1] : '',
+          minDay: data?.productdata.MinDays,
+          leaseterm: data?.leaseterm,
+          id: params.id,
+          spec: defaultValue,
+        });
+      } else {
+        if (+!!params?.startEnd?.length === 0) {
+          navToCale('calendar');
+          return;
+        }
+        navigate('OrderSubmit', {
+          id: priceParameter!.autoid,
+          start: params?.startEnd?.[0] ?? '',
+          end: params?.startEnd?.[1] ?? '',
+        });
+      }
     });
   };
   return (
@@ -134,27 +147,24 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
       <Modal
         style={style.modal}
         testID={'modal'}
+        ref={ref as any}
         isVisible={isModalVisible}
         onSwipeComplete={() => setIsModalVisible(false)}
         useNativeDriverForBackdrop
         onBackdropPress={() => setIsModalVisible(false)}
+        hasBackdrop
         propagateSwipe={true}
         swipeDirection={['down']}>
         <Box style={[style.content, { paddingBottom: bottom }]}>
           <Header data={{ ...data, ...priceParameter }} />
           <Body data={spec} onChange={onChange} />
-          <Footer data={data?.productdata} onClick={navToCale} />
+          <Footer
+            data={data?.productdata}
+            onClick={() => navToCale('calendar')}
+          />
           <Button
             onPress={() => {
-              if (+!!params?.startEnd?.length === 0) {
-                navToCale();
-                return;
-              }
-              navigate('OrderSubmit', {
-                id: data!.productdata.AutoID,
-                start: params?.startEnd?.[0] ?? '',
-                end: params?.startEnd?.[1] ?? '',
-              });
+              navToCale();
               // Linking.canOpenURL('alipays://platformapi/startApp').then(
               //   support => {
               //     if (support) {

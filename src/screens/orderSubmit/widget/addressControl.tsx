@@ -1,7 +1,9 @@
 import { Box, Text as RNText, Pressable, Icon } from '@/components';
 import { navigate } from '@/services/NavigationService';
+import { memo, useState } from 'react';
 
 export type Address = {
+  id: number;
   name: string;
   address: string;
   phone: string;
@@ -10,8 +12,8 @@ export type Address = {
   county: string;
 };
 type Props = {
-  value: Address;
-  onChange?: () => void;
+  value?: Address | null;
+  onChange?: (value: Address) => void;
 };
 
 const Text = ({ children, ...restProps }: any) => {
@@ -21,7 +23,8 @@ const Text = ({ children, ...restProps }: any) => {
     </RNText>
   );
 };
-const AddressControl: React.FC<Props> = ({ value }) => {
+
+const AddressControl: React.FC<Props> = ({ value: _value, onChange }) => {
   return (
     <Pressable
       scalable={false}
@@ -29,24 +32,25 @@ const AddressControl: React.FC<Props> = ({ value }) => {
       onPress={() => {
         navigate('Address', {
           from: 'OrderSubmit',
+          onChange,
         });
       }}>
       <Box backgroundColor="black" padding="x4">
         <Text fontWeight="bold" mb="x1">
           收货人信息
         </Text>
-        {value === null ? (
+        {_value === null ? (
           <>
             <Text>请选择收货地址</Text>
           </>
         ) : (
           <>
-            <Text fontWeight="bold">{value.name}</Text>
+            <Text fontWeight="bold">{_value!.name}</Text>
             <Text>
-              {value.province}
-              {value.city}
-              {value.county}
-              {value.address}
+              {_value!.province}
+              {_value!.city}
+              {_value!.county}
+              {_value!.address}
             </Text>
           </>
         )}
@@ -64,4 +68,4 @@ const AddressControl: React.FC<Props> = ({ value }) => {
   );
 };
 
-export default AddressControl;
+export default memo(AddressControl);

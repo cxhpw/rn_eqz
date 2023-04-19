@@ -34,8 +34,11 @@ const Detail: React.FC<Props> = () => {
     <Container>
       <ScrollView
         style={{ flex: 1 }}
-        contentContainerStyle={{ paddingBottom: 60 }}>
+        contentContainerStyle={{ paddingBottom: 60, minHeight: '100%' }}>
         <Skeleton
+          containerStyle={{
+            flex: 1,
+          }}
           styles={[
             {
               width: width,
@@ -68,13 +71,18 @@ const Detail: React.FC<Props> = () => {
             },
             {
               width: width - 20,
-              height: 64,
+              height: 70,
               marginTop: 20,
+              marginHorizontal: 10,
+              marginBottom: 10,
+            },
+            {
+              width: '100%',
+              flex: 1,
               marginHorizontal: 10,
             },
           ]}
-          loading={loading}
-          animationDirection="horizontalRight">
+          loading={loading}>
           <Carousel data={data?.piclist} />
           <PlatformLogo />
           <ProductPanel data={data?.productdata} />

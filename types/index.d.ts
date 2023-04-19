@@ -189,3 +189,29 @@ type AddressInfo = {
   UserID: number;
   UserName: string;
 };
+
+type OrderSettlement = {
+  address: string;
+  addrid: number;
+  city: string;
+  code: number;
+  consignee: string;
+  county: string;
+  creditlineremark: string;
+  delegationremark: string;
+  endtime: string;
+  fitting: string;
+  deposit: number;
+  orderprocessurl: string;
+  phone: string;
+  prid: number;
+  primg: string;
+  proinsuranceremark: string;
+  province: string;
+  regagreement: string;
+  rent: number;
+  startime: string;
+  subdays: number;
+  title: string;
+  insurance: number;
+};

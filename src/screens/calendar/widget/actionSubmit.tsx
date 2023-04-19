@@ -14,7 +14,7 @@ type Props = {
   min: any;
   days: number;
   onLayout: (e: any) => void;
-  onSubmit: () => void;
+  onSubmit: (id: number) => void;
   onRangeDays: (n: any) => void;
   boundary?: boolean;
   startEnd?: string[];
@@ -145,7 +145,7 @@ const ActionSubmit: React.FC<Props> = ({
         </Center>
         <Button
           disabled={disabled}
-          onPress={() => onSubmit()}
+          onPress={() => onSubmit(data!.autoid)}
           style={[
             styles.button,
             // eslint-disable-next-line react-native/no-inline-styles

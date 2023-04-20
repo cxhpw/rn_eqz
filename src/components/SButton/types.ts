@@ -1,11 +1,5 @@
 import { MutableRefObject } from 'react';
-import {
-  PressableProps,
-  StyleProp,
-  TextStyle,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
+import { PressableProps, StyleProp, TextStyle, ViewStyle } from 'react-native';
 import { Colors } from '../Theme/theme';
 
 export interface InterfaceButtonProps

@@ -74,7 +74,7 @@ const Button = (
       onPressIn={composeEventHandlers(onPressIn, pressableProps.onPressIn)}
       onPressOut={composeEventHandlers(onPressOut, pressableProps.onPressOut)}
       {...redolveProps}>
-      <Center height="100%">
+      <Center>
         {isLoading && spinnerPlacement === 'start' ? spinnerElement : null}
         {leftIcon && !isLoading ? leftIcon : null}
         {(isLoading || leftIcon) && <Text style={styles.space} />}

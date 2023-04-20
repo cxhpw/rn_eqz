@@ -63,6 +63,8 @@ export default function useButton(props: any, { isDisabled, ...state }: State) {
           paddingHorizontal: 'x3',
           borderRadius: 'x1',
           opacity: isDisabled ? 0.5 : 1,
+          alignItems: 'center',
+          justifyContent: 'center',
         },
       }),
     [isDisabled],

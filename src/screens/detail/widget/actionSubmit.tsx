@@ -165,17 +165,6 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
           <Button
             onPress={() => {
               navToCale();
-              // Linking.canOpenURL('alipays://platformapi/startApp').then(
-              //   support => {
-              //     if (support) {
-              //       Linking.openURL(
-              //         `alipays://platformapi/startApp?appId=2018100561582465&page=/pages/detail/detail?id=${data?.productdata.AutoID}`,
-              //       );
-              //     } else {
-              //       Alert.alert('请安装支付宝');
-              //     }
-              //   },
-              // );
             }}
             style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>
             确定

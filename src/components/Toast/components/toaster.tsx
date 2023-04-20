@@ -1,5 +1,6 @@
 import { ViewStyle } from 'react-native';
 import {
+  ContentInset,
   resolveValue,
   ToasterProps,
   ToastPosition,
@@ -17,9 +18,17 @@ const DEFAULT_OFFSET = 16;
 
 const ToastWrapper: React.FC<
   ToastWrapperProps & { offset: number; position: ToastPosition }
-> = ({ id, onHeightUpdate, children, offset, position, style }) => {
+> = ({
+  id,
+  onHeightUpdate,
+  children,
+  offset,
+  position,
+  style,
+  contentInset,
+}) => {
   const progress = useSharedValue(0);
-  const positionStyle = getPositionStyle(position, offset);
+  const positionStyle = getPositionStyle(position, offset, contentInset);
   const AnimatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ translateY: progress.value }],
@@ -43,19 +52,20 @@ const ToastWrapper: React.FC<
     </Animated.View>
   );
 };
-
+/** toast位置函数 */
 const getPositionStyle = (
   position: ToastPosition,
   offset: number,
+  contentInset?: ContentInset,
 ): ViewStyle => {
   const top = position.includes('top');
   const verticalStyle: ViewStyle = top
     ? {
-        top: 0,
+        top: contentInset?.top || 0,
         marginTop: DEFAULT_OFFSET,
       }
     : {
-        bottom: 0,
+        bottom: contentInset?.bottom || 0,
         marginBottom: DEFAULT_OFFSET,
       };
   const horizontalStyle: ViewStyle = position.includes('center')
@@ -65,16 +75,17 @@ const getPositionStyle = (
     : position.includes('right')
     ? {
         alignItems: 'flex-end',
-        right: 0,
+        right: contentInset?.right || DEFAULT_OFFSET,
       }
     : {
         alignItems: 'flex-start',
-        left: 0,
+        left: contentInset?.left || DEFAULT_OFFSET,
       };
   return {
     position: 'absolute',
-    marginHorizontal: DEFAULT_OFFSET,
+    // marginHorizontal: DEFAULT_OFFSET,
     zIndex: 9999,
+    width: '100%',
     transform: [
       {
         translateY: offset * (top ? 1 : -1),
@@ -109,6 +120,7 @@ export const Toaster: React.FC<ToasterProps> = ({
             key={t.id}
             offset={offset}
             onHeightUpdate={handlers.updateHeight}
+            contentInset={t.contentInset}
             style={containerStyle}
             position={toastPosition}>
             {t.type === 'custom' ? (

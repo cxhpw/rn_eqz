@@ -47,7 +47,7 @@ const Order = () => {
         tabBarStyle={styles.tabBarStyle}
         textStyle={styles.textStyle}
         indicatorStyle={styles.indicatorStyle}
-        swipeEnabled={false}
+        swipeEnabled={true}
       />
     </Container>
   );

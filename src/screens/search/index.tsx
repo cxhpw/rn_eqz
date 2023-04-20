@@ -119,7 +119,6 @@ const Index = () => {
             }
           }}
           onMomentumScrollBegin={() => {
-            console.log(1234);
             setIsEndDuring(false);
           }}
         />

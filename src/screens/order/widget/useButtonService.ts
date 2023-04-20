@@ -1,10 +1,13 @@
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 import { useCustomRequest, useToast } from '@/hooks';
 import request from '@/request';
+import { useContext } from 'react';
+import { OrderContext } from './tabView';
 
 export default function useButtonService(id: number) {
+  const Context = useContext(OrderContext);
   const { showToast } = useToast();
-  const { loading, runAsync } = useCustomRequest(
+  const { runAsync } = useCustomRequest(
     async (params: any) => {
       const res = await (
         await request.post('/Include/alipay/data.aspx', {
@@ -14,6 +17,24 @@ export default function useButtonService(id: number) {
         })
       ).data;
       return res;
+    },
+    {
+      manual: true,
+    },
+  );
+  const { runAsync: freePay, loading } = useCustomRequest(
+    async params => {
+      console.log('参数', params);
+      return await (
+        await request({
+          url: '/Include/alipay/data.aspx',
+          method: 'POST',
+          data: {
+            apiname: 'alipayfreezepay',
+            oid: params,
+          },
+        })
+      ).data;
     },
     {
       manual: true,
@@ -34,6 +55,7 @@ export default function useButtonService(id: number) {
           }).then(res => {
             console.log(res);
             showToast(res.msg);
+            Context?.onRefresh();
           });
         },
       },
@@ -53,7 +75,6 @@ export default function useButtonService(id: number) {
             runAsync({
               action: 'delete',
             }).then(res => {
-              console.log(res);
               showToast(res.msg);
               resolve(res);
             });
@@ -68,7 +89,22 @@ export default function useButtonService(id: number) {
       action: 'sign',
     });
   };
-  const onPay = () => {};
+  const onPay = () => {
+    freePay(id).then(resp => {
+      console.log(123);
+      Linking.canOpenURL('alipays://platformapi/startApp').then(support => {
+        if (support) {
+          Linking.openURL(
+            `alipays://platformapi/startApp?appId=60000157&orderStr=${encodeURIComponent(
+              resp.myOrderStr,
+            )}&return_url=rntemplate://order_detail/${id}`,
+          );
+        } else {
+          Alert.alert('请安装支付宝');
+        }
+      });
+    });
+  };
   return {
     /** 是否取消 */
     onCancel,

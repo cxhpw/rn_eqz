@@ -6,6 +6,7 @@ export const linking: LinkingOptions<AppParamList> = {
   config: {
     screens: {
       Detail: 'detail/:id',
+      OrderDetail: 'order_detail/:id',
     },
   },
 };

@@ -31,6 +31,12 @@ export const resolveValue = <TValue, TArg>(
   arg: TArg,
 ): TValue => (isFunction(valOrFunction) ? valOrFunction(arg) : valOrFunction);
 
+export interface ContentInset {
+  top?: number;
+  right?: number;
+  bottom?: number;
+  left?: number;
+}
 export interface Toast {
   type: ToastType;
   id: string;
@@ -44,10 +50,20 @@ export interface Toast {
   createdAt: number;
   visible: boolean;
   height?: number;
+  contentInset?: ContentInset;
 }
 
 export type ToastOptions = Partial<
-  Pick<Toast, 'id' | 'icon' | 'duration' | 'style' | 'position' | 'iconTheme'>
+  Pick<
+    Toast,
+    | 'id'
+    | 'icon'
+    | 'duration'
+    | 'style'
+    | 'position'
+    | 'iconTheme'
+    | 'contentInset'
+  >
 >;
 
 export type DefaultToastOptions = ToastOptions & {
@@ -68,4 +84,5 @@ export interface ToastWrapperProps {
   style?: ViewStyle;
   onHeightUpdate: (id: string, height: number) => void;
   children?: React.ReactNode;
+  contentInset?: ContentInset;
 }

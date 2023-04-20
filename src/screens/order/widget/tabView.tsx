@@ -1,5 +1,5 @@
 import { TViewProps } from '@/components/Tabs/type';
-import { PropsWithChildren, createContext, useEffect } from 'react';
+import { PropsWithChildren, createContext, useState } from 'react';
 import { Box, Empty, FlashList, LoadButton } from '@/components';
 import { useRefreshService } from '@/hooks';
 import request from '@/request';
@@ -12,34 +12,32 @@ type noop = (n: OrderItem[]) => OrderItem[];
 export const OrderContext = createContext<null | {
   data: OrderItem[];
   setData: (fn: noop) => void;
+  onRefresh: () => void;
 }>(null);
 
 const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
+  const [isEndDuring, setIsEndDuring] = useState(true);
   const {
     data = [],
     setData,
     allLoaded,
     loadingMore,
     refreshing,
+    onRefresh,
     onLoadMore,
-  } = useRefreshService<OrderItem>(
-    async params => {
-      const res = await (
-        await request<Page<OrderItem>>({
-          url: '/Include/alipay/data.aspx',
-          params: {
-            apiname: 'getorders',
-            status: route.key,
-            pageNum: params.PageIndex,
-          },
-        })
-      ).data;
-      return res;
-    },
-    {
-      manual: false,
-    },
-  );
+  } = useRefreshService<OrderItem>(async params => {
+    const res = await (
+      await request<Page<OrderItem>>({
+        url: '/Include/alipay/data.aspx',
+        params: {
+          apiname: 'getorders',
+          status: route.key,
+          pageNum: params.PageIndex,
+        },
+      })
+    ).data;
+    return res;
+  });
   const renderFooter = () => {
     return data.length === 0 ? null : <LoadButton loading={!allLoaded} />;
   };
@@ -49,6 +47,7 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
         value={{
           data,
           setData,
+          onRefresh,
         }}>
         <FlashList
           data={data}
@@ -56,10 +55,20 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
           contentContainerStyle={{
             paddingHorizontal: 10,
           }}
-          renderItem={({ item }) => <Item {...item} />}
-          onEndReached={onLoadMore}
-          keyExtractor={_item => `${_item.OrderID}`}
           refreshing={refreshing}
+          onRefresh={onRefresh}
+          renderItem={({ item }) => <Item {...item} />}
+          onEndReached={async () => {
+            if (!isEndDuring) {
+              console.log('初始化');
+              setIsEndDuring(true);
+              onLoadMore();
+            }
+          }}
+          onMomentumScrollBegin={() => {
+            setIsEndDuring(false);
+          }}
+          keyExtractor={_item => `${_item.OrderID}`}
           onEndReachedThreshold={100}
           loadingMore={loadingMore}
           allLoaded={allLoaded}
@@ -79,6 +88,6 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
   );
 };
 
-TabView.displayName = 'TabView';
+TabView.displayName = 'TabScene';
 
 export default TabView;

@@ -95,7 +95,8 @@ const ToastBar: React.FC<ToastBarProps> = ({
   style,
   children,
 }) => {
-  const [height, setHeight] = useState(48);
+  const [height, setHeight] = useState(toast.height || 48);
+  const [width, setWidth] = useState(0);
   const enterAnimation = useMemo(
     () => (_factor: number) => {
       return new Keyframe({
@@ -142,9 +143,8 @@ const ToastBar: React.FC<ToastBarProps> = ({
       entering={enter}
       exiting={exit}
       onLayout={e => {
-        if (height === 0) {
-          setHeight(e.nativeEvent.layout.height);
-        }
+        setHeight(e.nativeEvent.layout.height);
+        setWidth(e.nativeEvent.layout.width);
       }}>
       <ToastBarBase style={style}>
         {typeof children === 'function' ? (

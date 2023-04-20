@@ -92,6 +92,9 @@ export function useRefreshService<
    * 从头开始刷新数据
    */
   const onRefresh = async () => {
+    if (loading) {
+      return;
+    }
     try {
       await runAsync({ ...params[0], PageIndex: INITIAL_PAGE });
     } catch (error) {
@@ -104,7 +107,6 @@ export function useRefreshService<
    */
   const onLoadMore = async () => {
     if (loading) return;
-    console.log(allLoaded);
     try {
       let _param = params?.[0] ?? options?.defaultParams[0];
       const { PageIndex } = _param;
@@ -118,7 +120,6 @@ export function useRefreshService<
 
   const onUpdate = async (params: P) => {
     if (loading) return;
-
     try {
       await runAsync({ ...params[0], PageSize: 10, PageIndex: INITIAL_PAGE });
     } catch (error) {
@@ -140,8 +141,10 @@ export function useRefreshService<
         loadingMore: loading,
       };
     }
+    console.log('params', params);
     return {
-      refreshing: loading,
+      // 避免第一次加载时请求两次
+      refreshing: params.length === 0 ? false : loading,
       loadingMore: false,
     };
   }, [loading, params]);
@@ -152,6 +155,7 @@ export function useRefreshService<
     allLoaded,
     data,
     setData,
+    params,
     onRefresh: useMemoizedFn(onRefresh),
     onLoadMore: useMemoizedFn(onLoadMore),
     onUpdate: useMemoizedFn(onUpdate),

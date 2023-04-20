@@ -42,6 +42,14 @@ const textStyle = [
 ];
 function _text(style: Object = {}) {
   let result: any = {};
+  if (Array.isArray(style)) {
+    style = style.reduce((prev, cur) => {
+      return {
+        ...prev,
+        ...cur,
+      };
+    }, {});
+  }
   for (const [key, value] of Object.entries(style)) {
     if (textStyle.indexOf(key) !== -1) {
       result[key] = value;

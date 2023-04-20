@@ -46,7 +46,6 @@ const LoaderIcon: React.FC<LoaderTheme> = ({ primary, secondary }) => {
     -1,
     false,
   );
-  console.log(1);
   return <Animated.View style={[styles.IconWrapper, IconAnimateStyle]} />;
 };
 

@@ -343,32 +343,7 @@ PODS:
     - RCTTypeSafety
     - React-Core
     - ReactCommon/turbomodule/core
-  - react-native-skia (0.1.172):
-    - React
-    - React-callinvoker
-    - React-Core
-    - react-native-skia/Api (= 0.1.172)
-    - react-native-skia/Jsi (= 0.1.172)
-    - react-native-skia/RNSkia (= 0.1.172)
-    - react-native-skia/SkiaHeaders (= 0.1.172)
-    - react-native-skia/Utils (= 0.1.172)
-  - react-native-skia/Api (0.1.172):
-    - React
-    - React-callinvoker
-    - React-Core
-  - react-native-skia/Jsi (0.1.172):
-    - React
-    - React-callinvoker
-    - React-Core
-  - react-native-skia/RNSkia (0.1.172):
-    - React
-    - React-callinvoker
-    - React-Core
-  - react-native-skia/SkiaHeaders (0.1.172):
-    - React
-    - React-callinvoker
-    - React-Core
-  - react-native-skia/Utils (0.1.172):
+  - react-native-skia (0.1.185):
     - React
     - React-callinvoker
     - React-Core
@@ -740,7 +715,7 @@ SPEC CHECKSUMS:
   React: bb3e06418d2cc48a84f9666a576c7b38e89cd7db
   React-bridging: 572502ec59c9de30309afdc4932e278214288913
   React-callinvoker: 6b708b79c69f3359d42f1abb4663f620dbd4dadf
-  React-Codegen: 74e1cd7cee692a8b983c18df3274b5e749de07c8
+  React-Codegen: ae5360313e74862bbc6b036143c2963cb4892096
   React-Core: b587d0a624f9611b0e032505f3d6f25e8daa2bee
   React-CoreModules: c6ff48b985e7aa622e82ca51c2c353c7803eb04e
   React-cxxreact: ade3d9e63c599afdead3c35f8a8bd12b3da6730b
@@ -757,7 +732,7 @@ SPEC CHECKSUMS:
   react-native-refresh-control: b4a6e1e3c08126286cb4c5c07eaca45df7d5b715
   react-native-restart: 45c8dca02491980f2958595333cbccd6877cb57e
   react-native-safe-area-context: 99b24a0c5acd0d5dcac2b1a7f18c49ea317be99a
-  react-native-skia: 9313b8213e95466ef784158190aac26ee6990b82
+  react-native-skia: 8d65fa55196f437b475563b67b06a744f2ad4a0d
   react-native-webview: 9f111dfbcfc826084d6c507f569e5e03342ee1c1
   React-perflogger: 8c79399b0500a30ee8152d0f9f11beae7fc36595
   React-RCTActionSheet: 7316773acabb374642b926c19aef1c115df5c466

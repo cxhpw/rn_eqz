@@ -30,6 +30,9 @@ type CenterProps = LayoutProps<Theme> &
 const restyleFunctions = composeRestyleFunctions([layout, border, spacing]);
 
 const Center = ({ children, ...rest }: PropsWithChildren<CenterProps>) => {
+  const boxChildren = (child: unknown) => {
+    return typeof child === 'string' ? <Text>{child}</Text> : child;
+  };
   const props = useRestyle(restyleFunctions as any, {
     alignItems: 'center',
     justifyContent: 'center',
@@ -38,9 +41,7 @@ const Center = ({ children, ...rest }: PropsWithChildren<CenterProps>) => {
   });
   return (
     //@ts-ignore
-    <View {...props}>
-      <Text>{children}</Text>
-    </View>
+    <View {...props}>{boxChildren(children)}</View>
   );
 };
 

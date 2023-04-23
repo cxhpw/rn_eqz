@@ -241,8 +241,8 @@ const lightTheme = createTheme({
     Subtle: {},
     Outline: {
       backgroundColor: 'transparent',
-      borderColor: 'border',
-      color: 'primary100',
+      borderColor: 'primary50',
+      color: 'primary50',
     },
     Link: {
       borderColor: 'transparent',

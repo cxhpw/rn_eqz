@@ -16,69 +16,59 @@ const CellList: React.FC<Props> = ({ data, value }) => {
       paddingHorizontal="2.5"
       paddingVertical="x4">
       <Flex justifyContent="space-between" marginBottom="x4">
-        <Text variant="h3">商品金额</Text>
-        <Text variant="h3">
-          <Price
-            afterText=""
-            money={data?.rent}
-            color={theme.colors.text}
-            //@ts-ignore
-            style={theme.textVariants.h3}
-          />
-        </Text>
+        <Text variant="h2">商品金额</Text>
+        <Price
+          afterText=""
+          money={data?.rent}
+          color={theme.colors.text}
+          //@ts-ignore
+          style={theme.textVariants.h2}
+        />
       </Flex>
       <Flex justifyContent="space-between" marginBottom="x4">
         <Text color="gray300" variant="p2">
           押金
         </Text>
-        <Text color="gray300" variant="p2">
-          <Price
-            afterText=""
-            money={data?.deposit}
-            color={theme.colors.gray300}
-            style={theme.textVariants.p2}
-          />
-        </Text>
+        <Price
+          afterText=""
+          money={data?.deposit}
+          color={theme.colors.gray300}
+          style={theme.textVariants.p2}
+        />
       </Flex>
       <Flex justifyContent="space-between" marginBottom="x4">
         <Text color="gray300" variant="p2">
           租金
         </Text>
-        <Text color="gray300" variant="p2">
-          <Price
-            afterText=""
-            money={data?.rent}
-            color={theme.colors.gray300}
-            style={theme.textVariants.p2}
-          />
-        </Text>
+        <Price
+          afterText=""
+          money={data?.rent}
+          color={theme.colors.gray300}
+          style={theme.textVariants.p2}
+        />
       </Flex>
       <Flex justifyContent="space-between" marginBottom="x4">
         <Text color="gray300" variant="p2">
           计费规则
         </Text>
-        <Text color="gray300" variant="p2">
-          <Price
-            afterText="/日"
-            beforeText="日均租金："
-            money={data!.rent / data!.subdays}
-            color={theme.colors.gray300}
-            style={theme.textVariants.p2}
-          />
-        </Text>
+        <Price
+          afterText="/日"
+          beforeText="日均租金："
+          money={data!.rent / data!.subdays}
+          color={theme.colors.gray300}
+          style={theme.textVariants.p2}
+        />
       </Flex>
       <Flex justifyContent="space-between" marginBottom="x4">
         <Text color="gray300" variant="p2">
           安心享
         </Text>
-        <Text color="gray300" variant="p2">
-          <Price
-            afterText=""
-            money={value ? data!.insurance : 0}
-            color={theme.colors.gray300}
-            style={theme.textVariants.p2}
-          />
-        </Text>
+        <Price
+          afterText=""
+          money={value ? data!.insurance : 0}
+          color={theme.colors.gray300}
+          style={theme.textVariants.p2}
+        />
       </Flex>
       <Flex justifyContent="space-between">
         <Text color="gray300" variant="p2">

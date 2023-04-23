@@ -56,7 +56,7 @@ const Index: React.FC<Props> = ({ navigation }) => {
           <Banner />
           <MidImage url={TagImg} />
           <Cate />
-          <BottomImage url={ad1?.adlist[0].image} />
+          <BottomImage data={ad1?.adlist[0]} />
         </BgImage>
         <Spacer backgroundColor="#f8f8f8" />
         <Promo urls={ad2?.adlist}>

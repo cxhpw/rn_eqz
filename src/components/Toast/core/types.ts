@@ -51,6 +51,7 @@ export interface Toast {
   visible: boolean;
   height?: number;
   contentInset?: ContentInset;
+  onClose?: () => void;
 }
 
 export type ToastOptions = Partial<
@@ -63,6 +64,7 @@ export type ToastOptions = Partial<
     | 'position'
     | 'iconTheme'
     | 'contentInset'
+    | 'onClose'
   >
 >;
 

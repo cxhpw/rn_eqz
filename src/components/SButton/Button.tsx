@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import { memo, forwardRef } from 'react';
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { IButtonProps } from './types';
-import useButton from './usePropsResolution';
+import usePropsResolution from './usePropsResolution';
 import Text from '../Text';
 import { useIsPressed } from '../Pressable';
 import Center from '../Center';
@@ -41,15 +41,16 @@ const Button = (
     onPressOut,
     colorScheme,
     _text,
+    style,
     ...redolveProps
-  } = useButton(props, {
+  } = usePropsResolution(props, {
     isDisabled: isDisabled || isLoading,
     isPressed: isPressedProp || isPressed,
     variant: variant,
   });
   const boxChildren = (child: any) => {
     return child ? (
-      <Text variant="p0" color={colorScheme} style={[_text]}>
+      <Text variant="p2" color={colorScheme} style={[_text]}>
         {child}
       </Text>
     ) : null;
@@ -71,6 +72,7 @@ const Button = (
       disabled={isDisabled || isLoading}
       ref={ref}
       variant={variant}
+      style={[style]}
       onPressIn={composeEventHandlers(onPressIn, pressableProps.onPressIn)}
       onPressOut={composeEventHandlers(onPressOut, pressableProps.onPressOut)}
       {...redolveProps}>

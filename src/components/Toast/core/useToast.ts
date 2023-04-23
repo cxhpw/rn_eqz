@@ -24,9 +24,7 @@ export function useToast(toastOptions?: DefaultToastOptions) {
     if (pausedAt) {
       return;
     }
-
     const now = Date.now();
-
     const timeouts = toasts.map(t => {
       if (t.duration === Infinity) {
         return;

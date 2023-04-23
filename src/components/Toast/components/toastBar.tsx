@@ -15,24 +15,6 @@ interface ToastBarProps {
   }) => Renderable;
 }
 
-const fadeInAnimation = new Keyframe({
-  0: {
-    opacity: 0,
-  },
-  100: {
-    opacity: 1,
-  },
-});
-
-const fadeOutAnimation = new Keyframe({
-  0: {
-    opacity: 1,
-  },
-  100: {
-    opacity: 0,
-  },
-});
-
 const ToastBarBase = ({ children, style }: any) => {
   return (
     <View
@@ -75,17 +57,14 @@ const Message = ({ children }: any) => {
 };
 const getAnimationStyle = (
   position: ToastPosition,
-  _enter: any,
-  _exit: any,
+  enterAnimation: (factor: number) => Keyframe,
+  exitAnimation: (factor: number) => Keyframe,
 ) => {
   const top = position.includes('top');
   const factor = top ? 1 : -1;
-  const [enter, exit] = prefersReducedMotion()
-    ? [fadeInAnimation, fadeOutAnimation]
-    : [_enter(factor), _exit(factor)];
   return {
-    enter,
-    exit,
+    enter: enterAnimation(factor),
+    exit: exitAnimation(factor),
   };
 };
 
@@ -95,42 +74,45 @@ const ToastBar: React.FC<ToastBarProps> = ({
   style,
   children,
 }) => {
-  const [height, setHeight] = useState(toast.height || 48);
-  const [width, setWidth] = useState(0);
-  const enterAnimation = useMemo(
-    () => (_factor: number) => {
-      return new Keyframe({
-        0: {
-          opacity: 0,
-          transform: [{ scale: 0.6 }, { translateY: _factor * -(height * 2) }],
-        },
-        100: {
-          opacity: 1,
-          transform: [
-            { scale: 1 },
-            {
-              translateY: 0,
-            },
-          ],
-        },
-      }).duration(200);
-    },
-    [height],
-  );
-  const exitAnimation = useMemo(
-    () => (factor: number) =>
-      new Keyframe({
-        0: {
-          opacity: 1,
-          transform: [{ scale: 1 }, { translateY: 0 }],
-        },
-        100: {
-          opacity: 0,
-          transform: [{ scale: 0.6 }, { translateY: factor * -(height * 1.5) }],
-        },
-      }).duration(250),
-    [height],
-  );
+  const [toastSize, setToastSize] = useState({
+    height: 48,
+    width: 0,
+  });
+  const enterAnimation = (factor: number) => {
+    return new Keyframe({
+      0: {
+        opacity: 0,
+        transform: [
+          { scale: 0.6 },
+          { translateY: factor * -(toastSize.height * 2) },
+        ],
+      },
+      100: {
+        opacity: 1,
+        transform: [
+          { scale: 1 },
+          {
+            translateY: 0,
+          },
+        ],
+      },
+    }).duration(350);
+  };
+  const exitAnimation = (factor: number) => {
+    return new Keyframe({
+      0: {
+        opacity: 1,
+        transform: [{ scale: 1 }, { translateY: 0 }],
+      },
+      100: {
+        opacity: 0,
+        transform: [
+          { scale: 0.6 },
+          { translateY: factor * -(toastSize.height * 1.5) },
+        ],
+      },
+    }).duration(400);
+  };
   const { enter, exit } = getAnimationStyle(
     toast.position || position || 'top-center',
     enterAnimation,
@@ -138,13 +120,16 @@ const ToastBar: React.FC<ToastBarProps> = ({
   );
   const icon = <ToastIcon toast={toast} />;
   const message = <Message>{resolveValue(toast.message, toast)}</Message>;
+
   return (
     <Animated.View
       entering={enter}
       exiting={exit}
       onLayout={e => {
-        setHeight(e.nativeEvent.layout.height);
-        setWidth(e.nativeEvent.layout.width);
+        setToastSize({
+          width: e.nativeEvent.layout.width,
+          height: e.nativeEvent.layout.height,
+        });
       }}>
       <ToastBarBase style={style}>
         {typeof children === 'function' ? (

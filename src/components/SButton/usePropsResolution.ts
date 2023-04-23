@@ -6,13 +6,7 @@ import {
   spacing,
 } from '@shopify/restyle';
 import { Theme } from '../Theme/theme';
-import {
-  Pressable,
-  PressableProps,
-  StyleProp,
-  StyleSheet,
-  ViewProps,
-} from 'react-native';
+import { Pressable, PressableProps, StyleProp, ViewProps } from 'react-native';
 import { IButtonProps } from './types';
 import { useMemo } from 'react';
 
@@ -58,7 +52,10 @@ function _text(style: Object = {}) {
   return result;
 }
 
-export default function useButton(props: any, { isDisabled, ...state }: State) {
+export default function usePropsResolution(
+  props: any,
+  { isDisabled, ...state }: State,
+) {
   const theme = useTheme<Theme>();
   const variant = useMemo(
     () =>
@@ -66,7 +63,7 @@ export default function useButton(props: any, { isDisabled, ...state }: State) {
         themeKey: 'ButtonVariants',
         defaults: {
           borderColor: 'border',
-          borderWidth: StyleSheet.hairlineWidth,
+          borderWidth: 1,
           paddingVertical: '2.5',
           paddingHorizontal: 'x3',
           borderRadius: 'x1',

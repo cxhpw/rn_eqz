@@ -50,7 +50,7 @@ interface State {
 
 const toastTimeouts = new Map<Toast['id'], ReturnType<typeof setTimeout>>();
 
-export const TOAST_EXPIRE_DISMISS_DELAY = 0;
+export const TOAST_EXPIRE_DISMISS_DELAY = 1000;
 
 const addToRemoveQueue = (toastId: string) => {
   if (toastTimeouts.has(toastId)) {
@@ -64,6 +64,7 @@ const addToRemoveQueue = (toastId: string) => {
       toastId: toastId,
     });
   }, TOAST_EXPIRE_DISMISS_DELAY);
+
   toastTimeouts.delete(toastId);
 
   toastTimeouts.set(toastId, timeout);
@@ -125,6 +126,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
       };
     case ActionType.REMOVE_TOAST:
+      state.toasts.forEach(t => t.onClose?.());
       if (action.toastId === undefined) {
         return {
           ...state,
@@ -133,7 +135,9 @@ export const reducer = (state: State, action: Action): State => {
       }
       return {
         ...state,
-        toasts: state.toasts.filter(t => t.id !== action.toastId),
+        toasts: state.toasts.filter(t => {
+          return t.id !== action.toastId;
+        }),
       };
 
     case ActionType.START_PAUSE:
@@ -171,8 +175,8 @@ export const dispatch = (action: Action) => {
 export const defaultTimeouts: {
   [key in ToastType]: number;
 } = {
-  blank: 4000,
-  error: 4000,
+  blank: 3000,
+  error: 3000,
   success: 2000,
   loading: Infinity,
   custom: 4000,
@@ -205,7 +209,6 @@ export const useStore = (toastOptions: DefaultToastOptions = {}): State => {
       ...t.style,
     },
   }));
-
   return {
     ...state,
     toasts: mergedToasts,

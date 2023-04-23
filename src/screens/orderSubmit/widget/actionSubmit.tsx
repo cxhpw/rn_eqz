@@ -70,6 +70,7 @@ const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
       </Center>
       <SButton
         indicatorColor="#fff"
+        isDisabled={total === '计算中'}
         onPress={() => {
           runAsync().then(res => {
             onSuccess(res);
@@ -81,7 +82,9 @@ const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
                       Linking.openURL(
                         `alipays://platformapi/startApp?appId=60000157&orderStr=${encodeURIComponent(
                           resp.myOrderStr,
-                        )}&return_url=rntemplate://order_detail/${res.oid}`,
+                        )}&scheme=rntemplate://order_detail/${
+                          res.oid
+                        }&return_url=rntemplate://order_detail/${res.oid}`,
                       );
                     } else {
                       Alert.alert('请安装支付宝');
@@ -102,6 +105,7 @@ const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
           paddingHorizontal: 0,
           flexGrow: 0.7,
           fontSize: 14,
+          lineHeight: 20,
           fontWeight: 'bold',
         }}>
         确认支付

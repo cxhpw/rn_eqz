@@ -138,8 +138,8 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
             />
             <Agreement
               value={isAgree}
+              article={[data?.delegationremark ?? '', data?.regagreement ?? '']}
               onChange={value => {
-                console.log('用户协议', value);
                 setIsAgree(value);
               }}
             />
@@ -149,10 +149,7 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
       <ActionSubmit
         total={total}
         onSubmit={() => {
-          toast.loading('提交订单中', {
-            contentInset: { bottom: 34 },
-            duration: Infinity,
-          });
+          toast.loading('提交订单中');
           return request.post('/Include/alipay/data.aspx', {
             prid: data?.prid,
             startime: route.params.start,
@@ -167,7 +164,7 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
           });
         }}
         onSuccess={res => {
-          toast.dismiss();
+          toast.remove();
           if (res.ret === 'success') {
             toast.success(res.msg, {
               position: 'top-center',

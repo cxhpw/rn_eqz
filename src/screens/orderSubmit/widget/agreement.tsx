@@ -7,14 +7,12 @@ import { scale } from '@/components/helpers/normalize';
 type Props = {
   onChange: (n: boolean) => void;
   value: boolean;
-  article?: string;
+  article?: string[];
 };
 
-const Agreement: React.FC<Props> = ({ onChange, value, article }) => {
+const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
   const [show, setShow] = useState(false);
-  const memoryHtmlBlock = useMemo(() => {
-    return <HtmlParse html={article} />;
-  }, [article]);
+  const [article, setArticle] = useState('');
   return (
     <>
       <Box mt="2.5">
@@ -23,6 +21,7 @@ const Agreement: React.FC<Props> = ({ onChange, value, article }) => {
             value="cxh"
             size={20}
             shape="circular"
+            defaultChecked={value}
             checked={value}
             accessibilityLabel="是否同意用户协议"
             onChange={onChange}>
@@ -33,11 +32,18 @@ const Agreement: React.FC<Props> = ({ onChange, value, article }) => {
               color="primary50"
               variant="p2"
               onPress={() => {
-                console.log(123);
+                setArticle(_article?.[1] ?? '');
+                setShow(true);
               }}>
               《用户租赁与服务协议》
             </Text>
-            <Text color="primary50" variant="p2">
+            <Text
+              color="primary50"
+              variant="p2"
+              onPress={() => {
+                setArticle(_article?.[0] ?? '');
+                setShow(true);
+              }}>
               《委托扣款授权书》
             </Text>
           </Checkbox>
@@ -60,27 +66,17 @@ const Agreement: React.FC<Props> = ({ onChange, value, article }) => {
           width={scale(270)}
           paddingHorizontal="x5"
           paddingVertical="x4">
-          <Text variant="h3" textAlign="center" mb="x4">
-            安心享说明
-          </Text>
           <ScrollView
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             style={{
-              height: 150,
+              height: 350,
             }}>
-            {memoryHtmlBlock}
+            <HtmlParse
+              htmlStyle="p{font-size: 12px}div{font-size: 12px}"
+              html={article}
+            />
           </ScrollView>
           <Flex justifyContent="space-between" marginTop="x5">
-            <SButton
-              variant="Outline"
-              colorScheme="black"
-              style={styles.btn}
-              onPress={() => {
-                onChange(true);
-                setShow(false);
-              }}>
-              开启
-            </SButton>
             <SButton
               variant="Outline"
               colorScheme="black"
@@ -100,7 +96,7 @@ const styles = StyleSheet.create({
   btn: {
     borderColor: '#000',
     borderRadius: 0,
-    width: '45%',
+    width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 44,

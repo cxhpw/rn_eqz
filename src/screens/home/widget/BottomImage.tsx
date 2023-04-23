@@ -1,17 +1,32 @@
-import { Box } from 'native-base';
+import { Box, Pressable } from '@/components';
+import { navigate } from '@/services/NavigationService';
+import { transformUrlToParams } from '@/utils/common';
 import { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
-const BottomImage: React.FC<{ url: string }> = ({ url }) => {
+const BottomImage: React.FC<{
+  data?: { image: string; name: string; url: string };
+}> = ({ data }) => {
   return (
-    <Box mx={2.5} mb={2} flexGrow={1} justifyContent="flex-end">
-      <Image
-        style={style.Image}
-        source={{
-          uri: url,
-        }}
-        resizeMode="contain"
-      />
+    <Box
+      marginHorizontal="2.5"
+      marginBottom="x2"
+      flexGrow={1}
+      justifyContent="flex-end">
+      <Pressable
+        scalable={false}
+        onPress={() => {
+          const { routeName, params } = transformUrlToParams(data!.url);
+          navigate(routeName as any, params);
+        }}>
+        <Image
+          style={style.Image}
+          source={{
+            uri: data?.image,
+          }}
+          resizeMode="contain"
+        />
+      </Pressable>
     </Box>
   );
 };

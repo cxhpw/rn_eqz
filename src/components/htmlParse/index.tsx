@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 type Props = {
@@ -7,14 +8,14 @@ type Props = {
   onLoadEnd?: () => void;
 };
 const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
+  const ref = useRef<WebView>(null);
   const [height, setHeight] = useState(0);
   const generateHtml = (content: string, _htmlStyle?: string) => `
-  <!DOCTYPE html>\n
+  <!DOCTYPE html>
   <html>
     <head>
-      <title>Web View</title>
       <meta http-equiv="content-type" content="text/html; charset=utf-8">
-      <meta name="viewport" content="width=320, user-scalable=no">
+      <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
       <style type="text/css">
         body {
           margin: 0;
@@ -27,23 +28,23 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
         * {
           margin: 0;
           padding: 0;
+          font-family: "微软雅黑"
         }
         ${_htmlStyle}
       </style>
     </head>
     <body>
       ${content}
-      <script>
-      setTimeout(function () {
-        document.body.clientHeight
-        window.ReactNativeWebView.postMessage(document.body.clientHeight)
-      }, 500)
-      </script>
     </body>
   </html>
   `;
+  const runFirst = `
+  setTimeout(function() {
+    window.ReactNativeWebView.postMessage(document.body.clientHeight)
+   }, 500);`;
   return (
     <WebView
+      ref={ref}
       scrollEnabled={false}
       style={[
         {
@@ -52,14 +53,15 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
       ]}
       onMessage={event => {
         if (Number(event.nativeEvent.data) !== height) {
-          console.log(event.nativeEvent.data);
           setHeight(Number(event.nativeEvent.data));
           onLoadEnd?.();
         }
       }}
+      javaScriptEnabled={true}
+      injectedJavaScript={runFirst}
       source={{
-        // html.replace(/&nbsp;/gi, '')
-        html: generateHtml(html.replace(/&nbsp;/gi, ''), htmlStyle),
+        // html: html,
+        html: generateHtml(html, htmlStyle),
       }}
     />
   );

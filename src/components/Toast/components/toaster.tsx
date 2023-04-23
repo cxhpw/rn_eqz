@@ -11,7 +11,7 @@ import ToastBar from './toastBar';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
+  withSpring,
 } from 'react-native-reanimated';
 
 const DEFAULT_OFFSET = 16;
@@ -39,13 +39,13 @@ const ToastWrapper: React.FC<
     positionStyle.transform?.length &&
     'translateY' in positionStyle.transform[0]
   ) {
-    progress.value = withTiming(positionStyle.transform![0].translateY);
+    progress.value = withSpring(positionStyle.transform![0].translateY);
   }
   return (
     <Animated.View
       style={[positionStyle, AnimatedStyle, style]}
       onLayout={e => {
-        console.log('toaster layout', id);
+        console.log('toast id', id);
         onHeightUpdate(id, e.nativeEvent.layout.height);
       }}>
       {children}

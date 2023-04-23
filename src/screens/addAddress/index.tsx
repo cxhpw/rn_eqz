@@ -13,42 +13,34 @@ import request from '@/request';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import PickerRegion from './picker';
-import { navigate, goBack, setParams } from '@/services/NavigationService';
-import { useEffect, useState } from 'react';
+import { goBack, setParams } from '@/services/NavigationService';
+import { useEffect } from 'react';
 
 const { useForm } = Form;
 const Index = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'AddAddress'>>();
-  const [formData, setFormData] = useState({
-    uname: '',
-    mobile: '',
-    region: [],
-    address: '',
-    code: '',
-    isDefault: false,
-  });
   const [form] = useForm();
   const { showToast } = useToast();
   useEffect(() => {
+    async function run() {
+      const res = await (
+        await request('/Include/alipay/data.aspx', {
+          params: {
+            apiname: 'getaddrdetails',
+            adrid: params.id,
+          },
+        })
+      ).data;
+      form.setFieldsValue({
+        uname: res.Consignee,
+        mobile: res.ContactPhone,
+        region: [res.Province, res.City, res.County] as unknown as string[],
+        address: res.Address,
+        code: res.PostCode,
+        isDefault: res.IsDefault,
+      });
+    }
     if (params?.id) {
-      async function run() {
-        const res = await (
-          await request('/Include/alipay/data.aspx', {
-            params: {
-              apiname: 'getaddrdetails',
-              adrid: params.id,
-            },
-          })
-        ).data;
-        form.setFieldsValue({
-          uname: res.Consignee,
-          mobile: res.ContactPhone,
-          region: [res.Province, res.City, res.County] as unknown as string[],
-          address: res.Address,
-          code: res.PostCode,
-          isDefault: res.IsDefault,
-        });
-      }
       run();
     }
   }, [form, params?.id]);

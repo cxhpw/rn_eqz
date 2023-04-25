@@ -44,6 +44,7 @@ const Card = ({ data }: { data?: OrderDetail }) => {
         </Box>
       </Flex>
       <HtmlParse
+        //@ts-ignore
         html={item?.fujian}
         htmlStyle={`p {font-size: 12px; color; color: ${theme.colors.gray300}; background-color: ${theme.colors.primary_background}}`}
       />

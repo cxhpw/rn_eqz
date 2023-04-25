@@ -29,7 +29,8 @@ const Index = () => {
       toast.error('请同意用户协议');
     }
   };
-  const onChange = value => {
+  const onChange = (value: any) => {
+    setIsAgress(true);
     console.log(value);
   };
   return (

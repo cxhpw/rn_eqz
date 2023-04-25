@@ -23,7 +23,8 @@ const PayMethodCard: React.FC<Props> = ({ onChange, value }) => {
         <Text color="gray300" variant="p2">
           凭芝麻信用最高可全免
         </Text>
-        <Switch value={value} onChange={onChange} />
+        <Text>1500</Text>
+        {/* <Switch disabled value={value} onChange={onChange} /> */}
       </Flex>
     </Box>
   );

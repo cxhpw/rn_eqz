@@ -2,6 +2,7 @@
 import { Center, Flex, Price, SButton, Text } from '@/components';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
+import { redirect } from '@/services/NavigationService';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { memo } from 'react';
@@ -75,6 +76,9 @@ const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
           runAsync().then(res => {
             onSuccess(res);
             if (res.ret === 'success') {
+              redirect('OrderDetail', {
+                id: res.oid,
+              });
               freePay(res.oid).then(resp => {
                 Linking.canOpenURL('alipays://platformapi/startApp').then(
                   support => {

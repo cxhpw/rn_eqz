@@ -103,6 +103,7 @@ export const Toaster: React.FC<ToasterProps> = ({
   gutter,
   children,
   containerStyle,
+  contentInset,
 }) => {
   const { toasts, handlers } = useToast(toastOptions);
   return (
@@ -120,7 +121,7 @@ export const Toaster: React.FC<ToasterProps> = ({
             key={t.id}
             offset={offset}
             onHeightUpdate={handlers.updateHeight}
-            contentInset={t.contentInset}
+            contentInset={contentInset || t.contentInset}
             style={containerStyle}
             position={toastPosition}>
             {t.type === 'custom' ? (

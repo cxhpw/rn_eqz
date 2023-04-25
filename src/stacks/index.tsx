@@ -18,6 +18,7 @@ import WebView from '@/screens/webview';
 import Activity from '@/screens/activity';
 import Search from '@/screens/search';
 import OrderDetail from '@/screens/orderDetail';
+import Login from '@/screens/login';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -80,6 +81,16 @@ const MAIN_SCREENS: ScreenProps[] = [
     component: Search,
     options: {
       title: '搜索',
+    },
+  },
+  {
+    name: 'Login',
+    component: Login,
+    options: {
+      title: '登录',
+      headerTransparent: true,
+      headerTitle: '',
+      headerTintColor: '#fff',
     },
   },
 ];

@@ -2,7 +2,7 @@ import { Alert, Linking } from 'react-native';
 import { useCustomRequest, useToast } from '@/hooks';
 import request from '@/request';
 import { useContext } from 'react';
-import { OrderContext } from './tabView';
+import { OrderContext } from '../screens/order/widget/tabView';
 
 export default function useButtonService(id: number) {
   const Context = useContext(OrderContext);
@@ -92,17 +92,12 @@ export default function useButtonService(id: number) {
   const onPay = () => {
     freePay(id).then(resp => {
       console.log(123);
-      Linking.canOpenURL('alipays://platformapi/startApp').then(support => {
-        if (support) {
-          Linking.openURL(
-            `alipays://platformapi/startApp?appId=60000157&orderStr=${encodeURIComponent(
-              resp.myOrderStr,
-            )}&return_url=rntemplate://order_detail/${id}`,
-          );
-        } else {
-          Alert.alert('请安装支付宝');
-        }
-      });
+      const returnUrl = encodeURIComponent(`rntemplate://order_detail/${id}`);
+      Linking.openURL(
+        `alipays://platformapi/startApp?appId=60000157&orderStr=${encodeURIComponent(
+          resp.myOrderStr,
+        )}&return_url=${returnUrl}`,
+      );
     });
   };
   return {

@@ -29,7 +29,6 @@ import Stack from '@/stacks';
 import { lightTheme, darkTheme } from './theme';
 import { NativeBaseProvider } from 'native-base';
 import { useStore } from './store';
-import { Toaster } from '@/components/Toast';
 
 enableFreeze();
 

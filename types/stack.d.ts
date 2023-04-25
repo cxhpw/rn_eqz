@@ -18,7 +18,9 @@ type CommonStackParamList = {
   Company: undefined;
 };
 
-type AuthStackParamList = {};
+type AuthStackParamList = {
+  Login: undefined;
+};
 
 type MainStackParamList = {
   Tab: undefined;

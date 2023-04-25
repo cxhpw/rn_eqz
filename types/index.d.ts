@@ -61,6 +61,7 @@ type OrderItem = {
   Quantity: number;
   StartingTime: string;
   OrderStatus: number;
+  ProImg: string;
 };
 
 const orderStatus = [
@@ -214,4 +215,58 @@ type OrderSettlement = {
   subdays: number;
   title: string;
   insurance: number;
+};
+
+type OrderDetail = {
+  Address: string;
+  AutoID: number;
+  City: string;
+  Consignee: string;
+  Country: string;
+  County: string;
+  Days: number;
+  EndTime: string;
+  Expiretime: string;
+  GoodsTotalAmout: number;
+  Insurance: number;
+  InsuranceFee: number;
+  Integral: number;
+  IsEva: boolean;
+  IsInsurance: boolean;
+  IsMyPay: boolean;
+  IsOwn: boolean;
+  IsReturnMyself: boolean;
+  IsWxPay: boolean;
+  Isintegral: boolean;
+  LastModifyTime: string;
+  NeedInvoice: boolean;
+  OrderAddTime: string;
+  OrderAuditTime: string;
+  OrderClient: string;
+  OrderFinishTime: string;
+  OrderItem: OrderItem[];
+  OrderNo: string;
+  OrderPayTime: string;
+  OrderShippingFee: number;
+  OrderStatus: number;
+  OrderTotalAmount: number;
+  OrderType: number;
+  OrdersSerialList: [];
+  OtherFee: number;
+  Phone: string;
+  PostCode: string;
+  Province: string;
+  Remark: string;
+  ReturnAddress: string;
+  ReturnKuaiDiName: string;
+  ReturnKuaiDiNo: string;
+  StartingTime: string;
+  UserID: number;
+  UserName: string;
+  integralLine: number;
+  kuaidijson: null | any;
+  paidOrderTotalAmount: nulber;
+  paidOtherFee: number;
+  unpaidOrderTotalAmount: number;
+  unpaidOtherFee: number;
 };

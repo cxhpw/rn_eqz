@@ -6,8 +6,6 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../Theme/theme';
 import { ViewStyle } from 'react-native';
 
-// const Enum = ['Input', 'Switch', 'Radio', 'Checkbox'];
-
 type Props = PropsWithChildren<
   FieldProps & {
     /** 边框 */

@@ -4,10 +4,11 @@
 import React, { FunctionComponent } from 'react';
 import { ViewProps } from 'react-native';
 import { GProps } from 'react-native-svg';
+import IconPhone from './IconPhone';
 import IconBianji from './IconBianji';
 import IconAdd from './IconAdd';
-import IconYanjingXianshi from './IconYanjingXianshi';
-import IconYanjingYincang from './IconYanjingYincang';
+import IconEyeopen from './IconEyeopen';
+import IconEyeclose from './IconEyeclose';
 import IconJinggao from './IconJinggao';
 import IconWarning from './IconWarning';
 import IconRight from './IconRight';
@@ -18,12 +19,11 @@ import IconDidian from './IconDidian';
 import IconKuaidi from './IconKuaidi';
 import IconSousuoO from './IconSousuoO';
 import IconSousuo from './IconSousuo';
-import IconEyeclose from './IconEyeclose';
-import IconEyeopen from './IconEyeopen';
+export { default as IconPhone } from './IconPhone';
 export { default as IconBianji } from './IconBianji';
 export { default as IconAdd } from './IconAdd';
-export { default as IconYanjingXianshi } from './IconYanjingXianshi';
-export { default as IconYanjingYincang } from './IconYanjingYincang';
+export { default as IconEyeopen } from './IconEyeopen';
+export { default as IconEyeclose } from './IconEyeclose';
 export { default as IconJinggao } from './IconJinggao';
 export { default as IconWarning } from './IconWarning';
 export { default as IconRight } from './IconRight';
@@ -34,14 +34,13 @@ export { default as IconDidian } from './IconDidian';
 export { default as IconKuaidi } from './IconKuaidi';
 export { default as IconSousuoO } from './IconSousuoO';
 export { default as IconSousuo } from './IconSousuo';
-export { default as IconEyeclose } from './IconEyeclose';
-export { default as IconEyeopen } from './IconEyeopen';
 
 export type IconNames =
+  | 'phone'
   | 'bianji'
   | 'add'
-  | 'yanjing_xianshi'
-  | 'yanjing_yincang'
+  | 'eyeopen'
+  | 'eyeclose'
   | 'jinggao'
   | 'warning'
   | 'right'
@@ -51,9 +50,7 @@ export type IconNames =
   | 'didian'
   | 'kuaidi'
   | 'sousuo_o'
-  | 'sousuo'
-  | 'eyeclose'
-  | 'eyeopen';
+  | 'sousuo';
 
 interface Props extends GProps, ViewProps {
   name: IconNames;
@@ -63,38 +60,36 @@ interface Props extends GProps, ViewProps {
 
 let IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
   switch (name) {
+    case 'phone':
+      return <IconPhone key="1" {...rest} />;
     case 'bianji':
-      return <IconBianji key="1" {...rest} />;
+      return <IconBianji key="2" {...rest} />;
     case 'add':
-      return <IconAdd key="2" {...rest} />;
-    case 'yanjing_xianshi':
-      return <IconYanjingXianshi key="3" {...rest} />;
-    case 'yanjing_yincang':
-      return <IconYanjingYincang key="4" {...rest} />;
-    case 'jinggao':
-      return <IconJinggao key="5" {...rest} />;
-    case 'warning':
-      return <IconWarning key="6" {...rest} />;
-    case 'right':
-      return <IconRight key="7" {...rest} />;
-    case 'jindu':
-      return <IconJindu key="8" {...rest} />;
-    case 'yirenzheng':
-      return <IconYirenzheng key="9" {...rest} />;
-    case 'youhuijuan':
-      return <IconYouhuijuan key="10" {...rest} />;
-    case 'didian':
-      return <IconDidian key="11" {...rest} />;
-    case 'kuaidi':
-      return <IconKuaidi key="12" {...rest} />;
-    case 'sousuo_o':
-      return <IconSousuoO key="13" {...rest} />;
-    case 'sousuo':
-      return <IconSousuo key="14" {...rest} />;
-    case 'eyeclose':
-      return <IconEyeclose key="L1" {...rest} />;
+      return <IconAdd key="3" {...rest} />;
     case 'eyeopen':
-      return <IconEyeopen key="L2" {...rest} />;
+      return <IconEyeopen key="4" {...rest} />;
+    case 'eyeclose':
+      return <IconEyeclose key="5" {...rest} />;
+    case 'jinggao':
+      return <IconJinggao key="6" {...rest} />;
+    case 'warning':
+      return <IconWarning key="7" {...rest} />;
+    case 'right':
+      return <IconRight key="8" {...rest} />;
+    case 'jindu':
+      return <IconJindu key="9" {...rest} />;
+    case 'yirenzheng':
+      return <IconYirenzheng key="10" {...rest} />;
+    case 'youhuijuan':
+      return <IconYouhuijuan key="11" {...rest} />;
+    case 'didian':
+      return <IconDidian key="12" {...rest} />;
+    case 'kuaidi':
+      return <IconKuaidi key="13" {...rest} />;
+    case 'sousuo_o':
+      return <IconSousuoO key="14" {...rest} />;
+    case 'sousuo':
+      return <IconSousuo key="15" {...rest} />;
   }
 
   return null;

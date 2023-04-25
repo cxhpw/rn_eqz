@@ -128,7 +128,6 @@ const lightTheme = createTheme({
   textVariants: {
     defaults: {
       fontSize: scale(14),
-      lineHeight: scale(19),
       fontFamily: 'PingFang SC',
     },
     h0: {

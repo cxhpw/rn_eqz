@@ -3,8 +3,11 @@ import FastImage from 'react-native-fast-image';
 import { getMonthDate } from '@/utils/common';
 import { StyleSheet } from 'react-native';
 import { memo } from 'react';
+import { useTheme } from '@shopify/restyle';
+import { AppTheme } from '@/theme';
 
 const Description: React.FC<{ data?: OrderSettlement }> = ({ data }) => {
+  const theme = useTheme<AppTheme>();
   return (
     <Box
       padding="2.5"
@@ -42,7 +45,7 @@ const Description: React.FC<{ data?: OrderSettlement }> = ({ data }) => {
       <Box mt="x4">
         <HtmlParse
           html={data?.fitting}
-          htmlStyle="p {color: #7B7B7B; font-size: 12px}"
+          htmlStyle={`p {color: #7B7B7B; font-size: 12px;background-color: ${theme.colors.primary_background};color: ${theme.colors.gray300}}`}
         />
       </Box>
     </Box>

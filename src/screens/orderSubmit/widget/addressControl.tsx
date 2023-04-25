@@ -1,6 +1,6 @@
 import { Box, Text as RNText, Pressable, Icon } from '@/components';
 import { navigate } from '@/services/NavigationService';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 
 export type Address = {
   id: number;
@@ -36,7 +36,7 @@ const AddressControl: React.FC<Props> = ({ value: _value, onChange }) => {
         });
       }}>
       <Box backgroundColor="black" padding="x4">
-        <Text fontWeight="bold" mb="x1">
+        <Text fontWeight="bold" mb="x2">
           收货人信息
         </Text>
         {_value === null ? (
@@ -45,7 +45,9 @@ const AddressControl: React.FC<Props> = ({ value: _value, onChange }) => {
           </>
         ) : (
           <>
-            <Text fontWeight="bold">{_value!.name}</Text>
+            <Text fontWeight="bold" mb="x1">
+              {_value!.name}
+            </Text>
             <Text>
               {_value!.province}
               {_value!.city}

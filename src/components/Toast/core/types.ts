@@ -79,6 +79,7 @@ export interface ToasterProps {
   gutter?: number;
   containerStyle?: ViewStyle;
   children?: (toast: Toast) => JSX.Element;
+  contentInset?: ContentInset;
 }
 
 export interface ToastWrapperProps {

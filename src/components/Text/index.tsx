@@ -1,5 +1,5 @@
 import { createText, TextProps } from '@shopify/restyle';
-import React, { forwardRef, memo } from 'react';
+import React, { memo } from 'react';
 import { TextProps as RNTextProps } from 'react-native';
 
 import { type Theme } from '../Theme/theme';

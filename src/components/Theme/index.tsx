@@ -3,6 +3,8 @@ import React from 'react';
 import { PropsWithChildren } from 'react';
 import baseTheme, { type Theme } from './theme';
 import { Portal } from '@/components';
+import { Toaster } from '../Toast';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { lightTheme } = baseTheme;
 type Props = {
@@ -12,9 +14,13 @@ const ThemeProvider: React.FC<PropsWithChildren<Props>> = ({
   theme = lightTheme,
   children,
 }) => {
+  const contentInset = useSafeAreaInsets();
   return (
     <ShopifyThemeProvider theme={theme}>
-      <Portal.Host>{children}</Portal.Host>
+      <Portal.Host>
+        {children}
+        <Toaster contentInset={contentInset} />
+      </Portal.Host>
     </ShopifyThemeProvider>
   );
 };

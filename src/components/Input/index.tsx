@@ -27,10 +27,7 @@ const AnimatedTouchableIcon =
   Animated.createAnimatedComponent(TouchableOpacity);
 const { scale } = helpers;
 export interface InputProps
-  extends Omit<
-    TextInputProps,
-    'placeholderTextColor' | 'onChange' | 'onChangeText'
-  > {
+  extends Omit<TextInputProps, 'onChange' | 'onChangeText'> {
   /** 标签 */
   label?: ReactNode;
   /** 标签位置。可选值：左侧/上方 */
@@ -88,6 +85,7 @@ const Input = forwardRef<TextInput, InputProps>(
       type = 'all',
       labelStyle,
       containerStyle,
+      placeholderTextColor,
       ...restProps
     },
     ref,
@@ -116,7 +114,7 @@ const Input = forwardRef<TextInput, InputProps>(
     const InputContent = (
       <>
         {leftIcon && <Box marginHorizontal="x1">{leftIcon}</Box>}
-        <Box flexGrow={1}>
+        <Box flexGrow={1} flex={1}>
           <TextInput
             ref={ref}
             {...restProps}
@@ -135,7 +133,7 @@ const Input = forwardRef<TextInput, InputProps>(
             ]}
             editable={!disabled}
             textAlignVertical="center"
-            placeholderTextColor={theme.colors.gray300}
+            placeholderTextColor={placeholderTextColor || theme.colors.gray300}
             selectionColor={theme.colors.gray500}
             value={inputValue}
             onChangeText={handleChange}

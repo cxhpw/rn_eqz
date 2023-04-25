@@ -2,7 +2,7 @@ import { Flex, SButton } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { StyleSheet } from 'react-native';
-import useButtonService from './useButtonService';
+import useButtonService from '../../../hooks/useOrderService';
 import { OrderContext } from './tabView';
 import { useContext } from 'react';
 

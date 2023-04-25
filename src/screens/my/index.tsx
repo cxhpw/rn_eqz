@@ -80,17 +80,26 @@ const My: React.FC<Props> = () => {
       <ScrollView style={{ flex: 1 }}>
         <BgWrap>
           <Box px={2.5}>
-            <Box flexDirection="row" pt={5} alignItems="center">
-              <Image
-                style={style.avator}
-                source={require('@/images/avator.png')}
-              />
-              <Box>
-                <Text color="white" variant="h1">
-                  {signedIn ? '已登陆' : '登陆/注册'}
-                </Text>
+            <Pressable
+              onPress={() => {
+                if (!signedIn) {
+                  navigate('Login');
+                }
+              }}
+              scalable={false}
+              activeOpacity={1}>
+              <Box flexDirection="row" pt={5} alignItems="center">
+                <Image
+                  style={style.avator}
+                  source={require('@/images/avator.png')}
+                />
+                <Box>
+                  <Text color="white" variant="h1">
+                    {signedIn ? '已登陆' : '登陆/注册'}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
+            </Pressable>
             <Box flexDirection="row" mt={5}>
               <Center flex={1}>
                 <Text color="white" style={style.common}>

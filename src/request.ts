@@ -30,11 +30,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   resopnse => {
     if (resopnse.data.ret === 'fail') {
-      Alert.alert('提示', resopnse.data.msg, [
-        {
-          text: '确定',
-        },
-      ]);
+      // Alert.alert('提示', resopnse.data.msg, [
+      //   {
+      //     text: '确定',
+      //   },
+      // ]);
     }
     return resopnse;
   },

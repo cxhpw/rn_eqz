@@ -100,7 +100,7 @@ const My: React.FC<Props> = () => {
               </Box>
             </Pressable>
             <Box flexDirection="row" marginTop="x5">
-              <Center flex={1}>
+              <Center flex={1} flexDirection="column">
                 <Text color="white" style={style.common}>
                   {(userInfo.Amount || 0).toFixed(2)}
                 </Text>
@@ -108,7 +108,7 @@ const My: React.FC<Props> = () => {
                   余额(元)
                 </Text>
               </Center>
-              <Center flex={1}>
+              <Center flex={1} flexDirection="column">
                 <Text color="white" style={style.common}>
                   {userInfo.PingJiaNum || 0}
                 </Text>
@@ -118,7 +118,7 @@ const My: React.FC<Props> = () => {
               </Center>
               <Center flex={1}>
                 <Pressable>
-                  <Center>
+                  <Center flexDirection="column">
                     <Image
                       style={[style.icon]}
                       source={require('@/images/kefu.png')}

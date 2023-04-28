@@ -21,6 +21,8 @@ import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import useSpecService from '../useSpecService';
 import { RouteProp, useRoute } from '@react-navigation/native';
+import { storageService } from '@/services/StorageService';
+import useStackService from '@/stacks/useStackService';
 
 type Props = {
   data: ProductDetail | undefined;
@@ -29,6 +31,8 @@ type Props = {
 
 const { scale } = helpers;
 const ActionSubmit: React.FC<Props> = ({ data }) => {
+  useStackService.useModel();
+  const { signedIn } = storageService;
   const ref = useRef<Modal>();
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   const theme = useTheme<AppTheme>();
@@ -82,11 +86,15 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
           navToCale('calendar');
           return;
         }
-        navigate('OrderSubmit', {
-          id: priceParameter!.autoid,
-          start: params?.startEnd?.[0] ?? '',
-          end: params?.startEnd?.[1] ?? '',
-        });
+        if (signedIn) {
+          navigate('OrderSubmit', {
+            id: priceParameter!.autoid,
+            start: params?.startEnd?.[0] ?? '',
+            end: params?.startEnd?.[1] ?? '',
+          });
+        } else {
+          navigate('Login');
+        }
       }
     });
   };

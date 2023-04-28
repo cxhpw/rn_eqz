@@ -147,7 +147,7 @@ class StorageService {
   /**
    * 登出
    */
-  signOut() {
+  async signOut() {
     StorageService.getInstance().deleteStorage(StorageToken.SignedIn);
     StorageService.getInstance().deleteStorage(StorageToken.UserInfo);
     StorageService.getInstance().deleteStorage(StorageToken.Token);

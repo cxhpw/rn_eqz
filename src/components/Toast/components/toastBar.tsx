@@ -96,7 +96,7 @@ const ToastBar: React.FC<ToastBarProps> = ({
           },
         ],
       },
-    }).duration(350);
+    }).duration(250);
   };
   const exitAnimation = (factor: number) => {
     return new Keyframe({
@@ -111,7 +111,7 @@ const ToastBar: React.FC<ToastBarProps> = ({
           { translateY: factor * -(toastSize.height * 1.5) },
         ],
       },
-    }).duration(400);
+    }).duration(300);
   };
   const { enter, exit } = getAnimationStyle(
     toast.position || position || 'top-center',

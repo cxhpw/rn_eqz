@@ -15,7 +15,7 @@ import ActionSubmit from './widget/actionSubmit';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { isEmpty } from 'lodash-es';
-import { toast, Toaster } from '@/components/Toast';
+import { toast } from '@/components/Toast';
 
 const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
   route,

@@ -17,21 +17,30 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import { scale } from '@/components/helpers/normalize';
 import { useState } from 'react';
 import toast from '@/components/Toast';
+import { goBack } from '@/services/NavigationService';
+import useStackService from '@/stacks/useStackService';
+import { useAuthService } from './useAuthService';
 
 const { useForm } = Form;
 const Index = () => {
+  const { loading, handleFinish } = useAuthService();
   const [form] = useForm();
   const [isAgress, setIsAgress] = useState(false);
   const theme = useTheme<AppTheme>();
-  const onFinish = (value: any) => {
-    console.log(value);
+  const onFinish = async (values: any) => {
     if (!isAgress) {
       toast.error('请同意用户协议');
+      return;
+    }
+    try {
+      await handleFinish(values);
+      goBack();
+    } catch (error) {
+      console.log('登录错误消息', error);
     }
   };
   const onChange = (value: any) => {
-    setIsAgress(true);
-    console.log(value);
+    setIsAgress(value);
   };
   return (
     <Container hasHeader={false}>
@@ -138,7 +147,13 @@ const Index = () => {
               </Checkbox>
             </Flex>
           </Form>
-          <Button marginTop="x10" title="提交" onPress={form.submit} />
+          <Button
+            marginTop="x10"
+            title="提交"
+            onPress={form.submit}
+            loading={loading}
+            disabled={loading}
+          />
         </Box>
       </Box>
     </Container>

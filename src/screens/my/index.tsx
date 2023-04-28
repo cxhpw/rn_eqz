@@ -1,4 +1,13 @@
-import { Container, Text, Pressable, Box, Center } from '@/components';
+import {
+  Container,
+  Text,
+  Pressable,
+  Box,
+  Center,
+  confirm,
+  SButton as Button,
+  Flex,
+} from '@/components';
 import { BgWrap, Menu, MenuItem } from './widget';
 import Image from 'react-native-fast-image';
 import { storageService } from '@/services/StorageService';
@@ -6,6 +15,7 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { EOderStatus } from '@/enum';
 import { navigate } from '@/services/NavigationService';
 import { Waterfall } from './widget';
+import useStackService from '@/stacks/useStackService';
 
 type Props = {};
 
@@ -73,14 +83,16 @@ const SERVICES_LIST = [
 ];
 
 const My: React.FC<Props> = () => {
-  const { signedIn, userInfo } = storageService;
+  const { signOut, signedIn, userInfo } = storageService;
+  const { update } = useStackService.useModel();
+  const avator = require('@/images/avator.png');
   return (
     <Container isBttomTabsScreen backgroundColor="#f8f8f8">
       <ScrollView style={{ flex: 1 }}>
         <BgWrap>
           <Box paddingHorizontal="2.5">
             <Pressable
-              onPress={() => {
+              onPress={async () => {
                 if (!signedIn) {
                   navigate('Login');
                 }
@@ -88,21 +100,46 @@ const My: React.FC<Props> = () => {
               scalable={false}
               activeOpacity={1}>
               <Box flexDirection="row" paddingTop="x5" alignItems="center">
-                <Image
-                  style={style.avator}
-                  source={require('@/images/avator.png')}
-                />
-                <Box>
-                  <Text color="white" variant="h1">
-                    {signedIn ? '已登陆' : '登陆/注册'}
-                  </Text>
-                </Box>
+                <Flex flex={1}>
+                  {signedIn ? (
+                    <Image
+                      style={style.avator}
+                      source={{ uri: userInfo.HeaderPhoto }}
+                    />
+                  ) : (
+                    <Image style={style.avator} source={avator} />
+                  )}
+                  <Box>
+                    <Text color="white" variant="h1">
+                      {signedIn ? userInfo.NickName : '登陆/注册'}
+                    </Text>
+                  </Box>
+                </Flex>
+                {signedIn ? (
+                  <Box>
+                    <Button
+                      variant="Link"
+                      colorScheme="white"
+                      onPress={async () => {
+                        try {
+                          await confirm('是否退出登录');
+                          signOut().then(() => {
+                            update();
+                          });
+                        } catch (error) {
+                          console.log('不退出');
+                        }
+                      }}>
+                      退出登录
+                    </Button>
+                  </Box>
+                ) : null}
               </Box>
             </Pressable>
             <Box flexDirection="row" marginTop="x5">
               <Center flex={1} flexDirection="column">
                 <Text color="white" style={style.common}>
-                  {(userInfo.Amount || 0).toFixed(2)}
+                  {(userInfo?.Amount ?? 0).toFixed(2)}
                 </Text>
                 <Text style={style.label} color="white">
                   余额(元)
@@ -110,7 +147,7 @@ const My: React.FC<Props> = () => {
               </Center>
               <Center flex={1} flexDirection="column">
                 <Text color="white" style={style.common}>
-                  {userInfo.PingJiaNum || 0}
+                  {userInfo?.PingJiaNum ?? 0}
                 </Text>
                 <Text style={style.label} color="white">
                   商品评价
@@ -142,7 +179,6 @@ const My: React.FC<Props> = () => {
             {props => (
               <MenuItem
                 onPress={e => {
-                  console.log(e.dataset);
                   navigate('Order', {
                     code: e.dataset.code,
                   });
@@ -165,7 +201,6 @@ const My: React.FC<Props> = () => {
             {props => (
               <MenuItem
                 onPress={e => {
-                  console.log(e.dataset);
                   const { routeName, label, params = {} } = e.dataset;
                   switch (label) {
                     default:

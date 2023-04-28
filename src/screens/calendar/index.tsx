@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { SetStateAction, useRef, useState } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Container } from '@/components';
 import DateCalendar from './dateCalendar';
@@ -6,8 +6,9 @@ import ActionSubmit from './widget/actionSubmit';
 import dayjs from 'dayjs';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
-import { redirect, setParams } from '@/services/NavigationService';
-import { RouteProp } from '@react-navigation/native';
+import { navigate, redirect, setParams } from '@/services/NavigationService';
+import { storageService } from '@/services/StorageService';
+import useStackService from '@/stacks/useStackService';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
 
@@ -17,7 +18,9 @@ type Props = {} & NativeStackScreenProps<AppParamList, 'Calendar'>;
  * false 时为手动选择租期
  */
 let manual = false;
-const Index: React.FC<Props> = ({ route, navigation }) => {
+const Index: React.FC<Props> = ({ route }) => {
+  useStackService.useModel();
+  const { signedIn } = storageService;
   const startEnd = useRef<string[]>([]);
   const [height, setHeight] = useState(0);
   /**
@@ -43,15 +46,6 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
     });
     return res.data;
   });
-  /**
-   * 回退到商品详情时，重新打开Modal
-   */
-  // useEffect(() => {
-  //   const { fn } = route.params;
-  //   return () => {
-  //     fn?.(true);
-  //   };
-  // }, [route.params]);
 
   const onLayout = (h: SetStateAction<number>) => {
     setHeight(h);
@@ -69,11 +63,16 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
       startEnd: startEnd.current,
       isShowModal: true,
     });
-    redirect('OrderSubmit', {
-      id: id,
-      start: startEnd.current[0],
-      end: startEnd.current[1],
-    });
+    console.log('日期', signedIn);
+    if (signedIn) {
+      redirect('OrderSubmit', {
+        id: id,
+        start: startEnd.current[0],
+        end: startEnd.current[1],
+      });
+    } else {
+      navigate('Login');
+    }
   };
   // 租期回调
   const onRangeDays = (n: any) => {

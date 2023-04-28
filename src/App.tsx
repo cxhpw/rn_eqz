@@ -28,6 +28,7 @@ import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
 import { lightTheme, darkTheme } from './theme';
 import { useStore } from './store';
+import useStackService from './stacks/useStackService';
 
 enableFreeze();
 
@@ -40,6 +41,7 @@ const App = () => {
 
   useMount(() => {
     const init = async () => {
+      /** 同步状态到zustand */
       fetchAppConfig();
     };
     init().finally(() => {
@@ -62,13 +64,15 @@ const App = () => {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-          <NavigationContainer
-            ref={navigationRef}
-            theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-            fallback={<Fallback />}
-            linking={linking}>
-            <Stack />
-          </NavigationContainer>
+          <useStackService.Provider>
+            <NavigationContainer
+              ref={navigationRef}
+              theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+              fallback={<Fallback />}
+              linking={linking}>
+              <Stack />
+            </NavigationContainer>
+          </useStackService.Provider>
         </ThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

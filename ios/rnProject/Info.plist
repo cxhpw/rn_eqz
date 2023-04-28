@@ -44,8 +44,12 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		 <!-- 允许所有域名使用 HTTP 协议 -->
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		 <!-- 允许所有域名使用 HTTPS 协议 -->
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+    <true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>f.wxjmei.com</key>

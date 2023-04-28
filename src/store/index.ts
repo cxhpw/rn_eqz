@@ -7,8 +7,13 @@ import {
 } from '@/slice/utils';
 import { createAppConfigSlice, AppConfigSlice } from '@/slice/config';
 import { createErrorSlice, ErrorSlice } from '@/slice/error';
+import { AuthSlice, createAuthSlice } from '@/slice/auth';
 
-type Slices = isOnlineSlice & CServiceSlice & AppConfigSlice & ErrorSlice;
+type Slices = isOnlineSlice &
+  CServiceSlice &
+  AppConfigSlice &
+  ErrorSlice &
+  AuthSlice;
 type Create = StateCreator<Slices>;
 
 const log = (_create: Create): StateCreator<Slices> => {
@@ -34,5 +39,6 @@ export const useStore = create<Slices>(
     ...createisOnlineSlice(...args),
     ...createAppConfigSlice(...args),
     ...createErrorSlice(...args),
+    ...createAuthSlice(...args),
   })),
 );

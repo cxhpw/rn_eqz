@@ -13,21 +13,21 @@ import {
 } from './widget';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Box } from 'native-base';
+import { Box } from '@/components';
 import { useStore } from '@/store';
 
 type Props = {} & BottomTabScreenProps<AppParamList>;
 
 function Title({ children }: PropsWithChildren) {
   return (
-    <Box mb={2}>
+    <Box marginBottom="x2">
       <Text variant="h1">{children}</Text>
     </Box>
   );
 }
 function Summary({ children }: PropsWithChildren) {
   return (
-    <Box mb={2.5}>
+    <Box marginBottom="2.5">
       <Text variant="p2" color="gray300">
         {children}
       </Text>

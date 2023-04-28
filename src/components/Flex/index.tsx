@@ -12,6 +12,8 @@ import {
   spacing,
   SpacingProps,
   useRestyle,
+  position,
+  PositionProps,
 } from '@shopify/restyle';
 
 import { Theme } from '../Theme/theme';
@@ -21,11 +23,13 @@ const restyleFunctions = composeRestyleFunctions([
   border,
   backgroundColor,
   layout,
+  position,
 ]);
 
 type FlexProps = SpacingProps<Theme> &
   BorderProps<Theme> &
   LayoutProps<Theme> &
+  PositionProps<Theme> &
   BackgroundColorProps<Theme> & {
     style?: StyleProp<ViewStyle>;
     children?: ReactNode;

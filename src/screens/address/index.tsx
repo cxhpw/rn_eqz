@@ -11,16 +11,17 @@ import {
   Icon,
   CustomRefreshControl,
 } from '@/components';
-import { useRefreshService, useToast } from '@/hooks';
+import { useRefreshService } from '@/hooks';
 import { StyleSheet, View } from 'react-native';
 import request from '@/request';
 import { useEffect, useState } from 'react';
 import { FlashList } from '@shopify/flash-list';
 import { Radio } from '@/components/Radio';
-import { Fab } from 'native-base';
 import { navigate } from '@/services/NavigationService';
 import { useIsFocused } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import toast from '@/components/Toast';
+import FA from './Fab';
 
 const Index = ({
   route,
@@ -28,7 +29,6 @@ const Index = ({
 }: NativeStackScreenProps<AppParamList, 'Address'>) => {
   const isFocused = useIsFocused();
   const [value, setValue] = useState('');
-  const toast = useToast();
   const {
     data = [],
     allLoaded,
@@ -94,7 +94,7 @@ const Index = ({
     ).data;
     if (res) {
       console.log(res);
-      toast.showToast(res.msg);
+      toast(res.msg);
       onRefresh();
     }
   };
@@ -212,13 +212,19 @@ const Index = ({
             />
           </Swipeable.Provider>
         </Radio.Group>
-        <Fab
+        {/* <Fab
           onPress={() => {
             navigate('AddAddress');
           }}
           renderInPortal={false}
           shadow={2}
           size="lg"
+          icon={<Icon color="white" name="add" size={20} />}
+        /> */}
+        <FA
+          onPress={() => {
+            navigate('AddAddress');
+          }}
           icon={<Icon color="white" name="add" size={20} />}
         />
       </Flex>

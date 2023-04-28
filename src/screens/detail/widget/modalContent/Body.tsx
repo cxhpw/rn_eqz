@@ -1,7 +1,6 @@
-import { Text, Pressable } from '@/components';
+import { Text, Pressable, Box, Flex } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { Box, Flex } from 'native-base';
 import { useCallback } from 'react';
 import { ScrollView, StyleSheet, TextStyle } from 'react-native';
 
@@ -34,7 +33,7 @@ const Body: React.FC<Props> = ({ data, onChange }) => {
             return (
               <Box style={styles.box} key={item.name}>
                 <Text style={styles.title}>{item.name}</Text>
-                <Flex flexWrap="wrap" flexDir="row">
+                <Flex flexWrap="wrap" flexDirection="row">
                   {item.children.map(child => (
                     <Pressable
                       scalable={false}

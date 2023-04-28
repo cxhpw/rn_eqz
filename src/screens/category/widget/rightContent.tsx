@@ -1,9 +1,9 @@
-import { Box } from 'native-base';
 import { StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Item from '@/screens/home/widget/Section/Item';
 import DisCount from '@/screens/home/widget/Section/Discount';
 import { FlashList } from '@shopify/flash-list';
+import { Box } from '@/components';
 
 type Props = {
   data?: Goods | null;
@@ -34,7 +34,7 @@ const RightContent: React.FC<Props> = ({ data }) => {
       estimatedItemSize={150}
       ListHeaderComponent={
         data?.CategoryBanner ? (
-          <Box px="5px">
+          <Box paddingHorizontal="x1">
             <FastImage
               source={{
                 uri: data?.CategoryBanner,

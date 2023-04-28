@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import Header from './modalContent/header';
 import ProductContext from '../context';
-import { Box } from 'native-base';
+import { Box } from '@/components';
 import { StyleSheet } from 'react-native';
 import RNModal from 'react-native-modal';
 

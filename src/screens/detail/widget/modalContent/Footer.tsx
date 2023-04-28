@@ -1,6 +1,5 @@
-import { Icon, Pressable } from '@/components';
+import { Icon, Pressable, Box } from '@/components';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { Box } from 'native-base';
 import { Text, StyleSheet, View } from 'react-native';
 import dayjs from 'dayjs';
 

@@ -1,8 +1,7 @@
-import { Container, Fallback } from '@/components';
+import { Container, Fallback, Box, Flex } from '@/components';
 import { PropsWithChildren, useEffect, useRef, useState } from 'react';
 import request from '@/request';
 import { useCustomRequest } from '@/hooks';
-import { Box, Flex } from 'native-base';
 import { Menu, RightContent } from './widget';
 import type { IGestureResponderEvent } from './widget/menu/item';
 import useScrollService from './useScrollService';
@@ -52,7 +51,10 @@ const Category: React.FC<PropsWithChildren<Props>> = () => {
         <Fallback />
       ) : (
         <Flex flexDirection="row" flex={1}>
-          <Box width="24" height="full">
+          <Box
+            style={{
+              width: '24%',
+            }}>
             <Menu
               ref={ref}
               data={goods}
@@ -64,7 +66,7 @@ const Category: React.FC<PropsWithChildren<Props>> = () => {
               }}
             />
           </Box>
-          <Box flex={1} height="full">
+          <Box flex={1}>
             <RightContent data={content} />
           </Box>
         </Flex>

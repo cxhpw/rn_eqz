@@ -1,13 +1,12 @@
 import { useStore } from '@/store';
 import { useRequest } from 'ahooks';
 import { Service, Options } from 'ahooks/lib/useRequest/src/types';
-import { useToast } from '@/hooks';
+import toast from '@/components/Toast';
 
 export default function useCustomRequest<T, P extends any[] = []>(
   service: Service<T, P>,
   options?: Options<T, P>,
 ) {
-  const { showToast } = useToast();
   const isOnline = useStore(state => state.isOnline);
   const customService = async (...args: P) => {
     if (!isOnline) {
@@ -30,10 +29,10 @@ export default function useCustomRequest<T, P extends any[] = []>(
         if ([100].includes(code)) {
           // signOut();
         } else {
-          showToast(message);
+          toast(message);
         }
       } catch (err) {
-        showToast((err as unknown as { message: string })?.message);
+        toast.error((err as unknown as { message: string })?.message);
       } finally {
         onError?.(error, params);
       }

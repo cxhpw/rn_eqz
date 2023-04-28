@@ -1,7 +1,6 @@
-import { Pressable, Text } from '@/components';
+import { Pressable, Text, Center } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { Center } from 'native-base';
 import { memo } from 'react';
 import { GestureResponderEvent, StyleSheet } from 'react-native';
 

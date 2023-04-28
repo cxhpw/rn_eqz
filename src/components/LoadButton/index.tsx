@@ -1,4 +1,4 @@
-import { Flex } from 'native-base';
+import { Flex } from '@/components';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 
 const Index: React.FC<{ title?: string; loading?: boolean }> = ({
@@ -9,7 +9,7 @@ const Index: React.FC<{ title?: string; loading?: boolean }> = ({
     <Flex
       position="relative"
       flexDirection="row"
-      py={5}
+      paddingVertical="x5"
       alignItems="center"
       justifyContent="center">
       {loading ? (

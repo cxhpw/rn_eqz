@@ -50,7 +50,11 @@ const Button = (
   });
   const boxChildren = (child: any) => {
     return child ? (
-      <Text variant="p2" color={colorScheme} style={[_text]}>
+      <Text
+        variant="p2"
+        color={colorScheme}
+        style={[_text]}
+        paddingVertical="x1">
         {child}
       </Text>
     ) : null;
@@ -77,15 +81,15 @@ const Button = (
       onPressOut={composeEventHandlers(onPressOut, pressableProps.onPressOut)}
       {...redolveProps}>
       <Center>
-        {isLoading && spinnerPlacement === 'start' ? spinnerElement : null}
         {leftIcon && !isLoading ? leftIcon : null}
-        {(isLoading || leftIcon) && <Text style={styles.space} />}
+        {isLoading && spinnerPlacement === 'start' ? spinnerElement : null}
+        {/* {(isLoading || leftIcon) && <Text style={styles.space} />} */}
         {isLoading
           ? isLoadingText
             ? boxChildren(isLoadingText)
             : null
           : boxChildren(children)}
-        {(isLoading || rightIcon) && <Text style={styles.space} />}
+        {/* {(isLoading || rightIcon) && <Text style={styles.space} />} */}
         {rightIcon && !isLoading ? rightIcon : null}
         {isLoading && spinnerPlacement === 'end' ? spinnerElement : null}
       </Center>

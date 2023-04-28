@@ -1,7 +1,6 @@
-import { Text } from '@/components';
+import { Text, Box, Flex } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { Box, Flex } from 'native-base';
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -18,8 +17,8 @@ const ProductPanel: React.FC<Props> = ({ data }) => {
   console.log('ProductPanel render');
   return (
     <Box
-      padding={2.5}
-      pb="15px"
+      padding="2.5"
+      paddingBottom="x4"
       style={[style.wrapper, { borderBottomColor: theme.colors.border }]}>
       <Text variant="h2" mb="x5">
         {data?.ProductName}

@@ -7,8 +7,9 @@ import {
   Input,
   Switch,
   Text,
+  toast,
 } from '@/components';
-import { useCustomRequest, useToast } from '@/hooks';
+import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
@@ -20,7 +21,6 @@ const { useForm } = Form;
 const Index = () => {
   const { params } = useRoute<RouteProp<AppParamList, 'AddAddress'>>();
   const [form] = useForm();
-  const { showToast } = useToast();
   useEffect(() => {
     async function run() {
       const res = await (
@@ -67,7 +67,7 @@ const Index = () => {
 
   const onFinish = (values: any) => {
     runAsync(values).then(res => {
-      showToast(res.msg);
+      toast(res.msg);
       if (res.ret === 'success') {
         setParams('Address', {
           pageIsRefresh: true,

@@ -1,7 +1,6 @@
 import { StyleSheet, Linking, TouchableOpacity, Alert } from 'react-native';
 import React, { memo, PropsWithChildren } from 'react';
-import { Container, Text } from '@/components';
-import { Box, Center } from 'native-base';
+import { Container, Text, Box, Center } from '@/components';
 import FastImage from 'react-native-fast-image';
 import { useStore } from '@/store';
 import { useMount } from 'ahooks';
@@ -28,7 +27,11 @@ const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
             Alert.alert('提示', error.message);
           });
       }}>
-      <Box py={7} px={6} mb={4} style={style.card}>
+      <Box
+        paddingVertical="x7"
+        paddingHorizontal="x6"
+        marginBottom="x4"
+        style={style.card}>
         <Box>
           <Text style={style.title} color="black">
             {title}
@@ -51,22 +54,24 @@ const Chat: React.FC<PropsWithChildren<Props>> = () => {
   useMount(() => fetchService());
   return (
     <Container isBttomTabsScreen>
-      <Center flex={1} mt="-40%">
-        <FastImage
-          style={style.Image}
-          source={{
-            uri: PrTLImg,
-          }}
-          resizeMode="cover"
-        />
+      <Box flex={1} mt="x10">
+        <Center>
+          <FastImage
+            style={style.Image}
+            source={{
+              uri: PrTLImg,
+            }}
+            resizeMode="cover"
+          />
+        </Center>
         <Text padding="x7" color="gray300">
           {data?.ServiceTime}
         </Text>
-        <Box px={6} width="full">
+        <Box paddingHorizontal="x6" flex={1}>
           <Card title="商家电话" desc={`${data?.BusinessPhone}`} />
           <Card title="平台电话" desc={`${data?.PlatformServices}`} />
         </Box>
-      </Center>
+      </Box>
     </Container>
   );
 };

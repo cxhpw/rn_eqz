@@ -1,12 +1,12 @@
 import { Alert, Linking } from 'react-native';
-import { useCustomRequest, useToast } from '@/hooks';
+import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import { useContext } from 'react';
 import { OrderContext } from '../screens/order/widget/tabView';
+import { toast } from '@/components';
 
 export default function useButtonService(id: number) {
   const Context = useContext(OrderContext);
-  const { showToast } = useToast();
   const { runAsync } = useCustomRequest(
     async (params: any) => {
       const res = await (
@@ -54,7 +54,7 @@ export default function useButtonService(id: number) {
             action: 'cancel',
           }).then(res => {
             console.log(res);
-            showToast(res.msg);
+            toast(res.msg);
             Context?.onRefresh();
           });
         },
@@ -75,7 +75,7 @@ export default function useButtonService(id: number) {
             runAsync({
               action: 'delete',
             }).then(res => {
-              showToast(res.msg);
+              toast(res.msg);
               resolve(res);
             });
           },

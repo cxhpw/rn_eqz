@@ -1,4 +1,4 @@
-import { Box, Flex } from 'native-base';
+import { Box, Flex } from '@/components';
 import { memo, PropsWithChildren, useState } from 'react';
 import { StyleSheet, Dimensions, View } from 'react-native';
 import RNCarousel from 'react-native-reanimated-carousel';
@@ -57,7 +57,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({ data = [] }) => {
           setActive(index);
         }}
       />
-      <Flex flexDir="row" style={style.indicator} justifyContent="center">
+      <Flex flexDirection="row" style={style.indicator} justifyContent="center">
         {data.map((item, i) => (
           <Dot key={item.PicID} active={i === active} />
         ))}

@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo } from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Box, Flex } from 'native-base';
 import Carousel from 'react-native-reanimated-carousel';

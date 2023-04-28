@@ -1,11 +1,5 @@
 import { Box, Button, Center, Flex, HStack } from 'native-base';
-import {
-  Image,
-  StyleSheet,
-  Linking,
-  Alert,
-  InteractionManager,
-} from 'react-native';
+import { Image, StyleSheet, InteractionManager } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
@@ -19,7 +13,7 @@ import Footer from './modalContent/Footer';
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import useSpecService from '../useSpecService';
-import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
+import { RouteProp, useRoute } from '@react-navigation/native';
 
 type Props = {
   data: ProductDetail | undefined;

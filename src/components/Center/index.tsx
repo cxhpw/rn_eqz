@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import {
   composeRestyleFunctions,
   spacing,
@@ -25,7 +25,7 @@ import Text from '../Text';
 
 type CenterProps = LayoutProps<Theme> &
   BorderProps<Theme> &
-  SpacingProps<Theme>;
+  SpacingProps<Theme> & { style?: StyleProp<ViewStyle> };
 
 const restyleFunctions = composeRestyleFunctions([layout, border, spacing]);
 

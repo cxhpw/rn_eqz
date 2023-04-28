@@ -1,12 +1,18 @@
-import { Text, Pressable } from '@/components';
+import {
+  Text,
+  Pressable,
+  Box,
+  SButton as Button,
+  Center,
+  Flex,
+  toast,
+} from '@/components';
 import { AppTheme } from '@/theme';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { useTheme } from '@shopify/restyle';
-import { Box, Button, Center, Flex } from 'native-base';
 import { useEffect, useState } from 'react';
 import { LayoutChangeEvent, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useToast } from 'native-base';
 import request from '@/request';
 import { useCustomRequest } from '@/hooks';
 
@@ -35,7 +41,6 @@ const ActionSubmit: React.FC<Props> = ({
   boundary = false,
   startEnd,
 }) => {
-  const toast = useToast();
   const [disabled, setDisabled] = useState<boolean>(true);
   const [show, setShow] = useState<boolean>(false);
   const { bottom } = useSafeAreaInsets();
@@ -75,11 +80,7 @@ const ActionSubmit: React.FC<Props> = ({
     if (days > 0) {
       setDisabled(days < min);
       if (days < min) {
-        toast.show({
-          description: `此商品至少起租${min}天`,
-          placement: 'top',
-          duration: 2000,
-        });
+        toast.error(`此商品至少起租${min}天`);
         setShow(false);
       } else {
         console.log('发生请求');
@@ -102,9 +103,9 @@ const ActionSubmit: React.FC<Props> = ({
         },
       ]}>
       <Box style={styles.infoBox}>
-        <Flex flexDir="row" alignItems="center">
+        <Flex flexDirection="row" alignItems="center">
           <Text color="gray500">租期：</Text>
-          <Flex flexDir="row">
+          <Flex flexDirection="row">
             {params.leaseterm?.map((item, index) => (
               <Pressable
                 onPress={() => {
@@ -139,18 +140,19 @@ const ActionSubmit: React.FC<Props> = ({
           </Box>
         )}
       </Box>
-      <Flex style={styles.actionSubmit} flexDir="row">
+      <Flex style={styles.actionSubmit} flexDirection="row">
         <Center flex={1}>
           <Text color="gray500">{`此商品至少起租${min}天`}</Text>
         </Center>
         <Button
-          disabled={disabled}
+          isDisabled={disabled}
           onPress={() => onSubmit(data!.autoid)}
           style={[
             styles.button,
             // eslint-disable-next-line react-native/no-inline-styles
             {
               backgroundColor: disabled ? '#999' : theme.colors.primary50,
+              borderColor: disabled ? '#999' : theme.colors.primary50,
             },
           ]}>
           <Text color="white">确定</Text>

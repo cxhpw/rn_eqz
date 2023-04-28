@@ -67,7 +67,7 @@ export default function usePropsResolution(
           paddingVertical: '2.5',
           paddingHorizontal: 'x3',
           borderRadius: 'x1',
-          opacity: isDisabled ? 0.5 : 1,
+          opacity: isDisabled ? 0.4 : 1,
           alignItems: 'center',
           justifyContent: 'center',
         },

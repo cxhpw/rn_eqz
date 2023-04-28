@@ -1,5 +1,4 @@
-import { Text, Pressable, HtmlParse } from '@/components';
-import { Box, Center, Flex } from 'native-base';
+import { Text, Pressable, HtmlParse, Box, Center, Flex } from '@/components';
 import { memo, useState } from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -20,7 +19,7 @@ const Desc: React.FC<Props> = ({ data }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return (
     <Box>
-      <Flex flexDir="row">
+      <Flex flexDirection="row">
         {tabs.map((item, i) => (
           <Box key={item.title} flex={1}>
             <Pressable style={style.tabBarItem} onPress={() => setActive(i)}>

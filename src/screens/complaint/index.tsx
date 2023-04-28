@@ -1,11 +1,10 @@
-import { Box, Button, Container, Form, Input } from '@/components';
-import { useCustomRequest, useToast } from '@/hooks';
+import { Box, Button, Container, Form, Input, toast } from '@/components';
+import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 
 const { useForm } = Form;
 const Index = () => {
   const [form] = useForm();
-  const { showToast } = useToast();
   const { runAsync, loading } = useCustomRequest(
     async values => {
       return (
@@ -25,7 +24,7 @@ const Index = () => {
   const onFinish = (values: any) => {
     console.log(values);
     runAsync(values).then(res => {
-      showToast(res.msg);
+      toast(res.msg);
     });
   };
   const onFinishFailed = () => {};

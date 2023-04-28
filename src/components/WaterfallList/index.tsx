@@ -1,6 +1,5 @@
 import { MasonryFlashList, MasonryFlashListProps } from '@shopify/flash-list';
-import { Flex } from 'native-base';
-import { Text } from '@/components';
+import { Text, Flex } from '@/components';
 import { useRef, useState } from 'react';
 import {
   ActivityIndicator,
@@ -116,7 +115,7 @@ export default function WaterfallList<T>({
     switch (footerStatus) {
       case FooterStatus.CanLoadMore:
         return (
-          <Flex marginTop="5" alignItems={'center'} justifyContent={'center'}>
+          <Flex marginTop="x5" alignItems={'center'} justifyContent={'center'}>
             <Text variant="p1" color="gray400">
               上拉加载更多
             </Text>
@@ -124,7 +123,7 @@ export default function WaterfallList<T>({
         );
       case FooterStatus.Refreshing:
         return (
-          <Flex marginTop="5" alignItems={'center'} justifyContent={'center'}>
+          <Flex marginTop="x5" alignItems={'center'} justifyContent={'center'}>
             <ActivityIndicator color="gray" />
             <Text variant="p1" color="gray400">
               努力加载中...
@@ -133,7 +132,7 @@ export default function WaterfallList<T>({
         );
       case FooterStatus.NoMoreData:
         return (
-          <Flex marginTop="5" alignItems={'center'} justifyContent={'center'}>
+          <Flex marginTop="x5" alignItems={'center'} justifyContent={'center'}>
             <Text variant="p1" color="gray400">
               没有更多数据了
             </Text>
@@ -141,7 +140,7 @@ export default function WaterfallList<T>({
         );
       case FooterStatus.Failure:
         return (
-          <Flex marginTop="5" alignItems={'center'} justifyContent={'center'}>
+          <Flex marginTop="x5" alignItems={'center'} justifyContent={'center'}>
             <Text variant="p1" color="gray400">
               加载失败
             </Text>

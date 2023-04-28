@@ -1,5 +1,5 @@
 import { memo, PropsWithChildren } from 'react';
-import { Box } from 'native-base';
+import { Box } from '@/components';
 import { ImageBackground, StyleSheet } from 'react-native';
 
 const BgWrap: React.FC<PropsWithChildren<{ url: string }>> = ({
@@ -7,7 +7,7 @@ const BgWrap: React.FC<PropsWithChildren<{ url: string }>> = ({
   url,
 }) => {
   return (
-    <Box height="430px">
+    <Box height={430}>
       <ImageBackground
         style={style.ImageBackground}
         source={{

@@ -1,8 +1,7 @@
 import { useCustomRequest } from '@/hooks';
 import request from '@/request';
 import WaterfallItem from './waterfallItem';
-import { Box, Center, Flex } from 'native-base';
-import { LoadButton, Text } from '@/components';
+import { LoadButton, Text, Box, Center, Flex } from '@/components';
 import { StyleSheet } from 'react-native';
 
 const Waterfall = () => {
@@ -19,14 +18,14 @@ const Waterfall = () => {
   );
   return (
     <Box>
-      <Center flexDirection="row" my={5}>
+      <Center flexDirection="row" marginVertical="x5">
         <Text style={style.line} />
         <Text variant="h2" paddingHorizontal="x4">
           为您推荐
         </Text>
         <Text style={style.line} />
       </Center>
-      <Flex flexWrap="wrap" flexDir="row" px="5px">
+      <Flex flexWrap="wrap" flexDirection="row" marginHorizontal="x1">
         {data?.map(item => (
           <WaterfallItem data={item} key={item.AutoID} />
         ))}

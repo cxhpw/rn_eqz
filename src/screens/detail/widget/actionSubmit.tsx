@@ -1,9 +1,16 @@
-import { Box, Button, Center, Flex, HStack } from 'native-base';
 import { Image, StyleSheet, InteractionManager } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { Text, Pressable, helpers } from '@/components';
+import {
+  Text,
+  Pressable,
+  helpers,
+  Box,
+  SButton as Button,
+  Center,
+  Flex,
+} from '@/components';
 import { navigate } from '@/services/NavigationService';
 import Modal from 'react-native-modal';
 import { memo, useEffect, useRef, useState } from 'react';
@@ -62,7 +69,7 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
       if (name === 'calendar') {
         navigate('Calendar', {
           // 警告：函数值无法被序列化，但是功能能用
-          fn: (n: boolean) => setIsModalVisible(n),
+          // fn: (n: boolean) => setIsModalVisible(n),
           start: params.startEnd ? params.startEnd[0] : '',
           end: params.startEnd ? params.startEnd[1] : '',
           minDay: data?.productdata.MinDays,
@@ -85,7 +92,7 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
   };
   return (
     <>
-      <HStack
+      <Flex
         style={[
           style.wrapper,
           // eslint-disable-next-line react-native/no-inline-styles
@@ -95,13 +102,13 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
           },
         ]}
         alignItems="center">
-        <Flex flex={1} flexDir="row">
+        <Flex flex={1} flexDirection="row">
           <Center flex={1}>
             <Pressable
               onPress={() => {
                 navigate('Home');
               }}>
-              <Center height="full" flex={1}>
+              <Center height="100%" flexDirection="column">
                 <Image
                   style={style.icon}
                   source={require('@/images/index.png')}
@@ -115,7 +122,7 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
               onPress={() => {
                 navigate('Chat');
               }}>
-              <Center height="full" flex={1}>
+              <Center height="100%" flexDirection="column">
                 <Image
                   style={style.icon}
                   source={require('@/images/chat.png')}
@@ -125,7 +132,7 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
             </Pressable>
           </Center>
         </Flex>
-        <Flex ml={2.5}>
+        <Flex marginLeft="2.5">
           <Button
             onPress={() => setIsModalVisible(true)}
             style={[
@@ -137,7 +144,7 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
             选择租赁日期
           </Button>
         </Flex>
-      </HStack>
+      </Flex>
       <Modal
         style={style.modal}
         testID={'modal'}

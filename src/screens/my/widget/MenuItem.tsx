@@ -1,8 +1,9 @@
-import { Center, VStack, IStackProps } from 'native-base';
 import { FC } from 'react';
 import Image from 'react-native-fast-image';
-import { Text, Pressable } from '@/components';
+import { Text, Pressable, Center, Box } from '@/components';
 import { GestureResponderEvent } from 'react-native';
+import { SpacingProps } from '@shopify/restyle';
+import { Theme } from '@/components/Theme/theme';
 
 interface IGestureResponderEvent extends GestureResponderEvent {
   dataset: {
@@ -17,7 +18,8 @@ type Props = {
   size?: number;
   cols?: number;
   onPress?: (event: IGestureResponderEvent) => any;
-} & IStackProps;
+} & SpacingProps<Theme>;
+
 const MenuItem: FC<Props> = ({
   label,
   url,
@@ -52,7 +54,7 @@ const MenuItem: FC<Props> = ({
     );
   }
   return (
-    <VStack width={`1/${cols}`} {...rest}>
+    <Box width={`${(1 / cols!) * 100}%`} {...rest}>
       <Pressable
         onPress={e => {
           //@ts-ignore
@@ -62,14 +64,14 @@ const MenuItem: FC<Props> = ({
           event.dataset.url && delete event.dataset.url;
           onPress?.(event as IGestureResponderEvent);
         }}>
-        <Center>
+        <Center flexDirection="column">
           {createImage()}
           <Text variant="p2" mt="x2" color="black">
             {label}
           </Text>
         </Center>
       </Pressable>
-    </VStack>
+    </Box>
   );
 };
 

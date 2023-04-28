@@ -1,7 +1,6 @@
-import { Box, Flex } from 'native-base';
 import { memo } from 'react';
 import { Pressable } from 'react-native';
-import { Icon, Text } from '@/components';
+import { Icon, Text, Box, Flex } from '@/components';
 import { useTheme } from '@shopify/restyle';
 import { AppTheme } from '@/theme';
 import { navigate } from '@/services/NavigationService';
@@ -9,18 +8,18 @@ import { navigate } from '@/services/NavigationService';
 const SearchBar: React.FC = () => {
   const theme = useTheme<AppTheme>();
   return (
-    <Box mx="2.5" my="2.5">
+    <Box marginVertical="2.5" marginHorizontal="2.5">
       <Pressable
         onPress={() => {
           navigate('Search');
         }}>
         <Flex
-          px="15px"
-          direction="row"
+          paddingHorizontal="x4"
+          flexDirection="row"
           alignItems="center"
-          height="40px"
+          height={40}
           overflow="hidden"
-          borderRadius={4}
+          borderRadius="x1"
           backgroundColor="white">
           <Icon name="sousuo" color={theme.colors.primary500} size={25} />
           <Text color="primary500" fontSize={14} ml="x1">

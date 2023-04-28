@@ -1,10 +1,10 @@
-import { Box } from 'native-base';
+import { Box } from '@/components';
 import { memo } from 'react';
 import { Image, StyleSheet } from 'react-native';
 
 const MidImage = ({ url }: { url: string }) => {
   return (
-    <Box mx="2.5" mt={2.5}>
+    <Box marginHorizontal="2.5" marginTop="2.5">
       <Image
         style={style.Image}
         source={{

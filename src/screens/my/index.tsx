@@ -1,5 +1,4 @@
-import { Container, Text, Pressable } from '@/components';
-import { Box, Center } from 'native-base';
+import { Container, Text, Pressable, Box, Center } from '@/components';
 import { BgWrap, Menu, MenuItem } from './widget';
 import Image from 'react-native-fast-image';
 import { storageService } from '@/services/StorageService';
@@ -79,7 +78,7 @@ const My: React.FC<Props> = () => {
     <Container isBttomTabsScreen backgroundColor="#f8f8f8">
       <ScrollView style={{ flex: 1 }}>
         <BgWrap>
-          <Box px={2.5}>
+          <Box paddingHorizontal="2.5">
             <Pressable
               onPress={() => {
                 if (!signedIn) {
@@ -88,7 +87,7 @@ const My: React.FC<Props> = () => {
               }}
               scalable={false}
               activeOpacity={1}>
-              <Box flexDirection="row" pt={5} alignItems="center">
+              <Box flexDirection="row" paddingTop="x5" alignItems="center">
                 <Image
                   style={style.avator}
                   source={require('@/images/avator.png')}
@@ -100,7 +99,7 @@ const My: React.FC<Props> = () => {
                 </Box>
               </Box>
             </Pressable>
-            <Box flexDirection="row" mt={5}>
+            <Box flexDirection="row" marginTop="x5">
               <Center flex={1}>
                 <Text color="white" style={style.common}>
                   {(userInfo.Amount || 0).toFixed(2)}
@@ -133,7 +132,7 @@ const My: React.FC<Props> = () => {
             </Box>
           </Box>
         </BgWrap>
-        <Box style={style.card} mt="3.5">
+        <Box style={style.card} marginTop="x4">
           <View>
             <Text style={style.title} color="black">
               我的订单
@@ -149,7 +148,7 @@ const My: React.FC<Props> = () => {
                   });
                 }}
                 data={props}
-                py={4}
+                paddingVertical="x4"
                 key={props.label}
                 {...props}
               />
@@ -174,7 +173,7 @@ const My: React.FC<Props> = () => {
                   }
                 }}
                 data={props}
-                py={4}
+                paddingVertical="x4"
                 key={props.label}
                 {...props}
               />

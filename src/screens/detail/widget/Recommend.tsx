@@ -1,8 +1,7 @@
 import { FlashList } from '@shopify/flash-list';
 import Item from '@/screens/home/widget/Section/Item';
 import DisCount from '@/screens/home/widget/Section/Discount';
-import { Text } from '@/components';
-import { Box } from 'native-base';
+import { Text, Box } from '@/components';
 import { memo } from 'react';
 
 type Props = {
@@ -11,7 +10,7 @@ type Props = {
 const Recommend: React.FC<Props> = ({ data = [] }) => {
   console.log('Recommend render');
   return (
-    <Box px={2.5} pt="15px">
+    <Box paddingHorizontal="2.5" marginTop="x4">
       <Text variant="h2">推荐商品</Text>
       <FlashList
         showsHorizontalScrollIndicator={false}

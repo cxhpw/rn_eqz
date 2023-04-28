@@ -1,10 +1,10 @@
 import { memo, PropsWithChildren } from 'react';
-import { Box } from 'native-base';
+import { Box } from '@/components';
 import { ImageBackground, StyleSheet } from 'react-native';
 
 const BgWrap: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <Box height="164px">
+    <Box height={164}>
       <ImageBackground
         style={style.ImageBackground}
         resizeMode="stretch"

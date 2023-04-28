@@ -1,10 +1,10 @@
 import { useCustomRequest } from '@/hooks';
-import { Box, HStack } from 'native-base';
 import { PropsWithChildren } from 'react';
 import { Image, ScrollView } from 'react-native';
 import request from '@/request';
 import Item from './Item';
 import DisCount from './Discount';
+import { Box, Flex } from '@/components';
 
 type Props = {
   type: string;
@@ -60,15 +60,18 @@ const Index: React.FC<PropsWithChildren<Props>> = ({
       ).data,
   );
   return (
-    <Box py={5} px={2.5}>
-      <Box mb={2}>{renderTitle}</Box>
+    <Box paddingVertical="x5" paddingHorizontal="2.5">
+      <Box marginBottom="x2">{renderTitle}</Box>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        <HStack space="1.5">
+        <Flex>
           {data?.map((item, index) => {
             return (
               <Item
                 key={item.AutoID}
                 {...item}
+                ItemStyle={{
+                  marginRight: 10,
+                }}
                 hasPrice={hasPrice}
                 size={185 / 2}
                 renderIcon={
@@ -81,7 +84,7 @@ const Index: React.FC<PropsWithChildren<Props>> = ({
               />
             );
           })}
-        </HStack>
+        </Flex>
       </ScrollView>
     </Box>
   );

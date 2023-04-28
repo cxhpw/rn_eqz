@@ -1,9 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import { useCustomRequest } from '@/hooks';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import request from '@/request';
-import { Box, Center, HStack } from 'native-base';
 import FastImage from 'react-native-fast-image';
-import { Text, LoadButton, Price } from '@/components';
+import { Text, LoadButton, Price, Box, Center, Flex } from '@/components';
 import { FC, PropsWithChildren } from 'react';
 import { navigate } from '@/services/NavigationService';
 
@@ -22,7 +22,7 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
       ).data,
   );
   return (
-    <Box px={2.5} py={5}>
+    <Box paddingHorizontal="2.5" paddingVertical="x5">
       <Box>{children}</Box>
       <Box>
         {data?.map((item, index) => {
@@ -32,7 +32,7 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
               onPress={() => {
                 navigate('Detail', { id: item.AutoID });
               }}>
-              <HStack space={2} py={2.5}>
+              <Flex paddingVertical="2.5" flex={1}>
                 <Center>
                   <FastImage
                     source={{
@@ -41,11 +41,7 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                     style={style.FastImage}
                   />
                 </Center>
-                <Center
-                  flex={1}
-                  alignItems="flex-start"
-                  position="relative"
-                  justifyContent="flex-start">
+                <Box flex={1} height="100%">
                   <Text
                     variant="h2"
                     style={{
@@ -59,10 +55,10 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                         <Box
                           key={tag}
                           style={style.tag}
-                          borderRadius="4px"
+                          borderRadius="x1"
                           overflow="hidden"
-                          mb={1}
-                          mr={1}>
+                          marginBottom="x1"
+                          marginRight="x1">
                           <Text fontSize={10} lineHeight={16} color="white">
                             {tag}
                           </Text>
@@ -79,7 +75,7 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                       fontSize: 12,
                     }}
                   />
-                  <Box mt={1.5}>
+                  <Box marginTop="x2">
                     <Text style={style.hit}>{item.Hit}浏览</Text>
                   </Box>
                   <View
@@ -88,8 +84,8 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                       { display: data.length - 1 === index ? 'none' : 'flex' },
                     ]}
                   />
-                </Center>
-              </HStack>
+                </Box>
+              </Flex>
             </TouchableOpacity>
           );
         })}
@@ -103,6 +99,7 @@ const style = StyleSheet.create({
     width: 155,
     height: 155,
     borderRadius: 6,
+    marginRight: 10,
   },
   line: {
     position: 'absolute',

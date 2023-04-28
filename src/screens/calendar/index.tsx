@@ -46,12 +46,12 @@ const Index: React.FC<Props> = ({ route, navigation }) => {
   /**
    * 回退到商品详情时，重新打开Modal
    */
-  useEffect(() => {
-    const { fn } = route.params;
-    return () => {
-      fn?.(true);
-    };
-  }, [route.params]);
+  // useEffect(() => {
+  //   const { fn } = route.params;
+  //   return () => {
+  //     fn?.(true);
+  //   };
+  // }, [route.params]);
 
   const onLayout = (h: SetStateAction<number>) => {
     setHeight(h);

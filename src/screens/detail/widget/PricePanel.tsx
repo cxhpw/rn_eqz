@@ -1,26 +1,21 @@
-import { Text, Price } from '@/components';
+/* eslint-disable react-native/no-inline-styles */
+import { Text, Price, Box, Center, Flex } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { Box, Center, Flex, HStack, VStack } from 'native-base';
 import { memo } from 'react';
 import { StyleSheet } from 'react-native';
 
 type Props = {
   data: ProductInfo | undefined;
 } & Partial<ProductPrice>;
-const PricePanel: React.FC<Props> = ({
-  data,
-  weekprice,
-  dayprice,
-  monthprice,
-}) => {
+const PricePanel: React.FC<Props> = ({ data }) => {
   const theme = useTheme<AppTheme>();
   console.log('PricePanel render');
   return (
-    <Box py="15px" px={2.5}>
-      <HStack alignItems="center">
-        <VStack flex={1}>
-          <Flex flexDir="row" alignItems="flex-end">
+    <Box paddingVertical="x4" paddingHorizontal="2.5">
+      <Flex alignItems="center">
+        <Box flex={1}>
+          <Flex flexDirection="row" alignItems="flex-end">
             <Price
               money={data?.SpecialPrice}
               style={{
@@ -60,16 +55,17 @@ const PricePanel: React.FC<Props> = ({
               money={data?.MinSellPrice}
             />
           )}
-        </VStack>
+        </Box>
         <Center
-          px={4}
-          py={1}
+          paddingHorizontal="x4"
+          paddingVertical="x1"
+          flexDirection="column"
           style={{
             borderRightColor: theme.colors.border,
             borderLeftColor: theme.colors.border,
           }}
-          borderLeftWidth="1"
-          borderRightWidth="1">
+          borderLeftWidth={1}
+          borderRightWidth={1}>
           <Text variant="p2" mb={'x2'}>
             {data?.Hit}
           </Text>
@@ -77,7 +73,10 @@ const PricePanel: React.FC<Props> = ({
             浏览
           </Text>
         </Center>
-        <Center px={4} py={1}>
+        <Center
+          paddingHorizontal="x4"
+          paddingVertical="x1"
+          flexDirection="column">
           <Text variant="p2" mb={'x2'}>
             {data?.Evaluation}
           </Text>
@@ -85,56 +84,8 @@ const PricePanel: React.FC<Props> = ({
             用户口碑
           </Text>
         </Center>
-      </HStack>
-      {/* <Flex
-        flexDir="row"
-        mb={2.5}
-        style={{
-          backgroundColor:
-            theme.theme === 'dark' ? theme.colors.background : '#eee',
-          padding: 5,
-          marginTop: 15,
-        }}>
-        <Price
-          style={{
-            color:
-              theme.theme === 'dark'
-                ? theme.colors.white
-                : theme.colors.gray500,
-            fontWeight: '400',
-            marginRight: 5,
-          }}
-          beforeText="起始租金：¥"
-          afterText="/日"
-          money={dayprice}
-        />
-        <Price
-          style={{
-            color:
-              theme.theme === 'dark'
-                ? theme.colors.white
-                : theme.colors.gray500,
-            fontWeight: '400',
-            marginRight: 5,
-          }}
-          beforeText="周租金：¥"
-          afterText="/日"
-          money={weekprice}
-        />
-        <Price
-          style={{
-            color:
-              theme.theme === 'dark'
-                ? theme.colors.white
-                : theme.colors.gray500,
-            fontWeight: '400',
-          }}
-          beforeText="月租金：¥"
-          afterText="/日"
-          money={monthprice}
-        />
-      </Flex> */}
-      <Flex flexDir="row" mt={4}>
+      </Flex>
+      <Flex flexDirection="row" marginTop="x4">
         {data?.SpecialSummary.map(item => (
           <Text key={item.Discount} style={style.dis}>
             满{item.Daynum}天打{item.Discount}折

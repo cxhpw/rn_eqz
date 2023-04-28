@@ -1,6 +1,5 @@
-import { Price } from '@/components';
+import { Price, Box, Flex } from '@/components';
 import { RouteProp, useRoute } from '@react-navigation/native';
-import { Box, Flex, VStack } from 'native-base';
 import { Text, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 type Props = {
@@ -10,15 +9,15 @@ const Header: React.FC<Props> = ({ data }) => {
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   return (
     <Box style={styles.header}>
-      <Flex alignItems="center" flexDir="row">
+      <Flex alignItems="center" flexDirection="row">
         <FastImage
           source={{
             uri: data.productdata?.ProImg,
           }}
           style={styles.image}
         />
-        <VStack>
-          <Box mb={2.5}>
+        <Box>
+          <Box marginBottom="2.5">
             <Price
               // eslint-disable-next-line react-native/no-inline-styles
               style={{
@@ -69,9 +68,9 @@ const Header: React.FC<Props> = ({ data }) => {
               />
             )}
           </Box>
-        </VStack>
+        </Box>
       </Flex>
-      <Flex flexDir="row" my="15px">
+      <Flex flexDirection="row" paddingVertical="x4">
         {data?.productdata?.SpecialSummary.map(item => (
           <Text key={item.Discount} style={styles.tag}>
             满{item.Daynum}天打{item.Discount}折

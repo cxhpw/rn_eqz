@@ -1,9 +1,9 @@
-import { Center, HStack } from 'native-base';
 import { memo, PropsWithChildren } from 'react';
 import request from '@/request';
 import { useCustomRequest } from '@/hooks';
 import { Image, StyleSheet, Pressable } from 'react-native';
 import { navigate } from '@/services/NavigationService';
+import { Flex, Center } from '@/components';
 
 type Props = {};
 
@@ -26,9 +26,9 @@ const Cate: React.FC<PropsWithChildren<Props>> = ({}) => {
     navigate('Category', { id });
   };
   return (
-    <HStack justifyContent="space-around" alignItems="center" mt="6">
+    <Flex justifyContent="space-around" alignItems="center" marginTop="x6">
       {data?.map(item => (
-        <Center key={item.AutoID} size="50px" flexGrow={1}>
+        <Center key={item.AutoID} width={50} height={50} flexGrow={1}>
           <Pressable onPress={() => onClick(item.AutoID)}>
             <Image
               style={style.Image}
@@ -39,7 +39,7 @@ const Cate: React.FC<PropsWithChildren<Props>> = ({}) => {
           </Pressable>
         </Center>
       ))}
-    </HStack>
+    </Flex>
   );
 };
 

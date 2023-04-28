@@ -1,10 +1,9 @@
 import { memo } from 'react';
 import { Dimensions, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Box, Flex } from 'native-base';
 import Carousel from 'react-native-reanimated-carousel';
 import { useRequest, useSafeState } from 'ahooks';
 import request from '@/request';
-import { Text } from '@/components';
+import { Text, Box, Flex } from '@/components';
 import { transformUrlToParams } from '@/utils/common';
 import { navigate } from '@/services/NavigationService';
 
@@ -32,7 +31,7 @@ function Banner({}: Props) {
     defaultParams: [3],
   });
   return (
-    <Box mx="2.5" position="relative">
+    <Box marginHorizontal="2.5">
       {!loading ? (
         <Carousel
           loop
@@ -66,7 +65,9 @@ function Banner({}: Props) {
           }}
         />
       ) : (
-        <Box style={style.swiper}>loading...</Box>
+        <Box style={style.swiper}>
+          <Text>loading...</Text>
+        </Box>
       )}
       <Indicator total={data.length} current={current} />
     </Box>
@@ -77,13 +78,15 @@ function Banner({}: Props) {
 function Indicator({ current, total }) {
   return (
     <Flex
-      direction="row"
-      padding={1}
-      backgroundColor="rgba(0,0,0,.5)"
+      flexDirection="row"
+      padding="x1"
       position="absolute"
-      bottom={1}
-      borderRadius="2.5"
-      right={1}>
+      style={{
+        borderRadius: 4,
+        backgroundColor: 'rgba(0,0,0,.5)',
+        right: '4%',
+        bottom: '4%',
+      }}>
       <Text style={[style.Indicator, { fontSize: 12 }]}>{current}</Text>
       <Text style={style.Indicator}>/</Text>
       <Text style={style.Indicator}>{total}</Text>

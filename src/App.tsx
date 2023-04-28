@@ -27,7 +27,6 @@ import { linking } from './linking';
 import { hide as hideSplash } from 'react-native-bootsplash';
 import Stack from '@/stacks';
 import { lightTheme, darkTheme } from './theme';
-import { NativeBaseProvider } from 'native-base';
 import { useStore } from './store';
 
 enableFreeze();
@@ -60,21 +59,19 @@ const App = () => {
     return () => listener.remove();
   });
   return (
-    <NativeBaseProvider>
-      <SafeAreaProvider>
-        <GestureHandlerRootView style={{ flex: 1 }}>
-          <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-            <NavigationContainer
-              ref={navigationRef}
-              theme={theme === 'dark' ? DarkTheme : DefaultTheme}
-              fallback={<Fallback />}
-              linking={linking}>
-              <Stack />
-            </NavigationContainer>
-          </ThemeProvider>
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </NativeBaseProvider>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
+          <NavigationContainer
+            ref={navigationRef}
+            theme={theme === 'dark' ? DarkTheme : DefaultTheme}
+            fallback={<Fallback />}
+            linking={linking}>
+            <Stack />
+          </NavigationContainer>
+        </ThemeProvider>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 };
 

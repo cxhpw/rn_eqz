@@ -1,5 +1,4 @@
-import { helpers } from '@/components';
-import { Box, Center, HStack, VStack } from 'native-base';
+import { helpers, Box, Center, Flex } from '@/components';
 import { PropsWithChildren } from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
@@ -12,11 +11,11 @@ type Props = {
 const { scale } = helpers;
 const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
   return (
-    <Box py={5} px={2.5}>
+    <Box paddingVertical="x5" paddingHorizontal="2.5">
       <Box>{children}</Box>
       {urls.length > 0 && (
-        <HStack space={2.5}>
-          <Center flex={1} position="relative">
+        <Flex>
+          <Center flex={1}>
             <TouchableOpacity
               activeOpacity={1}
               onPress={() => {
@@ -37,9 +36,9 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
               />
             </TouchableOpacity>
           </Center>
+          <Center width={10} />
           <Center flex={1}>
-            <VStack
-              space={2.5}
+            <Box
               style={{
                 width: '100%',
               }}>
@@ -66,6 +65,7 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
                   />
                 </TouchableOpacity>
               </Center>
+              <Center height={10} />
               <Center>
                 <TouchableOpacity
                   activeOpacity={1}
@@ -89,9 +89,9 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
                   />
                 </TouchableOpacity>
               </Center>
-            </VStack>
+            </Box>
           </Center>
-        </HStack>
+        </Flex>
       )}
     </Box>
   );

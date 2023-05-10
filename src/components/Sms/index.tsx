@@ -1,4 +1,4 @@
-import { View, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Text from '../Text';
 import { useCountDown } from 'ahooks';
 import { useState } from 'react';

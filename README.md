@@ -142,6 +142,38 @@ code-push app add <appName> <platform> react-native
 code-push deployment list <appName> -k
 ```
 
-> production: 用于生产环境
+- 推送热更新文件
 
-> staging: 用于模拟环境
+```
+code-push release-react <appName> <platform> [options]
+```
+
+```
+选项：
+  --bundleName, -b           Name of the generated JS bundle file. If unspecified, the standard bundle name will be used, depending on the specified platform: "main.jsbundle" (iOS), "index.android.bundle" (Android) or "index.windows.bundle" (Windows)  [字符串] [默认值: null]
+  --deploymentName, -d       Deployment to release the update to  [字符串] [默认值: "Staging"]
+  --description, --des       Description of the changes made to the app with this release  [字符串] [默认值: null]
+  --development, --dev       Specifies whether to generate a dev or release build  [布尔] [默认值: false]
+  --disabled, -x             Specifies whether this release should be immediately downloadable  [布尔] [默认值: false]
+  --entryFile, -e            Path to the app's entry Javascript file. If omitted, "index.<platform>.js" and then "index.js" will be used (if they exist)  [字符串] [默认值: null]
+  --gradleFile, -g           Path to the gradle file which specifies the binary version you want to target this release at (android only).  [默认值: null]
+  --mandatory, -m            Specifies whether this release should be considered mandatory  [布尔] [默认值: false]
+  --noDuplicateReleaseError  When this flag is set, releasing a package that is identical to the latest release will produce a warning instead of an error  [布尔] [默认值: false]
+  --plistFile, -p  Path to the plist file which specifies the binary version you want to target this release at (iOS only).  [默认值: null]
+  --plistFilePrefix, --pre   Prefix to append to the file name when attempting to find your app's Info.plist file (iOS only).  [默认值: null]
+  --rollout, -r              Percentage of users this release should be immediately available to  [字符串] [默认值: "100%"]
+  --privateKeyPath, -k       Specifies the location of a RSA private key to sign the release with  [字符串] [默认值: false]
+  --sourcemapOutput, -s      Path to where the sourcemap for the resulting bundle should be written. If omitted, a sourcemap will not be generated.  [字符串] [默认值: null]
+  --targetBinaryVersion, -t  Semver expression that specifies the binary app version(s) this release is targeting (e.g. 1.1.0, ~1.2.3). If omitted, the release will target the exact version specified in the "Info.plist" (iOS), "build.gradle" (Android) or "Package.appxmanifest" (Windows) files.  [字符串] [默认值: null]
+  --outputDir, -o            Path to where the bundle and sourcemap should be written. If omitted, a bundle and sourcemap will not be written.  [字符串] [默认值: null]
+  --config, -c               Path to the React Native CLI configuration file  [字符串] [默认值: null]
+  -v, --version              显示版本号  [布尔]
+
+示例：
+  release-react MyApp ios Releases the React Native iOS project in the current working directory to the "MyApp" app's "Staging" deployment
+
+  release-react MyApp android -d Production -k ~/.ssh/codepush_rsa  Releases the React Native Android project in the current working directory to the "MyApp" app's "Production" deployment, signed with the "codepush_rsa" private key
+
+  release-react MyApp windows --dev Releases the development bundle of the React Native Windows project in the current working directory to the "MyApp" app's "Staging" deployment
+
+```

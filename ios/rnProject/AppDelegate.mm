@@ -3,9 +3,9 @@
 
 // codepush
 #import <CodePush/CodePush.h>
-// #import <AppCenterReactNative.h>
-// #import <AppCenterReactNativeAnalytics.h>
-// #import <AppCenterReactNativeCrashes.h>
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -76,9 +76,9 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // <- initialization using the storyboard file name
   
   // codepush
-  // [AppCenterReactNative register];
-  // [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
-  // [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   
   return YES;
 }

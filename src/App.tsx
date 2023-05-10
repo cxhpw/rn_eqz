@@ -58,7 +58,6 @@ const Main = () => {
   });
 
   useEffect(() => {
-    console.log('当前：', theme);
     const listener = Appearance.addChangeListener(themeChange);
     return () => listener.remove();
   });
@@ -80,7 +79,6 @@ const Main = () => {
     </SafeAreaProvider>
   );
 };
-
 const App = codePush({
   checkFrequency: codePush.CheckFrequency.ON_APP_START,
   installMode: codePush.InstallMode.ON_NEXT_RESTART,

@@ -1,7 +1,12 @@
 import { useStore } from '@/store';
-import { useRequest } from 'ahooks';
+import { useRequest, useDebounce } from 'ahooks';
 import { Service, Options } from 'ahooks/lib/useRequest/src/types';
 import toast from '@/components/Toast';
+import useDebounceFn from './useDebounceFn';
+
+const queue: any[] = [];
+let messages: string[] = [];
+let isCall = false;
 
 export default function useCustomRequest<T, P extends any[] = []>(
   service: Service<T, P>,
@@ -29,10 +34,37 @@ export default function useCustomRequest<T, P extends any[] = []>(
         if ([100].includes(code)) {
           // signOut();
         } else {
-          toast(message);
+          Promise.resolve().then(() => {
+            messages.push(message);
+            setTimeout(() => {
+              if (!isCall) {
+                isCall = true;
+                toast.error(message, {
+                  onClose() {
+                    isCall = false;
+                  },
+                });
+              }
+            });
+          });
         }
       } catch (err) {
-        toast.error((err as unknown as { message: string })?.message);
+        queue.push(() => {
+          toast.error((err as unknown as { message: string })?.message, {
+            onClose() {
+              isCall = false;
+              queue.length = 0;
+            },
+          });
+        });
+        Promise.resolve().then(() => {
+          setTimeout(() => {
+            if (!isCall) {
+              isCall = true;
+              queue.shift()();
+            }
+          });
+        });
       } finally {
         onError?.(error, params);
       }

@@ -94,6 +94,7 @@
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string></string>
+	<!-- 禁止横屏 -->
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

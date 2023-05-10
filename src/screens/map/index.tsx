@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { requireNativeComponent, ViewProps } from 'react-native';
+import { ViewProps, requireNativeComponent } from 'react-native';
 
 const RNTMap = requireNativeComponent<
   ViewProps & {

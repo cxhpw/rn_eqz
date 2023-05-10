@@ -24,3 +24,5 @@ export default function Fallback() {
     </View>
   );
 }
+
+Fallback.displayName = 'Fallback';

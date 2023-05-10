@@ -14,11 +14,9 @@ import {
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { ImageBackground, StyleSheet } from 'react-native';
-import { scale } from '@/components/helpers/normalize';
 import { useState } from 'react';
 import toast from '@/components/Toast';
 import { goBack } from '@/services/NavigationService';
-import useStackService from '@/stacks/useStackService';
 import { useAuthService } from './useAuthService';
 
 const { useForm } = Form;
@@ -167,15 +165,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: scale(370),
-    height: scale(598),
+    width: 370,
+    height: 598,
   },
   bottomBg: {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    width: scale(230),
-    height: scale(90),
+    width: 230,
+    height: 90,
   },
 });
 

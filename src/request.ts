@@ -2,6 +2,10 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import Config from 'react-native-config';
 import { storageService, type StorageToken } from '@/services/StorageService';
+import { toast } from './components';
+
+const messageQueue: any[] = [];
+let isCall = false;
 
 const service = axios.create({
   baseURL: Config.API_URL,
@@ -39,8 +43,23 @@ service.interceptors.response.use(
     return resopnse;
   },
   error => {
-    console.log('响应错误', error);
-    return Promise.reject(error);
+    messageQueue.push(() => {
+      toast.error(error.message, {
+        onClose() {
+          isCall = false;
+          messageQueue.length = 0;
+        },
+      });
+    });
+    Promise.resolve().then(() => {
+      setTimeout(() => {
+        if (!isCall) {
+          isCall = true;
+          messageQueue.shift()();
+        }
+      });
+    });
+    return Promise.reject(error.message);
   },
 );
 

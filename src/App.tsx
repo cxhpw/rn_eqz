@@ -29,10 +29,12 @@ import Stack from '@/stacks';
 import { lightTheme, darkTheme } from './theme';
 import { useStore } from './store';
 import useStackService from './stacks/useStackService';
+import codePush from 'react-native-code-push';
 
 enableFreeze();
 
-const App = () => {
+const Main = () => {
+  /** 获取app配置 */
   const fetchAppConfig = useStore(state => state.fetchAppConfig);
   // 监听网络情况
   useNetwork();
@@ -78,5 +80,29 @@ const App = () => {
     </SafeAreaProvider>
   );
 };
+
+const App = codePush({
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  installMode: codePush.InstallMode.ON_NEXT_RESTART,
+  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
+  updateDialog: {
+    // 是否显示更新描述
+    appendReleaseDescription: true,
+    // 更新描述的前缀。 默认为"Description"
+    descriptionPrefix: '\n\n更新内容：\n',
+    // 强制更新按钮文字，默认为continue
+    mandatoryContinueButtonLabel: '立即更新',
+    // 强制更新时的信息. 默认为"An update is available that must be installed."
+    mandatoryUpdateMessage: '必须更新后才能使用',
+    // 非强制更新时，按钮文字,默认为"ignore"
+    optionalIgnoreButtonLabel: '稍后',
+    // 非强制更新时，确认按钮文字. 默认为"Install"
+    optionalInstallButtonLabel: '更新',
+    // 非强制更新时，检查到更新的消息文本
+    optionalUpdateMessage: '有新版本了，是否更新？',
+    // Alert窗口的标题
+    title: '应用更新',
+  },
+})(Main);
 
 export default App;

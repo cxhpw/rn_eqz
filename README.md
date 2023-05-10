@@ -109,3 +109,39 @@ adb
 ```
 adb shell am start -W -a android.intent.action.VIEW -d "rntemplate://路径" [your android package name]
 ```
+
+## 5.配置热更新
+
+热更新使用的是微软家的 codePush 和使用它家的管理平台[https://appcenter.ms](https://appcenter.ms)
+
+- 需要全局安装 codePush-cli
+
+```
+npm install -g code-push-cli
+```
+
+- 注册-登录
+
+```
+code-push register
+
+code-push login
+```
+
+- 创建应用
+
+```
+code-push app add <appName> <platform> react-native
+```
+
+创建成功后，可以到[网站地址](https://appcenter.ms)查看
+
+- 查看应用 Deploymeny Key
+
+```
+code-push deployment list <appName> -k
+```
+
+> production: 用于生产环境
+
+> staging: 用于模拟环境

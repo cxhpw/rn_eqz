@@ -1,6 +1,12 @@
 #import "AppDelegate.h"
 #import "RNBootSplash.h" // <- add the header import
 
+// codepush
+#import <CodePush/CodePush.h>
+// #import <AppCenterReactNative.h>
+// #import <AppCenterReactNativeAnalytics.h>
+// #import <AppCenterReactNativeCrashes.h>
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -68,7 +74,12 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [self.window makeKeyAndVisible];
 
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView]; // <- initialization using the storyboard file name
-
+  
+  // codepush
+  // [AppCenterReactNative register];
+  // [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  // [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+  
   return YES;
 }
 
@@ -107,8 +118,10 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
+  // return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  // return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [CodePush bundleURL];
 #endif
 }
 

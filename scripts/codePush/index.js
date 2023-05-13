@@ -63,20 +63,26 @@ const QUESTIONS = [
 ];
 
 function main() {
-  inquirer.prompt(QUESTIONS).then(option => {
-    const { description, environment, platform, version, mandatory } = option;
-    if (!description) {
-      console.error('你没有输入改动描述');
-      process.exit(1);
-    }
-    makePush({
-      environment,
-      platform,
-      version,
-      description,
-      mandatory,
+  inquirer
+    .prompt(QUESTIONS)
+    .then(option => {
+      const { description, environment, platform, version, mandatory } = option;
+      if (!description) {
+        console.error('你没有输入改动描述');
+        process.exit(1);
+      }
+      makePush({
+        environment,
+        platform,
+        version,
+        description,
+        mandatory,
+      });
+    })
+    .onExit(() => {
+      // cleanup logic here
+      console.log('Exiting...');
     });
-  });
 }
 
 main();

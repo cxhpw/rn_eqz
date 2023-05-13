@@ -18,6 +18,7 @@ export default function useNetwork() {
       '网络发生了变化',
       !!netInfo.isConnected ? '网络正常' : '网络异常',
     );
+    console.log('netInfo.isInternetReachable', netInfo.isInternetReachable);
     setNetwork(!!netInfo.isConnected);
   }, [netInfo.isConnected]);
   /**

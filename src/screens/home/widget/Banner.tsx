@@ -34,7 +34,7 @@ function Banner({}: Props) {
     <Box marginHorizontal="2.5">
       {!loading ? (
         <Carousel
-          loop
+          loop={data.length > 1}
           width={width}
           style={style.swiper}
           autoPlay={true}
@@ -99,7 +99,7 @@ const style = StyleSheet.create({
     borderRadius: 4,
     height: 160,
     overflow: 'hidden',
-    backgroundColor: '#ffffff',
+    // backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
   },

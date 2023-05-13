@@ -36,20 +36,23 @@ enableFreeze();
 const Main = () => {
   /** 获取app配置 */
   const fetchAppConfig = useStore(state => state.fetchAppConfig);
+  const isOnline = useStore(state => state.isOnline);
   // 监听网络情况
   useNetwork();
 
   useFlipper(navigationRef);
 
-  useMount(() => {
+  useEffect(() => {
     const init = async () => {
       /** 同步状态到zustand */
-      fetchAppConfig();
+      if (isOnline) {
+        fetchAppConfig();
+      }
     };
     init().finally(() => {
       hideSplash({ fade: true });
     });
-  });
+  }, [fetchAppConfig, isOnline]);
 
   const [theme, setTheme] = useSafeState(Appearance.getColorScheme());
 
@@ -61,6 +64,7 @@ const Main = () => {
     const listener = Appearance.addChangeListener(themeChange);
     return () => listener.remove();
   });
+
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1 }}>

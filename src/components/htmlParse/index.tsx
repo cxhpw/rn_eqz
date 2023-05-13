@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { useWindowDimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 type Props = {
@@ -36,12 +35,17 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
     <body>
       ${content}
     </body>
+    <script>
+    setTimeout(function() {
+      window.ReactNativeWebView.postMessage(document.body.clientHeight)
+     }, 1000);
+    </script>
   </html>
   `;
   const runFirst = `
   setTimeout(function() {
     window.ReactNativeWebView.postMessage(document.body.clientHeight)
-   }, 500);`;
+   }, 1000);`;
   return (
     <WebView
       ref={ref}
@@ -52,13 +56,14 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
         },
       ]}
       onMessage={event => {
+        console.log('webview onMessage', event.nativeEvent.data);
         if (Number(event.nativeEvent.data) !== height) {
           setHeight(Number(event.nativeEvent.data));
           onLoadEnd?.();
         }
       }}
       javaScriptEnabled={true}
-      injectedJavaScript={runFirst}
+      // injectedJavaScript={runFirst}
       source={{
         // html: html,
         html: generateHtml(html, htmlStyle),

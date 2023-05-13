@@ -87,6 +87,7 @@ export function useRefreshService<
     },
     onError: handleError,
   });
+
   /**
    * 从头开始刷新数据
    */
@@ -109,7 +110,6 @@ export function useRefreshService<
     try {
       let _param = params?.[0] ?? options?.defaultParams[0];
       const { PageIndex } = _param;
-      console.log(PageIndex, allLoaded, PageIndex >= (result?.TotalPage ?? 0));
       if (allLoaded || PageIndex >= (result?.TotalPage ?? 0)) return;
       await runAsync({ ..._param, PageIndex: PageIndex + 1 });
     } catch (error) {
@@ -120,7 +120,7 @@ export function useRefreshService<
   const onUpdate = async (params: P) => {
     if (loading) return;
     try {
-      await runAsync({ ...params[0], PageSize: 10, PageIndex: INITIAL_PAGE });
+      await runAsync({ PageSize: 10, PageIndex: INITIAL_PAGE, ...params[0] });
     } catch (error) {
       handleError(error, params as P);
     }
@@ -140,7 +140,6 @@ export function useRefreshService<
         loadingMore: loading,
       };
     }
-    console.log('params', params);
     return {
       // 避免第一次加载时请求两次
       refreshing: params.length === 0 ? false : loading,
@@ -158,5 +157,6 @@ export function useRefreshService<
     onRefresh: useMemoizedFn(onRefresh),
     onLoadMore: useMemoizedFn(onLoadMore),
     onUpdate: useMemoizedFn(onUpdate),
+    loading,
   };
 }

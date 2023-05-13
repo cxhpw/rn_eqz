@@ -40,7 +40,6 @@ const Index: React.FC<Props> = ({ navigation }) => {
     state => state.appConfig,
   );
   useEffect(() => {
-    console.log('执行');
     navigation.setOptions({
       headerStyle: {
         backgroundColor: WeiXinTopColor,
@@ -49,18 +48,6 @@ const Index: React.FC<Props> = ({ navigation }) => {
         color: '#ffffff',
       },
     });
-    // if (isOnline) {
-    //   navigation.setOptions({
-    //     headerStyle: {
-    //       backgroundColor: WeiXinTopColor,
-    //     },
-    //     headerTitleStyle: {
-    //       color: '#ffffff',
-    //     },
-    //   });
-    // } else {
-    //   throw new Error(JSON.stringify({ type: 'network' }));
-    // }
   }, [WeiXinTopColor, navigation]);
   return (
     <Container isBttomTabsScreen>

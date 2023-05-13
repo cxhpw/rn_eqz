@@ -1,4 +1,4 @@
-import { Container, Text, Spacer } from '@/components';
+import { Container, Text, Spacer, Box } from '@/components';
 import { ScrollView } from 'react-native';
 import {
   SearchBar,
@@ -13,8 +13,8 @@ import {
 } from './widget';
 import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { Box } from '@/components';
 import { useStore } from '@/store';
+import useCheckNetworkError from '@/hooks/useCheckNetworkError';
 
 type Props = {} & BottomTabScreenProps<AppParamList>;
 
@@ -35,10 +35,12 @@ function Summary({ children }: PropsWithChildren) {
   );
 }
 const Index: React.FC<Props> = ({ navigation }) => {
+  useCheckNetworkError();
   const { WeiXinTopImg, WeiXinTopColor, TagImg, ad1, ad2 } = useStore(
     state => state.appConfig,
   );
   useEffect(() => {
+    console.log('执行');
     navigation.setOptions({
       headerStyle: {
         backgroundColor: WeiXinTopColor,
@@ -47,6 +49,18 @@ const Index: React.FC<Props> = ({ navigation }) => {
         color: '#ffffff',
       },
     });
+    // if (isOnline) {
+    //   navigation.setOptions({
+    //     headerStyle: {
+    //       backgroundColor: WeiXinTopColor,
+    //     },
+    //     headerTitleStyle: {
+    //       color: '#ffffff',
+    //     },
+    //   });
+    // } else {
+    //   throw new Error(JSON.stringify({ type: 'network' }));
+    // }
   }, [WeiXinTopColor, navigation]);
   return (
     <Container isBttomTabsScreen>
@@ -80,4 +94,5 @@ const Index: React.FC<Props> = ({ navigation }) => {
     </Container>
   );
 };
+Index.displayName = 'Home';
 export default Index;

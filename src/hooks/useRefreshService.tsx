@@ -41,7 +41,6 @@ export function useRefreshService<
 
   const { onSuccess, onError, ...restOptions } = options || {};
   const handleError = (err: unknown, params: P) => {
-    console.log(err);
     const { code, message } = JSON.parse((err as Error).message);
     if (code) {
       if ([0, 1, 2].includes(code)) {

@@ -4,6 +4,7 @@ import { Container, Text, Box, Center } from '@/components';
 import FastImage from 'react-native-fast-image';
 import { useStore } from '@/store';
 import { useMount } from 'ahooks';
+import useCheckNetworkError from '@/hooks/useCheckNetworkError';
 
 type Props = {
   name: string;
@@ -46,6 +47,7 @@ const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
 });
 
 const Chat: React.FC<PropsWithChildren<Props>> = () => {
+  useCheckNetworkError();
   const { PrTLImg } = useStore(state => state.appConfig);
   const [data, fetchService] = useStore(state => [
     state.serviceInfo,

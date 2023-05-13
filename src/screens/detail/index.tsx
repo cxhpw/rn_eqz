@@ -1,8 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import { ScrollView, Dimensions } from 'react-native';
+import {
+  ScrollView,
+  Dimensions,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from 'react-native';
 import React from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useHeaderHeight } from '@react-navigation/elements';
 import { Container, Skeleton, Spacer } from '@/components';
 import {
   Carousel,
@@ -18,8 +23,8 @@ import request from '@/request';
 
 type Props = {} & NativeStackScreenProps<AppParamList, 'Detail'>;
 const { width } = Dimensions.get('window');
-const Detail: React.FC<Props> = () => {
-  const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
+const Detail: React.FC<Props> = ({ route, navigation }) => {
+  const { params } = route;
   const { data, loading } = useCustomRequest<ProductDetail>(async () => {
     const res = await request({
       url: '/Include/alipay/data.aspx',
@@ -30,10 +35,27 @@ const Detail: React.FC<Props> = () => {
     });
     return res.data;
   });
+  const height = useHeaderHeight();
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const offsetTop = e.nativeEvent.contentOffset.y;
+    const opacity = Math.min(offsetTop, height) / height;
+    if (opacity <= 1) {
+      navigation.setOptions({
+        headerStyle: {
+          backgroundColor: `rgba(255,255,255,${opacity})`,
+        },
+        headerTitleStyle: {
+          color: `rgba(0,0,0,${opacity})`,
+        },
+      });
+    }
+  };
   return (
     <Container>
       <ScrollView
         style={{ flex: 1 }}
+        onScroll={onScroll}
+        scrollEventThrottle={1}
         contentContainerStyle={{ paddingBottom: 60, minHeight: '100%' }}>
         <Skeleton
           containerStyle={{

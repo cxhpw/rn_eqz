@@ -1,4 +1,10 @@
-import { Image, StyleSheet, InteractionManager } from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  InteractionManager,
+  Linking,
+  Alert,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
@@ -142,7 +148,22 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
         </Flex>
         <Flex marginLeft="2.5">
           <Button
-            onPress={() => setIsModalVisible(true)}
+            // onPress={() => setIsModalVisible(true)}
+            onPress={() => {
+              // 2018100561582465
+              Linking.canOpenURL('alipays://platformapi/startApp').then(
+                support => {
+                  if (support) {
+                    const query = encodeURIComponent(`id=${params.id}`);
+                    Linking.openURL(
+                      `alipays://platformapi/startApp?appId=2018100561582465&page=/pages/detail/detail&query=${query}`,
+                    );
+                  } else {
+                    Alert.alert('请安装支付宝');
+                  }
+                },
+              );
+            }}
             style={[
               style.button,
               {

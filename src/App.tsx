@@ -19,7 +19,7 @@ import {
 } from '@react-navigation/native';
 import { useFlipper } from '@react-navigation/devtools';
 import { enableFreeze } from 'react-native-screens';
-import { Fallback, ThemeProvider } from '@/components';
+import { Fallback, ThemeProvider, ErrorBlock } from '@/components';
 import { useSafeState, useMemoizedFn, useMount } from 'ahooks';
 import { useNetwork } from './hooks';
 import { navigationRef } from '@/services/NavigationService';

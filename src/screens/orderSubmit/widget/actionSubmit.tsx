@@ -7,13 +7,20 @@ import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
 import { memo } from 'react';
 import { Alert, Linking } from 'react-native';
+import dayjs from 'dayjs';
 
 type Props = {
+  data?: OrderSettlement;
   total: number | string;
   onSubmit: () => Promise<any>;
   onSuccess: (d: any) => void;
 };
-const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
+const ActionSubmit: React.FC<Props> = ({
+  total,
+  onSubmit,
+  onSuccess,
+  data,
+}) => {
   const theme = useTheme<AppTheme>();
   const { runAsync, loading } = useCustomRequest(
     async () => {
@@ -76,26 +83,31 @@ const ActionSubmit: React.FC<Props> = ({ total, onSubmit, onSuccess }) => {
           runAsync().then(res => {
             onSuccess(res);
             if (res.ret === 'success') {
-              redirect('OrderDetail', {
-                id: res.oid,
-              });
               freePay(res.oid).then(resp => {
                 Linking.canOpenURL('alipays://platformapi/startApp').then(
                   support => {
                     if (support) {
                       Linking.openURL(
-                        `alipays://platformapi/startApp?appId=60000157&orderStr=${encodeURIComponent(
-                          resp.myOrderStr,
-                        )}&scheme=rntemplate://order_detail/${
+                        `alipays://platformapi/startApp?return_url=rntemplate://order_detail/${
                           res.oid
-                        }&return_url=rntemplate://order_detail/${res.oid}`,
+                        }&appId=60000157&orderStr=${encodeURIComponent(
+                          resp.myOrderStr,
+                        )}`,
                       );
                     } else {
                       Alert.alert('请安装支付宝');
                     }
+                    redirect('OrderDetail', {
+                      id: res.oid,
+                    });
                   },
                 );
               });
+              // setTimeout(() => {
+              //   redirect('OrderDetail', {
+              //     id: res.oid,
+              //   });
+              // });
             }
           });
         }}

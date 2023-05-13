@@ -29,6 +29,7 @@ export default function useCustomRequest<T, P extends any[] = []>(
   const result = useRequest(customService, {
     refreshDeps,
     onError: (error: any, params: P) => {
+      console.log('useCustomRequest', error);
       try {
         const { code, message } = JSON.parse(error.message);
         if ([100].includes(code)) {

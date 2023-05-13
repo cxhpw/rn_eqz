@@ -19,6 +19,7 @@ import Activity from '@/screens/activity';
 import Search from '@/screens/search';
 import OrderDetail from '@/screens/orderDetail';
 import Login from '@/screens/login';
+import { ErrorBlock } from '@/components';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -41,7 +42,10 @@ const MAIN_SCREENS: ScreenProps[] = [
     name: 'Detail',
     component: Detail,
     options: {
-      title: Config.APP_DISPLAY_NAME,
+      headerTransparent: true,
+      headerTitle: Config.APP_DISPLAY_NAME,
+      headerTitleStyle: { color: 'transparent' },
+      // headerTintColor: '#fff',
     },
   },
   {

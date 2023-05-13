@@ -1,5 +1,6 @@
 import { StateCreator } from 'zustand';
 import request from '@/request';
+import isEmpty from 'lodash-es/isEmpty';
 
 type Ad = {
   addesc: string;
@@ -29,7 +30,7 @@ export const createAppConfigSlice: StateCreator<AppConfigSlice> = (
 ) => ({
   appConfig: {} as Props,
   fetchAppConfig: async () => {
-    if ('PrTLImg' in get().appConfig) {
+    if (!isEmpty(get().appConfig)) {
       return get().appConfig;
     }
     const res = await request.get('/Include/alipay/data.aspx', {

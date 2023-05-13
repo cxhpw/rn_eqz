@@ -9,7 +9,7 @@ type Props = {
   start?: string;
   end?: string;
   fixedDays?: number;
-  boundary?: boolean;
+  manual?: boolean;
   invalidDates?: string[];
 };
 const DateCalendar: React.FC<Props> = ({
@@ -17,7 +17,7 @@ const DateCalendar: React.FC<Props> = ({
   paddingBttom,
   start,
   end,
-  boundary,
+  manual,
   invalidDates,
 }) => {
   return (
@@ -25,7 +25,7 @@ const DateCalendar: React.FC<Props> = ({
       initialState={{
         start,
         end,
-        boundary,
+        manual,
         onChange: onChange,
         invalidDates,
       }}>

@@ -193,6 +193,7 @@ type AddressInfo = {
 
 type OrderSettlement = {
   address: string;
+  deviceid: number;
   addrid: number;
   city: string;
   code: number;

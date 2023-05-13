@@ -43,7 +43,7 @@ export function createShareModel() {
       days: calendarInstance.days,
     };
     useEffect(() => {
-      if (initialState.boundary) {
+      if (initialState.manual) {
         calendarInstance.setStartEnd(initialState.start, initialState.end);
         shareModel.update();
       }

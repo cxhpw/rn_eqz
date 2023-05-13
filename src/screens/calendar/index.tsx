@@ -93,17 +93,18 @@ const Index: React.FC<Props> = ({ route }) => {
       <DateCalendar
         start={fixedDays[0] || route.params.start}
         end={fixedDays[1] || route.params.end}
-        boundary={manual}
+        manual={manual}
         onChange={onChange}
         paddingBttom={height}
         invalidDates={data.unavailabledate}
+        // invalidDates={['2023-05-15']}
       />
       <ActionSubmit
         onSubmit={onSubmit}
         onLayout={onLayout}
         onRangeDays={onRangeDays}
         min={route.params.minDay}
-        boundary={manual}
+        manual={manual}
         startEnd={startEnd.current}
         days={days}
       />

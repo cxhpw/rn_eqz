@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  BottomTabScreenProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import Home from '@/screens/home';
 import My from '@/screens/my';
 import Chat from '@/screens/chat';
@@ -6,11 +9,19 @@ import Category from '@/screens/category';
 import { IconNames } from '@/components/Icon';
 import { StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native';
-import { helpers } from '@/components';
+import { ErrorBlock, helpers } from '@/components';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 
 const { scale } = helpers;
 const Tab = createBottomTabNavigator();
+
+const ErrorBlockWrapper = (Component: React.FC<any>) => {
+  return (props: any) => (
+    <ErrorBlock>
+      <Component {...props} />
+    </ErrorBlock>
+  );
+};
 
 const tabItems: {
   name: string;
@@ -20,7 +31,7 @@ const tabItems: {
   options?: BottomTabNavigationOptions;
 }[] = [
   {
-    component: Home,
+    component: ErrorBlockWrapper(Home),
     name: 'Home',
     label: '首页',
     icon: (focused: boolean) => {
@@ -37,7 +48,7 @@ const tabItems: {
     },
   },
   {
-    component: Category,
+    component: ErrorBlockWrapper(Category),
     name: 'Category',
     label: '分类',
     icon: (focused: boolean) => {
@@ -54,7 +65,7 @@ const tabItems: {
     },
   },
   {
-    component: Chat,
+    component: ErrorBlockWrapper(Chat),
     name: 'Chat',
     label: '客服',
     icon: (focused: boolean) => {
@@ -70,26 +81,26 @@ const tabItems: {
       );
     },
   },
-  {
-    component: My,
-    name: 'My',
-    label: '我的',
-    icon: (focused: boolean) => {
-      return (
-        <Image
-          style={style.Icon}
-          source={
-            focused
-              ? require('@/images/my-select.png')
-              : require('@/images/my.png')
-          }
-        />
-      );
-    },
-    options: {
-      headerStyle: {},
-    },
-  },
+  // {
+  //   component: My,
+  //   name: 'My',
+  //   label: '我的',
+  //   icon: (focused: boolean) => {
+  //     return (
+  //       <Image
+  //         style={style.Icon}
+  //         source={
+  //           focused
+  //             ? require('@/images/my-select.png')
+  //             : require('@/images/my.png')
+  //         }
+  //       />
+  //     );
+  //   },
+  //   options: {
+  //     headerStyle: {},
+  //   },
+  // },
 ];
 
 function TabStack() {

@@ -2,8 +2,8 @@ import React, { ErrorInfo, PropsWithChildren, ReactNode } from 'react';
 import { SvgXml } from 'react-native-svg';
 
 import Box from '../Box';
-import Button from '../Button';
 import Text from '../Text';
+import { TapGestureHandler } from 'react-native-gesture-handler';
 
 export default class ErrorBlock extends React.Component<
   PropsWithChildren<{
@@ -32,6 +32,7 @@ export default class ErrorBlock extends React.Component<
       console.error(error, info);
     }
   }
+
   handleRefresh = () => {
     this.setState({ error: null }, () => this.props.onRefresh?.());
   };
@@ -368,28 +369,27 @@ function Fallback({
       </defs>
     </svg>
   `;
-
+  console.log('ErrorBlock render');
   return (
-    <Box
-      padding="x6"
-      width="100%"
-      flex={1}
-      justifyContent="center"
-      alignItems="center">
-      <SvgXml
-        xml={type === 'network' ? networkXml : defaultXml}
-        width={190}
-        height={190}
-      />
-      <Text variant="p1" color="gray300" marginBottom={'x4'}>
-        {type === 'network' ? '网络连接异常' : '对不起，应用出错了'}
-      </Text>
-      <Button
-        title="刷新试试"
-        type="primary"
-        onPress={onRefresh}
+    <TapGestureHandler onActivated={onRefresh}>
+      <Box
+        padding="x6"
         width="100%"
-      />
-    </Box>
+        flex={1}
+        justifyContent="center"
+        alignItems="center">
+        <SvgXml
+          xml={type === 'network' ? networkXml : defaultXml}
+          width={190}
+          height={190}
+        />
+        <Text marginBottom="x2" marginTop="x5">
+          {type === 'network' ? '您好像处于离线状态' : '对不起，应用出错了'}
+        </Text>
+        <Text variant="p1" color="gray300">
+          轻触屏幕重试
+        </Text>
+      </Box>
+    </TapGestureHandler>
   );
 }

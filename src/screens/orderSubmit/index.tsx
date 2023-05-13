@@ -147,6 +147,7 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
         </ScrollView>
       </Box>
       <ActionSubmit
+        data={data}
         total={total}
         onSubmit={() => {
           toast.loading('提交订单中');
@@ -166,7 +167,7 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
         onSuccess={res => {
           toast.remove();
           if (res.ret === 'success') {
-            toast.success(res.msg, {
+            toast.success('创建订单成功', {
               position: 'top-center',
             });
           } else {

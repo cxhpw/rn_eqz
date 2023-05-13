@@ -23,6 +23,7 @@ LogBox.ignoreLogs([
  * 未捕获的JS异常
  */
 setJSExceptionHandler((error, isFatal) => {
+  console.error(123123);
   if (isFatal) {
     Alert.alert(
       '未知异常',
@@ -40,7 +41,7 @@ setJSExceptionHandler((error, isFatal) => {
       ],
     );
   } else {
-    console.log(error); // So that we can see it in the ADB logs in case of Android if needed
+    console.log('setJSExceptionHandler', error); // So that we can see it in the ADB logs in case of Android if needed
   }
 }, false);
 
@@ -49,7 +50,7 @@ setJSExceptionHandler((error, isFatal) => {
  */
 setNativeExceptionHandler(
   exceptionString => {
-    console.log(exceptionString);
+    console.log('异常处理', exceptionString);
   },
   false,
   true,

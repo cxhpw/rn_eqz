@@ -13,11 +13,14 @@ import {
 } from '@/components';
 import { AppTheme } from '@/theme';
 import { useTheme } from '@shopify/restyle';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { useState } from 'react';
 import toast from '@/components/Toast';
 import { goBack } from '@/services/NavigationService';
 import { useAuthService } from './useAuthService';
+import FastImage from 'react-native-fast-image';
+import { KeyboardInsetsView } from '@sdcx/keyboard-insets';
+import request from '@/request';
 
 const { useForm } = Form;
 const Index = () => {
@@ -32,7 +35,7 @@ const Index = () => {
     }
     try {
       await handleFinish(values);
-      goBack();
+      // goBack();
     } catch (error) {
       console.log('登录错误消息', error);
     }
@@ -41,119 +44,139 @@ const Index = () => {
     setIsAgress(value);
   };
   return (
-    <Container hasHeader={false}>
-      <ImageBackground
-        style={styles.topBg}
-        source={require('@/images/topbg.png')}
-        resizeMode="stretch"
-      />
-      <ImageBackground
-        style={styles.bottomBg}
-        source={require('@/images/bottombg.png')}
-        resizeMode="stretch"
-      />
-      <Box
-        flex={1}
-        alignItems="center"
-        justifyContent="center"
-        mb="x10"
-        zIndex="19">
-        <Box width={300}>
-          <Text fontSize={45} fontWeight="bold" mb="x6">
-            登陆
-          </Text>
-          <Form form={form} onFinish={onFinish}>
-            <Box mb="2.5">
-              <Form.FormItem
-                name="phoneNumber"
-                type="bottom"
-                rules={[
-                  { required: true, message: '请输入电话' },
-                  { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
-                ]}>
-                <Input
-                  inputType="input"
-                  placeholder="请输入手机号码"
-                  placeholderTextColor="#fff"
-                  inputStyle={{
-                    height: 50,
-                  }}
-                  style={{
-                    borderColor: '#000',
-                    borderBottomWidth: 1,
-                    borderRadius: 0,
-                  }}
-                  leftIcon={
-                    <Icon name="phone" size={20} color={theme.colors.text} />
-                  }
-                />
-              </Form.FormItem>
-            </Box>
-            <Box mb="2.5">
-              <Form.FormItem
-                type="bottom"
-                name="password"
-                rules={[{ required: true, message: '请输入验证码' }]}>
-                <Input
-                  keyboardType="number-pad"
-                  placeholder="请输入验证码"
-                  placeholderTextColor="#fff"
-                  inputStyle={{
-                    height: 50,
-                  }}
-                  style={{
-                    borderColor: '#000',
-                    borderBottomWidth: 1,
-                    borderRadius: 0,
-                  }}
-                  leftIcon={
-                    <Icon
-                      name="yirenzheng"
-                      size={20}
-                      color={theme.colors.text}
-                    />
-                  }
-                  rightIcon={
-                    <Sms
-                      color="#fff"
-                      disabledColor="#999"
-                      onSend={() => {
-                        console.log('发送验证码');
-                      }}
-                      onEnd={() => {
-                        console.log('倒计时结束');
-                      }}
-                    />
-                  }
-                />
-              </Form.FormItem>
-            </Box>
-            <Flex alignItems="center">
-              <Checkbox
-                value="cxh"
-                size={16}
-                defaultChecked={isAgress}
-                checked={isAgress}
-                accessibilityLabel="是否同意用户协议"
-                onChange={onChange}>
-                <Text color="white" ml="x2" variant="p2">
-                  我同意
-                </Text>
-                <Text color="white" variant="p2">
-                  《用户租赁与服务协议》
-                </Text>
-              </Checkbox>
-            </Flex>
-          </Form>
-          <Button
-            marginTop="x10"
-            title="提交"
-            onPress={form.submit}
-            loading={loading}
-            disabled={loading}
-          />
-        </Box>
-      </Box>
+    <Container isBttomTabsScreen>
+      <KeyboardInsetsView style={{ flex: 1 }}>
+        <FastImage
+          style={styles.topBg}
+          source={require('@/images/topbg.png')}
+          resizeMode="stretch"
+        />
+        <FastImage
+          style={styles.bottomBg}
+          source={require('@/images/bottombg.png')}
+          resizeMode="stretch"
+        />
+        <ScrollView
+          scrollEnabled={false}
+          keyboardDismissMode="on-drag"
+          contentContainerStyle={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+          }}>
+          <Box width={300}>
+            <Text fontSize={45} fontWeight="bold" mb="x6">
+              登陆
+            </Text>
+            <Form form={form} onFinish={onFinish}>
+              <Box mb="2.5">
+                <Form.FormItem
+                  name="name"
+                  type="bottom"
+                  rules={[
+                    { required: true, message: '请输入电话' },
+                    { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
+                  ]}>
+                  <Input
+                    inputType="input"
+                    placeholder="请输入手机号码"
+                    placeholderTextColor="#fff"
+                    inputStyle={{
+                      height: 50,
+                    }}
+                    style={{
+                      borderColor: '#000',
+                      borderBottomWidth: 1,
+                      borderRadius: 0,
+                    }}
+                    leftIcon={
+                      <Icon name="phone" size={20} color={theme.colors.text} />
+                    }
+                  />
+                </Form.FormItem>
+              </Box>
+              <Box mb="2.5">
+                <Form.FormItem
+                  type="bottom"
+                  name="password"
+                  rules={[{ required: true, message: '请输入验证码' }]}>
+                  <Input
+                    keyboardType="number-pad"
+                    placeholder="请输入验证码"
+                    placeholderTextColor="#fff"
+                    inputStyle={{
+                      height: 50,
+                    }}
+                    style={{
+                      borderColor: '#000',
+                      borderBottomWidth: 1,
+                      borderRadius: 0,
+                    }}
+                    leftIcon={
+                      <Icon
+                        name="yirenzheng"
+                        size={20}
+                        color={theme.colors.text}
+                      />
+                    }
+                    rightIcon={
+                      <Sms
+                        color="#fff"
+                        disabledColor="#999"
+                        onBeforeSend={async () => {
+                          try {
+                            await form.validateFields(['name']);
+                            return true;
+                          } catch (error) {
+                            console.error((error as any).errorFields[0].errors);
+                          }
+                          return false;
+                        }}
+                        onSend={() => {
+                          request('/include/ajax/ajaxmethod', {
+                            params: {
+                              t: 'getfindpwdcode',
+                              type: 'bymobile',
+                              paramval: form.getFieldValue('name'),
+                              temp: Math.random(),
+                            },
+                          });
+                        }}
+                        onEnd={() => {
+                          console.log('倒计时结束');
+                        }}
+                      />
+                    }
+                  />
+                </Form.FormItem>
+              </Box>
+              <Flex alignItems="center">
+                <Checkbox
+                  value="cxh"
+                  size={16}
+                  defaultChecked={isAgress}
+                  checked={isAgress}
+                  accessibilityLabel="是否同意用户协议"
+                  onChange={onChange}>
+                  <Text color="white" ml="x2" variant="p2">
+                    我同意
+                  </Text>
+                  <Text color="white" variant="p2">
+                    《用户租赁与服务协议》
+                  </Text>
+                </Checkbox>
+              </Flex>
+            </Form>
+            <Button
+              marginTop="x10"
+              title="提交"
+              onPress={form.submit}
+              loading={loading}
+              disabled={loading}
+            />
+          </Box>
+        </ScrollView>
+      </KeyboardInsetsView>
     </Container>
   );
 };

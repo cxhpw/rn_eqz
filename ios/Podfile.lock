@@ -350,7 +350,7 @@ PODS:
     - react-native-config/App (= 1.4.11)
   - react-native-config/App (1.4.11):
     - React-Core
-  - react-native-flipper (0.176.1):
+  - react-native-flipper (0.164.0):
     - React-Core
   - react-native-mmkv (2.5.1):
     - MMKV (>= 1.2.13)
@@ -782,7 +782,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 60769e5a0a6d4b32294a2456077f59d0266f9a8b
   React-logger: 1623c216abaa88974afce404dc8f479406bbc3a0
   react-native-config: bcafda5b4c51491ee1b0e1d0c4e3905bc7b56c1b
-  react-native-flipper: 7e4b1c3fe1a2eecbe7304e5ff6b89231b3ec61dc
+  react-native-flipper: c33a4995958ef12a2b2f8290d63bed7adeed7634
   react-native-mmkv: 69b9c003f10afdd01addf7c6ee784ce42ee2eff3
   react-native-netinfo: 2517ad504b3d303e90d7a431b0fcaef76d207983
   react-native-pager-view: 54bed894cecebe28cede54c01038d9d1e122de43
@@ -819,6 +819,6 @@ SPEC CHECKSUMS:
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: d78845a96ece70513f5d06636fe5392be25f0389
+PODFILE CHECKSUM: 7aa3984b5c38bd6c6d7fb8415b9959a9bedd6dd3
 
 COCOAPODS: 1.11.3

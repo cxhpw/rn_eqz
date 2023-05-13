@@ -22,23 +22,16 @@ type Props = {
   onLayout: (e: any) => void;
   onSubmit: (id: number) => void;
   onRangeDays: (n: any) => void;
-  boundary?: boolean;
+  manual?: boolean;
   startEnd?: string[];
 };
-function getActiveStyle(isActive: boolean): ViewStyle {
-  return isActive
-    ? {
-        backgroundColor: '#38CEB1',
-      }
-    : {};
-}
 const ActionSubmit: React.FC<Props> = ({
   min,
   days,
   onLayout,
   onSubmit,
   onRangeDays,
-  boundary = false,
+  manual = false,
   startEnd,
 }) => {
   const [disabled, setDisabled] = useState<boolean>(true);
@@ -50,6 +43,14 @@ const ActionSubmit: React.FC<Props> = ({
   const onLayoutChange = (e: LayoutChangeEvent) => {
     onLayout(e.nativeEvent.layout.height - bottom);
   };
+  function getActiveStyle(isActive: boolean): ViewStyle {
+    return isActive
+      ? {
+          backgroundColor: theme.colors.primary50,
+          borderColor: theme.colors.primary50,
+        }
+      : {};
+  }
   // 获取规格商品价格
   const { data, run } = useCustomRequest<ProductPrice>(
     async () =>
@@ -105,7 +106,7 @@ const ActionSubmit: React.FC<Props> = ({
       <Box style={styles.infoBox}>
         <Flex flexDirection="row" alignItems="center">
           <Text color="gray500">租期：</Text>
-          <Flex flexDirection="row">
+          <Flex flexDirection="row" flexWrap="wrap">
             {params.leaseterm?.map((item, index) => (
               <Pressable
                 onPress={() => {
@@ -115,10 +116,11 @@ const ActionSubmit: React.FC<Props> = ({
                 key={item}
                 style={[
                   styles.cell,
-                  getActiveStyle(active === index && boundary),
+                  getActiveStyle(active === index && manual),
                 ]}>
                 <Text
-                  color={active === index && boundary ? 'white' : 'gray500'}>
+                  fontSize={10}
+                  color={active === index && manual ? 'white' : 'gray500'}>
                   {item}天
                 </Text>
               </Pressable>
@@ -140,8 +142,8 @@ const ActionSubmit: React.FC<Props> = ({
           </Box>
         )}
       </Box>
-      <Flex style={styles.actionSubmit} flexDirection="row">
-        <Center flex={1}>
+      <Flex flexDirection="row">
+        <Center style={styles.left} flex={1}>
           <Text color="gray500">{`此商品至少起租${min}天`}</Text>
         </Center>
         <Button
@@ -175,13 +177,15 @@ const styles = StyleSheet.create({
       width: 0,
       height: -1,
     },
+    elevation: 1,
     shadowOpacity: 0.1,
     borderRadius: 20,
     shadowRadius: 20,
   },
   infoBox: {
-    paddingVertical: 20,
+    paddingTop: 15,
     paddingHorizontal: 15,
+    paddingBottom: 5,
   },
   button: {
     width: 150,
@@ -203,10 +207,12 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginRight: 10,
     borderWidth: 1,
+    marginBottom: 10,
   },
-  actionSubmit: {
-    borderTopWidth: 1,
-    borderTopColor: '#dfdfdf',
+  left: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    height: '100%',
+    borderTopColor: '#ddd',
   },
 });
 

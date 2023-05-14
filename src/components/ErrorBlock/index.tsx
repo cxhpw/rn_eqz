@@ -29,7 +29,7 @@ export default class ErrorBlock extends React.Component<
     if (this.props.onError) {
       this.props.onError(error, info);
     } else {
-      console.error(error, info);
+      // console.error(error, info);
     }
   }
 

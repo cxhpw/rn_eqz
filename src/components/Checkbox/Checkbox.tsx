@@ -1,12 +1,11 @@
-import { forwardRef, memo, useRef } from 'react';
+import { forwardRef, memo, useContext, useRef } from 'react';
 import { CheckboxProps } from './type';
-import { useCheckbox } from '@react-native-aria/checkbox';
+import { useCheckbox, useCheckboxGroupItem } from '@react-native-aria/checkbox';
 import { useToggleState } from '@react-stately/toggle';
 import Flex from '../Flex';
-import Box from '../Box';
 import { usePropsResolution } from './usePropsResolution';
 import Text from '../Text';
-// import { CheckboxGroupContext } from './CheckboxGroup';
+import { CheckboxGroupContext } from './CheckboxGroup';
 import { SvgXml } from 'react-native-svg';
 
 function Icon({ size = 20, color = '#fff' }: { size: number; color: string }) {
@@ -33,27 +32,45 @@ const Checkbox = (
   }: CheckboxProps,
   ref: any,
 ) => {
+  let groupState = useContext(CheckboxGroupContext);
   const inputRef = useRef(null);
-  const state = useToggleState({
-    onChange,
-    value: value,
-    defaultSelected: defaultChecked,
-    isSelected: undefined,
-  });
-  const { inputProps } = useCheckbox(
-    {
-      isDisabled: disabled,
-      isIndeterminate: indeterminate,
-      isSelected: checked,
-      defaultSelected: defaultChecked,
-      onChange,
-      value: value,
-      'aria-label': props.accessibilityLabel || 'checkbox',
-      children,
-    },
-    state,
-    inputRef,
-  );
+
+  const { inputProps } = groupState
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      useCheckboxGroupItem(
+        {
+          isDisabled: disabled,
+          isIndeterminate: indeterminate,
+          onChange,
+          value: value,
+          children,
+          'aria-label': props.accessibilityLabel || 'checkbox',
+        },
+        groupState.state,
+        inputRef,
+      )
+    : // eslint-disable-next-line react-hooks/rules-of-hooks
+      useCheckbox(
+        {
+          isDisabled: disabled,
+          isIndeterminate: indeterminate,
+          isSelected: checked,
+          defaultSelected: defaultChecked,
+          onChange,
+          value: value,
+          children,
+          'aria-label': props.accessibilityLabel || 'checkbox',
+        },
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useToggleState({
+          onChange,
+          value: value,
+          defaultSelected: defaultChecked,
+          isSelected: undefined,
+        }),
+        inputRef,
+      );
+
   const { CheckboxComponent, TouchableOpacity } =
     usePropsResolution(inputProps);
 
@@ -67,20 +84,23 @@ const Checkbox = (
       child
     );
   };
+  console.log(123, inputProps.isIndeterminate);
   return (
     <TouchableOpacity {...inputProps} {...props} ref={ref}>
       <Flex>
         <CheckboxComponent
-          width={size}
-          height={size}
+          width={groupState?.size ?? size}
+          height={groupState?.size ?? size}
           backgroundColor={`${inputProps.checked ? 'primary50' : 'white'}`}
           alignItems="center"
           justifyContent="center"
           borderWidth={1}
-          borderRadius={shape === 'square' ? 'x1' : 'full'}
+          borderRadius={
+            (groupState?.shape ?? shape) === 'square' ? 'x1' : 'full'
+          }
           borderColor={`${inputProps.checked ? 'primary50' : 'gray200'}`}>
           <Icon
-            size={size * 0.8}
+            size={(groupState?.size ?? size) * 0.8}
             color={inputProps.checked ? '#fff' : 'rgba(0,0,0,.2)'}
           />
         </CheckboxComponent>

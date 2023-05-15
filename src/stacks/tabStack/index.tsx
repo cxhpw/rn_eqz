@@ -81,26 +81,26 @@ const tabItems: {
       );
     },
   },
-  // {
-  //   component: My,
-  //   name: 'My',
-  //   label: '我的',
-  //   icon: (focused: boolean) => {
-  //     return (
-  //       <Image
-  //         style={style.Icon}
-  //         source={
-  //           focused
-  //             ? require('@/images/my-select.png')
-  //             : require('@/images/my.png')
-  //         }
-  //       />
-  //     );
-  //   },
-  //   options: {
-  //     headerStyle: {},
-  //   },
-  // },
+  {
+    component: My,
+    name: 'My',
+    label: '我的',
+    icon: (focused: boolean) => {
+      return (
+        <Image
+          style={style.Icon}
+          source={
+            focused
+              ? require('@/images/my-select.png')
+              : require('@/images/my.png')
+          }
+        />
+      );
+    },
+    options: {
+      headerStyle: {},
+    },
+  },
 ];
 
 function TabStack() {

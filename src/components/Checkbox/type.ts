@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject, ReactNode } from 'react';
 import { CheckboxGroupState as _CheckboxGroupState } from '@react-stately/checkbox';
 import { ViewProps } from 'react-native';
 import { TouchableOpacity } from './usePropsResolution';
@@ -30,18 +30,27 @@ export interface CheckboxProps
 }
 
 export interface CheckboxGroupProps {
+  value?: string[];
   /** 默认值 */
   defaultValue?: string[];
   onChange?: handleChangeFunction<string[]>;
+  children: JSX.Element | JSX.Element[] | string;
+
+  size?: number;
+  shape?: 'square' | 'circular';
+
+  label?: ReactNode;
+  isDisabled?: boolean;
 }
 
 export interface CheckboxGroupContext {
   size?: number;
+  shape?: 'square' | 'circular';
   state: _CheckboxGroupState;
 }
 
 export type CheckboxComponentType = ((props: CheckboxProps) => JSX.Element) & {
   Group: React.MemoExoticComponent<
-    (props: CheckboxGroupProps & { ref: MutableRefObject<any> }) => JSX.Element
+    (props: CheckboxGroupProps & { ref?: MutableRefObject<any> }) => JSX.Element
   >;
 };

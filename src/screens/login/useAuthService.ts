@@ -28,7 +28,7 @@ export function useAuthService() {
     async (params: any) => {
       return await (
         await request.post('/user/login', {
-          _loginmobile: params.name,
+          _loginname: params.name,
           _loginpwd: params.password,
           _logintype: 'verificationlogin',
         })
@@ -40,7 +40,7 @@ export function useAuthService() {
   /** 获取登录凭证 */
   const fetchToken = async (values: any) => {
     _login(values).then(res => {
-      console.log(res);
+      console.log(555, res);
     });
   };
 

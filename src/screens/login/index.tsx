@@ -75,7 +75,7 @@ const Index = () => {
                   type="bottom"
                   rules={[
                     { required: true, message: '请输入电话' },
-                    { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
+                    // { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
                   ]}>
                   <Input
                     inputType="input"
@@ -152,12 +152,12 @@ const Index = () => {
               </Box>
               <Flex alignItems="center">
                 <Checkbox
-                  value="cxh"
                   size={16}
                   defaultChecked={isAgress}
                   checked={isAgress}
                   accessibilityLabel="是否同意用户协议"
-                  onChange={onChange}>
+                  onChange={onChange}
+                  value={''}>
                   <Text color="white" ml="x2" variant="p2">
                     我同意
                   </Text>

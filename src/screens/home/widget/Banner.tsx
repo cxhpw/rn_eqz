@@ -1,6 +1,7 @@
 import { memo } from 'react';
-import { Dimensions, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
+import FastImage from 'react-native-fast-image';
 import { useRequest, useSafeState } from 'ahooks';
 import request from '@/request';
 import { Text, Box, Flex } from '@/components';
@@ -48,7 +49,7 @@ function Banner({}: Props) {
                 const { routeName, params } = transformUrlToParams(item.AdLink);
                 navigate(routeName as any, params);
               }}>
-              <Image
+              <FastImage
                 source={{
                   uri: item.AdMediaPath,
                 }}

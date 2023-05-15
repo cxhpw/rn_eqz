@@ -19,7 +19,6 @@ import Activity from '@/screens/activity';
 import Search from '@/screens/search';
 import OrderDetail from '@/screens/orderDetail';
 import Login from '@/screens/login';
-import { ErrorBlock } from '@/components';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 

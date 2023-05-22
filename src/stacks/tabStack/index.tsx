@@ -106,7 +106,7 @@ const tabItems: {
 function TabStack() {
   return (
     <Tab.Navigator
-      initialRouteName="HomePage"
+      initialRouteName="Tab"
       screenOptions={{
         headerShown: true,
         lazy: true,

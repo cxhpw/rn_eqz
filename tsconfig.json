@@ -8,7 +8,6 @@
     },
     /* Completeness */
     "skipLibCheck": true                             /* Skip type checking all .d.ts files. */
-    
   },
   "exclude": ["src/components/Theme"]
 }

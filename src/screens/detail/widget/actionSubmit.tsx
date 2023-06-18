@@ -150,7 +150,6 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
           <Button
             // onPress={() => setIsModalVisible(true)}
             onPress={() => {
-              // 2018100561582465
               Linking.canOpenURL('alipays://platformapi/startApp').then(
                 support => {
                   if (support) {

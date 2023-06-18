@@ -1,7 +1,4 @@
-import {
-  BottomTabScreenProps,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '@/screens/home';
 import My from '@/screens/my';
 import Chat from '@/screens/chat';

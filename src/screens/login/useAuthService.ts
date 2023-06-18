@@ -4,6 +4,7 @@ import { storageService, StorageToken } from '@/services/StorageService';
 import { Keyboard } from 'react-native';
 import useStackService from '@/stacks/useStackService';
 import { useSafeState } from 'ahooks';
+import { toast } from '@/components';
 
 export function useAuthService() {
   const { update } = useStackService.useModel();
@@ -40,7 +41,11 @@ export function useAuthService() {
   /** 获取登录凭证 */
   const fetchToken = async (values: any) => {
     _login(values).then(res => {
-      console.log(555, res);
+      if (res.ret === 'fail') {
+        toast.error(res.msg);
+      } else {
+        toast.success(res.msg);
+      }
     });
   };
 

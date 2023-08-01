@@ -17,18 +17,16 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderDetail'>> = ({
   route,
 }) => {
   const theme = useTheme<AppTheme>();
-  const { data, loading, runAsync } = useCustomRequest<OrderDetail>(
-    async () => {
-      return await (
-        await request('/Include/alipay/data.aspx', {
-          params: {
-            apiname: 'getordersdetails',
-            oid: route.params.id,
-          },
-        })
-      ).data;
-    },
-  );
+  const { data, runAsync } = useCustomRequest<OrderDetail>(async () => {
+    return await (
+      await request('/Include/alipay/data.aspx', {
+        params: {
+          apiname: 'getordersdetails',
+          oid: route.params.id,
+        },
+      })
+    ).data;
+  });
   return (
     <Container>
       <Box

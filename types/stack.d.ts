@@ -20,6 +20,7 @@ type CommonStackParamList = {
 
 type AuthStackParamList = {
   Login: undefined;
+  Map: undefined;
 };
 
 type MainStackParamList = {

@@ -11,6 +11,7 @@
 
 #import "RNTMapMarket.h"
 
+
 @implementation RNTMapManager
 
 RCT_EXPORT_MODULE(RNTMap)
@@ -19,6 +20,7 @@ RCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(showsScale, BOOL)
 // 是否显示罗盘
 RCT_EXPORT_VIEW_PROPERTY(showsCompass, BOOL)
+RCT_EXPORT_VIEW_PROPERTY(showsUserLocation, BOOL)
 // 定义事件，类型RCTBubblingEventBlock
 RCT_EXPORT_VIEW_PROPERTY(onRegionChange, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onMapReady, RCTBubblingEventBlock)
@@ -32,18 +34,21 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
   // 实例化一个MKMapView对象
   RNTMapView *map = [RNTMapView new];
   map.delegate = self;
-  map.showsUserLocation = YES;
-  // MKMapView doesn't report tap events, so we attach gesture recognizers to it
-  UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
+  map.userTrackingMode = MKUserTrackingModeFollow;
+  // MKMapView doesn't report tap events, so we attach gesture
+  UITapGestureRecognizer *onTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
+
   // 绑定事件
-  [map addGestureRecognizer:tap];
+  [map addGestureRecognizer:onTap];
   return map;
 }
+
 
 
 #pragma mark MKMapViewDelegate
 
 - (void)mapView:(RNTMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+
   if (mapView.hasStartedRendering) {
     [self _regionChanged:mapView];
   }
@@ -51,7 +56,17 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 
 - (void)mapViewWillStartRenderingMap:(RNTMapView *)mapView {
   if (!mapView.hasStartedRendering) {
-    mapView.onMapReady(@{});
+    MKCoordinateRegion region = mapView.region;
+    #define FLUSH_NAN(value) (isnan(value) ? 0 : value)
+    mapView.onMapReady(@{
+       @"region": @{
+        @"latitude": @(FLUSH_NAN(region.center.latitude)),
+        @"longitude": @(FLUSH_NAN(region.center.longitude)),
+        @"latitudeDelta": @(FLUSH_NAN(region.span.latitudeDelta)),
+        @"longitudeDelta": @(FLUSH_NAN(region.span.longitudeDelta)),
+      },
+      @"罗盘": @(mapView.showsCompass),
+    });
     mapView.hasStartedRendering = YES;
   }
   [mapView beginLoading];
@@ -61,10 +76,11 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
   [mapView finishLoading];
 }
 
+
 #pragma mark Gesture Recognizer Handlers
+
 -  (void)handleMapTap:(UITapGestureRecognizer *)recognizer {
   RNTMapView *map = (RNTMapView *)recognizer.view;
-  
   CGPoint tapPoint = [recognizer locationInView:map];
   CLLocationCoordinate2D tapCoordinate = [map convertPoint:tapPoint toCoordinateFromView:map];
   MKMapPoint mapPoint = MKMapPointForCoordinate(tapCoordinate);

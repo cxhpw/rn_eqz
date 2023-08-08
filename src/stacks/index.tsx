@@ -19,6 +19,7 @@ import Activity from '@/screens/activity';
 import Search from '@/screens/search';
 import OrderDetail from '@/screens/orderDetail';
 import Login from '@/screens/login';
+import MapPage from '@/screens/map';
 
 const Stack = createNativeStackNavigator<AppParamList>();
 
@@ -96,6 +97,13 @@ const MAIN_SCREENS: ScreenProps[] = [
       headerTintColor: '#fff',
     },
   },
+  {
+    name: 'Map',
+    component: MapPage,
+    options: {
+      title: '地图',
+    },
+  },
 ];
 
 const COMMON_SCREENS: ScreenProps[] = [
@@ -159,7 +167,7 @@ const COMMON_SCREENS: ScreenProps[] = [
 export default () => {
   return (
     <Stack.Navigator
-      initialRouteName="Home"
+      initialRouteName="Map"
       screenOptions={{
         animation: 'slide_from_right',
         headerTitleAlign: 'center',

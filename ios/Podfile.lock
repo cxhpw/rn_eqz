@@ -351,7 +351,7 @@ PODS:
     - React-Core
   - react-native-flipper (0.164.0):
     - React-Core
-  - react-native-mmkv (2.8.0):
+  - react-native-mmkv (2.5.1):
     - MMKV (>= 1.2.13)
     - React-Core
   - react-native-netinfo (9.3.10):
@@ -442,6 +442,10 @@ PODS:
     - React-perflogger (= 0.70.6)
   - ReactNativeExceptionHandler (2.10.10):
     - React-Core
+  - rive-react-native (2.1.37):
+    - React-Core
+    - RiveRuntime (= 1.0.18)
+  - RiveRuntime (1.0.18)
   - RNBootSplash (4.4.1):
     - React-Core
   - RNFastImage (8.6.3):
@@ -450,7 +454,7 @@ PODS:
     - SDWebImageWebPCoder (~> 0.8.4)
   - RNFlashList (1.4.3):
     - React-Core
-  - RNGestureHandler (2.10.0):
+  - RNGestureHandler (2.8.0):
     - React-Core
   - RNKeyboardInsets (0.1.0):
     - React-Core
@@ -574,6 +578,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeExceptionHandler (from `../node_modules/react-native-exception-handler`)
+  - rive-react-native (from `../node_modules/rive-react-native`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - RNFastImage (from `../node_modules/react-native-fast-image`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
@@ -606,6 +611,7 @@ SPEC REPOS:
     - MMKV
     - MMKVCore
     - OpenSSL-Universal
+    - RiveRuntime
     - SDWebImage
     - SDWebImageWebPCoder
     - SocketRocket
@@ -713,6 +719,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeExceptionHandler:
     :path: "../node_modules/react-native-exception-handler"
+  rive-react-native:
+    :path: "../node_modules/rive-react-native"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
   RNFastImage:
@@ -782,7 +790,7 @@ SPEC CHECKSUMS:
   React-logger: 1623c216abaa88974afce404dc8f479406bbc3a0
   react-native-config: 86038147314e2e6d10ea9972022aa171e6b1d4d8
   react-native-flipper: c33a4995958ef12a2b2f8290d63bed7adeed7634
-  react-native-mmkv: 7da5e18e55c04a9af9a7e0ab9792a1e8d33765a1
+  react-native-mmkv: 69b9c003f10afdd01addf7c6ee784ce42ee2eff3
   react-native-netinfo: ccbe1085dffd16592791d550189772e13bf479e2
   react-native-pager-view: 0ccb8bf60e2ebd38b1f3669fa3650ecce81db2df
   react-native-refresh-control: b4a6e1e3c08126286cb4c5c07eaca45df7d5b715
@@ -803,10 +811,12 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
   ReactNativeExceptionHandler: b11ff67c78802b2f62eed0e10e75cb1ef7947c60
+  rive-react-native: a23e04ba8052091dbf85f6d34c13f01135e57a1c
+  RiveRuntime: e36e481478d5332694427ddbc12cc50ccfa8a1bc
   RNBootSplash: 4f968c1e098c7ec97939ace039f735e3d335bd4b
   RNFastImage: 5c9c9fed9c076e521b3f509fe79e790418a544e8
   RNFlashList: ade81b4e928ebd585dd492014d40fb8d0e848aab
-  RNGestureHandler: e145476da655f3dbc48ef2f0a08cf7a34338c02b
+  RNGestureHandler: 62232ba8f562f7dea5ba1b3383494eb5bf97a4d3
   RNKeyboardInsets: b601abfbb7ebcd4b970d7ed17733657e50d746a5
   RNReanimated: 3ed15d2c7d7fd9d9a284de291a1e347d132d282b
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f

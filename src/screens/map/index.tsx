@@ -9,6 +9,8 @@ const RNTMap = requireNativeComponent<
     showsScale?: boolean;
     /** 是否禁止缩放 */
     zoomEnabled?: boolean;
+    /** 是否显示用户位置 */
+    showsUserLocation?: boolean;
     region: {
       /**
        * 地图中心点的坐标。
@@ -32,20 +34,20 @@ const RNTMap = requireNativeComponent<
 
 const Index = () => {
   const [region, setRegion] = useState({
-    latitude: 22.566147,
-    longitude: 113.900594,
+    latitude: 23.51,
+    longitude: 116.5,
     latitudeDelta: 0.1,
     longitudeDelta: 0.1,
   });
+
   return (
     <>
       <RNTMap
         region={region}
         zoomEnabled={false}
-        showsCompass={true}
-        style={{ flex: 1 }}
-        onMapReady={e => {
-          console.log('地图初始化中', e.nativeEvent.cxh);
+        style={{ height: 200 }}
+        onMapReady={(e: any) => {
+          console.log('地图初始化中', e.nativeEvent);
         }}
         onRegionChange={e => {
           console.log('onRegionChange', e.nativeEvent.region);

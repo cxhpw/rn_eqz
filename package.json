@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "android:dev": "cross-env ENVFILE=.env.dev react-native run-android",
+    "android:dev": "cross-env ENVFILE=.env.dev react-native run-android --active-arch-only",
     "android:staging": "cd ./android && cross-env ENVFILE=.env.staging ./gradlew app:assembleRelease",
     "android:prod": "cd ./android && cross-env ENVFILE=.env.prod ./gradlew app:assembleRelease",
     "ios": "react-native run-ios",
@@ -36,7 +36,6 @@
     "@shopify/flash-list": "^1.4.1",
     "@shopify/react-native-skia": "0.1.185",
     "@shopify/restyle": "^2.3.0",
-    "add": "^2.0.6",
     "ahooks": "^3.7.2",
     "appcenter": "4.4.5",
     "appcenter-analytics": "4.4.5",
@@ -45,7 +44,6 @@
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.7",
     "echarts": "^5.4.1",
-    "global": "^4.4.0",
     "lodash-es": "^4.17.21",
     "rc-field-form": "^1.27.4",
     "react": "18.1.0",
@@ -72,7 +70,6 @@
     "rive-react-native": "2.1.37",
     "stable-hash": "^0.0.3",
     "wrn-echarts": "^0.1.3",
-    "yarn": "^1.22.19",
     "zustand": "^4.3.4"
   },
   "devDependencies": {

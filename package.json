@@ -5,7 +5,7 @@
   "scripts": {
     "android:dev": "cross-env ENVFILE=.env.dev react-native run-android --active-arch-only",
     "android:staging": "cd ./android && cross-env ENVFILE=.env.staging ./gradlew app:assembleRelease",
-    "android:prod": "cd ./android && cross-env ENVFILE=.env.prod ./gradlew app:assembleRelease",
+    "android:prod": "cd ./android && cross-env ENVFILE=.env.prod ./gradlew app:bundleRelease",
     "ios": "react-native run-ios",
     "ios:build": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/main.jsbundle  --assets-dest ios",
     "start": "watchman watch-del-all && react-native start --reset-cache",
@@ -78,6 +78,8 @@
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@testing-library/jest-native": "^5.4.2",
+    "@testing-library/react-native": "^12.2.0",
     "@tsconfig/react-native": "^2.0.2",
     "@types/crypto-js": "^4.1.1",
     "@types/jest": "^26.0.23",
@@ -117,7 +119,11 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ],
+    "testPathIgnorePatterns": ["/__tests__/"]
   },
   "config": {
     "commitizen": {

@@ -17,7 +17,9 @@
     "postinstall": "npx husky install && npx patch-package",
     "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts}\"",
     "clean": "react-native-clean-project",
-    "svg-init": "npx iconfont-rn"
+    "svg-init": "npx iconfont-rn",
+    "e2e:ios":"detox test --configuration ios.sim.debug",
+    "e2e:android":"detox test --configuration android.emu.debug"
   },
   "dependencies": {
     "@byron-react-native/refresh-control": "^1.2.5",
@@ -96,6 +98,7 @@
     "commitizen": "^4.2.6",
     "cross-env": "^7.0.3",
     "cz-customizable": "^7.0.0",
+    "detox": "^20.11.2",
     "eslint": "^7.32.0",
     "husky": "^8.0.2",
     "inquirer": "^9.2.2",
@@ -124,7 +127,8 @@
       "@testing-library/jest-native/extend-expect"
     ],
     "testPathIgnorePatterns": [
-      "/__tests__/"
+      "/__tests__/",
+      "/e2e/"
     ]
   },
   "config": {

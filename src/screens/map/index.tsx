@@ -1,5 +1,61 @@
-import { useState } from 'react';
-import { ViewProps, requireNativeComponent } from 'react-native';
+import { useState, useTransition } from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  ViewProps,
+  requireNativeComponent,
+} from 'react-native';
+
+const dummyData = Array(10000).fill(1);
+
+const NonUrgentUI = ({ value, isPending }: any) => {
+  const backgroundStyle = {
+    backgroundColor: value % 2 === 0 ? 'red' : 'green',
+  };
+  return (
+    <View>
+      <Text>Non urgent update value: {isPending ? 'PENDING' : value}</Text>
+      <View style={[styles.container, backgroundStyle]}>
+        {dummyData.map((_, index) => (
+          <View key={index} style={styles.item} />
+        ))}
+      </View>
+    </View>
+  );
+};
+
+const ConcurrentStartTransition = () => {
+  const [value, setValue] = useState(1);
+  const [nonUrgentValue, setNonUrgentValue] = useState(1);
+  const [isPending, startTransition] = useTransition();
+  const handleClick = () => {
+    const newValue = value + 1;
+    setValue(newValue);
+    startTransition(() => {
+      setNonUrgentValue(newValue);
+    });
+  };
+  return (
+    <View>
+      <Button testID="testBtn" onPress={handleClick} title="Increment value" />
+      <Text testID="testContext">Value: {value}</Text>
+      <NonUrgentUI value={nonUrgentValue} isPending={isPending} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  item: {
+    width: 10,
+    height: 10,
+  },
+});
 
 const RNTMap = requireNativeComponent<
   ViewProps & {
@@ -62,6 +118,7 @@ const Index = () => {
           });
         }}
       />
+      <ConcurrentStartTransition />
     </>
   );
 };

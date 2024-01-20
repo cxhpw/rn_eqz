@@ -1,11 +1,5 @@
 import axios from 'axios';
-import { Alert } from 'react-native';
 import Config from 'react-native-config';
-import { storageService, type StorageToken } from '@/services/StorageService';
-import { toast } from './components';
-
-const messageQueue: any[] = [];
-let isCall = false;
 
 const service = axios.create({
   baseURL: Config.API_URL,

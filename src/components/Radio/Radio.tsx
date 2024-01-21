@@ -42,8 +42,8 @@ const RadioComponent = memo(
               isChecked
                 ? 'checked'
                 : isDisabled || isReadOnly
-                ? 'disabled'
-                : undefined
+                  ? 'disabled'
+                  : undefined
             }>
             {icon && isChecked ? (
               sizedIcon()

@@ -78,8 +78,8 @@ const Index: React.FC<PropsWithChildren<Props>> = ({
                   hasSort
                     ? IconFn(index)
                     : hasDisCount
-                    ? DisCount(item.Discount as any)
-                    : ''
+                      ? DisCount(item.Discount as any)
+                      : ''
                 }
               />
             );

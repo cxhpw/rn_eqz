@@ -61,8 +61,8 @@ export default function useButton({
         type === 'primary'
           ? theme.colors.border
           : disabled
-          ? theme.colors.disabled
-          : theme.colors.primary200,
+            ? theme.colors.disabled
+            : theme.colors.primary200,
       borderRadius: _borderRadius,
     },
     ...restProps,

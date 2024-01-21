@@ -34,8 +34,8 @@ const Container: React.FC<
         isBttomTabsScreen
           ? ['left', 'right']
           : hasHeader
-          ? ['left', 'right', 'bottom']
-          : ['top', 'left', 'right']
+            ? ['left', 'right', 'bottom']
+            : ['top', 'left', 'right']
       }>
       <StatusBar
         barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}

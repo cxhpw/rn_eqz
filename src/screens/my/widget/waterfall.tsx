@@ -26,9 +26,7 @@ const Waterfall = () => {
         <Text style={style.line} />
       </Center>
       <Flex flexWrap="wrap" flexDirection="row" marginHorizontal="x1">
-        {data?.map(item => (
-          <WaterfallItem data={item} key={item.AutoID} />
-        ))}
+        {data?.map(item => <WaterfallItem data={item} key={item.AutoID} />)}
       </Flex>
       <LoadButton loading={loading} title="本租赁服务由e奇租提供" />
     </Box>

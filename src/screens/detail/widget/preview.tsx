@@ -36,7 +36,7 @@ const Carousel: React.FC<PropsWithChildren<Props>> = ({ data = [] }) => {
   const [active, setActive] = useState(0);
   console.log('Carousel render');
   return (
-    <Box width="full" style={style.wrapper}>
+    <Box width="100%" style={style.wrapper}>
       <RNCarousel
         loop={false}
         autoPlay={false}

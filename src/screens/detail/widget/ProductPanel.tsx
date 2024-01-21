@@ -24,9 +24,7 @@ const ProductPanel: React.FC<Props> = ({ data }) => {
         {data?.ProductName}
       </Text>
       <Flex flexWrap="wrap" flexDirection="row">
-        {data?.ProductTag?.map(item => (
-          <Tag key={item} title={item} />
-        ))}
+        {data?.ProductTag?.map(item => <Tag key={item} title={item} />)}
       </Flex>
       <Text color="gray300" variant="p2" marginTop="2.5">
         {data?.ShortDesc}

@@ -1,9 +1,9 @@
 import { ViewStyle, View, Text } from 'react-native';
 import { Toast, ToastPosition, Renderable, resolveValue } from '../core/types';
-import { prefersReducedMotion } from '../core/utils';
 import Animated, { Keyframe } from 'react-native-reanimated';
-import { memo, useMemo, useState } from 'react';
+import { memo, useState } from 'react';
 import ToastIcon from './toastIcon';
+import type { ReanimatedKeyframe } from 'react-native-reanimated/lib/typescript/reanimated2/layoutReanimation/animationBuilder/Keyframe';
 
 interface ToastBarProps {
   toast: Toast;
@@ -57,8 +57,8 @@ const Message = ({ children }: any) => {
 };
 const getAnimationStyle = (
   position: ToastPosition,
-  enterAnimation: (factor: number) => Keyframe,
-  exitAnimation: (factor: number) => Keyframe,
+  enterAnimation: (factor: number) => ReanimatedKeyframe,
+  exitAnimation: (factor: number) => ReanimatedKeyframe,
 ) => {
   const top = position.includes('top');
   const factor = top ? 1 : -1;

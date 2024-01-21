@@ -1,6 +1,6 @@
 import { Text, Price, Pressable } from '@/components';
 import { memo } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { View, StyleSheet, ViewStyle, DimensionValue } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { push } from '@/services/NavigationService';
 
@@ -8,7 +8,7 @@ type Props = Product & {
   hasPrice?: boolean;
   renderIcon?: JSX.Element | '';
   IconStyle?: ViewStyle;
-  size?: number | string;
+  size?: DimensionValue | undefined;
   px?: number;
   mx?: number;
   ItemStyle?: ViewStyle;

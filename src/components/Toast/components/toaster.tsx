@@ -9,6 +9,7 @@ import {
 import { useToast } from '../core/useToast';
 import ToastBar from './toastBar';
 import Animated, {
+  AnimatableValue,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -34,12 +35,11 @@ const ToastWrapper: React.FC<
       transform: [{ translateY: progress.value }],
     };
   });
-  if (
-    'transform' in positionStyle &&
-    positionStyle.transform?.length &&
-    'translateY' in positionStyle.transform[0]
-  ) {
-    progress.value = withSpring(positionStyle.transform![0].translateY);
+  if (positionStyle.transform && positionStyle.transform.length > 0) {
+    const translateYValue = (
+      positionStyle.transform[0] as { translateY?: number }
+    ).translateY as number;
+    progress.value = withSpring(translateYValue);
   }
   return (
     <Animated.View
@@ -73,14 +73,14 @@ const getPositionStyle = (
         alignItems: 'center',
       }
     : position.includes('right')
-    ? {
-        alignItems: 'flex-end',
-        right: contentInset?.right || DEFAULT_OFFSET,
-      }
-    : {
-        alignItems: 'flex-start',
-        left: contentInset?.left || DEFAULT_OFFSET,
-      };
+      ? {
+          alignItems: 'flex-end',
+          right: contentInset?.right || DEFAULT_OFFSET,
+        }
+      : {
+          alignItems: 'flex-start',
+          left: contentInset?.left || DEFAULT_OFFSET,
+        };
   return {
     position: 'absolute',
     // marginHorizontal: DEFAULT_OFFSET,

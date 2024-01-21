@@ -15,7 +15,7 @@
     "tsc": "tsc --noEmit --pretty -p tsconfig.json $(git diff --name-only --cached --diff-filter=d -- '*.{tsx,ts}')",
     "pod": "cd ios && pod install --verbose && cd ..",
     "postinstall": "npx husky install && npx patch-package",
-    "prettier": "prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts}\"",
+    "prettier": "npx prettier --write --cache --cache-strategy metadata \"**/*.{tsx,ts}\"",
     "clean": "react-native-clean-project",
     "svg-init": "npx iconfont-rn",
     "e2e:ios": "detox test --configuration ios.sim.debug",

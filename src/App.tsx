@@ -17,7 +17,6 @@ import {
   DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native';
-import { useFlipper } from '@react-navigation/devtools';
 import { enableFreeze } from 'react-native-screens';
 import { Fallback, ThemeProvider } from '@/components';
 import { useSafeState, useMemoizedFn } from 'ahooks';
@@ -39,8 +38,6 @@ const Main = () => {
   const isOnline = useStore(state => state.isOnline);
   // 监听网络情况
   useNetwork();
-
-  useFlipper(navigationRef);
 
   useEffect(() => {
     const init = async () => {

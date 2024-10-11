@@ -108,7 +108,6 @@
     "lint-staged": "^13.1.0",
     "npm": "^9.6.6",
     "react-native-clean-project": "^4.0.1",
-    "react-native-flipper": "0.164.0",
     "react-native-iconfont-cli": "^2.2.4",
     "react-test-renderer": "18.2.0",
     "shelljs": "^0.8.5",

@@ -39,7 +39,8 @@ const Hot = ({ onChange }: { onChange: (s: string) => void }) => {
               key={index}
               onPress={() => {
                 onChange(item);
-              }}>
+              }}
+            >
               <Text opacity={1} mr="x4" mb="x4" variant="h2" color="primary200">
                 {item}
               </Text>

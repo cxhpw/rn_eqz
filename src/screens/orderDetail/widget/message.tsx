@@ -7,7 +7,8 @@ const Message = ({ message }: { message?: string }) => {
       backgroundColor="primary_background"
       paddingHorizontal="x3"
       minHeight={100}
-      paddingVertical="2.5">
+      paddingVertical="2.5"
+    >
       <Flex alignItems="flex-start">
         <Text mr="x4">留言</Text>
         <Box flex={1}>

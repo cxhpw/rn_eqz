@@ -34,7 +34,8 @@ export const AnimatedIconWrapper = ({ children }: any) => {
           minWidth: 20,
         },
         animatedStyle,
-      ]}>
+      ]}
+    >
       <Text>{children}</Text>
     </Animated.View>
   );
@@ -49,7 +50,8 @@ const IndicatorWrapper = ({ children }: any) => {
         alignItems: 'center',
         minWidth: 20,
         minHeight: 20,
-      }}>
+      }}
+    >
       {children}
     </View>
   );
@@ -75,7 +77,8 @@ const ToastIcon: React.FC<{ toast: Toast }> = ({ toast }) => {
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
             position: 'absolute',
-          }}>
+          }}
+        >
           {type === 'error' ? (
             <ErrorIcon {...iconTheme} />
           ) : (

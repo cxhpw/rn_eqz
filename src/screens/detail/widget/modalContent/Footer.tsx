@@ -14,7 +14,8 @@ const Footer: React.FC<Props> = ({ data, onClick }) => {
       scalable={false}
       onPress={() => {
         onClick();
-      }}>
+      }}
+    >
       <Box style={styles.wrapper}>
         <Text style={styles.title}>
           租赁日期<Text style={styles.label}>（{data?.MinDays}天起租）</Text>

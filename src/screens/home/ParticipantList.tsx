@@ -67,7 +67,8 @@ function Participant({
       layout={Layout.springify()}
       style={[styles.participantView]}
       exiting={LightSpeedOutRight}
-      entering={LightSpeedInLeft}>
+      entering={LightSpeedInLeft}
+    >
       <Text>{name}</Text>
       <Button title="Remove" color="red" onPress={onRemove} />
     </Animated.View>

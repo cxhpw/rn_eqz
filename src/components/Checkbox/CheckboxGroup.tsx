@@ -1,4 +1,4 @@
-import { Children, createContext, forwardRef, memo } from 'react';
+import { createContext, forwardRef, memo } from 'react';
 import { View, Text } from 'react-native';
 import {
   CheckboxGroupProps,
@@ -11,10 +11,12 @@ export const CheckboxGroupContext = createContext<null | _CheckboxGroupContext>(
   null,
 );
 
-const CheckboxGroup = (
-  { size, shape, children, ...props }: CheckboxGroupProps,
-  ref: any,
-) => {
+const CheckboxGroup = ({
+  size,
+  shape,
+  children,
+  ...props
+}: CheckboxGroupProps) => {
   let state = useCheckboxGroupState(props);
   const { groupProps, labelProps } = useCheckboxGroup(props, state);
   return (
@@ -25,7 +27,8 @@ const CheckboxGroup = (
           size,
           shape,
           state,
-        }}>
+        }}
+      >
         {children}
       </CheckboxGroupContext.Provider>
     </View>

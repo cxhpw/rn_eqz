@@ -34,7 +34,8 @@ const AddressControl: React.FC<Props> = ({ value: _value, onChange }) => {
           from: 'OrderSubmit',
           onChange,
         });
-      }}>
+      }}
+    >
       <Box backgroundColor="black" padding="x4">
         <Text fontWeight="bold" mb="x2">
           收货人信息
@@ -63,7 +64,8 @@ const AddressControl: React.FC<Props> = ({ value: _value, onChange }) => {
         top="50%"
         style={{
           marginTop: -10,
-        }}>
+        }}
+      >
         <Icon name="right" color="#ffffff" size={20} />
       </Box>
     </Pressable>

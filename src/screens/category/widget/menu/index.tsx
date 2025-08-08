@@ -28,7 +28,8 @@ const Menu = (
         flex: 1,
         backgroundColor: theme === 'dark' ? colors.black : '#f7f5f6',
       }}
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+    >
       {data?.map((item, idx) => (
         <MenuItem
           active={activeIndex === idx}

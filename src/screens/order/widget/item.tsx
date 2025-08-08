@@ -26,7 +26,8 @@ const StatusTag = memo(({ children, status = 'fail' }: any) => {
       style={_styles.tag}
       alignItems="center"
       justifyContent="center"
-      minWidth={80}>
+      minWidth={80}
+    >
       <Text color="white" variant="p2">
         {children}
       </Text>
@@ -75,7 +76,8 @@ const Item: React.FC<OrderItem> = ({
         navigate('OrderDetail', {
           id: OrderID,
         });
-      }}>
+      }}
+    >
       <Box
         mt="x10"
         style={{
@@ -92,7 +94,8 @@ const Item: React.FC<OrderItem> = ({
           height: 1,
         }}
         shadowRadius={4}
-        borderRadius="x1">
+        borderRadius="x1"
+      >
         <StatusTag status={OrderStatus === 101 ? 'fail' : ''}>
           {statusText(OrderStatus)}
         </StatusTag>

@@ -14,7 +14,8 @@ const CellList: React.FC<Props> = ({ data, value }) => {
       mb="2.5"
       backgroundColor="primary_background"
       paddingHorizontal="2.5"
-      paddingVertical="x4">
+      paddingVertical="x4"
+    >
       <Flex justifyContent="space-between" marginBottom="x4">
         <Text variant="h2">商品金额</Text>
         <Price

@@ -10,7 +10,8 @@ const TabBarItem = forwardRef<View, TabBarItemProps>((props, ref) => {
       style={[
         { justifyContent: 'center', alignItems: 'center', height: '100%' },
         { flex: 1 }, //scrollEnabled
-      ]}>
+      ]}
+    >
       <View
         ref={ref}
         style={[
@@ -19,7 +20,8 @@ const TabBarItem = forwardRef<View, TabBarItemProps>((props, ref) => {
             justifyContent: 'center',
             alignItems: 'center',
           },
-        ]}>
+        ]}
+      >
         {props.showIcon && (
           <View style={{ marginRight: 4 }}>
             {props.renderIcon?.(props.active)}

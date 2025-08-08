@@ -123,7 +123,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
       });
     }
     return React.Children.map(children, (child, i) => {
-      const style = (child as ReactElement).props.style || {};
+      const style = (child as ReactElement<{ style: any }>).props.style || {};
       console.log(child);
       const boneStyle = getBoneStyles(style);
       if (animationType === 'pulse' || animationType === 'none') {

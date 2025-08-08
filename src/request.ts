@@ -37,24 +37,8 @@ service.interceptors.response.use(
     return resopnse;
   },
   error => {
-    console.error('axios', error);
-    // messageQueue.push(() => {
-    //   toast.error(`[${error.name}:${error.message}]`, {
-    //     onClose() {
-    //       isCall = false;
-    //       messageQueue.length = 0;
-    //     },
-    //   });
-    // });
-    // Promise.resolve().then(() => {
-    //   setTimeout(() => {
-    //     if (!isCall) {
-    //       isCall = true;
-    //       messageQueue.shift()();
-    //     }
-    //   });
-    // });
-    return Promise.reject(error.message);
+    console.error('响应错误', error);
+    return Promise.reject(error);
   },
 );
 

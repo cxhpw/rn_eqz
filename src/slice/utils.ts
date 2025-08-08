@@ -2,8 +2,8 @@ import { StateCreator } from 'zustand';
 import request from '@/request';
 
 export type isOnlineSlice = {
-  isOnline: boolean;
-  setNetwork: (n: boolean) => void;
+  isOnline: boolean | null;
+  setNetwork: (n: boolean | null) => void;
 };
 export const createisOnlineSlice: StateCreator<isOnlineSlice> = set => ({
   isOnline: true,

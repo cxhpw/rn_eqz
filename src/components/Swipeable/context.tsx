@@ -20,7 +20,8 @@ const Provider = ({ children }: PropsWithChildren<{}>) => {
       value={{
         changeState: changeState,
         id: previousId,
-      }}>
+      }}
+    >
       {children}
     </Context.Provider>
   );

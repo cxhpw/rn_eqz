@@ -17,7 +17,8 @@ const Modal = () => {
         onSwipeComplete={() => setIsModalVisible(false)}
         useNativeDriverForBackdrop
         onBackdropPress={() => setIsModalVisible(false)}
-        swipeDirection={['down']}>
+        swipeDirection={['down']}
+      >
         <Box style={style.content}>
           <Header data={customer} />
         </Box>

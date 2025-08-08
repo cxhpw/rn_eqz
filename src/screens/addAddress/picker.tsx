@@ -75,7 +75,8 @@ const PickerRegion: React.ForwardRefRenderFunction<any, Props> = (
             });
             Picker.show();
           }
-        }}>
+        }}
+      >
         <Box flexDirection="row" marginTop="x1">
           <Text style={[styles.label]} variant="p1" color="gray500">
             所在区域
@@ -86,7 +87,8 @@ const PickerRegion: React.ForwardRefRenderFunction<any, Props> = (
               justifyContent="center"
               borderBottomColor="border"
               style={[style]}
-              borderBottomWidth={ONE_PIXEL}>
+              borderBottomWidth={ONE_PIXEL}
+            >
               <Text color={`${value.length === 0 ? 'gray300' : 'text'}`}>
                 {value.length ? value.join('、') : '请选择所在地址'}
               </Text>

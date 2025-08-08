@@ -36,6 +36,7 @@ const MAIN_SCREENS: ScreenProps[] = [
     component: TabScreen,
     options: {
       headerShown: false,
+      title: '',
     },
   },
   {
@@ -44,6 +45,7 @@ const MAIN_SCREENS: ScreenProps[] = [
     options: {
       headerTransparent: true,
       headerTitle: Config.APP_DISPLAY_NAME,
+      headerBackTitle: Config.APP_DISPLAY_NAME,
       headerTitleStyle: { color: 'transparent' },
       // headerTintColor: '#fff',
     },
@@ -175,11 +177,13 @@ export default () => {
         gestureEnabled: true,
         gestureDirection: 'horizontal',
         headerBackTitle: '',
-      }}>
+      }}
+    >
       <Stack.Group
         screenOptions={{
           presentation: 'card',
-        }}>
+        }}
+      >
         {MAIN_SCREENS.map(screen => {
           //@ts-ignore
           return <Stack.Screen key={screen.name} {...screen} />;

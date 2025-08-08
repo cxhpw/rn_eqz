@@ -124,7 +124,8 @@ const Pressable = (
       onPress={onPress}
       onLongPress={onLongPress}
       onPressIn={handlePressIn}
-      onPressOut={handlePressOut}>
+      onPressOut={handlePressOut}
+    >
       <Animated.View style={[animatedStyle, style]}>{children}</Animated.View>
     </RNPressable>
   );

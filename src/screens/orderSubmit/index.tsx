@@ -67,12 +67,14 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
         flex={1}
         style={{
           backgroundColor: theme.theme === 'dark' ? 'black' : '#f9f9f9',
-        }}>
+        }}
+      >
         <ScrollView
           contentContainerStyle={{
             padding: 10,
             minHeight: '100%',
-          }}>
+          }}
+        >
           <Skeleton
             containerStyle={{
               flex: 1,
@@ -114,7 +116,8 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderSubmit'>> = ({
                 flex: 1,
               },
             ]}
-            loading={loading}>
+            loading={loading}
+          >
             <AddressControl
               value={address}
               onChange={value => {

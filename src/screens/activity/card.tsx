@@ -16,7 +16,8 @@ const Card = ({ Image, Title, Url }: Item) => {
       width="100%"
       borderRadius="x1"
       overflow="hidden"
-      mt="x5">
+      mt="x5"
+    >
       <Pressable
         scalable={false}
         onPress={() => {
@@ -25,7 +26,8 @@ const Card = ({ Image, Title, Url }: Item) => {
         }}
         style={{
           height: '100%',
-        }}>
+        }}
+      >
         <ImageBackground
           style={[StyleSheet.absoluteFill]}
           resizeMode="cover"

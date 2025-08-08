@@ -1,4 +1,5 @@
-import React, { PropsWithChildren, useContext, useRef } from 'react';
+// @ts-nocheck
+import React, { useContext, useRef } from 'react';
 import { Field, FieldContext } from 'rc-field-form';
 import type { FieldProps } from 'rc-field-form/es/Field';
 import Text from '../Text';
@@ -6,23 +7,19 @@ import { useTheme } from '@shopify/restyle';
 import { Theme } from '../Theme/theme';
 import { ViewStyle } from 'react-native';
 
-type Props = PropsWithChildren<
-  FieldProps & {
-    /** 边框 */
-    type?: 'bottom' | 'all';
-  }
->;
+type Props = FieldProps & {
+  /** 边框 */
+  type?: 'bottom' | 'all';
+};
 interface ErrorProps {
   warning?: boolean;
-  children?: React.ReactNode[];
+  children?: string[];
 }
-export const Error: React.FC<ErrorProps> = ({ children }) => (
+export const ErrorMessage: React.FC<ErrorProps> = ({ children }) => (
   <Text variant="p3" color="func600">
     {children?.[0]}
   </Text>
 );
-
-let child: React.ReactElement;
 
 const FormItem: React.FC<Props> = ({
   /** 边框 */
@@ -57,25 +54,21 @@ const FormItem: React.FC<Props> = ({
       ref.current?.focus();
     }
   };
-  //@ts-ignore
-  // if (!children || Enum.indexOf(children.type.render.displayName) === -1) {
-  //   console.warn('Error: first children must be inculde a Form Component');
-  // }
   return (
     <Field name={name} {...fieldProps} onMetaChange={onMetaChange}>
       {(control, meta, form) => {
         const childNode =
           typeof children === 'function'
             ? children(control, meta, form)
-            : React.cloneElement((child = children as React.ReactElement), {
+            : React.cloneElement(children, {
                 ...control,
                 ref,
                 type,
                 style:
                   meta.errors.length > 0
                     ? mergeStyleProps()
-                    : child.props.style,
-                brief: <Error>{meta.errors}</Error>,
+                    : children.props.style,
+                brief: <ErrorMessage>{meta.errors}</ErrorMessage>,
               });
         return <>{childNode}</>;
       }}

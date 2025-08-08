@@ -56,7 +56,8 @@ const DateItem: React.FC<Props> = ({ data }) => {
         data.onPress(data);
         console.log('更新');
         update();
-      }}>
+      }}
+    >
       <View style={[styles.date, getDateViewStyle(data)]}>
         <Text style={[getDateTextStyle(data)]}>
           {data.today ? '今天' : data.str}

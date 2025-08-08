@@ -38,7 +38,8 @@ const Item: React.FC<Props> = ({
           marginHorizontal: mx,
         },
         ItemStyle,
-      ]}>
+      ]}
+    >
       <Pressable
         scalable={false}
         onPress={() => {
@@ -46,7 +47,8 @@ const Item: React.FC<Props> = ({
           typeof onPress === 'function'
             ? onPress(AutoID)
             : push('Detail', { id: AutoID });
-        }}>
+        }}
+      >
         <View style={style.wrapper}>
           <FastImage
             style={StyleSheet.absoluteFill}

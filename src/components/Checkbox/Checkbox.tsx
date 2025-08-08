@@ -33,43 +33,47 @@ const Checkbox = (
   ref: any,
 ) => {
   let groupState = useContext(CheckboxGroupContext);
+
   const inputRef = useRef(null);
 
-  const { inputProps } = groupState
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      useCheckboxGroupItem(
-        {
-          isDisabled: disabled,
-          isIndeterminate: indeterminate,
-          onChange,
-          value: value,
-          children,
-          'aria-label': props.accessibilityLabel || 'checkbox',
-        },
-        groupState.state,
-        inputRef,
-      )
-    : // eslint-disable-next-line react-hooks/rules-of-hooks
-      useCheckbox(
-        {
-          isDisabled: disabled,
-          isIndeterminate: indeterminate,
-          isSelected: checked,
-          defaultSelected: defaultChecked,
-          onChange,
-          value: value,
-          children,
-          'aria-label': props.accessibilityLabel || 'checkbox',
-        },
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useToggleState({
-          onChange,
-          value: value,
-          defaultSelected: defaultChecked,
-          isSelected: undefined,
-        }),
-        inputRef,
-      );
+  const { inputProps } =
+    groupState != null
+      ? // eslint-disable-next-line react-hooks/rules-of-hooks
+        useCheckboxGroupItem(
+          {
+            isDisabled: disabled,
+            isIndeterminate: indeterminate,
+            onChange,
+            value: value,
+            children,
+            'aria-label': props.accessibilityLabel || 'checkbox',
+          },
+          groupState.state,
+          inputRef,
+        )
+      : // eslint-disable-next-line react-hooks/rules-of-hooks
+        useCheckbox(
+          {
+            isDisabled: disabled,
+            isIndeterminate: indeterminate,
+            isSelected: checked,
+            defaultSelected: defaultChecked,
+            onChange,
+            value: value,
+            children,
+            'aria-label': props.accessibilityLabel || 'checkbox',
+          },
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          useToggleState({
+            onChange,
+            // @ts-ignore
+            value: value,
+            defaultSelected: defaultChecked,
+            isSelected: undefined,
+          }),
+          // @ts-ignore
+          inputRef,
+        );
 
   const { CheckboxComponent, TouchableOpacity } =
     usePropsResolution(inputProps);
@@ -98,7 +102,8 @@ const Checkbox = (
           borderRadius={
             (groupState?.shape ?? shape) === 'square' ? 'x1' : 'full'
           }
-          borderColor={`${inputProps.checked ? 'primary50' : 'gray200'}`}>
+          borderColor={`${inputProps.checked ? 'primary50' : 'gray200'}`}
+        >
           <Icon
             size={(groupState?.size ?? size) * 0.8}
             color={inputProps.checked ? '#fff' : 'rgba(0,0,0,.2)'}

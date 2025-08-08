@@ -1,7 +1,6 @@
 import { useRadio } from '@react-native-aria/radio';
 import React, { forwardRef, memo } from 'react';
 import isEmpty from 'lodash-es/isEmpty';
-//@ts-ignore
 import stableHash from 'stable-hash';
 import { mergeRefs } from '../utils';
 import { combineContextAndProps } from '../utils';
@@ -34,7 +33,8 @@ const RadioComponent = memo(
           }}
           {...inputProps}
           disabled={isDisabled}
-          ref={mergeRefs([ref, wrapperRef])}>
+          ref={mergeRefs([ref, wrapperRef])}
+        >
           {/* radio */}
           <RadioWrapper
             size={size}
@@ -44,7 +44,8 @@ const RadioComponent = memo(
                 : isDisabled || isReadOnly
                   ? 'disabled'
                   : undefined
-            }>
+            }
+          >
             {icon && isChecked ? (
               sizedIcon()
             ) : (
@@ -65,7 +66,7 @@ const Radio = (
 ) => {
   const contextState = React.useContext(RadioGroupContext);
   const combinedProps = combineContextAndProps({ ...contextState }, props);
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<any>(null);
   const radioState = useRadio(
     {
       ...combinedProps,

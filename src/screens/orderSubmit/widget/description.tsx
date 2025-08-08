@@ -13,7 +13,8 @@ const Description: React.FC<{ data?: OrderSettlement }> = ({ data }) => {
       padding="2.5"
       paddingVertical="x4"
       backgroundColor="primary_background"
-      mb="2.5">
+      mb="2.5"
+    >
       <Flex>
         <Flex alignItems="flex-start" flex={1}>
           <FastImage

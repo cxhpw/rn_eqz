@@ -14,7 +14,6 @@ import {
 import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { useStore } from '@/store';
-import useCheckNetworkError from '@/hooks/useCheckNetworkError';
 
 type Props = {} & BottomTabScreenProps<AppParamList>;
 
@@ -35,7 +34,6 @@ function Summary({ children }: PropsWithChildren) {
   );
 }
 const Index: React.FC<Props> = ({ navigation }) => {
-  useCheckNetworkError();
   const { WeiXinTopImg, WeiXinTopColor, TagImg, ad1, ad2 } = useStore(
     state => state.appConfig,
   );

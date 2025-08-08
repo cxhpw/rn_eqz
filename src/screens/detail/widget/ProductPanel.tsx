@@ -19,12 +19,15 @@ const ProductPanel: React.FC<Props> = ({ data }) => {
     <Box
       padding="2.5"
       paddingBottom="x4"
-      style={[style.wrapper, { borderBottomColor: theme.colors.border }]}>
+      style={[style.wrapper, { borderBottomColor: theme.colors.border }]}
+    >
       <Text variant="h2" mb="x5">
         {data?.ProductName}
       </Text>
       <Flex flexWrap="wrap" flexDirection="row">
-        {data?.ProductTag?.map(item => <Tag key={item} title={item} />)}
+        {data?.ProductTag?.map(item => (
+          <Tag key={item} title={item} />
+        ))}
       </Flex>
       <Text color="gray300" variant="p2" marginTop="2.5">
         {data?.ShortDesc}

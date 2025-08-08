@@ -60,7 +60,8 @@ const ShiverBone: FC<ShiverBoneProps> = ({
         style={[
           { position: 'absolute', height: '100%', width: '100%' },
           animatedStyle,
-        ]}>
+        ]}
+      >
         <LinearGradient
           style={{ flex: 1 }}
           colors={[boneColor!, highlightColor!, boneColor!]}

@@ -15,7 +15,8 @@ const Card = ({ data }: { data?: OrderDetail }) => {
       mt="2.5"
       paddingVertical="2.5"
       paddingHorizontal="x3"
-      backgroundColor="primary_background">
+      backgroundColor="primary_background"
+    >
       <Flex marginBottom="2.5">
         <FastImage
           style={styles.image}

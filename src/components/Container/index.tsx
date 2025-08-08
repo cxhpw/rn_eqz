@@ -36,7 +36,8 @@ const Container: React.FC<
           : hasHeader
             ? ['left', 'right', 'bottom']
             : ['top', 'left', 'right']
-      }>
+      }
+    >
       <StatusBar
         barStyle={theme.theme === 'light' ? 'dark-content' : 'light-content'}
         backgroundColor="transparent"

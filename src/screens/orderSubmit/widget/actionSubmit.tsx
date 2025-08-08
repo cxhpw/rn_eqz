@@ -55,7 +55,8 @@ const ActionSubmit: React.FC<Props> = ({
         flex={1}
         height="100%"
         justifyContent="flex-start"
-        paddingLeft="x5">
+        paddingLeft="x5"
+      >
         {total === '计算中' ? (
           <Text variant="h3" color="primary50">
             价格计算中
@@ -123,7 +124,8 @@ const ActionSubmit: React.FC<Props> = ({
           fontSize: 14,
           lineHeight: 20,
           fontWeight: 'bold',
-        }}>
+        }}
+      >
         确认支付
       </SButton>
     </Flex>

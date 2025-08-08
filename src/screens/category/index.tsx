@@ -5,7 +5,6 @@ import { useCustomRequest } from '@/hooks';
 import { Menu, RightContent } from './widget';
 import type { IGestureResponderEvent } from './widget/menu/item';
 import useScrollService from './useScrollService';
-import useCheckNetworkError from '@/hooks/useCheckNetworkError';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 type Props = {
   name: string;
@@ -16,8 +15,7 @@ const Category: React.FC<
   PropsWithChildren<Props & BottomTabScreenProps<AppParamList, 'Category'>>
 > = ({ route }) => {
   const { params } = route;
-  useCheckNetworkError();
-  const ref = useRef();
+  const ref = useRef(null);
   const [active, setActive] = useState<number>(0);
   const { data: goods, loading } = useCustomRequest<Goods[]>(async () => {
     return (
@@ -58,7 +56,8 @@ const Category: React.FC<
           <Box
             style={{
               width: '24%',
-            }}>
+            }}
+          >
             <Menu
               ref={ref}
               data={goods}

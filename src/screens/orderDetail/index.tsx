@@ -33,7 +33,8 @@ const Index: React.FC<NativeStackScreenProps<AppParamList, 'OrderDetail'>> = ({
         flex={1}
         style={{
           backgroundColor: theme.theme === 'dark' ? 'black' : '#f9f9f9',
-        }}>
+        }}
+      >
         <ScrollView
           contentContainerStyle={{
             paddingVertical: 10,

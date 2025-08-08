@@ -24,7 +24,8 @@ const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
             defaultChecked={value}
             checked={value}
             accessibilityLabel="是否同意用户协议"
-            onChange={onChange}>
+            onChange={onChange}
+          >
             <Text color="gray300" ml="x2" variant="p2">
               我同意
             </Text>
@@ -34,7 +35,8 @@ const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
               onPress={() => {
                 setArticle(_article?.[1] ?? '');
                 setShow(true);
-              }}>
+              }}
+            >
               《用户租赁与服务协议》
             </Text>
             <Text
@@ -43,7 +45,8 @@ const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
               onPress={() => {
                 setArticle(_article?.[0] ?? '');
                 setShow(true);
-              }}>
+              }}
+            >
               《委托扣款授权书》
             </Text>
           </Checkbox>
@@ -60,17 +63,20 @@ const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
         useNativeDriverForBackdrop
         onBackdropPress={() => {
           setShow(false);
-        }}>
+        }}
+      >
         <Box
           backgroundColor="white"
           width={scale(270)}
           paddingHorizontal="x5"
-          paddingVertical="x4">
+          paddingVertical="x4"
+        >
           <ScrollView
             showsVerticalScrollIndicator={true}
             style={{
               height: 350,
-            }}>
+            }}
+          >
             <HtmlParse
               htmlStyle="p{font-size: 12px}div{font-size: 12px}"
               html={article}
@@ -83,7 +89,8 @@ const Agreement: React.FC<Props> = ({ onChange, value, article: _article }) => {
               style={styles.btn}
               onPress={() => {
                 setShow(false);
-              }}>
+              }}
+            >
               关闭
             </SButton>
           </Flex>

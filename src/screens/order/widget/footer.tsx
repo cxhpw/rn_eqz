@@ -38,7 +38,8 @@ const Footer = ({ status, id }: any) => {
                 return [...res];
               });
             });
-          }}>
+          }}
+        >
           删除订单
         </SButton>
       );
@@ -47,7 +48,8 @@ const Footer = ({ status, id }: any) => {
         <SButton
           variant="Outline"
           colorScheme="primary50"
-          style={[styles.btn, styles.primary]}>
+          style={[styles.btn, styles.primary]}
+        >
           确认收货
         </SButton>
       );
@@ -56,7 +58,8 @@ const Footer = ({ status, id }: any) => {
         <SButton
           variant="Outline"
           colorScheme="primary50"
-          style={[styles.btn, styles.primary]}>
+          style={[styles.btn, styles.primary]}
+        >
           归还
         </SButton>
       );
@@ -67,14 +70,16 @@ const Footer = ({ status, id }: any) => {
             variant="Outline"
             colorScheme="text"
             style={styles.btn}
-            onPress={onCancel}>
+            onPress={onCancel}
+          >
             取消订单
           </SButton>
           <SButton
             onPress={onPay}
             variant="Outline"
             colorScheme="primary50"
-            style={[styles.btn, styles.primary]}>
+            style={[styles.btn, styles.primary]}
+          >
             去付款
           </SButton>
         </>
@@ -84,7 +89,8 @@ const Footer = ({ status, id }: any) => {
         <SButton
           variant="Outline"
           colorScheme="primary50"
-          style={[styles.btn, styles.primary]}>
+          style={[styles.btn, styles.primary]}
+        >
           退款
         </SButton>
       );
@@ -110,7 +116,8 @@ const Footer = ({ status, id }: any) => {
         borderTopWidth: StyleSheet.hairlineWidth,
         borderTopColor: theme.colors.border,
         justifyContent: 'flex-end',
-      }}>
+      }}
+    >
       {renderOrderButton(status)}
     </Flex>
   );

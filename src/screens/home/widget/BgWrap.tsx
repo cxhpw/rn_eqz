@@ -12,7 +12,8 @@ const BgWrap: React.FC<PropsWithChildren<{ url: string }>> = ({
         style={style.ImageBackground}
         source={{
           uri: url,
-        }}>
+        }}
+      >
         {children}
       </ImageBackground>
     </Box>

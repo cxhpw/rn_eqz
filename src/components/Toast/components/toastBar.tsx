@@ -1,9 +1,11 @@
 import { ViewStyle, View, Text } from 'react-native';
 import { Toast, ToastPosition, Renderable, resolveValue } from '../core/types';
-import Animated, { Keyframe } from 'react-native-reanimated';
+import Animated, {
+  Keyframe,
+  ReanimatedKeyframe,
+} from 'react-native-reanimated';
 import { memo, useState } from 'react';
 import ToastIcon from './toastIcon';
-import type { ReanimatedKeyframe } from 'react-native-reanimated/lib/typescript/reanimated2/layoutReanimation/animationBuilder/Keyframe';
 
 interface ToastBarProps {
   toast: Toast;
@@ -37,7 +39,8 @@ const ToastBarBase = ({ children, style }: any) => {
           borderRadius: 8,
         },
         style,
-      ]}>
+      ]}
+    >
       {children}
     </View>
   );
@@ -50,7 +53,8 @@ const Message = ({ children }: any) => {
         justifyContent: 'center',
         marginVertical: 4,
         marginLeft: 10,
-      }}>
+      }}
+    >
       <Text>{children}</Text>
     </View>
   );
@@ -130,7 +134,8 @@ const ToastBar: React.FC<ToastBarProps> = ({
           width: e.nativeEvent.layout.width,
           height: e.nativeEvent.layout.height,
         });
-      }}>
+      }}
+    >
       <ToastBarBase style={style}>
         {typeof children === 'function' ? (
           children({

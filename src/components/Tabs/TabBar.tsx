@@ -12,6 +12,13 @@ export default function TabBar(props: TabBarProps) {
   const [measures, setMeasures] = useState<Measure[]>([]);
   useEffect(() => {
     setTimeout(() => {
+      // 保存每一个 TabBarItem 的测量信息
+      // 这里使用 setTimeout 是为了确保在组件渲染后获取测量
+      // 否则可能会因为组件还未渲染完成而导致测量
+      if (props.navigationState.routes.length === 0) {
+        setMeasures([]);
+        return;
+      }
       const m: Measure[] = [];
       props.navigationState.routes.forEach((route, _, array) => {
         route.ref.current?.measureLayout(
@@ -22,7 +29,7 @@ export default function TabBar(props: TabBarProps) {
               setMeasures(m);
             }
           },
-          () => {},
+          () => {}, // 测量失败的回调
         );
       });
     }, 0);
@@ -33,9 +40,11 @@ export default function TabBar(props: TabBarProps) {
     wrapperRef: scrollViewRef,
     idx: props.navigationState.index,
   });
+
   scrollViewRef.current?.scrollTo({
     x,
   });
+
   let tabBarWidth = 0;
   if (measures.length === 0) {
     tabBarWidth = 0;
@@ -70,7 +79,8 @@ export default function TabBar(props: TabBarProps) {
           },
           props.tabBarStyle,
         ]}
-        scrollEventThrottle={16}>
+        scrollEventThrottle={16}
+      >
         {props.navigationState.routes.map((route, idx) => {
           const { key, ...otherProps } = route;
           const itemProps: TabBarItemProps = {
@@ -100,7 +110,8 @@ export default function TabBar(props: TabBarProps) {
         {/* 指示器 */}
         {props.showIndicator && (
           <View
-            style={[{ position: 'absolute', width: tabBarWidth, bottom: 0 }]}>
+            style={[{ position: 'absolute', width: tabBarWidth, bottom: 0 }]}
+          >
             {measures.length > 0 && (
               <TabBarIndicator
                 x={x}

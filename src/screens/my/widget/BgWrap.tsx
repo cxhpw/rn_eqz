@@ -10,7 +10,8 @@ const BgWrap: React.FC<PropsWithChildren<{}>> = ({ children }) => {
         resizeMode="stretch"
         source={{
           uri: 'http://f.wxjmei.com/2020/06/202006169238617.jpg',
-        }}>
+        }}
+      >
         {children}
       </ImageBackground>
     </Box>

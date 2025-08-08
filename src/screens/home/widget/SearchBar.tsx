@@ -12,7 +12,8 @@ const SearchBar: React.FC = () => {
       <Pressable
         onPress={() => {
           navigate('Search');
-        }}>
+        }}
+      >
         <Flex
           paddingHorizontal="x4"
           flexDirection="row"
@@ -20,7 +21,8 @@ const SearchBar: React.FC = () => {
           height={40}
           overflow="hidden"
           borderRadius="x1"
-          backgroundColor="white">
+          backgroundColor="white"
+        >
           <Icon name="sousuo" color={theme.colors.primary500} size={25} />
           <Text color="primary500" fontSize={14} ml="x1">
             想体验什么？搜搜看

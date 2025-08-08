@@ -66,12 +66,14 @@ const Index: React.FC<Props> = ({
       <Animated.View
         key={label}
         // eslint-disable-next-line react-native/no-inline-styles
-        style={{ flex: 1, transform: [{ translateX: trans }] }}>
+        style={{ flex: 1, transform: [{ translateX: trans }] }}
+      >
         <RectButton
           style={[styles.rightAction, { backgroundColor: backgroundColor }]}
           onPress={() => {
             onPress();
-          }}>
+          }}
+        >
           <Text style={[styles.actionText, textStyle]}>{label}</Text>
         </RectButton>
       </Animated.View>
@@ -91,7 +93,8 @@ const Index: React.FC<Props> = ({
           flex: 1,
           width: actions.length <= 1 ? '100%' : calcWidth(),
           flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
-        }}>
+        }}
+      >
         {actions.map((action, index) => {
           const width = action?.width ?? actionWidth;
           const x = (actions.length - index) * width;
@@ -109,7 +112,8 @@ const Index: React.FC<Props> = ({
       rightThreshold={40}
       renderRightActions={renderRightActions}
       onSwipeableOpen={() => changeState(id)}
-      containerStyle={[style]}>
+      containerStyle={[style]}
+    >
       {children}
     </Swipeable>
   );

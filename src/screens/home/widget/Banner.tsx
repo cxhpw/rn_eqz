@@ -48,7 +48,8 @@ function Banner({}: Props) {
               onPress={() => {
                 const { routeName, params } = transformUrlToParams(item.AdLink);
                 navigate(routeName as any, params);
-              }}>
+              }}
+            >
               <FastImage
                 source={{
                   uri: item.AdMediaPath,
@@ -58,7 +59,7 @@ function Banner({}: Props) {
               />
             </TouchableOpacity>
           )}
-          onScrollBegin={() => {
+          onScrollStart={() => {
             setCurrent(oldValue => {
               let len = data.length;
               return oldValue === len ? 1 : oldValue + 1;
@@ -87,7 +88,8 @@ function Indicator({ current, total }) {
         backgroundColor: 'rgba(0,0,0,.5)',
         right: '4%',
         bottom: '4%',
-      }}>
+      }}
+    >
       <Text style={[style.Indicator, { fontSize: 12 }]}>{current}</Text>
       <Text style={style.Indicator}>/</Text>
       <Text style={style.Indicator}>{total}</Text>

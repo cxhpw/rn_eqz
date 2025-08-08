@@ -67,7 +67,8 @@ export default function useInput({
         return (
           <Flex
             alignItems="center"
-            style={labelPosition === 'left' ? { height: scale(40) } : {}}>
+            style={labelPosition === 'left' ? { height: scale(40) } : {}}
+          >
             {required && (
               <Text color="func600" marginRight={'x1'}>
                 *
@@ -83,7 +84,8 @@ export default function useInput({
       return (
         <Flex
           marginRight="x2"
-          style={labelPosition === 'left' ? { height: scale(40) } : {}}>
+          style={labelPosition === 'left' ? { height: scale(40) } : {}}
+        >
           {required && (
             <Text color="func600" marginRight={'x1'}>
               *

@@ -28,13 +28,15 @@ const DateCalendar: React.FC<Props> = ({
         manual,
         onChange: onChange,
         invalidDates,
-      }}>
+      }}
+    >
       <ScrollView
         stickyHeaderIndices={[0]}
         style={{ flex: 1 }}
         contentContainerStyle={{
           paddingBottom: paddingBttom,
-        }}>
+        }}
+      >
         <DateHeader />
         <DateBody />
       </ScrollView>

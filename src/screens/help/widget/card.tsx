@@ -18,14 +18,16 @@ const Card: React.FC<Props> = ({ item, ...rest }) => {
       shadowColor="black"
       mb="x5"
       backgroundColor="white"
-      padding="x5">
+      padding="x5"
+    >
       <Text
         onPress={() => {
           rest?.onChange?.(rest?.index as number);
         }}
         mb="2.5"
         fontWeight="bold"
-        style={styles.header}>
+        style={styles.header}
+      >
         {item.Title}
       </Text>
       {rest?.active && <Wrapper html={item.Content} />}

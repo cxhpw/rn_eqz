@@ -38,9 +38,11 @@ const Body: React.FC<Props> = ({ data, onChange }) => {
                     <Pressable
                       scalable={false}
                       key={child.name}
-                      onPress={() => onChange(idx, child)}>
+                      onPress={() => onChange(idx, child)}
+                    >
                       <Text
-                        style={[styles.btn, getCheckedStyle(child.checked)]}>
+                        style={[styles.btn, getCheckedStyle(child.checked)]}
+                      >
                         {child.name}
                       </Text>
                     </Pressable>

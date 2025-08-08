@@ -154,7 +154,8 @@ export default function LargeList<T>({
           <Flex
             marginTop={'x5'}
             alignItems={'center'}
-            justifyContent={'center'}>
+            justifyContent={'center'}
+          >
             <Text variant="p1" color="gray400">
               上拉加载更多
             </Text>
@@ -165,7 +166,8 @@ export default function LargeList<T>({
           <Flex
             marginTop={'x5'}
             alignItems={'center'}
-            justifyContent={'center'}>
+            justifyContent={'center'}
+          >
             <ActivityIndicator color="gray" />
             <Text variant="p1" color="gray400">
               努力加载中...
@@ -177,7 +179,8 @@ export default function LargeList<T>({
           <Flex
             marginTop={'x5'}
             alignItems={'center'}
-            justifyContent={'center'}>
+            justifyContent={'center'}
+          >
             <Text variant="p1" color="gray400">
               没有更多数据了
             </Text>
@@ -188,7 +191,8 @@ export default function LargeList<T>({
           <Flex
             marginTop={'x5'}
             alignItems={'center'}
-            justifyContent={'center'}>
+            justifyContent={'center'}
+          >
             <Text variant="p1" color="gray400">
               加载失败
             </Text>

@@ -125,7 +125,8 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
             style={[
               { width: 0, overflow: 'hidden', alignItems: 'center' },
               clearIconStyle,
-            ]}>
+            ]}
+          >
             {/* <SvgIcon name="closecircleo" color={theme.colors.icon} /> */}
           </AnimatedTouchableIcon>
         )}
@@ -133,7 +134,8 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={triggerPasswordType}
-            style={{ marginRight: theme.spacing.x3 }}>
+            style={{ marginRight: theme.spacing.x3 }}
+          >
             {/* <SvgIcon
               name={eyeOpen ? 'eyeclose' : 'eyeopen'}
               color={theme.colors.icon}
@@ -148,7 +150,8 @@ const InputItem = forwardRef<TextInput, InputItemProps>(
         borderBottomWidth={border ? ONE_PIXEL : 0}
         borderColor="border"
         width="100%"
-        style={style}>
+        style={style}
+      >
         <Flex>
           {LabelComp}
           {InputContent}

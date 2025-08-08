@@ -19,12 +19,12 @@ export default class ErrorBlock extends React.Component<
   };
 
   static getDerivedStateFromError(error: Error) {
-    console.log('发生错误');
+    console.log('发生错误', error);
     return { error };
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log('监听到错误');
+    console.log('监听到错误', typeof error.message);
     // 错误上报
     if (this.props.onError) {
       this.props.onError(error, info);
@@ -377,7 +377,8 @@ function Fallback({
         width="100%"
         flex={1}
         justifyContent="center"
-        alignItems="center">
+        alignItems="center"
+      >
         <SvgXml
           xml={type === 'network' ? networkXml : defaultXml}
           width={190}

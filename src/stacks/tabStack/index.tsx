@@ -3,7 +3,6 @@ import Home from '@/screens/home';
 import My from '@/screens/my';
 import Chat from '@/screens/chat';
 import Category from '@/screens/category';
-import { IconNames } from '@/components/Icon';
 import { StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native';
 import { ErrorBlock, helpers } from '@/components';
@@ -24,7 +23,7 @@ const tabItems: {
   name: string;
   component: JSX.Element | Element;
   label: string;
-  icon: IconNames | Element;
+  icon: Element;
   options?: BottomTabNavigationOptions;
 }[] = [
   {
@@ -110,7 +109,8 @@ function TabStack() {
         tabBarStyle: {
           paddingTop: scale(4),
         },
-      }}>
+      }}
+    >
       {tabItems.map(item => {
         return (
           <Tab.Screen
@@ -128,7 +128,8 @@ function TabStack() {
                       fontSize: scale(12),
                       color: focused ? '#c63520' : '#666666',
                       paddingTop: scale(4),
-                    }}>
+                    }}
+                  >
                     {item.label}
                   </Text>
                 );

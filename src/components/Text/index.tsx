@@ -24,7 +24,8 @@ export default memo(({ children, style, ...props }: Props) => {
           fontVariant: ['tabular-nums'],
         },
         style,
-      ]}>
+      ]}
+    >
       {children}
     </Text>
   );

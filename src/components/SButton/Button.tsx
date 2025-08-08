@@ -54,7 +54,8 @@ const Button = (
         variant="p2"
         color={colorScheme}
         style={[_text]}
-        paddingVertical="x1">
+        paddingVertical="x1"
+      >
         {child}
       </Text>
     ) : null;
@@ -79,7 +80,8 @@ const Button = (
       style={[style]}
       onPressIn={composeEventHandlers(onPressIn, pressableProps.onPressIn)}
       onPressOut={composeEventHandlers(onPressOut, pressableProps.onPressOut)}
-      {...redolveProps}>
+      {...redolveProps}
+    >
       <Center>
         {leftIcon && !isLoading ? leftIcon : null}
         {isLoading && spinnerPlacement === 'start' ? spinnerElement : null}

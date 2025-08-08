@@ -7,11 +7,18 @@ const CardList: React.FC<Props> = ({ children }) => {
   return (
     <View>
       {Children.map(children, (child, idx) => {
-        return React.cloneElement(child as React.ReactElement, {
-          index: idx,
-          active: idx === active,
-          onChange: setActive,
-        });
+        return React.cloneElement(
+          child as React.ReactElement<{
+            index: number;
+            active: boolean;
+            onChange: React.Dispatch<React.SetStateAction<number>>;
+          }>,
+          {
+            index: idx,
+            active: idx === active,
+            onChange: setActive,
+          },
+        );
       })}
     </View>
   );

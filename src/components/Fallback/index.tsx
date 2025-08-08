@@ -14,7 +14,8 @@ export default function Fallback() {
           backgroundColor:
             theme.theme === 'dark' ? 'rgba(0,0,0,.4)' : 'rgba(255,255,255,.4)',
         },
-      ]}>
+      ]}
+    >
       <ActivityIndicator
         animating
         size="large"

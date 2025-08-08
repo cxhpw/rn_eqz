@@ -10,6 +10,7 @@ export default function useNetwork() {
   const setNetwork = useStore(state => state.setNetwork);
   /** 已经包含了网络连接变化情况的监听事件 */
   const netInfo = useNetInfo();
+
   /**
    * 当连接状态发生改变的时候
    */
@@ -25,7 +26,7 @@ export default function useNetwork() {
    */
   useMount(() => {
     NetInfo.fetch().then((state: NetInfoState) => {
-      setNetwork(state.isConnected as boolean);
+      setNetwork(state.isConnected);
     });
   });
   return [netInfo];

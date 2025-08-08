@@ -1,6 +1,6 @@
 {
   "symbol_url": "//at.alicdn.com/t/c/font_1843357_2dsmf2gesqi.js",
-  "use_typescript": true,
+  "use_typescript": false,
   "save_dir": "./src/components/Icon",
   "trim_icon_prefix": "icon",
   "default_icon_size": 18,

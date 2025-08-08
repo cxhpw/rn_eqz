@@ -12,7 +12,8 @@ const PayMethodCard: React.FC<Props> = ({ onChange, value }) => {
       backgroundColor="primary_background"
       paddingHorizontal="2.5"
       mb="2.5"
-      paddingVertical="x4">
+      paddingVertical="x4"
+    >
       <Text variant="h2" mb="2.5">
         押金方式
       </Text>

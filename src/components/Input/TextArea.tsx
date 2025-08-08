@@ -66,7 +66,8 @@ const TextArea = forwardRef<TextInput, TextAreaProps>(
         <Box
           borderWidth={border ? ONE_PIXEL : 0}
           borderColor="border"
-          style={style}>
+          style={style}
+        >
           <TextInput
             ref={ref}
             {...restProps}

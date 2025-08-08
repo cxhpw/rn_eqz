@@ -12,13 +12,15 @@ const BottomImage: React.FC<{
       marginHorizontal="2.5"
       marginBottom="x2"
       flexGrow={1}
-      justifyContent="flex-end">
+      justifyContent="flex-end"
+    >
       <Pressable
         scalable={false}
         onPress={() => {
           const { routeName, params } = transformUrlToParams(data!.url);
           navigate(routeName as any, params);
-        }}>
+        }}
+      >
         <Image
           style={style.Image}
           source={{

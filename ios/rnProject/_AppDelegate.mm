@@ -57,6 +57,7 @@
   return [CodePush bundleURL];
 #endif
 }
+
 - (UIView *)createRootViewWithBridge:(RCTBridge *)bridge
                           moduleName:(NSString *)moduleName
                            initProps:(NSDictionary *)initProps {

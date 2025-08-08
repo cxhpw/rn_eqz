@@ -7,7 +7,7 @@ import {
 } from 'react-native-tab-view';
 
 export type CustomRoute = {
-  ref: RefObject<View>;
+  ref: RefObject<View | null>;
   renderIcon?: (active: boolean) => ReactNode;
 } & Pick<TabsScene, 'key' | 'title'>;
 

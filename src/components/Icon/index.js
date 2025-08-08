@@ -1,9 +1,7 @@
-/* tslint:disable */
 /* eslint-disable */
 
-import React, { FunctionComponent } from 'react';
-import { ViewProps } from 'react-native';
-import { GProps } from 'react-native-svg';
+import React from 'react';
+
 import IconPhone from './IconPhone';
 import IconBianji from './IconBianji';
 import IconAdd from './IconAdd';
@@ -35,30 +33,7 @@ export { default as IconKuaidi } from './IconKuaidi';
 export { default as IconSousuoO } from './IconSousuoO';
 export { default as IconSousuo } from './IconSousuo';
 
-export type IconNames =
-  | 'phone'
-  | 'bianji'
-  | 'add'
-  | 'eyeopen'
-  | 'eyeclose'
-  | 'jinggao'
-  | 'warning'
-  | 'right'
-  | 'jindu'
-  | 'yirenzheng'
-  | 'youhuijuan'
-  | 'didian'
-  | 'kuaidi'
-  | 'sousuo_o'
-  | 'sousuo';
-
-interface Props extends GProps, ViewProps {
-  name: IconNames;
-  size?: number;
-  color?: string | string[];
-}
-
-let IconFont: FunctionComponent<Props> = ({ name, ...rest }) => {
+let IconFont = ({ name, ...rest }) => {
   switch (name) {
     case 'phone':
       return <IconPhone key="1" {...rest} />;

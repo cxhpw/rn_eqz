@@ -65,7 +65,8 @@ const PricePanel: React.FC<Props> = ({ data }) => {
             borderLeftColor: theme.colors.border,
           }}
           borderLeftWidth={1}
-          borderRightWidth={1}>
+          borderRightWidth={1}
+        >
           <Text variant="p2" mb={'x2'}>
             {data?.Hit}
           </Text>
@@ -76,7 +77,8 @@ const PricePanel: React.FC<Props> = ({ data }) => {
         <Center
           paddingHorizontal="x4"
           paddingVertical="x1"
-          flexDirection="column">
+          flexDirection="column"
+        >
           <Text variant="p2" mb={'x2'}>
             {data?.Evaluation}
           </Text>

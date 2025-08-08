@@ -98,7 +98,8 @@ const My: React.FC<Props> = () => {
                 }
               }}
               scalable={false}
-              activeOpacity={1}>
+              activeOpacity={1}
+            >
               <Box flexDirection="row" paddingTop="x5" alignItems="center">
                 <Flex flex={1}>
                   {signedIn ? (
@@ -129,7 +130,8 @@ const My: React.FC<Props> = () => {
                         } catch (error) {
                           console.log('不退出');
                         }
-                      }}>
+                      }}
+                    >
                       退出登录
                     </Button>
                   </Box>

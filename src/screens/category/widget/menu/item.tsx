@@ -33,7 +33,8 @@ const Item: React.FC<Props> = ({
           id: item.AutoID,
         };
         onPress(event);
-      }}>
+      }}
+    >
       <Center
         style={[
           style.menuItem,
@@ -45,10 +46,12 @@ const Item: React.FC<Props> = ({
               : 'transparent',
           },
         ]}
-        key={item.AutoID}>
+        key={item.AutoID}
+      >
         <Text
           numberOfLines={2}
-          variant={item.CategoryName.length > 4 ? 'p3' : 'p2'}>
+          variant={item.CategoryName.length > 4 ? 'p3' : 'p2'}
+        >
           {item.CategoryName}
         </Text>
       </Center>

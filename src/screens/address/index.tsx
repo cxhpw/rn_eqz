@@ -113,7 +113,8 @@ const Index = ({
           navigate('AddAddress', {
             id,
           });
-        }}>
+        }}
+      >
         <Icon name="bianji" size={25} color="#333" />
       </Pressable>
     );
@@ -144,7 +145,8 @@ const Index = ({
                       },
                       backgroundColor: '#dd2c00',
                     },
-                  ]}>
+                  ]}
+                >
                   <Pressable
                     activeOpacity={1}
                     scalable={false}
@@ -166,12 +168,14 @@ const Index = ({
                       if (res.ret === 'success') {
                         setBackAddressData(item);
                       }
-                    }}>
+                    }}
+                  >
                     <Flex
                       backgroundColor="primary_background"
                       style={{
                         paddingLeft: 15,
-                      }}>
+                      }}
+                    >
                       <Radio
                         size="x6"
                         value={item.AutoID + ''}

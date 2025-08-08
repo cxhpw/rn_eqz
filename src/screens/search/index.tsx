@@ -49,7 +49,7 @@ const Index = () => {
     (isFirstPage?: boolean) => {
       const params = [
         {
-          PageIndex: 1 + (isFirstPage ? 0 : _params?.[0]?.PageIndex ?? 0),
+          PageIndex: 1 + (isFirstPage ? 0 : (_params?.[0]?.PageIndex ?? 0)),
           PageSize: 10,
         },
       ];
@@ -106,7 +106,8 @@ const Index = () => {
         padding="2.5"
         backgroundColor={`${
           theme.theme === 'dark' ? 'primary_background' : 'white'
-        }`}>
+        }`}
+      >
         <Input
           value={key}
           style={{

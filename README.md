@@ -110,7 +110,7 @@ adb
 adb shell am start -W -a android.intent.action.VIEW -d "rntemplate://路径" [your android package name]
 ```
 
-## 5.配置热更新
+## 5.配置热更新。❌
 
 热更新使用的是微软家的 codePush 和使用它家的管理平台[https://appcenter.ms](https://appcenter.ms)
 

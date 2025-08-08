@@ -26,7 +26,8 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
               }}
               style={{
                 width: '100%',
-              }}>
+              }}
+            >
               <FastImage
                 style={style.leftImage}
                 source={{
@@ -41,7 +42,8 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
             <Box
               style={{
                 width: '100%',
-              }}>
+              }}
+            >
               <Center flex={1}>
                 <TouchableOpacity
                   activeOpacity={1}
@@ -55,7 +57,8 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
                   }}
                   style={{
                     width: '100%',
-                  }}>
+                  }}
+                >
                   <FastImage
                     style={style.rightImage}
                     source={{
@@ -79,7 +82,8 @@ const Promo: React.FC<PropsWithChildren<Props>> = ({ children, urls = [] }) => {
                   }}
                   style={{
                     width: '100%',
-                  }}>
+                  }}
+                >
                   <FastImage
                     style={style.rightImage}
                     source={{

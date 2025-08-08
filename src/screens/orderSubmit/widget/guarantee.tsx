@@ -20,7 +20,8 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
       <Box
         backgroundColor="primary_background"
         paddingVertical="x4"
-        paddingHorizontal="2.5">
+        paddingHorizontal="2.5"
+      >
         <Text variant="h3" mb="2.5">
           安心享
         </Text>
@@ -29,7 +30,8 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
             color="primary50"
             onPress={() => {
               setShow(true);
-            }}>
+            }}
+          >
             查看安心享说明
           </Text>
           <Switch value={value} onChange={onChange} />
@@ -46,12 +48,14 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
         useNativeDriverForBackdrop
         onBackdropPress={() => {
           setShow(false);
-        }}>
+        }}
+      >
         <Box
           backgroundColor="white"
           width={scale(270)}
           paddingHorizontal="x5"
-          paddingVertical="x4">
+          paddingVertical="x4"
+        >
           <Text variant="h3" textAlign="center" mb="x4">
             安心享说明
           </Text>
@@ -59,7 +63,8 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
             showsVerticalScrollIndicator={false}
             style={{
               height: 150,
-            }}>
+            }}
+          >
             {memoryHtmlBlock}
           </ScrollView>
           <Flex justifyContent="space-between" marginTop="x5">
@@ -70,7 +75,8 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
               onPress={() => {
                 onChange(true);
                 setShow(false);
-              }}>
+              }}
+            >
               开启
             </SButton>
             <SButton
@@ -79,7 +85,8 @@ const Guarantee: React.FC<Props> = ({ value, onChange, article }) => {
               style={styles.btn}
               onPress={() => {
                 setShow(false);
-              }}>
+              }}
+            >
               关闭
             </SButton>
           </Flex>

@@ -11,12 +11,14 @@ const WaterfallItem: React.FC<Props> = ({ data, style }) => {
     <Box
       width="50%"
       marginBottom="2.5"
-      style={[{ paddingHorizontal: 5 }, style]}>
+      style={[{ paddingHorizontal: 5 }, style]}
+    >
       <Pressable
         scalable={false}
         onPress={() => {
           navigate('Detail', { id: data.AutoID });
-        }}>
+        }}
+      >
         <Box backgroundColor="white" borderRadius="x1" overflow="hidden">
           <Box style={styles.box}>
             <FastImage

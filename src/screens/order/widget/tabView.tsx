@@ -47,7 +47,8 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
           data,
           setData,
           onRefresh,
-        }}>
+        }}
+      >
         <FlashList
           data={data}
           // eslint-disable-next-line react-native/no-inline-styles

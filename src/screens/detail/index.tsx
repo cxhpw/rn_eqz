@@ -56,7 +56,8 @@ const Detail: React.FC<Props> = ({ route, navigation }) => {
         style={{ flex: 1 }}
         onScroll={onScroll}
         scrollEventThrottle={1}
-        contentContainerStyle={{ paddingBottom: 60, minHeight: '100%' }}>
+        contentContainerStyle={{ paddingBottom: 60, minHeight: '100%' }}
+      >
         <Skeleton
           containerStyle={{
             flex: 1,
@@ -104,7 +105,8 @@ const Detail: React.FC<Props> = ({ route, navigation }) => {
               marginHorizontal: 10,
             },
           ]}
-          loading={loading}>
+          loading={loading}
+        >
           <Carousel data={data?.piclist} />
           <PlatformLogo />
           <ProductPanel data={data?.productdata} />

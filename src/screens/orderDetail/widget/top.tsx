@@ -9,7 +9,8 @@ const Top = ({ data }: any) => {
     <Box
       backgroundColor="primary_background"
       paddingHorizontal="x3"
-      paddingVertical="x5">
+      paddingVertical="x5"
+    >
       <Box>
         <Flex marginBottom="2.5">
           <Icon name="kuaidi" color={theme.colors.text} />

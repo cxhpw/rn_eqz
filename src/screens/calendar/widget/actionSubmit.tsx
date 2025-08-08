@@ -102,7 +102,8 @@ const ActionSubmit: React.FC<Props> = ({
         {
           paddingBottom: bottom,
         },
-      ]}>
+      ]}
+    >
       <Box style={styles.infoBox}>
         <Flex flexDirection="row" alignItems="center">
           <Text color="gray500">租期：</Text>
@@ -117,10 +118,12 @@ const ActionSubmit: React.FC<Props> = ({
                 style={[
                   styles.cell,
                   getActiveStyle(active === index && manual),
-                ]}>
+                ]}
+              >
                 <Text
                   fontSize={10}
-                  color={active === index && manual ? 'white' : 'gray500'}>
+                  color={active === index && manual ? 'white' : 'gray500'}
+                >
                   {item}天
                 </Text>
               </Pressable>
@@ -156,7 +159,8 @@ const ActionSubmit: React.FC<Props> = ({
               backgroundColor: disabled ? '#999' : theme.colors.primary50,
               borderColor: disabled ? '#999' : theme.colors.primary50,
             },
-          ]}>
+          ]}
+        >
           <Text color="white">确定</Text>
         </Button>
       </Flex>

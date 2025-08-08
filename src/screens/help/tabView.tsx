@@ -16,7 +16,8 @@ const Demo: React.FC<Props> = ({ data = [], route }) => {
       style={{ flex: 1 }}
       contentContainerStyle={{
         padding: 20,
-      }}>
+      }}
+    >
       <CardList>
         {data.map(item => (
           <Card key={item.AutoID} item={item} />

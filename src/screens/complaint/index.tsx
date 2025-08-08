@@ -38,11 +38,13 @@ const Index = () => {
             <Form
               form={form}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}>
+              onFinishFailed={onFinishFailed}
+            >
               <Form.FormItem
                 name="uname"
                 type="bottom"
-                rules={[{ required: true, message: '请输入姓名' }]}>
+                rules={[{ required: true, message: '请输入姓名' }]}
+              >
                 <Input placeholder="请输入" label="姓名" labelPosition="top" />
               </Form.FormItem>
               <Form.FormItem
@@ -51,7 +53,8 @@ const Index = () => {
                 rules={[
                   { required: true, message: '请输入电话' },
                   { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
-                ]}>
+                ]}
+              >
                 <Input
                   keyboardType="numeric"
                   placeholder="请输入"
@@ -62,7 +65,8 @@ const Index = () => {
               <Form.FormItem
                 name="orderNumber"
                 type="bottom"
-                rules={[{ required: true, message: '请输入订单号' }]}>
+                rules={[{ required: true, message: '请输入订单号' }]}
+              >
                 <Input
                   placeholder="请输入"
                   label="订单号"
@@ -71,7 +75,8 @@ const Index = () => {
               </Form.FormItem>
               <Form.FormItem
                 name="content"
-                rules={[{ required: true, message: '问题或建议' }]}>
+                rules={[{ required: true, message: '问题或建议' }]}
+              >
                 <Input.TextArea
                   limit={100}
                   placeholder="请输入问题或建议"

@@ -11,6 +11,10 @@ import RNRestart from 'react-native-restart';
 import App from './src/App';
 import { name as appName } from './app.json';
 
+if (__DEV__) {
+  require("./ReactotronConfig");
+}
+
 LogBox.ignoreLogs([
   'Require cycle:',
   'new NativeEventEmitter()',

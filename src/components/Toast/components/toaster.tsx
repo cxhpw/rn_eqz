@@ -47,7 +47,8 @@ const ToastWrapper: React.FC<
       onLayout={e => {
         console.log('toast id', id);
         onHeightUpdate(id, e.nativeEvent.layout.height);
-      }}>
+      }}
+    >
       {children}
     </Animated.View>
   );
@@ -123,7 +124,8 @@ export const Toaster: React.FC<ToasterProps> = ({
             onHeightUpdate={handlers.updateHeight}
             contentInset={contentInset || t.contentInset}
             style={containerStyle}
-            position={toastPosition}>
+            position={toastPosition}
+          >
             {t.type === 'custom' ? (
               resolveValue(t.message, t)
             ) : children ? (

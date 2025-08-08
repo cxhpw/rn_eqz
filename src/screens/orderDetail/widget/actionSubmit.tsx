@@ -27,7 +27,8 @@ const Button = memo(({ children, ...props }: any) => {
       ]}
       colorScheme="text"
       variant="Outline"
-      {...props}>
+      {...props}
+    >
       {children}
     </SButton>
   );
@@ -45,7 +46,8 @@ const ButtonFilter = memo(({ data }: { data?: OrderDetail }) => {
             console.log('回退');
             goBack();
           });
-        }}>
+        }}
+      >
         删除订单
       </Button>
     );
@@ -54,7 +56,8 @@ const ButtonFilter = memo(({ data }: { data?: OrderDetail }) => {
       <Button
         onPress={() => {
           onSign();
-        }}>
+        }}
+      >
         确认收货
       </Button>
     );
@@ -66,7 +69,8 @@ const ButtonFilter = memo(({ data }: { data?: OrderDetail }) => {
         <Button
           onPress={() => {
             onCancel();
-          }}>
+          }}
+        >
           取消订单
         </Button>
         <Button
@@ -79,7 +83,8 @@ const ButtonFilter = memo(({ data }: { data?: OrderDetail }) => {
             borderColor: theme.colors.primary50,
           }}
           onPress={onPay}
-          colorScheme="primary50">
+          colorScheme="primary50"
+        >
           付款
         </Button>
       </>
@@ -110,7 +115,8 @@ const ActionSubmit = ({
             onRefresh?.();
           }
         },
-      }}>
+      }}
+    >
       <Flex
         backgroundColor="primary_background"
         justifyContent="space-between"
@@ -118,7 +124,8 @@ const ActionSubmit = ({
         height={50}
         borderTopWidth={StyleSheet.hairlineWidth}
         borderTopColor="gray100"
-        paddingHorizontal="x5">
+        paddingHorizontal="x5"
+      >
         <Box>
           {data?.OrderStatus === 1 || data?.OrderStatus === 0 ? (
             <Text variant="p2" color="gray300">

@@ -63,7 +63,8 @@ const MenuItem: FC<Props> = ({
           event.dataset.cols && delete event.dataset.cols;
           event.dataset.url && delete event.dataset.url;
           onPress?.(event as IGestureResponderEvent);
-        }}>
+        }}
+      >
         <Center flexDirection="column">
           {createImage()}
           <Text variant="p2" mt="x2" color="black">

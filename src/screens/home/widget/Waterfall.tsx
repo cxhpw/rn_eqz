@@ -31,7 +31,8 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
               key={item.AutoID}
               onPress={() => {
                 navigate('Detail', { id: item.AutoID });
-              }}>
+              }}
+            >
               <Flex paddingVertical="2.5" flex={1}>
                 <Center>
                   <FastImage
@@ -46,7 +47,8 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                     variant="h2"
                     style={{
                       marginBottom: 'auto',
-                    }}>
+                    }}
+                  >
                     {item.ProductName}
                   </Text>
                   <Box flexDirection="row">
@@ -58,7 +60,8 @@ const Waterfall: FC<PropsWithChildren<Props>> = ({ children }) => {
                           borderRadius="x1"
                           overflow="hidden"
                           marginBottom="x1"
-                          marginRight="x1">
+                          marginRight="x1"
+                        >
                           <Text fontSize={10} lineHeight={16} color="white">
                             {tag}
                           </Text>

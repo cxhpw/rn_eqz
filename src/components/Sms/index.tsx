@@ -24,12 +24,13 @@ const Index = ({ onSend, onEnd, disabled = false, onBeforeSend }: Props) => {
     <TouchableOpacity
       disabled={disabled || countdown !== 0}
       onPress={async () => {
-        console.log('await onBeforeSend()', await onBeforeSend());
+        console.log('await onBeforeSend()');
         if (await onBeforeSend()) {
           setTargetDate(Date.now() + 60000);
           onSend?.();
         }
-      }}>
+      }}
+    >
       <Text variant="p2" color="white" opacity={countdown !== 0 ? 0.6 : 1}>
         {countdown === 0
           ? '发送验证码'

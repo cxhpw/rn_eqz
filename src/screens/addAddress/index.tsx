@@ -86,7 +86,8 @@ const Index = () => {
             <Form.FormItem
               name="uname"
               type="bottom"
-              rules={[{ required: true, message: '请输入姓名' }]}>
+              rules={[{ required: true, message: '请输入姓名' }]}
+            >
               <Input
                 labelStyle={styles.label}
                 placeholder="请输入"
@@ -100,7 +101,8 @@ const Index = () => {
               rules={[
                 { required: true, message: '请输入电话' },
                 { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
-              ]}>
+              ]}
+            >
               <Input
                 keyboardType="numeric"
                 placeholder="请输入"
@@ -113,13 +115,15 @@ const Index = () => {
               name="region"
               type="bottom"
               rules={[{ required: true, message: '请选择地区' }]}
-              initialValue={[]}>
+              initialValue={[]}
+            >
               <PickerRegion />
             </Form.FormItem>
             <Form.FormItem
               name="address"
               type="bottom"
-              rules={[{ required: true, message: '请输入详细地址' }]}>
+              rules={[{ required: true, message: '请输入详细地址' }]}
+            >
               <Input
                 labelStyle={styles.label}
                 placeholder="请输入"

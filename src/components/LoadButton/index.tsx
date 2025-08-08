@@ -11,7 +11,8 @@ const Index: React.FC<{ title?: string; loading?: boolean }> = ({
       flexDirection="row"
       paddingVertical="x5"
       alignItems="center"
-      justifyContent="center">
+      justifyContent="center"
+    >
       {loading ? (
         <>
           <ActivityIndicator size="small" color="#999" />

@@ -133,7 +133,8 @@ export const CustomRefreshControl = forwardRef<
         style || styles.control,
         Platform.OS === 'ios' ? { marginTop: -height } : {},
       ]}
-      height={height}>
+      height={height}
+    >
       <RNRefreshHeader style={styles.row} onLayout={onLayout}>
         {refreshing ? (
           <ActivityIndicator color={'gray'} />
@@ -155,7 +156,8 @@ export const CustomRefreshControl = forwardRef<
               marginTop: 5,
               fontSize: 10,
               color: theme.colors.black,
-            }}>{`上次更新：${lastTime}`}</Text>
+            }}
+          >{`上次更新：${lastTime}`}</Text>
         </View>
       </RNRefreshHeader>
       {/* {props.children} 不能删除或注释，会导致 Android 无法设置 RefreshContent */}

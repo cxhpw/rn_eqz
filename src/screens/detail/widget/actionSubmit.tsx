@@ -29,7 +29,6 @@ import useSpecService from '../useSpecService';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { storageService } from '@/services/StorageService';
 import useStackService from '@/stacks/useStackService';
-
 type Props = {
   data: ProductDetail | undefined;
   onMount?: (e: any) => void;
@@ -39,7 +38,7 @@ const { scale } = helpers;
 const ActionSubmit: React.FC<Props> = ({ data }) => {
   useStackService.useModel();
   const { signedIn } = storageService;
-  const ref = useRef<Modal>();
+  const ref = useRef<Modal>(null);
   const { params } = useRoute<RouteProp<AppParamList, 'Detail'>>();
   const theme = useTheme<AppTheme>();
   const { bottom } = useSafeAreaInsets();
@@ -71,7 +70,8 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
       run();
     }
   }, [defaultValue, params.startEnd, run]);
-  const navToCale = (name?: 'calendar') => {
+
+  const navToCale = (name?: string) => {
     setIsModalVisible(false);
     // 安排一个任务在交互和动画完成之后执行
     InteractionManager.runAfterInteractions(() => {
@@ -115,13 +115,15 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
             backgroundColor: theme.theme === 'dark' ? '#232121' : '#fff',
           },
         ]}
-        alignItems="center">
+        alignItems="center"
+      >
         <Flex flex={1} flexDirection="row">
           <Center flex={1}>
             <Pressable
               onPress={() => {
                 navigate('Home');
-              }}>
+              }}
+            >
               <Center height="100%" flexDirection="column">
                 <Image
                   style={style.icon}
@@ -135,7 +137,8 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
             <Pressable
               onPress={() => {
                 navigate('Chat');
-              }}>
+              }}
+            >
               <Center height="100%" flexDirection="column">
                 <Image
                   style={style.icon}
@@ -168,7 +171,8 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
               {
                 backgroundColor: theme.colors.primary50,
               },
-            ]}>
+            ]}
+          >
             选择租赁日期
           </Button>
         </Flex>
@@ -183,7 +187,8 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
         onBackdropPress={() => setIsModalVisible(false)}
         hasBackdrop
         propagateSwipe={true}
-        swipeDirection={['down']}>
+        swipeDirection={['down']}
+      >
         <Box style={[style.content, { paddingBottom: bottom }]}>
           <Header data={{ ...data, ...priceParameter }} />
           <Body data={spec} onChange={onChange} />
@@ -195,7 +200,8 @@ const ActionSubmit: React.FC<Props> = ({ data }) => {
             onPress={() => {
               navToCale();
             }}
-            style={[style.submit, { backgroundColor: theme.colors.primary50 }]}>
+            style={[style.submit, { backgroundColor: theme.colors.primary50 }]}
+          >
             确定
           </Button>
         </Box>

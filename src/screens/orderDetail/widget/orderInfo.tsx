@@ -10,11 +10,13 @@ const OrderInfo = ({ data }: { data?: OrderDetail }) => {
       backgroundColor="primary_background"
       mt="2.5"
       paddingVertical="2.5"
-      paddingHorizontal="x3">
+      paddingHorizontal="x3"
+    >
       <Flex
         marginBottom="x1"
         alignItems="center"
-        justifyContent="space-between">
+        justifyContent="space-between"
+      >
         <Text variant="p2" color="gray300">
           合计租金
         </Text>
@@ -28,7 +30,8 @@ const OrderInfo = ({ data }: { data?: OrderDetail }) => {
       <Flex
         marginBottom="x1"
         alignItems="center"
-        justifyContent="space-between">
+        justifyContent="space-between"
+      >
         <Text variant="p2" color="gray300">
           租金
         </Text>
@@ -42,7 +45,8 @@ const OrderInfo = ({ data }: { data?: OrderDetail }) => {
       <Flex
         marginBottom="x5"
         alignItems="center"
-        justifyContent="space-between">
+        justifyContent="space-between"
+      >
         <Text variant="p2" color="gray300">
           安心享
         </Text>
@@ -75,7 +79,8 @@ const OrderInfo = ({ data }: { data?: OrderDetail }) => {
         paddingTop="x4"
         marginTop="x4"
         borderTopWidth={StyleSheet.hairlineWidth}
-        borderTopColor="border">
+        borderTopColor="border"
+      >
         <Text variant="p2" color="gray300" mb="x1">
           订单编号：{data?.OrderNo}
         </Text>

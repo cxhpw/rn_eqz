@@ -41,13 +41,15 @@ const Index = () => {
           <Form.FormItem
             name="cname"
             type="bottom"
-            rules={[{ required: true, message: '请输入公司名称' }]}>
+            rules={[{ required: true, message: '请输入公司名称' }]}
+          >
             <Input placeholder="请输入" label="公司名称" labelPosition="top" />
           </Form.FormItem>
           <Form.FormItem
             name="uname"
             type="bottom"
-            rules={[{ required: true, message: '请输入姓名' }]}>
+            rules={[{ required: true, message: '请输入姓名' }]}
+          >
             <Input placeholder="请输入" label="姓名" labelPosition="top" />
           </Form.FormItem>
           <Form.FormItem
@@ -56,7 +58,8 @@ const Index = () => {
             rules={[
               { required: true, message: '请输入电话' },
               { pattern: /^1\d{10}$/, message: '请输入正确手机号码' },
-            ]}>
+            ]}
+          >
             <Input
               keyboardType="numeric"
               placeholder="请输入"
@@ -67,13 +70,15 @@ const Index = () => {
           <Form.FormItem
             name="pname"
             type="bottom"
-            rules={[{ required: true, message: '请输入产品名称' }]}>
+            rules={[{ required: true, message: '请输入产品名称' }]}
+          >
             <Input placeholder="请输入" label="产品名称" labelPosition="top" />
           </Form.FormItem>
           <Form.FormItem
             name="number"
             type="bottom"
-            rules={[{ required: true, message: '请输入产品数量' }]}>
+            rules={[{ required: true, message: '请输入产品数量' }]}
+          >
             <Input
               keyboardType="number-pad"
               placeholder="请输入"

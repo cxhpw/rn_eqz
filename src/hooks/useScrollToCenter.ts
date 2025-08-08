@@ -16,20 +16,11 @@ const useScrollToCenterDistance = ({
   ref,
   wrapperRef,
   idx,
-}: {
-  /** 方向 */
-  direction?: 'horizontal' | 'vertical';
-  /** 需要居中的元素 */
-  ref: RefObject<View>;
-  /** 需要居中的元素下标 */
-  idx: number;
-  /** ScrollView */
-  wrapperRef: RefObject<Animated.ScrollView | ScrollView>;
-}): number => {
-  const { data } = useRequest(
+}: Params): number => {
+  const { data } = useRequest<[TCell, TScrollView], any>(
     async () => {
       const run = async () => {
-        const a = new Promise(resolve => {
+        const a = new Promise<TCell>(resolve => {
           ref.current?.measureLayout(
             wrapperRef.current as any,
             (left, top, width, height) => {
@@ -43,7 +34,7 @@ const useScrollToCenterDistance = ({
             () => {},
           );
         });
-        const b = new Promise(resolve => {
+        const b = new Promise<TScrollView>(resolve => {
           //@ts-ignore
           wrapperRef.current?.measureInWindow(
             (x: any, y: any, width: number, height: number) => {
@@ -68,16 +59,10 @@ const useScrollToCenterDistance = ({
   if (data === undefined || ref === undefined || ref.current === null) {
     return 0;
   }
-  const cell = data![0] as {
-    width: number;
-    height: number;
-    left: number;
-    top: number;
-  };
-  const scrollView = data![1] as {
-    width: number;
-    height: number;
-  };
+  const cell = data[0];
+
+  const scrollView = data[1];
+
   size = direction === 'horizontal' ? cell.width : cell.height;
   totalSize = direction === 'horizontal' ? scrollView.width : scrollView.height;
   offset = direction === 'horizontal' ? cell.left : cell.top;
@@ -86,5 +71,25 @@ const useScrollToCenterDistance = ({
 
   return x;
 };
+
+type Params = {
+  /** 方向 */
+  direction?: 'horizontal' | 'vertical';
+  /** 需要居中的元素 */
+  ref: RefObject<View | null>;
+  /** 需要居中的元素下标 */
+  idx: number;
+  /** ScrollView */
+  wrapperRef: RefObject<Animated.ScrollView | ScrollView | null>;
+};
+
+type TCell = {
+  width: number;
+  height: number;
+  left: number;
+  top: number;
+};
+
+type TScrollView = Pick<TCell, 'width' | 'height'>;
 
 export default useScrollToCenterDistance;

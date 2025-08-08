@@ -25,10 +25,8 @@ const Desc: React.FC<Props> = ({ data }) => {
             <Pressable style={style.tabBarItem} onPress={() => setActive(i)}>
               <Center flex={1}>
                 <Text
-                  style={[
-                    style.text,
-                    { color: active === i ? 'red' : '#333' },
-                  ]}>
+                  style={[style.text, { color: active === i ? 'red' : '#333' }]}
+                >
                   {item.title}
                 </Text>
               </Center>

@@ -148,7 +148,8 @@ const Input = forwardRef<TextInput, InputProps>(
             style={[
               { width: 0, overflow: 'hidden', alignItems: 'center' },
               clearIconStyle,
-            ]}>
+            ]}
+          >
             <ErrorIcon primary="#999" />
           </AnimatedTouchableIcon>
         )}
@@ -156,7 +157,8 @@ const Input = forwardRef<TextInput, InputProps>(
           <TouchableOpacity
             activeOpacity={0.5}
             onPress={triggerPasswordType}
-            style={{ marginRight: theme.spacing.x1 }}>
+            style={{ marginRight: theme.spacing.x1 }}
+          >
             <SvgIcon
               name={eyeOpen ? 'eyeclose' : 'eyeopen'}
               color={[theme.colors.icon]}
@@ -175,7 +177,8 @@ const Input = forwardRef<TextInput, InputProps>(
           borderColor="border"
           borderRadius="x1"
           paddingRight="2.5"
-          style={[style]}>
+          style={[style]}
+        >
           {InputContent}
         </Flex>
       ) : (
@@ -184,7 +187,8 @@ const Input = forwardRef<TextInput, InputProps>(
           borderColor="border"
           borderRadius="x1"
           paddingRight="2.5"
-          style={[style]}>
+          style={[style]}
+        >
           {InputContent}
         </Flex>
       );

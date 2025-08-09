@@ -1,4 +1,7 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {
+  BottomTabScreenProps,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import Home from '@/screens/home';
 import My from '@/screens/my';
 import Chat from '@/screens/chat';
@@ -7,23 +10,31 @@ import { StyleSheet, Text } from 'react-native';
 import { Image } from 'react-native';
 import { ErrorBlock, helpers } from '@/components';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
+import { ReactNode } from 'react';
 
 const { scale } = helpers;
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabStackParamList>();
 
-const ErrorBlockWrapper = (Component: React.FC<any>) => {
-  return (props: any) => (
+type Props<T extends keyof TabStackParamList> = BottomTabScreenProps<
+  TabStackParamList,
+  T
+>;
+
+function ErrorBlockWrapper<T extends keyof TabStackParamList>(
+  Component: React.ComponentType<Props<T>>,
+) {
+  return (props: Props<T>) => (
     <ErrorBlock>
       <Component {...props} />
     </ErrorBlock>
   );
-};
+}
 
 const tabItems: {
-  name: string;
-  component: JSX.Element | Element;
+  name: keyof TabStackParamList;
+  component: React.ComponentType<any>;
   label: string;
-  icon: Element;
+  icon: (focused: boolean) => ReactNode;
   options?: BottomTabNavigationOptions;
 }[] = [
   {
@@ -102,7 +113,7 @@ const tabItems: {
 function TabStack() {
   return (
     <Tab.Navigator
-      initialRouteName="Tab"
+      initialRouteName="Home"
       screenOptions={{
         headerShown: true,
         lazy: true,
@@ -116,7 +127,6 @@ function TabStack() {
           <Tab.Screen
             key={item.name}
             name={item.name}
-            //@ts-ignore
             component={item.component}
             options={{
               title: item.label,
@@ -135,7 +145,6 @@ function TabStack() {
                 );
               },
               tabBarIcon({ focused }) {
-                // @ts-ignore
                 return item.icon(focused);
               },
               ...item.options,

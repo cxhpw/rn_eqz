@@ -15,7 +15,7 @@ import React, { PropsWithChildren, useEffect } from 'react';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { useStore } from '@/store';
 
-type Props = {} & BottomTabScreenProps<AppParamList>;
+type Props = {} & BottomTabScreenProps<TabStackParamList, 'Home'>;
 
 function Title({ children }: PropsWithChildren) {
   return (

@@ -17,12 +17,12 @@ export default class ErrorBlock extends React.Component<
   state = {
     error: null,
   };
-
+  // 在渲染阶段执行
   static getDerivedStateFromError(error: Error) {
     console.log('发生错误', error);
     return { error };
   }
-
+  // 在重新渲染后异步执行
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.log('监听到错误', typeof error.message);
     // 错误上报
@@ -369,7 +369,6 @@ function Fallback({
       </defs>
     </svg>
   `;
-  console.log('ErrorBlock render');
   return (
     <TapGestureHandler onActivated={onRefresh}>
       <Box

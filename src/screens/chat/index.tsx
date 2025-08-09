@@ -1,15 +1,11 @@
 import { StyleSheet, Linking, TouchableOpacity, Alert } from 'react-native';
-import React, { memo, PropsWithChildren } from 'react';
+import React, { memo } from 'react';
 import { Container, Text, Box, Center } from '@/components';
 import FastImage from 'react-native-fast-image';
 import { useStore } from '@/store';
 import { useMount } from 'ahooks';
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
-type Props = {
-  name: string;
-};
-
-//@ts-ignore
 const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
   return (
     <TouchableOpacity
@@ -47,7 +43,7 @@ const Card = memo<{ title: string; desc: string }>(({ title, desc }) => {
   );
 });
 
-const Chat: React.FC<PropsWithChildren<Props>> = () => {
+const Chat: React.FC<BottomTabScreenProps<TabStackParamList, 'Chat'>> = () => {
   const { PrTLImg } = useStore(state => state.appConfig);
   const [data, fetchService] = useStore(state => [
     state.serviceInfo,

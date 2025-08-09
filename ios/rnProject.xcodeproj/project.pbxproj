@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* rnProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* rnProjectTests.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		14B576043773488A83082C1E /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70B3AC04B108494C99CC52C7 /* Roboto.ttf */; };
 		66A38BFA71B29DD75C47EA60 /* libPods-rnProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF69D4B4378403FD2A12945 /* libPods-rnProject.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		841678282E435D7B0099FBFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841678272E435D7B0099FBFF /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		13B07F961A680F5B00A75B9A /* rnProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rnProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rnProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rnProject/Info.plist; sourceTree = "<group>"; };
+		70B3AC04B108494C99CC52C7 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = ../assets/fonts/Roboto.ttf; sourceTree = "<group>"; };
 		7EED15A18C489F0CA624F17C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = rnProject/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = rnProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		841678272E435D7B0099FBFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = rnProject/AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5526C1AB8A8845B5BB62EFCA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				70B3AC04B108494C99CC52C7 /* Roboto.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +153,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				5526C1AB8A8845B5BB62EFCA /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -262,6 +274,7 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				CDCB64C3960E17B8F323E639 /* PrivacyInfo.xcprivacy in Resources */,
+				14B576043773488A83082C1E /* Roboto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,11 +2,12 @@
 {
   "extends": "@react-native/typescript-config",     /* Recommended React Native TSConfig base */
   "compilerOptions": {
+    "baseUrl": ".", // 关键
     "noEmit": true,
     "pretty": true,
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
     },
     /* Completeness */
     "skipLibCheck": true                             /* Skip type checking all .d.ts files. */

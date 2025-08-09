@@ -6,13 +6,12 @@ import { Menu, RightContent } from './widget';
 import type { IGestureResponderEvent } from './widget/menu/item';
 import useScrollService from './useScrollService';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-type Props = {
-  name: string;
-};
+
 // 用来区分左侧激活状态到底是来自首页还是分类页面
 let isMenuHandleEvent = false;
+
 const Category: React.FC<
-  PropsWithChildren<Props & BottomTabScreenProps<AppParamList, 'Category'>>
+  BottomTabScreenProps<TabStackParamList, 'Category'>
 > = ({ route }) => {
   const { params } = route;
   const ref = useRef(null);

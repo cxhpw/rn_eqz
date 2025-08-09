@@ -35,4 +35,4 @@ const CheckboxGroup = ({
   );
 };
 
-export default memo(forwardRef(CheckboxGroup));
+export default CheckboxGroup;

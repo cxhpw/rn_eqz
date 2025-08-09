@@ -25,10 +25,6 @@ type AuthStackParamList = {
 
 type MainStackParamList = {
   Tab: undefined;
-  Home: undefined;
-  Category: { id?: number };
-  Chat: undefined;
-  My: undefined;
   Detail: {
     id?: number | string;
     /**
@@ -54,6 +50,14 @@ type MainStackParamList = {
   OrderSubmit: { id: number; start: string; end: string };
 };
 
+type TabStackParamList = {
+  Home: undefined;
+  Category: { id?: number };
+  Chat: undefined;
+  My: undefined;
+};
+
 type AppParamList = MainStackParamList &
+  TabStackParamList &
   AuthStackParamList &
   CommonStackParamList;

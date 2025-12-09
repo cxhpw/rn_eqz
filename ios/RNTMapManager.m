@@ -14,6 +14,7 @@
 
 @implementation RNTMapManager
 
+// 导出模块
 RCT_EXPORT_MODULE(RNTMap)
 
 RCT_EXPORT_VIEW_PROPERTY(zoomEnabled, BOOL)
@@ -35,6 +36,9 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
   RNTMapView *map = [RNTMapView new];
   map.delegate = self;
   map.userTrackingMode = MKUserTrackingModeFollow;
+  map.showsUserLocation = true;
+ 
+  
   // MKMapView doesn't report tap events, so we attach gesture
   UITapGestureRecognizer *onTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
 
@@ -53,6 +57,7 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
     [self _regionChanged:mapView];
   }
 }
+
 
 - (void)mapViewWillStartRenderingMap:(RNTMapView *)mapView {
   if (!mapView.hasStartedRendering) {
@@ -75,6 +80,10 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 - (void)mapViewDidFinishRenderingMap:(RNTMapView *)mapView fullyRendered:(BOOL)fullyRendered {
   [mapView finishLoading];
 }
+
+- (void)mapViewDidFailLoadingMap:(MKMapView *)mapView withError:(NSError *)error {
+  NSLog(@"1");
+  }
 
 
 #pragma mark Gesture Recognizer Handlers
@@ -129,3 +138,4 @@ RCT_CUSTOM_VIEW_PROPERTY(region, MKCoordinateRegion, MKMapView)
 
 
 @end
+

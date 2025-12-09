@@ -16,6 +16,8 @@
 		84460C662A0DD9090043054F /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 84460C652A0DD9090043054F /* assets */; };
 		844C324E2A0B4AD200883E0D /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 844C324D2A0B4AD200883E0D /* AppCenter-Config.plist */; };
 		846B7B092976D74F00975B05 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846B7B082976D74E00975B05 /* BootSplash.storyboard */; };
+		846C04662ED87ED00090D379 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C04632ED87ED00090D379 /* CardView.m */; };
+		846C04672ED87ED00090D379 /* CardViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 846C04652ED87ED00090D379 /* CardViewManager.m */; };
 		8476744A29B4975800EB417D /* RNTMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476744929B4975800EB417D /* RNTMapManager.m */; };
 		8476745229B4B3ED00EB417D /* RNTMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476745129B4B3ED00EB417D /* RNTMapView.m */; };
 		8476745529B5F3FC00EB417D /* RNTMapMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 8476745429B5F3FC00EB417D /* RNTMapMarket.m */; };
@@ -39,13 +41,17 @@
 		13B07F961A680F5B00A75B9A /* rnProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rnProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = rnProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = rnProject/Info.plist; sourceTree = "<group>"; };
-		70B3AC04B108494C99CC52C7 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = ../assets/fonts/Roboto.ttf; sourceTree = "<group>"; };
+		70B3AC04B108494C99CC52C7 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = ../assets/fonts/Roboto.ttf; sourceTree = "<group>"; };
 		7EED15A18C489F0CA624F17C /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = rnProject/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = rnProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		841678272E435D7B0099FBFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = rnProject/AppDelegate.swift; sourceTree = "<group>"; };
 		84460C652A0DD9090043054F /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		844C324D2A0B4AD200883E0D /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		846B7B082976D74E00975B05 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = rnProject/BootSplash.storyboard; sourceTree = "<group>"; };
+		846C04622ED87ED00090D379 /* CardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		846C04632ED87ED00090D379 /* CardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		846C04642ED87ED00090D379 /* CardViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardViewManager.h; sourceTree = "<group>"; };
+		846C04652ED87ED00090D379 /* CardViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardViewManager.m; sourceTree = "<group>"; };
 		8476744829B4975800EB417D /* RNTMapManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNTMapManager.h; sourceTree = "<group>"; };
 		8476744929B4975800EB417D /* RNTMapManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNTMapManager.m; sourceTree = "<group>"; };
 		8476744B29B49F4400EB417D /* RCTConvert+Mapkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCTConvert+Mapkit.h"; sourceTree = "<group>"; };
@@ -99,6 +105,10 @@
 		13B07FAE1A68108700A75B9A /* rnProject */ = {
 			isa = PBXGroup;
 			children = (
+				846C04622ED87ED00090D379 /* CardView.h */,
+				846C04632ED87ED00090D379 /* CardView.m */,
+				846C04642ED87ED00090D379 /* CardViewManager.h */,
+				846C04652ED87ED00090D379 /* CardViewManager.m */,
 				841678272E435D7B0099FBFF /* AppDelegate.swift */,
 				84460C652A0DD9090043054F /* assets */,
 				846B7B082976D74E00975B05 /* BootSplash.storyboard */,
@@ -133,7 +143,6 @@
 				70B3AC04B108494C99CC52C7 /* Roboto.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -373,6 +382,8 @@
 			files = (
 				841678282E435D7B0099FBFF /* AppDelegate.swift in Sources */,
 				8476745229B4B3ED00EB417D /* RNTMapView.m in Sources */,
+				846C04662ED87ED00090D379 /* CardView.m in Sources */,
+				846C04672ED87ED00090D379 /* CardViewManager.m in Sources */,
 				8476745529B5F3FC00EB417D /* RNTMapMarket.m in Sources */,
 				8476744A29B4975800EB417D /* RNTMapManager.m in Sources */,
 			);

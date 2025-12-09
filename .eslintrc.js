@@ -12,5 +12,9 @@ module.exports = {
         'no-undef': 'off',
       },
     },
+    {
+      files: ['*.test.ts', '*.test.tsx', '*.spec.ts', '*.spec.tsx'],
+      env: { jest: false }, // 或者 extends: [] 把 jest 配置清空
+    },
   ],
 };

@@ -4,6 +4,10 @@ apply plugin: "com.facebook.react"
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
+project.ext.react = [
+        nodeExecutableAndArgs: ["/Users/admin/.nvm/versions/node/v18.19.0/bin/node"]
+]
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -92,7 +96,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-    namespace "com.rndiffapp"
+    namespace "com.rnproject"
     defaultConfig {
         applicationId "com.rnproject"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -122,6 +126,13 @@ android {
             proguardFile "${rootProject.projectDir}/../node_modules/detox/android/detox/proguard-rules-app.pro"
         }
     }
+    // 屏蔽警告⚠️
+    lintOptions {
+        disable 'Deprecated'
+    }
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs << "-Xlint:none"
+    }
    
 }
 
@@ -143,4 +154,3 @@ dependencies {
 }
 
 
-apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"

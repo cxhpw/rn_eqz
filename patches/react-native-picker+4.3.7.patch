@@ -1,7 +1,16 @@
 diff --git a/node_modules/react-native-picker/android/build.gradle b/node_modules/react-native-picker/android/build.gradle
-index 40f4f26..55ad51f 100644
+index 40f4f26..0a34a40 100644
 --- a/node_modules/react-native-picker/android/build.gradle
 +++ b/node_modules/react-native-picker/android/build.gradle
+@@ -1,7 +1,7 @@
+ apply plugin: 'com.android.library'
+ 
+ android {
+-    compileSdkVersion 27
++    compileSdkVersion 34
+     buildToolsVersion "23.0.1"
+ 
+     defaultConfig {
 @@ -22,6 +22,6 @@ android {
  }
  
@@ -20,8 +29,7 @@ index 0000000..0d259dd
 +o/classes
 diff --git a/node_modules/react-native-picker/android/build/.transforms/1b1a6b1c5ae1e2ae5ed78468c59b9132/transformed/classes/classes.dex b/node_modules/react-native-picker/android/build/.transforms/1b1a6b1c5ae1e2ae5ed78468c59b9132/transformed/classes/classes.dex
 new file mode 100644
-index 0000000..0c77165
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/.transforms/1b1a6b1c5ae1e2ae5ed78468c59b9132/transformed/classes/classes.dex differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/generated/source/buildConfig/debug/com/beefe/picker/BuildConfig.java b/node_modules/react-native-picker/android/build/generated/source/buildConfig/debug/com/beefe/picker/BuildConfig.java
 new file mode 100644
 index 0000000..5cbd47e
@@ -101,12 +109,10 @@ index 0000000..9e26dfe
 \ No newline at end of file
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compile_library_classes_jar/debug/classes.jar b/node_modules/react-native-picker/android/build/intermediates/compile_library_classes_jar/debug/classes.jar
 new file mode 100644
-index 0000000..5e3f2d8
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compile_library_classes_jar/debug/classes.jar differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compile_r_class_jar/debug/R.jar b/node_modules/react-native-picker/android/build/intermediates/compile_r_class_jar/debug/R.jar
 new file mode 100644
-index 0000000..44ebdcd
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compile_r_class_jar/debug/R.jar differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compile_symbol_list/debug/R.txt b/node_modules/react-native-picker/android/build/intermediates/compile_symbol_list/debug/R.txt
 new file mode 100644
 index 0000000..6a42430
@@ -2091,24 +2097,19 @@ index 0000000..6a42430
 +int xml rn_dev_preferences 0x0
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_enter.xml.flat b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_enter.xml.flat
 new file mode 100644
-index 0000000..733325b
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_enter.xml.flat differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_exit.xml.flat b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_exit.xml.flat
 new file mode 100644
-index 0000000..a85d923
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/anim_picker_exit.xml.flat differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view.xml.flat b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view.xml.flat
 new file mode 100644
-index 0000000..eb38d8f
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view.xml.flat differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_alone.xml.flat b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_alone.xml.flat
 new file mode 100644
-index 0000000..9ae2450
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_alone.xml.flat differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_linkage.xml.flat b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_linkage.xml.flat
 new file mode 100644
-index 0000000..cc25d60
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/compiled_local_resources/debug/out/layout_picker_view_linkage.xml.flat differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties b/node_modules/react-native-picker/android/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
 new file mode 100644
 index 0000000..6955cb0
@@ -2192,116 +2193,88 @@ index 0000000..e237e08
 \ No newline at end of file
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/BuildConfig.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/BuildConfig.class
 new file mode 100644
-index 0000000..b108ab4
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/BuildConfig.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$1.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$1.class
 new file mode 100644
-index 0000000..7d10ba7
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$1.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$2.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$2.class
 new file mode 100644
-index 0000000..38c1bb8
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$2.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$3.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$3.class
 new file mode 100644
-index 0000000..54965e3
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$3.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$4.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$4.class
 new file mode 100644
-index 0000000..669aec8
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule$4.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule.class
 new file mode 100644
-index 0000000..fc9d768
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewModule.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewPackage.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewPackage.class
 new file mode 100644
-index 0000000..4c328d9
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/PickerViewPackage.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/BuildProperties.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/BuildProperties.class
 new file mode 100644
-index 0000000..81e9c38
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/BuildProperties.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/MIUIUtils.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/MIUIUtils.class
 new file mode 100644
-index 0000000..c301268
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/util/MIUIUtils.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/InertiaTimerTask.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/InertiaTimerTask.class
 new file mode 100644
-index 0000000..788e628
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/InertiaTimerTask.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView$ACTION.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView$ACTION.class
 new file mode 100644
-index 0000000..eacc073
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView$ACTION.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView.class
 new file mode 100644
-index 0000000..1b2cb99
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopView.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopViewGestureListener.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopViewGestureListener.class
 new file mode 100644
-index 0000000..cca59bb
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/LoopViewGestureListener.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/MessageHandler.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/MessageHandler.class
 new file mode 100644
-index 0000000..6596fe1
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/MessageHandler.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedListener.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedListener.class
 new file mode 100644
-index 0000000..5887197
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedListener.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedRunnable.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedRunnable.class
 new file mode 100644
-index 0000000..39385ef
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnItemSelectedRunnable.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnSelectedListener.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnSelectedListener.class
 new file mode 100644
-index 0000000..7c7a597
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/OnSelectedListener.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$1.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$1.class
 new file mode 100644
-index 0000000..6b257a5
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$1.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$2.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$2.class
 new file mode 100644
-index 0000000..16cd230
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone$2.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone.class
 new file mode 100644
-index 0000000..1d9b207
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewAlone.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$1.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$1.class
 new file mode 100644
-index 0000000..cfe1490
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$1.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$2.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$2.class
 new file mode 100644
-index 0000000..9fab156
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$2.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$3.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$3.class
 new file mode 100644
-index 0000000..43d52c9
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$3.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$4.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$4.class
 new file mode 100644
-index 0000000..e09fa0e
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$4.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$5.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$5.class
 new file mode 100644
-index 0000000..de71cc7
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage$5.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage.class
 new file mode 100644
-index 0000000..ef6df4c
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/PickerViewLinkage.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/ReturnData.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/ReturnData.class
 new file mode 100644
-index 0000000..1aef4d1
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/ReturnData.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/SmoothScrollTimerTask.class b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/SmoothScrollTimerTask.class
 new file mode 100644
-index 0000000..35f803b
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/javac/debug/classes/com/beefe/picker/view/SmoothScrollTimerTask.class differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/local_only_symbol_list/debug/R-def.txt b/node_modules/react-native-picker/android/build/intermediates/local_only_symbol_list/debug/R-def.txt
 new file mode 100644
 index 0000000..853e42d
@@ -2569,8 +2542,7 @@ index 0000000..cc32009
 \ No newline at end of file
 diff --git a/node_modules/react-native-picker/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar b/node_modules/react-native-picker/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar
 new file mode 100644
-index 0000000..e31a12c
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/intermediates/runtime_library_classes_jar/debug/classes.jar differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt b/node_modules/react-native-picker/android/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt
 new file mode 100644
 index 0000000..c08b8bd
@@ -4083,8 +4055,7 @@ index 0000000..4083376
 +		INJECTED from /Users/admin/Documents/project/rn-eqz/node_modules/react-native-picker/android/src/main/AndroidManifest.xml
 diff --git a/node_modules/react-native-picker/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin b/node_modules/react-native-picker/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin
 new file mode 100644
-index 0000000..f2a16f0
-Binary files /dev/null and b/node_modules/react-native-picker/android/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin differ
+index 0000000..e69de29
 diff --git a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java b/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java
 index 813a0bd..73ad137 100644
 --- a/node_modules/react-native-picker/android/src/main/java/com/beefe/picker/PickerViewModule.java

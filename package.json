@@ -36,7 +36,7 @@
     "@react-stately/checkbox": "^3.4.1",
     "@react-stately/toggle": "^3.5.1",
     "@sdcx/keyboard-insets": "^0.1.0",
-    "@shopify/flash-list": "^1.4.1",
+    "@shopify/flash-list": "^2.2.0",
     "@shopify/react-native-skia": "^2.2.2",
     "@shopify/restyle": "^2.3.0",
     "ahooks": "^3.7.2",
@@ -114,7 +114,7 @@
     "typescript": "5.0.4"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "jest": {
     "preset": "react-native",
@@ -146,5 +146,5 @@
   },
   "resolutions": {
     "@react-aria/utils": "3.6.0"
-  }
+  } 
 }

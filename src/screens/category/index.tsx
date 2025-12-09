@@ -1,11 +1,12 @@
 import { Container, Fallback, Box, Flex } from '@/components';
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import request from '@/request';
 import { useCustomRequest } from '@/hooks';
 import { Menu, RightContent } from './widget';
 import type { IGestureResponderEvent } from './widget/menu/item';
 import useScrollService from './useScrollService';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // 用来区分左侧激活状态到底是来自首页还是分类页面
 let isMenuHandleEvent = false;
@@ -14,7 +15,7 @@ const Category: React.FC<
   BottomTabScreenProps<TabStackParamList, 'Category'>
 > = ({ route }) => {
   const { params } = route;
-  const ref = useRef(null);
+  const ref = useRef<ScrollView>(null);
   const [active, setActive] = useState<number>(0);
   const { data: goods, loading } = useCustomRequest<Goods[]>(async () => {
     return (
@@ -69,7 +70,13 @@ const Category: React.FC<
             />
           </Box>
           <Box flex={1}>
-            <RightContent data={content} />
+            <RightContent
+              data={content}
+              onNextCategory={() => {
+                console.log('下一个category');
+                setActive(active + 1);
+              }}
+            />
           </Box>
         </Flex>
       )}

@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native';
 import MenuItem, { type IGestureResponderEvent } from './item';
-import { forwardRef } from 'react';
+import { Ref, forwardRef } from 'react';
 import { useTheme } from '@shopify/restyle';
 import { AppTheme } from '@/theme';
 
@@ -14,7 +14,7 @@ type Props = {
 let cache: { [T: number]: any } = {};
 const Menu = (
   { data = [], activeIndex = 0, onPress, onLayout }: Props,
-  ref: any,
+  ref: Ref<ScrollView>,
 ) => {
   const { theme, colors } = useTheme<AppTheme>();
   return (

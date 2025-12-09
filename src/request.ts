@@ -10,13 +10,13 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    // if (config.method === 'post') {
-    //   config.data.customrdsession =
-    //     '034CEF83515F7A1108C5244A3F35714F8B33F7CBD449A0BBF921DC791B0251FCC9CC066866B20E258ECCB034EC98B7DB17D3660453D035D0';
-    // } else {
-    //   config.params.customrdsession =
-    //     '034CEF83515F7A1108C5244A3F35714F8B33F7CBD449A0BBF921DC791B0251FCC9CC066866B20E258ECCB034EC98B7DB17D3660453D035D0';
-    // }
+    if (config.method === 'post') {
+      config.data.customrdsession =
+        'B61CEE5B4F88C57353F8F0F9CB689177C03A29E5E9261234DD35250BD39FD9D9409D73A11ED0151F4A8C765762CA30C31009EE87EDBB4C19';
+    } else {
+      config.params.customrdsession =
+        'B61CEE5B4F88C57353F8F0F9CB689177C03A29E5E9261234DD35250BD39FD9D9409D73A11ED0151F4A8C765762CA30C31009EE87EDBB4C19';
+    }
     return config;
   },
   error => {

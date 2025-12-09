@@ -1,4 +1,7 @@
-import { MasonryFlashList, MasonryFlashListProps } from '@shopify/flash-list';
+import {
+  FlashList as MasonryFlashList,
+  FlashListProps,
+} from '@shopify/flash-list';
 import { Text, Flex } from '@/components';
 import { useRef, useState } from 'react';
 import {
@@ -23,7 +26,6 @@ export enum FooterStatus {
 export default function WaterfallList<T>({
   data,
   numColumns,
-  estimatedItemSize,
   refreshing,
   renderItem,
   renderEmpty,
@@ -36,7 +38,7 @@ export default function WaterfallList<T>({
   allLoaded,
   ...restProps
 }: Omit<
-  MasonryFlashListProps<T>,
+  FlashListProps<T>,
   | 'ListEmptyComponent'
   | 'ListFooterComponent'
   | 'ListHeaderComponent'
@@ -157,7 +159,7 @@ export default function WaterfallList<T>({
       data={data}
       numColumns={numColumns}
       renderItem={renderItem}
-      estimatedItemSize={estimatedItemSize}
+      masonry
       ListEmptyComponent={refreshing ? null : ListEmptyComponent}
       ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}

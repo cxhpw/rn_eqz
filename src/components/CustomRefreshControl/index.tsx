@@ -1,7 +1,6 @@
 import {
   RefreshControlProps,
   RNRefreshControl,
-  RNRefreshHeader,
 } from '@byron-react-native/refresh-control';
 import { useTheme } from '@shopify/restyle';
 import { useSafeState } from 'ahooks';
@@ -15,7 +14,6 @@ import {
 import {
   ActivityIndicator,
   Animated,
-  LayoutChangeEvent,
   Platform,
   StyleSheet,
   Text,
@@ -113,29 +111,24 @@ export const CustomRefreshControl = forwardRef<
     }
   };
 
+  const onChangeOffset = (offset: number) => {
+    props.onChangeOffset?.(offset);
+  };
+
   const rotate = animatedValue.current.interpolate({
     inputRange: [0, 180],
     outputRange: ['0deg', '180deg'],
   });
 
-  const onLayout = (event: LayoutChangeEvent) => {
-    const layout = event.nativeEvent.layout;
-    if (layout.height !== height) {
-      setHeight(Math.ceil(layout.height));
-    }
-  };
-
   return (
     <RNRefreshControl
       refreshing={refreshing}
       onChangeState={onChangeState}
-      style={[
-        style || styles.control,
-        Platform.OS === 'ios' ? { marginTop: -height } : {},
-      ]}
+      onChangeOffset={onChangeOffset}
+      style={[styles.control]}
       height={height}
     >
-      <RNRefreshHeader style={styles.row} onLayout={onLayout}>
+      <View style={styles.row} collapsable={false}>
         {refreshing ? (
           <ActivityIndicator color={'gray'} />
         ) : (
@@ -159,13 +152,13 @@ export const CustomRefreshControl = forwardRef<
             }}
           >{`上次更新：${lastTime}`}</Text>
         </View>
-      </RNRefreshHeader>
+      </View>
       {/* {props.children} 不能删除或注释，会导致 Android 无法设置 RefreshContent */}
       {props.children}
     </RNRefreshControl>
   );
 });
-
+// CustomRefreshControl.displayName = 'CustomRefreshControl';
 /**
  * 获取当前时间
  * @returns
@@ -186,8 +179,13 @@ const fetchNowTime = () => {
 const styles = StyleSheet.create({
   control: Platform.select({
     ios: {
-      backgroundColor: '#fff',
       justifyContent: 'flex-end',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 0,
+      overflow: 'visible',
     },
     android: {
       flex: 1,
@@ -198,7 +196,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
+    flex: 1,
   },
   left: {
     width: 32,
@@ -216,3 +214,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+CustomRefreshControl.displayName = 'fuck';

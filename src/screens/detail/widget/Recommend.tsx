@@ -33,7 +33,6 @@ const Recommend: React.FC<Props> = ({ data = [] }) => {
             renderIcon={DisCount(item.Discount as any)}
           />
         )}
-        estimatedItemSize={150}
         horizontal
       />
     </Box>

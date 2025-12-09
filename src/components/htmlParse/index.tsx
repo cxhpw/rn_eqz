@@ -37,18 +37,16 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
     </body>
     <script>
     setTimeout(function() {
-      window.ReactNativeWebView.postMessage(document.body.clientHeight)
+      window.ReactNativeWebView.postMessage(String(document.body.clientHeight))
      }, 1000);
     </script>
   </html>
   `;
-  const runFirst = `
-  setTimeout(function() {
-    window.ReactNativeWebView.postMessage(document.body.clientHeight)
-   }, 1000);`;
   return (
     <WebView
       ref={ref}
+      androidLayerType="hardware"
+      mixedContentMode="always"
       scrollEnabled={false}
       style={[
         {
@@ -63,7 +61,6 @@ const Index = ({ html = '', onLoadEnd, htmlStyle }: Props) => {
         }
       }}
       javaScriptEnabled={true}
-      // injectedJavaScript={runFirst}
       source={{
         // html: html,
         html: generateHtml(html, htmlStyle),

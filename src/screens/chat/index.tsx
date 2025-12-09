@@ -87,10 +87,11 @@ const style = StyleSheet.create({
   desc: {
     fontSize: 12,
     color: '#999999',
+    marginTop: 10,
   },
   card: {
     backgroundColor: '#fff',
-    borderRadius: 4,
+    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -98,6 +99,7 @@ const style = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 5,
+    elevation: 5,
   },
 });
 

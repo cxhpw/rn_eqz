@@ -6,7 +6,7 @@ import {
   NativeScrollEvent,
 } from 'react-native';
 import React from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useHeaderHeight } from '@react-navigation/elements';
 import { Container, Skeleton, Spacer } from '@/components';
 import {

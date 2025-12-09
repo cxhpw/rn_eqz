@@ -28,6 +28,7 @@ const Index = ({
   navigation,
 }: NativeStackScreenProps<AppParamList, 'Address'>) => {
   const isFocused = useIsFocused();
+  // 设置激活的单选ID
   const [value, setValue] = useState('');
   const {
     data = [],
@@ -57,6 +58,11 @@ const Index = ({
       manual: true,
     },
   );
+  /**
+   * 设置上一个页面的数据
+   * @param _value AddressInfo
+   * @returns
+   */
   const setBackAddressData = (_value: AddressInfo) => {
     if (!_value) {
       return;
@@ -84,6 +90,10 @@ const Index = ({
       onRefresh();
     }
   }, [isFocused, navigation, onRefresh, route.params?.pageIsRefresh]);
+  /**
+   * 删除地址
+   * @param id 地址id
+   */
   const onDelete = async (id: any) => {
     const res = (
       await request.post('/Include/alipay/data.aspx', {
@@ -98,7 +108,12 @@ const Index = ({
       onRefresh();
     }
   };
-  const EditControl = ({ id }: { id: number }) => {
+  /**
+   * 修改按钮
+   * @param param0
+   * @returns
+   */
+  const EditControlRender = ({ id }: { id: number }) => {
     if (route.params.from === 'OrderSubmit') {
       return null;
     }
@@ -125,7 +140,16 @@ const Index = ({
         <Radio.Group name="address" value={value}>
           <Swipeable.Provider>
             <FlashList
+              nestedScrollEnabled
               refreshControl={
+                // <RefreshControl
+                //   colors={['#4CAF50']} // Android 下加载圈颜色
+                //   tintColor="#4CAF50" // iOS 下加载圈颜色
+                //   title="正在刷新..." // iOS 下文字
+                //   refreshing={refreshing}
+                //   titleColor="red"
+                //   onRefresh={onRefresh}
+                // />
                 <CustomRefreshControl
                   onRefresh={onRefresh}
                   refreshing={refreshing}
@@ -196,7 +220,7 @@ const Index = ({
                           <Text variant="p2">{item.County}</Text>
                         </Flex>
                       </Box>
-                      <EditControl id={item.AutoID} />
+                      <EditControlRender id={item.AutoID} />
                     </Flex>
                   </Pressable>
                 </Swipeable>
@@ -212,7 +236,6 @@ const Index = ({
               ListEmptyComponent={
                 data.length === 0 ? <Empty height={500} /> : null
               }
-              estimatedItemSize={80}
             />
           </Swipeable.Provider>
         </Radio.Group>

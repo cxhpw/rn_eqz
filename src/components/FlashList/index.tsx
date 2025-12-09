@@ -35,7 +35,6 @@ export enum FooterStatus {
         <FlashList 
           renderItem={MessageItem} 
           getItemType={item => item.type} 
-          estimatedItemSize={200} 
         />
       );
       ```
@@ -59,7 +58,6 @@ export enum FooterStatus {
  */
 export default function LargeList<T>({
   data,
-  estimatedItemSize,
   refreshing,
   renderItem,
   renderEmpty,
@@ -133,11 +131,12 @@ export default function LargeList<T>({
     if (isScrollAtEnd) onFooter();
   };
 
-  const refreshControl = onRefresh ? (
-    <CustomRefreshControl onRefresh={onHeader} refreshing={refreshing} />
-  ) : (
-    void 0
-  );
+  const refreshControl =
+    onRefresh != null ? (
+      <CustomRefreshControl onRefresh={onHeader} refreshing={refreshing} />
+    ) : (
+      void 0
+    );
 
   // 列表数据为空的时候渲染的组件
   const ListEmptyComponent = renderEmpty?.();
@@ -208,11 +207,18 @@ export default function LargeList<T>({
       {...restProps}
       data={data}
       renderItem={renderItem}
-      estimatedItemSize={estimatedItemSize}
       ListEmptyComponent={refreshing ? null : ListEmptyComponent}
       ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}
-      refreshControl={refreshControl}
+      refreshControl={
+        refreshControl
+        // <RefreshControl
+        //   refreshing={refreshing}
+        //   onRefresh={onRefresh}
+        //   progressViewOffset={0} // ← key: reset native offset
+        //   tintColor="#000" // iOS spinner color
+        // />
+      }
       onScroll={handleScroll}
       scrollEventThrottle={16}
       onEndReached={null}

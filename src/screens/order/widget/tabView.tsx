@@ -51,7 +51,6 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
       >
         <FlashList
           data={data}
-          // eslint-disable-next-line react-native/no-inline-styles
           contentContainerStyle={{
             paddingHorizontal: 10,
           }}
@@ -72,7 +71,6 @@ const TabView: React.FC<PropsWithChildren<Props>> = ({ route, ...rest }) => {
           onEndReachedThreshold={100}
           loadingMore={loadingMore}
           allLoaded={allLoaded}
-          estimatedItemSize={300}
           renderEmpty={() =>
             refreshing || data.length !== 0 ? null : (
               <Box style={{ marginTop: '30%' }}>

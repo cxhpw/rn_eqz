@@ -1,10 +1,10 @@
 import { useSafeState } from 'ahooks';
-import { useCallback, useEffect } from 'react';
+import { RefObject, useCallback, useEffect } from 'react';
+import { ScrollView } from 'react-native';
 
-let i = 0;
 const MENUITEM_HEIGHT = 44;
 export default function useScrollService(
-  ref?: any,
+  ref?: RefObject<ScrollView | null>,
   current: number = 0,
   initalValue: Goods[] = [],
 ) {
@@ -18,10 +18,10 @@ export default function useScrollService(
   });
   const update = useCallback(
     (height: number) => {
-      function scrollToCenter(max: number) {
+      function scrollToCenter(currentIndex: number) {
         let offsetTop = 0;
         // eslint-disable-next-line @typescript-eslint/no-shadow
-        for (let i = 0; i < max; i++) {
+        for (let i = 0; i < currentIndex; i++) {
           offsetTop += MENUITEM_HEIGHT;
         }
         const y = offsetTop - (height - MENUITEM_HEIGHT) / 2;
@@ -33,16 +33,16 @@ export default function useScrollService(
       setHeight(height);
       return scrollToCenter(current);
     },
-    [current, ref, setHeight],
+    [current],
   );
   useEffect(() => {
-    console.log(++i, active, current);
+    console.log(active, current, initalValue[current]);
     if (active !== current || initalValue[current] !== undefined) {
       setActive(current);
       setContent(initalValue[current]);
       update(_height);
     }
-  }, [_height, active, current, initalValue, setActive, setContent, update]);
+  }, [current, initalValue]);
 
   return { active, content, update };
 }

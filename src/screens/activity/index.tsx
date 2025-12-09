@@ -80,7 +80,6 @@ const Activity: React.FC<NativeStackScreenProps<AppParamList, 'Activity'>> = ({
               onEndReachedThreshold={0}
               loadingMore={false}
               allLoaded={true}
-              estimatedItemSize={125}
               renderFooter={() => {
                 return <LoadButton loading={false} />;
               }}

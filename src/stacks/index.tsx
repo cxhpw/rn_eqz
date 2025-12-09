@@ -3,6 +3,7 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import Config from 'react-native-config';
+import { Platform } from 'react-native';
 
 import TabScreen from './tabStack';
 import Detail from '@/screens/detail';
@@ -99,13 +100,18 @@ const MAIN_SCREENS: ScreenProps[] = [
       headerTintColor: '#fff',
     },
   },
-  {
-    name: 'Map',
-    component: MapPage,
-    options: {
-      title: '地图',
-    },
-  },
+  // @ts-ignore
+  ...(Platform.OS === 'ios'
+    ? [
+        {
+          name: 'Map',
+          component: MapPage,
+          options: {
+            title: '地图',
+          },
+        },
+      ]
+    : []),
 ];
 
 const COMMON_SCREENS: ScreenProps[] = [

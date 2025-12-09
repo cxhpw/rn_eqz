@@ -16,8 +16,7 @@ import { EOderStatus } from '@/enum';
 import { navigate } from '@/services/NavigationService';
 import { Waterfall } from './widget';
 import useStackService from '@/stacks/useStackService';
-
-type Props = {};
+import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
 const ORDER_LIST = [
   {
@@ -82,7 +81,7 @@ const SERVICES_LIST = [
   },
 ];
 
-const My: React.FC<Props> = () => {
+const My: React.FC<BottomTabScreenProps<TabStackParamList, 'My'>> = () => {
   const { signOut, signedIn, userInfo } = storageService;
   const { update } = useStackService.useModel();
   const avator = require('@/images/avator.png');
@@ -177,7 +176,7 @@ const My: React.FC<Props> = () => {
               我的订单
             </Text>
           </View>
-          <Menu cols={5} data={ORDER_LIST}>
+          <Menu cols={5} data={ORDER_LIST} style={{ flexWrap: 'nowrap' }}>
             {props => (
               <MenuItem
                 onPress={e => {
@@ -199,7 +198,7 @@ const My: React.FC<Props> = () => {
               我的服务
             </Text>
           </View>
-          <Menu data={SERVICES_LIST} cols={4}>
+          <Menu data={SERVICES_LIST} cols={4} style={{ flexWrap: 'wrap' }}>
             {props => (
               <MenuItem
                 onPress={e => {

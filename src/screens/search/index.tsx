@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import { Box, Flex, Input, LoadButton, Empty } from '@/components';
 import { useRefreshService } from '@/hooks';
-import { MasonryFlashList } from '@shopify/flash-list';
+import { FlashList as MasonryFlashList } from '@shopify/flash-list';
 import { useCallback, useEffect, useState } from 'react';
 import WaterfallItem from '../my/widget/waterfallItem';
 import request from '@/request';
@@ -130,7 +130,7 @@ const Index = () => {
           }}
           data={data}
           numColumns={2}
-          estimatedItemSize={250}
+          masonry
           keyExtractor={item => item.AutoID}
           renderItem={({ item }: any) => (
             <WaterfallItem

@@ -7,8 +7,10 @@ import {
   ViewProps,
   requireNativeComponent,
 } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
+import { RefreshControl } from '@byron-react-native/refresh-control';
 
-const dummyData = Array(10000).fill(1);
+const dummyData = Array(100).fill(1);
 
 const NonUrgentUI = ({ value, isPending }: any) => {
   const backgroundStyle = {
@@ -19,7 +21,9 @@ const NonUrgentUI = ({ value, isPending }: any) => {
       <Text>Non urgent update value: {isPending ? 'PENDING' : value}</Text>
       <View style={[styles.container, backgroundStyle]}>
         {dummyData.map((_, index) => (
-          <View key={index} style={styles.item} />
+          <View key={index} style={styles.item}>
+            <Text>{_}</Text>
+          </View>
         ))}
       </View>
     </View>
@@ -51,10 +55,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  item: {
-    width: 10,
-    height: 10,
-  },
+  item: {},
 });
 
 const RNTMap = requireNativeComponent<
@@ -90,36 +91,50 @@ const RNTMap = requireNativeComponent<
 
 const Index = () => {
   const [region, setRegion] = useState({
-    latitude: 23.51,
-    longitude: 116.5,
+    latitude: 22.58,
+    longitude: 113.9,
     latitudeDelta: 0.1,
     longitudeDelta: 0.1,
   });
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+
+    // @ts-ignore
+    await new Promise(res => setTimeout(res, 5000));
+
+    setRefreshing(false);
+  };
 
   return (
-    <>
-      <RNTMap
-        region={region}
-        zoomEnabled={false}
-        style={{ height: 200 }}
-        onMapReady={(e: any) => {
-          console.log('地图初始化中', e.nativeEvent);
-        }}
-        onRegionChange={e => {
-          console.log('onRegionChange', e.nativeEvent.region);
-        }}
-        onPress={e => {
-          console.log('点击回调', e.nativeEvent);
-          setRegion({
-            latitude: e.nativeEvent.coordinate.latitude,
-            longitude: e.nativeEvent.coordinate.longitude,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1,
-          });
-        }}
-      />
-      <ConcurrentStartTransition />
-    </>
+    <FlashList
+      style={{ backgroundColor: '#f5f5f5', flex: 1 }}
+      data={[1, 2, 3, 4, 5, 6]}
+      // eslint-disable-next-line react-native/no-inline-styles
+      contentContainerStyle={{
+        // paddingHorizontal: 10,
+        // backgroundColor: "green",
+        // marginTop: -70,
+        flex: 1,
+      }}
+      renderItem={({ item, index }) => (
+        <Text key={item}>
+          {item}: {refreshing ? '刷新中' : '刷新结束'}
+        </Text>
+      )}
+      keyExtractor={_item => `${_item}`}
+      showsVerticalScrollIndicator={false}
+      refreshControl={<RefreshControl onRefresh={onRefresh} />}
+      onEndReached={null}
+    />
+    // <ScrollView >
+    //   {
+    //     dummyData.map((value, index) => {
+    //       return <Text key={index} style={{height: 50}}>{index}</Text>
+    //     })
+    //   }
+    // </ScrollView>
   );
 };
 

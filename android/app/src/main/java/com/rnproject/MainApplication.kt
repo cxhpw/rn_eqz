@@ -1,4 +1,4 @@
-package com.rndiffapp
+package com.rnproject
 
 import android.app.Application
 import com.facebook.react.PackageList
@@ -10,7 +10,6 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 
-import com.microsoft.codepush.react.CodePush;
 
 class MainApplication : Application(), ReactApplication {
 
@@ -24,7 +23,6 @@ class MainApplication : Application(), ReactApplication {
 
         override fun getJSMainModuleName(): String = "index"
 
-        override fun getJSBundleFile() = CodePush.getJSBundleFile()
 
         override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
 
